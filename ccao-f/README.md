@@ -25,6 +25,7 @@ All episodes: **[CCAO-F Exam Prep playlist](https://www.youtube.com/playlist?lis
 
 - [Episode questions](practice/episode-questions.md) — the seven worked questions from the series, one per domain, with full trap analysis.
 - [Mock exam](practice/mock-exam.md) — 30 original questions weighted across the domains. Answers and explanations in [mock-exam-answers.md](practice/mock-exam-answers.md).
+- [Interactive exam player](practice/mock-exam-player.html) — the same 30 questions as a timed exam simulator (60:00 countdown, strikethrough, flag-for-review, per-domain results). Download the file and open it in any browser — GitHub shows it as source; it runs locally.
 
 ## Final revision
 
