@@ -118,6 +118,16 @@ A customer-facing support assistant built on Claude, and legal wants the complia
 
 ---
 
-## Q8 — Domain 7
+## Q8 — Domain 7: the inconsistent answers
 
-Coming with EP 08 (the series finale). Until then, the [mock exam](mock-exam.md) carries two Domain 7 questions.
+Claude gives inconsistent answers on the same recurring task, and Ravi has already rewritten the prompt twice. What should he do first?
+
+- **A.** Switch to the most capable model.
+- **B.** Rewrite the prompt one more time and hope.
+- **C.** Walk the diagnosis in order — confirm the instructions are specific, confirm the task has the information it needs, then escalate if the problem stays.
+- **D.** Add every related document to the task.
+
+<details><summary>Reveal</summary>
+
+**C.** Diagnosis in order, cheapest lever first, measured against criteria — the whole domain in one answer. **B is the trap because it sounds like the cheapest-lever rule** — but he's already rewritten it twice; repeating one check without a plan is motion, not diagnosis. A spends money before finding the fault. D adds noise, not signal. (Domain 7: diagnose in order.)
+</details>
