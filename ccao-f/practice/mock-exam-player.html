@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CCAO-F Mock Exam</title>
+<style>
+  :root{
+    --navy:#232838; --panel:#2e3446; --ink:#1c2130; --paper:#f7f5f0;
+    --card:#ffffff; --orange:#e8822a; --orange-soft:#f6d9be;
+    --green:#2e8b57; --red:#c0392b; --grey:#8a8f9c; --line:#d8d4cc;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Segoe UI",system-ui,Arial,sans-serif; background:var(--paper); color:var(--ink); font-size:19px;}
+  .hidden{display:none!important;}
+
+  /* ---------- header bar ---------- */
+  header{background:var(--navy); color:#fff; display:flex; align-items:center; gap:18px; padding:14px 28px; position:sticky; top:0; z-index:5;}
+  header .brand{font-weight:700; letter-spacing:.4px;}
+  header .brand small{display:block; font-weight:400; font-size:12px; color:#b9bfce;}
+  header .qpos{margin-left:auto; font-size:17px; color:#dfe3ee;}
+  #timer{font-variant-numeric:tabular-nums; font-weight:700; font-size:22px; background:var(--panel); padding:6px 14px; border-radius:8px;}
+  #timer.low{background:var(--red); animation:pulse 1s infinite;}
+  @keyframes pulse{50%{opacity:.65}}
+  .hbtn{background:var(--panel); color:#fff; border:1px solid #4a516a; border-radius:8px; padding:8px 16px; font-size:16px; cursor:pointer;}
+  .hbtn:hover{background:#3a4158;}
+  .hbtn.flagged{background:var(--orange); border-color:var(--orange); color:#fff;}
+
+  /* ---------- start screen ---------- */
+  .center-wrap{max-width:880px; margin:48px auto; padding:0 24px;}
+  .start-card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:44px 48px; box-shadow:0 6px 24px rgba(0,0,0,.06);}
+  .start-card h1{font-size:40px; margin-bottom:6px;}
+  .start-card .sub{color:var(--grey); font-size:20px; margin-bottom:26px;}
+  .facts{display:flex; gap:16px; margin:22px 0 26px; flex-wrap:wrap;}
+  .fact{flex:1; min-width:150px; background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:16px; text-align:center;}
+  .fact b{display:block; font-size:30px; color:var(--orange);}
+  .fact span{font-size:14px; color:var(--grey); text-transform:uppercase; letter-spacing:.5px;}
+  .rules{line-height:1.75; margin-bottom:26px;}
+  .rules li{margin-left:22px;}
+  .disclaimer{background:var(--orange-soft); border-radius:10px; padding:14px 18px; font-size:16px; margin-bottom:28px;}
+  .big-btn{background:var(--orange); color:#fff; border:none; font-size:22px; font-weight:700; padding:16px 42px; border-radius:10px; cursor:pointer;}
+  .big-btn:hover{filter:brightness(1.06);}
+
+  /* ---------- exam screen ---------- */
+  .exam-wrap{max-width:1100px; margin:34px auto 120px; padding:0 28px;}
+  .meta-row{display:flex; align-items:center; gap:12px; margin-bottom:14px;}
+  .domain-tag{background:var(--navy); color:#fff; font-size:14px; letter-spacing:.6px; text-transform:uppercase; padding:5px 14px; border-radius:999px;}
+  .flag-note{color:var(--orange); font-weight:600; font-size:16px;}
+  .stem{background:var(--card); border:1px solid var(--line); border-left:6px solid var(--orange); border-radius:12px; padding:26px 30px; font-size:23px; line-height:1.55; margin-bottom:22px;}
+  .opt{display:flex; align-items:center; gap:16px; background:var(--card); border:2px solid var(--line); border-radius:12px; padding:16px 20px; margin-bottom:12px; cursor:pointer; transition:border-color .12s;}
+  .opt:hover{border-color:#b9b2a4;}
+  .opt .letter{flex:none; width:40px; height:40px; border-radius:50%; border:2px solid var(--ink); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:19px;}
+  .opt .txt{flex:1; font-size:20px; line-height:1.45;}
+  .opt.selected{border-color:var(--orange); background:#fff7ef;}
+  .opt.selected .letter{background:var(--orange); border-color:var(--orange); color:#fff;}
+  .opt.struck .txt, .opt.struck .letter{text-decoration:line-through; opacity:.38;}
+  .opt .strike-btn{flex:none; border:1px solid var(--line); background:var(--paper); color:var(--grey); border-radius:8px; font-size:14px; padding:6px 10px; cursor:pointer;}
+  .opt .strike-btn:hover{color:var(--red); border-color:var(--red);}
+  .hint{color:var(--grey); font-size:15px; margin-top:6px;}
+
+  /* ---------- footer nav ---------- */
+  .navbar{position:fixed; bottom:0; left:0; right:0; background:var(--navy); padding:14px 28px; display:flex; gap:14px; align-items:center; z-index:5;}
+  .navbar .spacer{flex:1;}
+  .nbtn{background:var(--panel); color:#fff; border:1px solid #4a516a; border-radius:9px; padding:12px 26px; font-size:18px; cursor:pointer;}
+  .nbtn:hover{background:#3a4158;}
+  .nbtn.primary{background:var(--orange); border-color:var(--orange); font-weight:700;}
+
+  /* ---------- review screen ---------- */
+  .review-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(74px,1fr)); gap:12px; margin:26px 0 30px;}
+  .rq{position:relative; border:2px solid var(--line); background:var(--card); border-radius:10px; padding:14px 0; text-align:center; font-weight:700; font-size:19px; cursor:pointer;}
+  .rq.answered{background:#e9f3ec; border-color:var(--green);}
+  .rq.unanswered{background:#f1f1f1; color:var(--grey);}
+  .rq.flag::after{content:"⚑"; position:absolute; top:-10px; right:-4px; color:var(--orange); font-size:19px;}
+  .legend{display:flex; gap:22px; color:var(--grey); font-size:16px; margin-bottom:8px; flex-wrap:wrap;}
+  .legend i{display:inline-block; width:14px; height:14px; border-radius:4px; margin-right:6px; vertical-align:-1px;}
+
+  /* ---------- results ---------- */
+  .score-line{font-size:46px; font-weight:800; margin:10px 0 4px;}
+  .score-line small{font-size:22px; color:var(--grey); font-weight:400;}
+  table{border-collapse:collapse; width:100%; margin:20px 0 30px; background:var(--card); border-radius:10px; overflow:hidden;}
+  th,td{border:1px solid var(--line); padding:12px 16px; text-align:left; font-size:18px;}
+  th{background:var(--navy); color:#fff; font-size:15px; letter-spacing:.5px; text-transform:uppercase;}
+  td.good{color:var(--green); font-weight:700;} td.bad{color:var(--red); font-weight:700;}
+  .rev-item{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:22px 26px; margin-bottom:18px;}
+  .rev-item .rstem{font-size:20px; font-weight:600; margin:6px 0 12px; line-height:1.5;}
+  .rev-item .ans{font-size:18px; margin:4px 0;}
+  .rev-item .ok{color:var(--green); font-weight:700;} .rev-item .no{color:var(--red); font-weight:700;}
+  .rev-item .why{background:var(--paper); border-left:4px solid var(--orange); border-radius:8px; padding:12px 16px; margin-top:10px; font-size:18px; line-height:1.55;}
+  .pill{display:inline-block; background:var(--navy); color:#fff; font-size:13px; padding:4px 12px; border-radius:999px; letter-spacing:.5px; text-transform:uppercase;}
+</style>
+</head>
+<body>
+
+<header id="topbar" class="hidden">
+  <div class="brand">CCAO-F Mock Exam<small>Original practice material · Unofficial · not affiliated with Anthropic</small></div>
+  <div class="qpos" id="qpos"></div>
+  <button class="hbtn" id="flagBtn">⚑ Flag for review</button>
+  <div id="timer">60:00</div>
+</header>
+
+<!-- START -->
+<section id="startScreen" class="center-wrap">
+  <div class="start-card">
+    <h1>CCAO-F Mock Exam</h1>
+    <div class="sub">Claude Certified Associate – Foundations · half-length practice sitting</div>
+    <div class="facts">
+      <div class="fact"><b>30</b><span>questions</span></div>
+      <div class="fact"><b>60:00</b><span>minutes</span></div>
+      <div class="fact"><b>7</b><span>domains</span></div>
+      <div class="fact"><b>2 min</b><span>per question, real pacing</span></div>
+    </div>
+    <ul class="rules">
+      <li>Click an option to select it. Use <b>abc̶</b> (or right-click an option) to strike out answers you have eliminated.</li>
+      <li><b>⚑ Flag</b> questions to revisit; the review screen shows everything flagged or unanswered before you submit.</li>
+      <li>The timer starts when you begin and submits the exam automatically at zero.</li>
+      <li>Eliminate the clearly wrong pair first, then choose between the remaining two.</li>
+    </ul>
+    <div class="disclaimer"><b>Every question here is original study material</b> written for the claude-certification-prep project, in the exam's style. Nothing is from, or derived from, the real exam. Study guides and answer explanations: github.com/sandhyagunturi88-lab/claude-certification-prep</div>
+    <button class="big-btn" onclick="startExam()">Begin exam</button>
+  </div>
+</section>
+
+<!-- EXAM -->
+<section id="examScreen" class="exam-wrap hidden">
+  <div class="meta-row">
+    <span class="domain-tag" id="domainTag"></span>
+    <span class="flag-note hidden" id="flagNote">⚑ Flagged for review</span>
+  </div>
+  <div class="stem" id="stem"></div>
+  <div id="opts"></div>
+  <div class="hint">Right-click an option (or use abc̶) to strike it out · selecting a struck option clears its strike</div>
+</section>
+
+<!-- REVIEW -->
+<section id="reviewScreen" class="center-wrap hidden">
+  <div class="start-card">
+    <h1 style="font-size:32px;">Review your answers</h1>
+    <div class="legend">
+      <span><i style="background:#e9f3ec;border:1px solid var(--green)"></i>Answered</span>
+      <span><i style="background:#f1f1f1;border:1px solid var(--line)"></i>Unanswered</span>
+      <span style="color:var(--orange)">⚑ Flagged</span>
+    </div>
+    <div class="review-grid" id="reviewGrid"></div>
+    <div id="reviewSummary" style="margin-bottom:22px; font-size:19px;"></div>
+    <button class="nbtn" style="background:var(--panel)" onclick="backToExam()">← Return to exam</button>
+    <button class="big-btn" style="font-size:19px; padding:13px 34px;" onclick="submitExam(false)">Submit exam</button>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="resultsScreen" class="center-wrap hidden" style="max-width:1000px;">
+  <div class="start-card">
+    <h1 style="font-size:32px;">Results</h1>
+    <div class="score-line" id="scoreLine"></div>
+    <div id="passNote" style="color:var(--grey); font-size:18px; margin-bottom:8px;"></div>
+    <table id="domainTable"></table>
+    <h2 style="margin:8px 0 16px; font-size:24px;">Question review</h2>
+    <div id="reviewList"></div>
+  </div>
+</section>
+
+<div class="navbar hidden" id="navbar">
+  <button class="nbtn" id="prevBtn" onclick="go(-1)">← Previous</button>
+  <button class="nbtn" id="nextBtn" onclick="go(1)">Next →</button>
+  <div class="spacer"></div>
+  <button class="nbtn primary" onclick="openReview()">Review &amp; submit</button>
+</div>
+
+<script>
+/* 30 original questions — claude-certification-prep, ccao-f/practice/mock-exam.md.
+   correct = index into options as authored; display order is rotated per question
+   so correct letters spread across A-D on screen. */
+const Q = [
+ // Domain 1
+ {d:"Domain 1 · Prompting", s:"A colleague's prompt reads “improve this document.” The output is long, generic, and unusable. The highest-value first fix is to:",
+  o:["Run the prompt again — sometimes the second draft is better","Rewrite the prompt to name a role, the audience, the format, and what to skip","Switch to a more capable model","Split the request into ten smaller prompts"], c:1,
+  e:"“Improve this document” is underspecified — no role, no audience, no format. A bigger model answers a vague question more fluently, not more usefully."},
+ {d:"Domain 1 · Prompting", s:"You're asking Claude a question about a sixty-page policy document pasted into the prompt. Where should the question go?",
+  o:["Before the document, so Claude knows what to look for","After the document, at the end of the prompt","In the middle, next to the most relevant section","In a separate follow-up message with no document attached"], c:1,
+  e:"Long document at the top, question at the end. Putting the question first buries it under sixty pages by the time Claude answers."},
+ {d:"Domain 1 · Prompting", s:"One prompt carries your instructions, three paragraphs of background, and a pasted report, all run together. Answers keep confusing the background with the report's content. The fix is to:",
+  o:["Shorten the background","Ask Claude to be more careful about what came from where","Fence each part in its own labeled section — instructions, context, document","Send the background and the report in separate chats"], c:2,
+  e:"Fence the parts with labeled sections so nothing is guessed about where instructions end and the document begins."},
+ {d:"Domain 1 · Prompting", s:"A monthly data task — extract figures from five reports, reconcile them, then write a summary — keeps failing when asked as one big prompt. The pattern to reach for is:",
+  o:["A more detailed single prompt covering all three stages","Chaining — extract first, then reconcile, then summarize, each step feeding the next","Asking for the summary first and the reconciliation only if it looks wrong","Repeating the prompt until one run gets all three stages right"], c:1,
+  e:"Chaining: each link small enough to inspect, so when something breaks you know which link."},
+ {d:"Domain 1 · Prompting", s:"A prompt has been rewritten five times. The answers are accurate every time, but far too slow for the daily deadline it serves. The next move is:",
+  o:["Rewrite number six, focused on brevity","Accept the speed — accuracy matters more","Recognize this is no longer a prompt problem and look at model choice instead","Delete the prompt's examples to make it shorter"], c:2,
+  e:"Accurate-but-slow is not a prompt problem — five rewrites proved that. The fix lives in model and effort choice, not rewrite number six."},
+ // Domain 2
+ {d:"Domain 2 · Output Evaluation", s:"A market summary cites “the 2025 Meridian Retail Index” — which you cannot find anywhere. The write-up is otherwise excellent. You should treat this as:",
+  o:["A formatting quirk — ask Claude for the correct link","A fabrication tell — verify every claim resting on that source before anything ships","Proof the report is paywalled — cite it as given","Acceptable, as long as the summary's conclusions sound right"], c:1,
+  e:"A plausible-sounding source that leads nowhere is fabrication tell number one. Everything resting on it is unverified until a human checks."},
+ {d:"Domain 2 · Output Evaluation", s:"An analysis states a precise figure — “a 34.7 percent reduction” — that appears nowhere in the documents you supplied. The precision of the number means:",
+  o:["Claude computed it from the documents, so it can be trusted","Nothing — precision is not evidence, and an unsourced statistic is a fabrication tell","It came from Claude's general knowledge, which is acceptable for statistics","The documents must contain it somewhere you haven't looked"], c:1,
+  e:"Unsourced precision is tell number two — specific enough to feel checked, and nobody checked it. That feeling is the thing to distrust."},
+ {d:"Domain 2 · Output Evaluation", s:"You've reviewed a ten-claim output and found one real error. After fixing it, you should:",
+  o:["Ship it — the error has been corrected","Ask Claude what caused the error","Keep auditing — one found error means others are likely","Regenerate the whole output and use whichever version reads better"], c:2,
+  e:"One found error starts the audit; it doesn't end it. The tells travel in groups."},
+ {d:"Domain 2 · Output Evaluation", s:"Before a research task, you want the output to be easier to verify. The single most effective instruction to add is:",
+  o:["“Be accurate”","“I don't know is an acceptable answer”","“Double-check everything before answering”","“Write in a confident, authoritative tone”"], c:1,
+  e:"Permission to say “I don't know” is the single most effective line for cutting fabricated facts. Self-checking is the trap wearing an instruction's clothes."},
+ {d:"Domain 2 · Output Evaluation", s:"Your director needs the conclusion of a forty-page analysis; the delivery team needs the method. Claude produced one detailed step-by-step write-up. The right move is:",
+  o:["Send it to both — the content is identical","Send the director the first page only","Produce two shapes of the same content — three lines for the director, the steps for the team","Ask the director to read the summary section"], c:2,
+  e:"Same content, different readers, different deliverables. Name the reader, then ask for that shape."},
+ {d:"Domain 2 · Output Evaluation", s:"A structured export passed its format validation — every field present, every bracket closed. This guarantees:",
+  o:["The data inside the fields is correct","The shape only — the contents still need human checking","The totals reconcile","The export is ready for the downstream system, checks complete"], c:1,
+  e:"The schema limit: a fixed shape guarantees the shape and nothing else. Contents are still checked by you."},
+ // Domain 3
+ {d:"Domain 3 · Selection", s:"Every Monday you produce the same status report from the same folder of documents, re-explaining the format each time. The right door is:",
+  o:["A longer prompt that includes the format","A project — instructions and knowledge saved once, used by every chat inside it","The most capable model, which needs less explaining","Asking Claude to remember the format at the end of each session"], c:1,
+  e:"Same work, same materials, every week — that's a project. Anything else re-pays the explanation tax weekly."},
+ {d:"Domain 3 · Selection", s:"You need real percentage changes computed from a spreadsheet's actual figures, then charted. The right door is:",
+  o:["Ask Claude to estimate the trends from the file","Code execution — compute and chart from the real data","A carefully-worded prompt asking for precise arithmetic","Research"], c:1,
+  e:"Real arithmetic on real data is code execution's job. Asking a language model to “be precise” about computation is hoping, not computing."},
+ {d:"Domain 3 · Selection", s:"Eight hundred support tickets need sorting into five categories, one line each. The right rung is:",
+  o:["The most capable model — quality matters everywhere","A fast, light model — high volume, simple judgment","Split the batch across every model family for comparison","Whichever model the team used last"], c:1,
+  e:"High volume, simple judgment — the fast light rung. The heavyweight does it too, at a price the task never earns."},
+ {d:"Domain 3 · Selection", s:"A long working session has gone soft — answers drifting, earlier details missed. The best next step is:",
+  o:["Keep going but write more forceful prompts","Start a clean session carrying forward just the decisions and key state","Paste the full transcript into a new session so nothing is lost","Switch to a bigger model mid-session and continue"], c:1,
+  e:"Restart clean with the key state. Pasting the whole history rebuilds the same overloaded window in a new room."},
+ {d:"Domain 3 · Selection", s:"A colleague says their analysis is weak and wants budget for the top model. They haven't checked what the current model was given. The first question is:",
+  o:["Whether the budget covers the bigger model's per-run cost","Whether the model actually saw the information the task needs","Which model the competitor teams use","Whether the analysis can be split across two models"], c:1,
+  e:"First staircase step: what's missing? If the model never saw the information, no model will guess it — and no budget line fixes it."},
+ // Domain 4
+ {d:"Domain 4 · Workflows", s:"You're choosing where Claude helps a five-step process. The step to target is the one where:",
+  o:["The team complains the loudest","Time consumed and language work — reading, drafting, summarizing — both run high","The newest tools are already installed","Automation is technically easiest, whatever the impact"], c:1,
+  e:"Mark every step for time eaten and language work; target where both run high. Loud complaints are how AI ends up where it doesn't pay."},
+ {d:"Domain 4 · Workflows", s:"Incoming requests are mostly routine, with a hard minority needing deep analysis. The pattern that fits is:",
+  o:["A chain — every request through the same steps","A router — easy items to the fast model, hard ones up the ladder","An autonomous agent deciding everything case by case","Parallel passes over every request regardless of difficulty"], c:1,
+  e:"Mixed difficulty is the router's home ground. An agent is the most flexibility and the least control — reached for last."},
+ {d:"Domain 4 · Workflows", s:"A team's document review workflow works well in tools that already hold the data. Leadership wants “AI transformation.” The recommendation that survives scrutiny is:",
+  o:["Rebuild the workflow around a new AI-native platform","Wire Claude into the existing tools at the step where it measurably pays, and keep the rest standing","Run the old and a fully new workflow in parallel indefinitely","Wait — transformation this early is all risk"], c:1,
+  e:"Augment the healthy. Rebuilding a healthy process around a new tool is how healthy processes die."},
+ {d:"Domain 4 · Workflows", s:"Presenting your pilot to stakeholders, the strongest slide reports:",
+  o:["The vendor's published case-study results for teams like yours","Your own pilot's measured numbers, its costs, and the steps that keep a human reviewer","Only the wins — limits invite doubt","A projection of company-wide savings from the vendor's calculator"], c:1,
+  e:"Your numbers, from your own pilot, limits included — the pitch that survives its first bad week."},
+ // Domain 5
+ {d:"Domain 5 · Configuration", s:"One workspace has accumulated sales decks, legal templates, and research papers. Answers have grown erratic. The fix is:",
+  o:["Better prompts specifying which materials to use per question","Split into separate projects by purpose — contradictory materials destabilize every answer","Remove all files and paste per-chat instead","Add instructions telling Claude to be more consistent"], c:1,
+  e:"Contradictory materials in one workspace destabilize every answer it gives. Split by purpose."},
+ {d:"Domain 5 · Configuration", s:"You've uploaded the right documents, but answers keep blending them with general knowledge and you can't tell which is which. The instruction to add is:",
+  o:["“Prefer the uploaded documents where possible”","“Answer only from these materials, and say unknown for anything not in them”","“Cite when using general knowledge”","“Be careful about sources”"], c:1,
+  e:"The fence, verbatim. “Prefer where possible” leaves the gap-filling door open, and you still can't tell which is which."},
+ {d:"Domain 5 · Configuration", s:"To make sure a report project never misses context, a teammate proposes connecting the department's entire shared drive and instructing Claude to ignore irrelevant files. This will:",
+  o:["Work — the instruction handles the noise","Quietly sink accuracy — the irrelevant files join every search anyway; connect the minimum instead","Work, but only with a more capable model","Improve answers, since more context is always better"], c:1,
+  e:"The whole-drive connector is the domain's signature trap — it feels thorough. Scope every connector to the minimum it needs."},
+ {d:"Domain 5 · Configuration", s:"A project's instructions were written eight months ago; the business has since renamed two products and changed the report template. The move is:",
+  o:["Nothing — instructions don't expire","Audit the setup: reread instructions against today's purpose, remove stale files, refresh what changed","Add a note telling Claude the instructions may be outdated","Start a new project every month as a rule"], c:1,
+  e:"Configuration rots in silence. Audit on a rhythm; a staleness note delegates your maintenance job to the model."},
+ // Domain 6
+ {d:"Domain 6 · Governance", s:"Claude drafts rejection letters from screening notes, and a manager proposes auto-sending them to save a day per week. This is:",
+  o:["Fine — rejections are routine correspondence","Not allowed to run unreviewed — employment decisions are high-stakes and a qualified human reviews before anything reaches a candidate","Fine if the letters are polite and well-written","Fine once accuracy exceeds a threshold in testing"], c:1,
+  e:"Employment is one of the seven high-stakes areas; rejections are exactly where the rule applies hardest."},
+ {d:"Domain 6 · Governance", s:"For a customer-facing assistant, AI involvement must be disclosed:",
+  o:["At the start of every session","When a customer directly asks","In the terms and conditions page","Only for complex queries where errors are likelier"], c:0,
+  e:"At the start, always, for anything customer-facing. On-request is the trap that sounds like balance."},
+ {d:"Domain 6 · Governance", s:"A briefing on a contested policy topic presents one position thoroughly and dismisses the opposing view in a single line. This is:",
+  o:["Efficient prose — the opposing view was at least mentioned","A slant tell — balance is checked, never assumed, and your review is the last line","Acceptable if the thorough side is the more popular one","A length problem — ask for a longer version"], c:1,
+  e:"Opposing views dismissed in a line is slant tell number two. Ask: are both sides treated fairly, and would every group recognize themselves?"},
+ {d:"Domain 6 · Governance", s:"A teammate wants to paste a customer list with contact details into Claude to draft outreach emails. Before anything else:",
+  o:["Check the organization's data policy — anonymize, get explicit authorization, or keep it out","Proceed — email drafting is a standard use case","Paste it but delete the chat afterwards","Use a personal account to keep it off the company workspace"], c:0,
+  e:"Personal information passes the org-policy gate before it enters any tool. The other options are policy violations with extra steps."},
+ // Domain 7
+ {d:"Domain 7 · Troubleshooting", s:"A recurring task's outputs have gone inconsistent. The team's proposals: upgrade the model, rewrite the prompt a third time, attach more documents. The right order of work is:",
+  o:["Model upgrade first — inconsistency is a capability problem","Diagnose in order: check the instructions are specific, check the task has the information it needs, then escalate — before spending on anything","All three at once, to fix it fastest","More documents first — context cures inconsistency"], c:1,
+  e:"Diagnose in order — each check costs less than the one after it. Everything-at-once means learning nothing about what fixed it."},
+ {d:"Domain 7 · Troubleshooting", s:"After tuning, a team runs its heavyweight model on everything — including sorting a thousand routine entries a week — and the bill shows it. The durable fix is:",
+  o:["Keep it — the best model gives the best results everywhere","Fit cost to workload — light model for the high-volume sorting, capable model for the deep judgment work","Run the sorting less often","Cap the number of sorting runs and queue the overflow"], c:1,
+  e:"The heavyweight-for-everything pattern is wasteful by definition. Rationing runs treats the symptom and keeps paying the mismatch."}
+];
+
+const EXAM_MINUTES = parseInt(new URLSearchParams(location.search).get("min")) || 60;
+const LETTERS = ["A","B","C","D"];
+
+/* rotate display order per question so correct letters spread across A-D */
+Q.forEach((q,i)=>{
+  const k = i % 4;
+  q.disp = [0,1,2,3].map(j => (j + k) % 4);       // disp[displayPos] = authored index
+  q.correctDisp = q.disp.indexOf(q.c);
+});
+
+let cur = 0, timeLeft = EXAM_MINUTES*60, timerId = null, submitted = false;
+const sel = Array(Q.length).fill(null);            // selected display index
+const struck = Q.map(()=>[false,false,false,false]);
+const flags = Array(Q.length).fill(false);
+
+const $ = id => document.getElementById(id);
+
+function startExam(){
+  $("startScreen").classList.add("hidden");
+  $("topbar").classList.remove("hidden");
+  $("examScreen").classList.remove("hidden");
+  $("navbar").classList.remove("hidden");
+  timerId = setInterval(tick, 1000);
+  render();
+}
+
+function tick(){
+  timeLeft--;
+  const m = Math.floor(timeLeft/60), s = timeLeft%60;
+  $("timer").textContent = `${m}:${String(s).padStart(2,"0")}`;
+  if(timeLeft <= 300) $("timer").classList.add("low");
+  if(timeLeft <= 0){ clearInterval(timerId); submitExam(true); }
+}
+
+function render(){
+  const q = Q[cur];
+  $("qpos").textContent = `Question ${cur+1} of ${Q.length}`;
+  $("domainTag").textContent = q.d;
+  $("stem").textContent = q.s;
+  $("flagNote").classList.toggle("hidden", !flags[cur]);
+  $("flagBtn").classList.toggle("flagged", flags[cur]);
+  $("flagBtn").textContent = flags[cur] ? "⚑ Flagged" : "⚑ Flag for review";
+  $("prevBtn").disabled = cur === 0;
+  $("nextBtn").textContent = cur === Q.length-1 ? "Review →" : "Next →";
+  const box = $("opts"); box.innerHTML = "";
+  q.disp.forEach((authIdx, dPos)=>{
+    const div = document.createElement("div");
+    div.className = "opt" + (sel[cur]===dPos?" selected":"") + (struck[cur][dPos]?" struck":"");
+    div.innerHTML = `<div class="letter">${LETTERS[dPos]}</div><div class="txt"></div><button class="strike-btn" title="Strike out">abc̶</button>`;
+    div.querySelector(".txt").textContent = q.o[authIdx];
+    div.onclick = e => {
+      if(e.target.classList.contains("strike-btn")) return;
+      if(struck[cur][dPos]) struck[cur][dPos] = false;   // selecting clears strike
+      sel[cur] = (sel[cur]===dPos) ? null : dPos;
+      render();
+    };
+    div.oncontextmenu = e => { e.preventDefault(); toggleStrike(dPos); };
+    div.querySelector(".strike-btn").onclick = e => { e.stopPropagation(); toggleStrike(dPos); };
+    box.appendChild(div);
+  });
+}
+
+function toggleStrike(dPos){
+  struck[cur][dPos] = !struck[cur][dPos];
+  if(struck[cur][dPos] && sel[cur]===dPos) sel[cur] = null;  // striking deselects
+  render();
+}
+
+function go(dir){
+  if(dir===1 && cur===Q.length-1){ openReview(); return; }
+  cur = Math.min(Q.length-1, Math.max(0, cur+dir));
+  render();
+}
+
+$("flagBtn").onclick = ()=>{ flags[cur] = !flags[cur]; render(); };
+
+document.addEventListener("keydown", e=>{
+  if($("examScreen").classList.contains("hidden")) return;
+  if(e.key==="ArrowRight") go(1);
+  else if(e.key==="ArrowLeft") go(-1);
+  else if(e.key.toLowerCase()==="f") $("flagBtn").onclick();
+  else{
+    const i = LETTERS.indexOf(e.key.toUpperCase());
+    if(i>=0){ if(struck[cur][i]) struck[cur][i]=false; sel[cur]=(sel[cur]===i)?null:i; render(); }
+  }
+});
+
+function openReview(){
+  $("examScreen").classList.add("hidden"); $("navbar").classList.add("hidden");
+  $("reviewScreen").classList.remove("hidden");
+  const g = $("reviewGrid"); g.innerHTML = "";
+  let unans = 0;
+  Q.forEach((_,i)=>{
+    const b = document.createElement("div");
+    b.className = "rq " + (sel[i]!==null ? "answered" : "unanswered") + (flags[i] ? " flag" : "");
+    if(sel[i]===null) unans++;
+    b.textContent = i+1;
+    b.onclick = ()=>{ cur=i; backToExam(); };
+    g.appendChild(b);
+  });
+  const fl = flags.filter(Boolean).length;
+  $("reviewSummary").innerHTML = `<b>${Q.length-unans}</b> answered · <b>${unans}</b> unanswered · <b style="color:var(--orange)">${fl}</b> flagged`;
+}
+
+function backToExam(){
+  $("reviewScreen").classList.add("hidden");
+  $("examScreen").classList.remove("hidden");
+  $("navbar").classList.remove("hidden");
+  render();
+}
+
+function submitExam(auto){
+  if(submitted) return;
+  const unans = sel.filter(s=>s===null).length;
+  if(!auto && unans>0 && !confirm(`${unans} question${unans>1?"s are":" is"} still unanswered. Submit anyway?`)) return;
+  submitted = true;
+  clearInterval(timerId);
+  $("reviewScreen").classList.add("hidden"); $("examScreen").classList.add("hidden");
+  $("navbar").classList.add("hidden"); $("topbar").classList.add("hidden");
+  $("resultsScreen").classList.remove("hidden");
+
+  let right = 0; const dom = {};
+  Q.forEach((q,i)=>{
+    const ok = sel[i]===q.correctDisp;
+    if(ok) right++;
+    const key = q.d.split(" ·")[0];
+    dom[key] = dom[key] || {ok:0,n:0};
+    dom[key].n++; if(ok) dom[key].ok++;
+  });
+  const pct = Math.round(right/Q.length*100);
+  $("scoreLine").innerHTML = `${right} / ${Q.length} <small>(${pct}%)</small>`;
+  $("passNote").textContent = auto
+    ? "Time expired — the exam submitted automatically. On the real paper the passing score is 720 out of 1000; any domain below two-thirds here deserves a reread of its study guide."
+    : "On the real paper the passing score is 720 out of 1000; any domain below two-thirds here deserves a reread of its study guide.";
+
+  let t = "<tr><th>Domain</th><th>Score</th><th>Verdict</th></tr>";
+  Object.entries(dom).forEach(([k,v])=>{
+    const good = v.ok/v.n >= 2/3;
+    t += `<tr><td>${k}</td><td>${v.ok} / ${v.n}</td><td class="${good?"good":"bad"}">${good?"Solid":"Reread the guide"}</td></tr>`;
+  });
+  $("domainTable").innerHTML = t;
+
+  const list = $("reviewList"); list.innerHTML = "";
+  Q.forEach((q,i)=>{
+    const ok = sel[i]===q.correctDisp;
+    const your = sel[i]===null ? "—" : `${LETTERS[sel[i]]}. ${q.o[q.disp[sel[i]]]}`;
+    const div = document.createElement("div");
+    div.className = "rev-item";
+    div.innerHTML = `<span class="pill">Q${i+1} · ${q.d}</span>
+      <div class="rstem"></div>
+      <div class="ans">Your answer: <span class="${ok?"ok":"no"}">${ok?"✔":"✘"} </span><span class="ya"></span></div>
+      <div class="ans">Correct: <span class="ok"></span></div>
+      <div class="why"></div>`;
+    div.querySelector(".rstem").textContent = q.s;
+    div.querySelector(".ya").textContent = your;
+    div.querySelectorAll(".ans")[1].querySelector(".ok").textContent = `${LETTERS[q.correctDisp]}. ${q.o[q.c]}`;
+    div.querySelector(".why").textContent = q.e;
+    list.appendChild(div);
+  });
+}
+</script>
+</body>
+</html>
