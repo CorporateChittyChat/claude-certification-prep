@@ -53,4 +53,4 @@ Match the tool to the task, and revisit the match when the workload changes.
 
 ## Practice
 
-Worked question (the inconsistent answers): [Q8 — coming with EP 08](../practice/episode-questions.md). Until then, the [mock exam](../practice/mock-exam.md) carries two Domain 7 questions.
+Worked question (the inconsistent answers): [Q8](../practice/episode-questions.md#q8--domain-7-the-inconsistent-answers). The [mock exam](../practice/mock-exam.md) carries two more Domain 7 questions.
