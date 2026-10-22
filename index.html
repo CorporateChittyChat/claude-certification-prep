@@ -54,6 +54,18 @@
   .emblem.second{margin-top:56px;}
   .emblem text{font-family:"Segoe UI",system-ui,Arial,sans-serif;}
 
+  /* ---------- support ---------- */
+  .coffee{display:grid; grid-template-columns:auto 1fr auto; gap:26px; align-items:center; background:linear-gradient(135deg,#fff8ec 0%,#fdf0dc 100%); border:2px solid #f2c48d; border-radius:20px; padding:28px 32px;}
+  .coffee .cup{font-size:56px; line-height:1;}
+  .coffee h2{font-size:28px; margin-bottom:4px;}
+  .coffee p{color:#3a3f4d; font-size:17px; max-width:640px;}
+  .coffee-cta{display:flex; flex-direction:column; align-items:center; gap:6px;}
+  .coffee-cta small{color:var(--grey); font-size:13px;}
+  .btn.coffee-btn{background:#6f4e37; color:#fff; font-size:18px; padding:14px 24px; box-shadow:0 6px 16px rgba(111,78,55,.3);}
+  .btn.coffee-btn:hover{filter:brightness(1.1);}
+  .thanks{position:fixed; left:50%; bottom:22px; transform:translateX(-50%); background:var(--green); color:#fff; font-weight:700; padding:14px 22px; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.2); z-index:10;}
+  .hidden{display:none!important;}
+
   /* ---------- footer disclaimer ---------- */
   .fine{grid-column:1 / -1; border-top:1px solid #3a4158; padding-top:18px; font-size:13px; color:#9aa1b3; line-height:1.6;}
 
@@ -139,6 +151,7 @@
   /* ---------- responsive ---------- */
   @media (max-width:980px){
     .hero .wrap, .tracks, .paths, footer .wrap{grid-template-columns:minmax(0,1fr);}
+    .coffee{grid-template-columns:1fr; text-align:center; justify-items:center;}
     .videos{grid-template-columns:repeat(2,minmax(0,1fr));}
     .emblems{justify-content:flex-start;}
     .emblems{grid-template-columns:repeat(4,minmax(0,92px)); gap:10px; justify-content:start;}
@@ -431,11 +444,30 @@
   </div>
 </section>
 
+<section class="block" id="support">
+  <div class="wrap">
+    <div class="coffee">
+      <div class="cup" aria-hidden="true">☕</div>
+      <div class="coffee-body">
+        <h2>Found this useful?</h2>
+        <p>Everything here is free and stays free: no sign-up, no paywall. If it helped you prepare, you can buy me a coffee. It keeps new tracks like CCAR-F and CCAR-P coming.</p>
+      </div>
+      <div class="coffee-cta">
+        <a class="btn coffee-btn" href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener">☕ Buy me a coffee</a>
+        <small>Optional · secure checkout by Stripe</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="thanks hidden" id="thanks" role="status">Thank you for the coffee! 🙏 It genuinely helps keep this free.</div>
+
 <footer>
   <div class="wrap">
     <div>
       <h4>About</h4>
       <p>Built alongside the <a href="https://www.youtube.com/@Corporatechittychat">CorporateChittyChat</a> channel, for IT professionals working with AI.</p>
+      <p style="margin-top:10px"><a href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener">☕ Buy me a coffee</a></p>
     </div>
     <div>
       <h4>Contributing</h4>
@@ -449,5 +481,13 @@
   </div>
 </footer>
 
+<script>
+  /* Stripe can redirect here with ?thanks=1 after a tip */
+  if (new URLSearchParams(location.search).get("thanks") === "1") {
+    const t = document.getElementById("thanks");
+    t.classList.remove("hidden");
+    setTimeout(() => t.classList.add("hidden"), 6000);
+  }
+</script>
 </body>
 </html>
