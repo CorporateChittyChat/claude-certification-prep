@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CCAO-F Mock Exam</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23e8822a'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%23232838'/%3E%3C/svg%3E">
 <style>
   :root{
     --navy:#232838; --panel:#2e3446; --ink:#1c2130; --paper:#f7f5f0;
@@ -61,6 +62,20 @@
   .disclaimer{background:var(--orange-soft); border-radius:10px; padding:14px 18px; font-size:16px; margin-bottom:28px;}
   .big-btn{background:var(--orange); color:#fff; border:none; font-size:22px; font-weight:700; padding:16px 42px; border-radius:10px; cursor:pointer;}
   .big-btn:hover{filter:brightness(1.06);}
+  .center-wrap.wide{max-width:1240px; margin-top:32px;}
+  .start-grid{display:block;}
+  .start-side .big-btn{width:100%;}
+  @media (min-width:1000px){
+    .start-grid{display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:40px; align-items:start;}
+    .start-grid .facts{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin:4px 0 18px;}
+    .start-grid .fact{min-width:0; padding:12px 6px;}
+    .start-grid .fact b{font-size:26px;}
+    .start-grid .fact span{font-size:12px;}
+    .center-wrap.wide .start-card{padding:32px 40px;}
+    .start-side .big-btn{margin-bottom:18px;}
+    .start-side .tip{margin-bottom:16px;}
+    .start-side{position:sticky; top:24px;}
+  }
 
   /* ---------- exam screen ---------- */
   .exam-wrap{max-width:1100px; margin:34px auto 120px; padding:0 28px;}
@@ -137,15 +152,15 @@
 </header>
 
 <!-- START -->
-<section id="startScreen" class="center-wrap">
+<section id="startScreen" class="center-wrap wide">
   <div class="start-card">
     <div class="hero">
       <svg class="emblem" viewBox="0 0 120 120" role="img" aria-label="CCAO-F practice exam badge">
         <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="#e8822a"/>
         <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="#232838"/>
-        <text x="60" y="52" text-anchor="middle" fill="#f6d9be" font-size="11" font-weight="700" letter-spacing="1.5">PRACTICE</text>
-        <text x="60" y="74" text-anchor="middle" fill="#fff" font-size="20" font-weight="800">CCAO-F</text>
-        <text x="60" y="90" text-anchor="middle" fill="#e8822a" font-size="10" font-weight="700" letter-spacing="1">MOCK EXAM</text>
+        <text x="60" y="50" text-anchor="middle" fill="#f6d9be" font-size="9" font-weight="700" textLength="48" lengthAdjust="spacingAndGlyphs">PRACTICE</text>
+        <text x="60" y="68" text-anchor="middle" fill="#fff" font-size="16" font-weight="800" textLength="60" lengthAdjust="spacingAndGlyphs">CCAO-F</text>
+        <text x="60" y="81" text-anchor="middle" fill="#e8822a" font-size="8.5" font-weight="700" textLength="50" lengthAdjust="spacingAndGlyphs">MOCK EXAM</text>
       </svg>
       <div>
         <h1>CCAO-F Mock Exam</h1>
@@ -159,6 +174,8 @@
         </div>
       </div>
     </div>
+    <div class="start-grid">
+    <div class="start-main">
     <div class="facts">
       <div class="fact"><b>30</b><span>questions</span></div>
       <div class="fact"><b>60:00</b><span>minutes</span></div>
@@ -170,11 +187,15 @@
       <li><b>⚑ Flag</b> questions to revisit; the review screen shows everything flagged or unanswered before you submit.</li>
       <li>The timer starts when you begin and submits the exam automatically at zero.</li>
     </ul>
+    </div>
+    <div class="start-side">
     <div class="tip"><span class="label">Exam strategy</span>
       <b>Eliminate the clearly wrong pair first, then choose between the remaining two.</b>
       Each question shows the scenario first and <b>what's actually being asked</b> below it. Watch the <mark class="q">highlighted</mark> qualifier words such as <i>first</i>, <i>best</i> and <i>most</i>: they usually decide between the last two options.</div>
+    <button class="big-btn" onclick="startExam()">Begin exam →</button>
     <div class="disclaimer"><b>Every question here is original study material</b> written for the claude-certification-prep project, in the exam's style. Nothing is from, or derived from, the real exam. Study guides and answer explanations: github.com/CorporateChittyChat/claude-certification-prep</div>
-    <button class="big-btn" onclick="startExam()">Begin exam</button>
+    </div>
+    </div>
   </div>
 </section>
 
@@ -563,9 +584,9 @@ function renderBadge(pct, weakCount){
     <svg class="emblem" viewBox="0 0 120 120" role="img" aria-label="${t.name} practice badge">
       <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="${t.c1}"/>
       <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="${t.c2}"/>
-      <text x="60" y="56" text-anchor="middle" fill="${t.c1}" font-size="26">${t.icon}</text>
-      <text x="60" y="78" text-anchor="middle" fill="#fff" font-size="15" font-weight="800">${pct}%</text>
-      <text x="60" y="93" text-anchor="middle" fill="${t.fg}" font-size="9" font-weight="700" letter-spacing="1">CCAO-F PRACTICE</text>
+      <text x="60" y="54" text-anchor="middle" fill="${t.c1}" font-size="20">${t.icon}</text>
+      <text x="60" y="70" text-anchor="middle" fill="#fff" font-size="15" font-weight="800">${pct}%</text>
+      <text x="60" y="81" text-anchor="middle" fill="${t.fg}" font-size="8" font-weight="700" textLength="46" lengthAdjust="spacingAndGlyphs">PRACTICE</text>
     </svg>
     <div>
       <span class="label">Practice badge earned</span>
