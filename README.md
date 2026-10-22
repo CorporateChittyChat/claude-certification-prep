@@ -11,8 +11,9 @@ Built alongside the **[CCAO-F Exam Prep video series](https://www.youtube.com/pl
 | Track | Status | Material |
 |---|---|---|
 | **Claude Certified Associate – Foundations (CCAO-F)** | Complete | [`ccao-f/`](ccao-f/) — 7 domain study guides, 37 practice questions, recap deck, video series |
-| **Claude Certified Developer – Foundations (CCDV-F)** | In progress (EP 00–09) | [`ccdv-f/`](ccdv-f/) — episode index and video series; runnable code per episode in [chittychat-studio/ccdvf-course](https://github.com/chittychat-studio/ccdvf-course) |
-| Architect track | Planned | — |
+| **Claude Certified Developer – Foundations (CCDV-F)** | Complete | [`ccdv-f/`](ccdv-f/) — episode index, video series, 30-question mock exam; runnable code per episode in [chittychat-studio/ccdvf-course](https://github.com/chittychat-studio/ccdvf-course) |
+| Claude Certified Architect – Foundations (CCAR-F) | Planned | — |
+| Claude Certified Architect – Professional (CCAR-P) | Planned | — |
 
 Each certification gets its own top-level folder with the same shape: `domains/` study notes, `practice/` questions and mock exams, `assets/` printable material, and a README mapping everything to the companion videos. The developer track is code-first, so its runnable builds live in a separate companion repo and `ccdv-f/` maps each episode to them.
 
@@ -30,7 +31,7 @@ Exam format, registration, and validity details: [`ccao-f/exam-logistics.md`](cc
 1. **Read** the [CCDV-F overview](ccdv-f/) for the episode-by-domain map.
 2. **Watch** the [video series](https://www.youtube.com/playlist?list=PLHvgccck0QgI) — Episode 00 covers the exam itself, then one domain per episode.
 3. **Build** each episode's hands-on project from the [companion code repo](https://github.com/chittychat-studio/ccdvf-course) — Python and TypeScript, one folder per episode.
-4. **Practice** with each episode's `PRACTICE.md` (EP 04 onward).
+4. **Test yourself** with the [30-question mock exam](ccdv-f/practice/mock-exam.md) ([interactive version](https://corporatechittychat.github.io/claude-certification-prep/ccdv-f/practice/mock-exam-player.html)) and each episode's `PRACTICE.md` (EP 04 onward).
 
 ## Contributing
 
