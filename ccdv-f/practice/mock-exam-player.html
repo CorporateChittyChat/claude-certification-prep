@@ -120,6 +120,8 @@
   th{background:var(--navy); color:#fff; font-size:15px; letter-spacing:.5px; text-transform:uppercase;}
   td.good{color:var(--green); font-weight:700;} td.bad{color:var(--red); font-weight:700; background:var(--red-soft);}
   td.bad a{color:var(--red);}
+  .coffee-note{font-size:16px; color:var(--grey); margin:-6px 0 16px;}
+  .coffee-note a{color:#6f4e37; font-weight:700;}
   .callout{background:var(--paper); border-left:5px solid var(--navy); border-radius:8px; padding:12px 16px; font-size:18px; margin:6px 0 18px;}
   .focus{border-radius:12px; padding:18px 22px; margin:4px 0 20px; font-size:19px;}
   .focus.weak{background:var(--red-soft); border:2px solid var(--red);}
@@ -231,6 +233,7 @@
   <div class="start-card">
     <h1 style="font-size:32px;">Results</h1>
     <div class="earned" id="earned"></div>
+    <p class="coffee-note">Found this mock exam useful? <a href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener">☕ Buy me a coffee</a>. Optional, and everything stays free.</p>
     <div class="score-line" id="scoreLine"></div>
     <div id="passNote" class="callout"></div>
     <div id="focusBox" class="focus"></div>
@@ -809,7 +812,7 @@ function submitExam(auto){
   fb.className = "focus " + (weak.length ? "weak" : "strong");
   fb.innerHTML = weak.length
     ? `<span class="label" style="color:var(--red)">Focus your study here</span><b>${weak.length} topic${weak.length>1?"s":""} below two-thirds.</b> Work through these episodes, then retake the exam:<ul>${weak.join("")}</ul>`
-    : `<span class="label" style="color:var(--green)">Every domain is solid</span><b>Every topic at two-thirds or better.</b> Skim the key takeaways below for any question you got right by guessing.`;
+    : `<span class="label" style="color:var(--green)">Every topic is solid</span><b>Every topic at two-thirds or better.</b> Skim the key takeaways below for any question you got right by guessing.`;
 
   const list = $("reviewList"); list.innerHTML = "";
   Q.forEach((q,i)=>{
