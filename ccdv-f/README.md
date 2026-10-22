@@ -33,6 +33,12 @@ The developer track is code-first, so its runnable material lives in its own rep
 1. **Watch** the episode for the concept and the exam trap.
 2. **Run** the episode's folder in the companion repo. Keep your API key in `.env`, never in code; episodes 05–09 run without a key.
 3. **Practice** with that folder's `PRACTICE.md` (EP 04 onward).
+4. **Test yourself** with the mock exam below once you've covered the episodes.
+
+## Practice
+
+- [Mock exam](practice/mock-exam.md) — 30 original questions, one topic per episode. Answers and explanations in [mock-exam-answers.md](practice/mock-exam-answers.md).
+- **[Interactive exam player](https://corporatechittychat.github.io/claude-certification-prep/ccdv-f/practice/mock-exam-player.html)** — the same 30 questions as a timed exam simulator (60:00 countdown, strikethrough, flag-for-review, per-topic results with links to each episode's code). Opens in the browser; nothing to install. ([source](practice/mock-exam-player.html))
 
 ## A note on product facts
 

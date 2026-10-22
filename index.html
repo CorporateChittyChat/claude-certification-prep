@@ -34,20 +34,24 @@
   .hero h1 em{font-style:normal; color:var(--orange);}
   .hero p.lead{font-size:21px; color:#dfe3ee; margin:18px 0 28px; max-width:640px;}
   .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
-  .btn{display:inline-flex; align-items:center; gap:8px; font-size:18px; font-weight:700; padding:14px 26px; border-radius:10px; text-decoration:none; border:2px solid transparent;}
+  .btn{display:inline-flex; align-items:center; gap:8px; font-size:17px; font-weight:700; padding:13px 20px; border-radius:10px; text-decoration:none; border:2px solid transparent;}
   .btn.primary{background:var(--orange); color:#1c2130;}
   .btn.primary:hover{filter:brightness(1.07);}
+  .btn.gold{background:var(--gold); color:#1c2130;}
+  .btn.gold:hover{filter:brightness(1.07);}
   .btn.ghost{border-color:#5a6280; color:#fff;}
   .btn.ghost:hover{background:#3a4158;}
   .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
   .chip{display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18); color:#fff; font-size:15px; font-weight:600; padding:6px 14px; border-radius:999px;}
+  a.chip{text-decoration:none;}
+  a.chip:hover{background:rgba(255,255,255,.22);}
   .emblems{display:flex; justify-content:center; gap:22px;}
   .emblem{width:150px; height:150px; filter:drop-shadow(0 10px 22px rgba(0,0,0,.35));}
   .emblem.second{margin-top:70px;}
   .emblem text{font-family:"Segoe UI",system-ui,Arial,sans-serif;}
 
-  /* ---------- notice ---------- */
-  .notice{background:var(--orange-soft); border-radius:12px; padding:16px 22px; font-size:16px; margin:-28px auto 0; position:relative; box-shadow:0 6px 20px rgba(0,0,0,.08);}
+  /* ---------- footer disclaimer ---------- */
+  .fine{grid-column:1 / -1; border-top:1px solid #3a4158; padding-top:18px; font-size:13px; color:#9aa1b3; line-height:1.6;}
 
   /* ---------- sections ---------- */
   section.block{padding:56px 0 8px;}
@@ -84,7 +88,8 @@
   .eps{list-style:none; display:grid; gap:6px; margin-bottom:22px; font-size:16px;}
   .eps li{display:flex; gap:10px; align-items:baseline;}
   .eps b{flex:none; font-size:13px; background:var(--navy); color:#fff; border-radius:6px; padding:2px 8px; font-variant-numeric:tabular-nums;}
-  .planned{margin-top:24px; background:var(--card); border:2px dashed var(--line); border-radius:16px; padding:20px 28px; display:flex; align-items:center; gap:16px; color:var(--grey);}
+  .planned-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px; margin-top:24px;}
+  .planned{background:var(--card); border:2px dashed var(--line); border-radius:16px; padding:20px 28px; display:flex; align-items:center; gap:16px; color:var(--grey);}
   .planned b{color:var(--ink);}
 
   /* ---------- start here ---------- */
@@ -106,7 +111,7 @@
 
   /* ---------- responsive ---------- */
   @media (max-width:980px){
-    .hero .wrap, .tracks, .paths, footer .wrap{grid-template-columns:minmax(0,1fr);}
+    .hero .wrap, .tracks, .paths, .planned-grid, footer .wrap{grid-template-columns:minmax(0,1fr);}
     .emblems{justify-content:flex-start;}
     .emblem{width:110px; height:110px;} .emblem.second{margin-top:0;}
     .topbar nav{display:none;}
@@ -126,7 +131,8 @@
   <div class="wrap">
     <a class="brand" href="./">Claude Certification <span>Prep</span></a>
     <nav>
-      <a href="ccao-f/practice/mock-exam-player.html">Mock exam</a>
+      <a href="ccao-f/practice/mock-exam-player.html">CCAO-F exam</a>
+      <a href="ccdv-f/practice/mock-exam-player.html">CCDV-F exam</a>
       <a href="#tracks">Certifications</a>
       <a href="#start">Start here</a>
       <a href="https://github.com/CorporateChittyChat/claude-certification-prep">GitHub</a>
@@ -138,15 +144,16 @@
   <div class="wrap">
     <div>
       <h1>Free study material for <em>Claude certifications</em></h1>
-      <p class="lead">Study notes per exam domain, original practice questions, a timed mock exam, a printable recap deck and a hands-on developer series. Built alongside the CorporateChittyChat exam-prep videos.</p>
+      <p class="lead">Study notes per exam domain, original practice questions, timed mock exams for both tracks, a printable recap deck and a hands-on developer series. Built alongside the CorporateChittyChat exam-prep videos.</p>
       <div class="cta-row">
-        <a class="btn primary" href="ccao-f/practice/mock-exam-player.html">▶ Take the CCAO-F mock exam</a>
-        <a class="btn ghost" href="#tracks">Browse both tracks</a>
+        <a class="btn primary" href="ccao-f/practice/mock-exam-player.html">▶ CCAO-F mock exam</a>
+        <a class="btn gold" href="ccdv-f/practice/mock-exam-player.html">▶ CCDV-F mock exam</a>
+        <a class="btn ghost" href="#tracks">Browse the tracks</a>
       </div>
       <div class="chips">
-        <span class="chip">🎯 Exam-style scenarios</span>
-        <span class="chip">📺 Video series</span>
-        <span class="chip">🧑‍💻 Runnable code</span>
+        <a class="chip" href="#tracks">🎯 Exam-style scenarios</a>
+        <a class="chip" href="https://www.youtube.com/@Corporatechittychat/playlists">📺 Video series</a>
+        <a class="chip" href="https://github.com/chittychat-studio/ccdvf-course">🧑‍💻 Runnable code</a>
         <span class="chip">Free · no sign-up</span>
       </div>
     </div>
@@ -168,10 +175,6 @@
     </div>
   </div>
 </section>
-
-<div class="wrap">
-  <div class="notice"><b>Independent study material. Not affiliated with, endorsed by, or approved by Anthropic.</b> "Claude" and certification names are Anthropic's trademarks, used here only to identify what these materials help you study for. Every practice question is original material written for this project. Nothing here is from, or derived from, any real exam.</div>
-</div>
 
 <section class="block" id="tracks">
   <div class="wrap">
@@ -219,7 +222,7 @@
           </svg>
           <div>
             <h3>Claude Certified Developer – Foundations</h3>
-            <span class="status wip">● In progress · EP 00–09</span>
+            <span class="status done">✔ Complete · EP 00–09</span>
           </div>
         </div>
         <p class="who">For people who build with Claude: the API, agents, tools and MCP, and Claude Code. Written by someone who sat and passed it.</p>
@@ -227,7 +230,7 @@
           <div class="stat"><b>8</b><span>domains</span></div>
           <div class="stat"><b>10</b><span>episodes</span></div>
           <div class="stat"><b>9</b><span>hands-on builds</span></div>
-          <div class="stat"><b>Py · TS</b><span>languages</span></div>
+          <div class="stat"><b>30</b><span>Q mock exam</span></div>
         </div>
         <ul class="eps">
           <li><b>EP 01</b>Model selection and optimization</li>
@@ -241,14 +244,18 @@
           <li><b>EP 09</b>Eval, testing and debugging</li>
         </ul>
         <ul class="links">
-          <li><a class="feature" href="https://github.com/chittychat-studio/ccdvf-course"><span class="ic">⌨</span><span>Companion code<small>One folder per episode, with a README and practice set</small></span></a></li>
+          <li><a class="feature" href="ccdv-f/practice/mock-exam-player.html"><span class="ic">▶</span><span>Interactive mock exam<small>30 questions, one topic per episode, timed with per-topic results</small></span></a></li>
+          <li><a href="https://github.com/chittychat-studio/ccdvf-course"><span class="ic">⌨</span><span>Companion code<small>Python and TypeScript, one folder per episode, with a README and practice set</small></span></a></li>
           <li><a href="https://www.youtube.com/playlist?list=PLHvgccck0QgI"><span class="ic">📺</span><span>Video series<small>Episode 00 covers the exam itself, then one domain per episode</small></span></a></li>
         </ul>
         <a class="btn dark" href="https://github.com/CorporateChittyChat/claude-certification-prep/tree/main/ccdv-f">Open the CCDV-F track →</a>
       </article>
     </div>
 
-    <div class="planned"><span class="status plan">Planned</span><span><b>Architect track</b> — coming later.</span></div>
+    <div class="planned-grid">
+      <div class="planned"><span class="status plan">Planned</span><span><b>CCAR-F</b> · Claude Certified Architect – Foundations</span></div>
+      <div class="planned"><span class="status plan">Planned</span><span><b>CCAR-P</b> · Claude Certified Architect – Professional</span></div>
+    </div>
   </div>
 </section>
 
@@ -274,7 +281,7 @@
           <li><span><b>Read</b> the <a href="https://github.com/CorporateChittyChat/claude-certification-prep/tree/main/ccdv-f">CCDV-F overview</a> for the episode-by-domain map.</span></li>
           <li><span><b>Watch</b> the <a href="https://www.youtube.com/playlist?list=PLHvgccck0QgI">video series</a>, starting with Episode 00 on the exam itself.</span></li>
           <li><span><b>Build</b> each episode's project from the <a href="https://github.com/chittychat-studio/ccdvf-course">companion code</a>. Episodes 05–09 run without an API key.</span></li>
-          <li><span><b>Practise</b> with each episode's <code>PRACTICE.md</code> (EP 04 onward).</span></li>
+          <li><span><b>Test yourself</b> with the <a href="ccdv-f/practice/mock-exam-player.html">interactive mock exam</a> and each episode's <code>PRACTICE.md</code> (EP 04 onward).</span></li>
         </ol>
       </div>
     </div>
@@ -295,6 +302,7 @@
       <h4>License</h4>
       <p><a href="https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/LICENSE.md">CC BY-NC-SA 4.0</a>: share and adapt with credit, non-commercially, under the same license.</p>
     </div>
+    <p class="fine">Independent study material. Not affiliated with, endorsed by, or approved by Anthropic. "Claude" and certification names are Anthropic's trademarks, used here only to identify what these materials help you study for. Every practice question is original material written for this project; nothing here is from, or derived from, any real exam.</p>
   </div>
 </footer>
 

@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CCDV-F Mock Exam</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23d4a017'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%23232838'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --navy:#232838; --panel:#2e3446; --ink:#1c2130; --paper:#f7f5f0;
+    --card:#ffffff; --orange:#e8822a; --orange-soft:#f6d9be;
+    --green:#2e8b57; --red:#c0392b; --grey:#5f6473; --line:#d8d4cc;
+    --orange-ink:#a8520d; --mark:#ffe08a; --green-soft:#e9f3ec; --red-soft:#fbeae8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Segoe UI",system-ui,Arial,sans-serif; background:var(--paper); color:var(--ink); font-size:19px; line-height:1.5;}
+  mark.q{background:var(--mark); color:inherit; padding:0 5px; border-radius:4px; font-weight:700;}
+  .label{display:block; font-size:13px; font-weight:800; letter-spacing:.9px; text-transform:uppercase; color:var(--orange-ink); margin-bottom:6px;}
+  .hidden{display:none!important;}
+
+  /* ---------- header bar ---------- */
+  header{background:var(--navy); color:#fff; display:flex; align-items:center; gap:18px; padding:14px 28px; position:sticky; top:0; z-index:5;}
+  header .brand{font-weight:700; letter-spacing:.4px;}
+  header .brand small{display:block; font-weight:400; font-size:12px; color:#b9bfce;}
+  header .qpos{margin-left:auto; font-size:17px; color:#dfe3ee;}
+  #timer{font-variant-numeric:tabular-nums; font-weight:700; font-size:22px; background:var(--panel); padding:6px 14px; border-radius:8px;}
+  #timer.low{background:var(--red); animation:pulse 1s infinite;}
+  @keyframes pulse{50%{opacity:.65}}
+  .hbtn{background:var(--panel); color:#fff; border:1px solid #4a516a; border-radius:8px; padding:8px 16px; font-size:16px; cursor:pointer;}
+  .hbtn:hover{background:#3a4158;}
+  .hbtn.flagged{background:var(--orange); border-color:var(--orange); color:#fff;}
+
+  /* ---------- start screen ---------- */
+  .center-wrap{max-width:880px; margin:48px auto; padding:0 24px;}
+  .start-card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:44px 48px; box-shadow:0 6px 24px rgba(0,0,0,.06);}
+  .start-card h1{font-size:40px; margin-bottom:6px;}
+  .start-card .sub{color:var(--grey); font-size:20px; margin-bottom:26px;}
+  .facts{display:flex; gap:16px; margin:22px 0 26px; flex-wrap:wrap;}
+  .fact{flex:1; min-width:150px; background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:16px; text-align:center;}
+  .fact b{display:block; font-size:30px; color:var(--orange);}
+  .fact span{font-size:14px; color:var(--grey); text-transform:uppercase; letter-spacing:.5px;}
+  .rules{line-height:1.75; margin-bottom:26px;}
+  .rules li{margin-left:22px;}
+  /* ---------- badges ---------- */
+  .hero{display:flex; align-items:center; gap:26px; margin-bottom:8px;}
+  .emblem{flex:none; width:118px; height:118px; filter:drop-shadow(0 6px 14px rgba(232,130,42,.35));}
+  .emblem text{font-family:"Segoe UI",system-ui,Arial,sans-serif;}
+  .chips{display:flex; flex-wrap:wrap; gap:10px; margin:6px 0 4px;}
+  .chip{display:inline-flex; align-items:center; gap:6px; background:var(--navy); color:#fff; font-size:15px; font-weight:600; padding:6px 14px; border-radius:999px;}
+  .chip.hot{background:var(--orange); color:#1c2130;}
+  .earned{display:flex; align-items:center; gap:24px; border-radius:14px; padding:22px 26px; margin:6px 0 18px; border:2px solid var(--line); background:var(--paper);}
+  .earned .emblem{width:104px; height:104px; animation:pop .6s ease-out;}
+  .earned h3{font-size:28px; line-height:1.2;}
+  .earned p{font-size:18px; margin-top:4px;}
+  .earned small{display:block; color:var(--grey); font-size:14px; margin-top:6px;}
+  @keyframes pop{0%{transform:scale(.4) rotate(-12deg); opacity:0} 70%{transform:scale(1.08)} 100%{transform:scale(1)}}
+  @media (prefers-reduced-motion:reduce){ .earned .emblem, #timer.low{animation:none;} }
+  .progress{position:absolute; left:0; right:0; bottom:-8px; height:8px; background:#e6e2da;}
+  .progress i{display:block; height:100%; width:0; background:linear-gradient(90deg,var(--orange),#f4b26b); transition:width .25s;}
+  @media (max-width:640px){ .hero{flex-direction:column; align-items:flex-start;} .start-card{padding:28px 20px;} .start-card h1{font-size:30px;} .earned{flex-direction:column; align-items:flex-start;} }
+  .tip{background:#fff8ec; border:2px solid var(--orange); border-radius:12px; padding:18px 22px; margin-bottom:24px; font-size:19px; line-height:1.6;}
+  .disclaimer{background:var(--orange-soft); border-radius:10px; padding:14px 18px; font-size:16px; margin-bottom:28px;}
+  .big-btn{background:var(--orange); color:#fff; border:none; font-size:22px; font-weight:700; padding:16px 42px; border-radius:10px; cursor:pointer;}
+  .big-btn:hover{filter:brightness(1.06);}
+  .center-wrap.wide{max-width:1240px; margin-top:32px;}
+  .start-grid{display:block;}
+  .start-side .big-btn{width:100%;}
+  @media (min-width:1000px){
+    .start-grid{display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:40px; align-items:start;}
+    .start-grid .facts{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin:4px 0 18px;}
+    .start-grid .fact{min-width:0; padding:12px 6px;}
+    .start-grid .fact b{font-size:26px;}
+    .start-grid .fact span{font-size:12px;}
+    .center-wrap.wide .start-card{padding:32px 40px;}
+    .start-side .big-btn{margin-bottom:18px;}
+    .start-side .tip{margin-bottom:16px;}
+    .start-side{position:sticky; top:24px;}
+  }
+
+  /* ---------- exam screen ---------- */
+  .exam-wrap{max-width:1100px; margin:34px auto 120px; padding:0 28px;}
+  .meta-row{display:flex; align-items:center; gap:12px; margin-bottom:14px;}
+  .domain-tag{background:var(--navy); color:#fff; font-size:14px; letter-spacing:.6px; text-transform:uppercase; padding:5px 14px; border-radius:999px;}
+  .flag-note{color:var(--orange-ink); font-weight:700; font-size:16px;}
+  .stem{background:var(--card); border:1px solid var(--line); border-left:6px solid var(--orange); border-radius:12px; padding:26px 30px; font-size:22px; line-height:1.55; margin-bottom:22px;}
+  .stem .scenario{color:#2f3445; margin-bottom:18px;}
+  .stem .ask{font-size:24px; font-weight:700; color:var(--ink); background:#fff8ec; border-radius:8px; padding:12px 16px;}
+  .opt{display:flex; align-items:center; gap:16px; background:var(--card); border:2px solid var(--line); border-radius:12px; padding:16px 20px; margin-bottom:12px; cursor:pointer; transition:border-color .12s;}
+  .opt:hover{border-color:#b9b2a4;}
+  .opt .letter{flex:none; width:40px; height:40px; border-radius:50%; border:2px solid var(--ink); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:19px;}
+  .opt .txt{flex:1; font-size:20px; line-height:1.45;}
+  .opt.selected{border-color:var(--orange); background:#fff7ef;}
+  .opt.selected .letter{background:var(--orange); border-color:var(--orange); color:#fff;}
+  .opt.struck .txt, .opt.struck .letter{text-decoration:line-through; opacity:.38;}
+  .opt .strike-btn{flex:none; border:1px solid var(--line); background:var(--paper); color:var(--grey); border-radius:8px; font-size:14px; padding:6px 10px; cursor:pointer;}
+  .opt .strike-btn:hover{color:var(--red); border-color:var(--red);}
+  .hint{color:var(--grey); font-size:16px; margin-top:8px;}
+
+  /* ---------- footer nav ---------- */
+  .navbar{position:fixed; bottom:0; left:0; right:0; background:var(--navy); padding:14px 28px; display:flex; gap:14px; align-items:center; z-index:5;}
+  .navbar .spacer{flex:1;}
+  .nbtn{background:var(--panel); color:#fff; border:1px solid #4a516a; border-radius:9px; padding:12px 26px; font-size:18px; cursor:pointer;}
+  .nbtn:hover{background:#3a4158;}
+  .nbtn.primary{background:var(--orange); border-color:var(--orange); font-weight:700;}
+
+  /* ---------- review screen ---------- */
+  .review-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(74px,1fr)); gap:12px; margin:26px 0 30px;}
+  .rq{position:relative; border:2px solid var(--line); background:var(--card); border-radius:10px; padding:14px 0; text-align:center; font-weight:700; font-size:19px; cursor:pointer;}
+  .rq.answered{background:var(--green-soft); border-color:var(--green);}
+  .rq.unanswered{background:#f1f1f1; color:var(--grey); border-style:dashed;}
+  .rq.flag::after{content:"⚑"; position:absolute; top:-10px; right:-4px; color:var(--orange); font-size:19px;}
+  .legend{display:flex; gap:22px; color:var(--grey); font-size:16px; margin-bottom:8px; flex-wrap:wrap;}
+  .legend i{display:inline-block; width:14px; height:14px; border-radius:4px; margin-right:6px; vertical-align:-1px;}
+
+  /* ---------- results ---------- */
+  .score-line{font-size:46px; font-weight:800; margin:10px 0 4px;}
+  .score-line small{font-size:22px; color:var(--grey); font-weight:400;}
+  table{border-collapse:collapse; width:100%; margin:20px 0 30px; background:var(--card); border-radius:10px; overflow:hidden;}
+  th,td{border:1px solid var(--line); padding:12px 16px; text-align:left; font-size:18px;}
+  th{background:var(--navy); color:#fff; font-size:15px; letter-spacing:.5px; text-transform:uppercase;}
+  td.good{color:var(--green); font-weight:700;} td.bad{color:var(--red); font-weight:700; background:var(--red-soft);}
+  td.bad a{color:var(--red);}
+  .callout{background:var(--paper); border-left:5px solid var(--navy); border-radius:8px; padding:12px 16px; font-size:18px; margin:6px 0 18px;}
+  .focus{border-radius:12px; padding:18px 22px; margin:4px 0 20px; font-size:19px;}
+  .focus.weak{background:var(--red-soft); border:2px solid var(--red);}
+  .focus.strong{background:var(--green-soft); border:2px solid var(--green);}
+  .focus ul{margin:8px 0 0 22px;} .focus li{margin:4px 0;}
+  .focus a{color:var(--ink); font-weight:700;}
+  .rev-head{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:8px 0 16px;}
+  .rev-head h2{font-size:24px; margin-right:auto;}
+  .seg{background:var(--card); color:var(--ink); border:2px solid var(--line); border-radius:999px; padding:7px 16px; font-size:16px; cursor:pointer;}
+  .seg.on{background:var(--navy); border-color:var(--navy); color:#fff;}
+  .rev-item{background:var(--card); border:1px solid var(--line); border-left:6px solid var(--line); border-radius:12px; padding:22px 26px; margin-bottom:18px;}
+  .rev-item.right{border-left-color:var(--green);}
+  .rev-item.wrong{border-left-color:var(--red);}
+  .rev-item .rstem{font-size:20px; font-weight:600; margin:6px 0 12px; line-height:1.5;}
+  .rev-item .ans{font-size:18px; margin:4px 0;}
+  .rev-item .ok{color:var(--green); font-weight:700;} .rev-item .no{color:var(--red); font-weight:700;}
+  .rev-item .why{background:#fff8ec; border-left:5px solid var(--orange); border-radius:8px; padding:14px 18px; margin-top:12px; font-size:19px; line-height:1.6; font-weight:500;}
+  .reviewList.missed-only .rev-item.right{display:none;}
+  .pill{display:inline-block; background:var(--navy); color:#fff; font-size:13px; padding:4px 12px; border-radius:999px; letter-spacing:.5px; text-transform:uppercase;}
+</style>
+</head>
+<body>
+
+<header id="topbar" class="hidden">
+  <div class="brand">CCDV-F Mock Exam<small>Original practice material · Unofficial · not affiliated with Anthropic</small></div>
+  <div class="qpos" id="qpos"></div>
+  <button class="hbtn" id="flagBtn">⚑ Flag for review</button>
+  <div id="timer">60:00</div>
+  <div class="progress" id="progress" title="Questions answered"><i id="progressBar"></i></div>
+</header>
+
+<!-- START -->
+<section id="startScreen" class="center-wrap wide">
+  <div class="start-card">
+    <div class="hero">
+      <svg class="emblem" viewBox="0 0 120 120" role="img" aria-label="CCDV-F practice exam badge">
+        <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="#d4a017"/>
+        <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="#232838"/>
+        <text x="60" y="50" text-anchor="middle" fill="#f6d9be" font-size="9" font-weight="700" textLength="48" lengthAdjust="spacingAndGlyphs">PRACTICE</text>
+        <text x="60" y="68" text-anchor="middle" fill="#fff" font-size="16" font-weight="800" textLength="60" lengthAdjust="spacingAndGlyphs">CCDV-F</text>
+        <text x="60" y="81" text-anchor="middle" fill="#d4a017" font-size="8.5" font-weight="700" textLength="50" lengthAdjust="spacingAndGlyphs">MOCK EXAM</text>
+      </svg>
+      <div>
+        <h1>CCDV-F Mock Exam</h1>
+        <div class="sub" style="margin-bottom:12px">Claude Certified Developer – Foundations · 30-question practice sitting</div>
+        <div class="chips">
+          <span class="chip hot">🎯 Exam-style scenarios</span>
+          <span class="chip">⏱ Timed</span>
+          <span class="chip">📊 Per-topic results</span>
+          <span class="chip">🏅 Earn a practice badge</span>
+          <span class="chip">Free · no sign-up</span>
+        </div>
+      </div>
+    </div>
+    <div class="start-grid">
+    <div class="start-main">
+    <div class="facts">
+      <div class="fact"><b>30</b><span>questions</span></div>
+      <div class="fact"><b>60:00</b><span>minutes</span></div>
+      <div class="fact"><b>9</b><span>episode topics</span></div>
+      <div class="fact"><b>2 min</b><span>per question, real pacing</span></div>
+    </div>
+    <ul class="rules">
+      <li>Click an option to select it. Use <b>abc̶</b> (or right-click an option) to strike out answers you have eliminated.</li>
+      <li><b>⚑ Flag</b> questions to revisit; the review screen shows everything flagged or unanswered before you submit.</li>
+      <li>The timer starts when you begin and submits the exam automatically at zero.</li>
+    </ul>
+    </div>
+    <div class="start-side">
+    <div class="tip"><span class="label">Exam strategy</span>
+      <b>Eliminate the clearly wrong pair first, then choose between the remaining two.</b>
+      Each question shows the scenario first and <b>what's actually being asked</b> below it. Watch the <mark class="q">highlighted</mark> qualifier words such as <i>first</i>, <i>best</i> and <i>most</i>: they usually decide between the last two options.</div>
+    <button class="big-btn" onclick="startExam()">Begin exam →</button>
+    <div class="disclaimer"><b>Every question here is original study material</b> written for the claude-certification-prep project, in the exam's style. Nothing is from, or derived from, the real exam. Study guides and answer explanations: github.com/CorporateChittyChat/claude-certification-prep</div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXAM -->
+<section id="examScreen" class="exam-wrap hidden">
+  <div class="meta-row">
+    <span class="domain-tag" id="domainTag"></span>
+    <span class="flag-note hidden" id="flagNote">⚑ Flagged for review</span>
+  </div>
+  <div class="stem" id="stem"></div>
+  <div id="opts"></div>
+  <div class="hint">Right-click an option (or use abc̶) to strike it out · selecting a struck option clears its strike</div>
+</section>
+
+<!-- REVIEW -->
+<section id="reviewScreen" class="center-wrap hidden">
+  <div class="start-card">
+    <h1 style="font-size:32px;">Review your answers</h1>
+    <div class="legend">
+      <span><i style="background:#e9f3ec;border:1px solid var(--green)"></i>Answered</span>
+      <span><i style="background:#f1f1f1;border:1px solid var(--line)"></i>Unanswered</span>
+      <span style="color:var(--orange-ink); font-weight:700">⚑ Flagged</span>
+    </div>
+    <div class="review-grid" id="reviewGrid"></div>
+    <div id="reviewSummary" style="margin-bottom:22px; font-size:19px;"></div>
+    <button class="nbtn" style="background:var(--panel)" onclick="backToExam()">← Return to exam</button>
+    <button class="big-btn" style="font-size:19px; padding:13px 34px;" onclick="submitExam(false)">Submit exam</button>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="resultsScreen" class="center-wrap hidden" style="max-width:1000px;">
+  <div class="start-card">
+    <h1 style="font-size:32px;">Results</h1>
+    <div class="earned" id="earned"></div>
+    <div class="score-line" id="scoreLine"></div>
+    <div id="passNote" class="callout"></div>
+    <div id="focusBox" class="focus"></div>
+    <table id="domainTable"></table>
+    <div class="rev-head">
+      <h2>Question review</h2>
+      <button class="seg on" id="showAll" onclick="filterReview(false)">All questions</button>
+      <button class="seg" id="showMissed" onclick="filterReview(true)">Only the ones I missed</button>
+    </div>
+    <div id="reviewList" class="reviewList"></div>
+  </div>
+</section>
+
+<div class="navbar hidden" id="navbar">
+  <button class="nbtn" id="prevBtn" onclick="go(-1)">← Previous</button>
+  <button class="nbtn" id="nextBtn" onclick="go(1)">Next →</button>
+  <div class="spacer"></div>
+  <button class="nbtn primary" onclick="openReview()">Review &amp; submit</button>
+</div>
+
+<script>
+/* 30 original questions — claude-certification-prep, ccdv-f/practice/mock-exam.md
+   (generated from one source, so letters here match the markdown answer key). */
+const Q = [
+ {
+  "d": "Model selection · EP 01",
+  "s": "A helpdesk routes about 40,000 short tickets a day into one of six queues. On a labelled set of 500 real tickets, the smallest model scores 97% and the largest scores 98%, but the largest is several times the cost and noticeably slower. Which model should the router use?",
+  "o": [
+   "The largest model, because one extra point of accuracy matters at this volume",
+   "The smallest model, because it clears the accuracy bar on representative data at a fraction of the cost and latency",
+   "A mid-tier model as a safe compromise, without testing it on the labelled set",
+   "Both models on every ticket, taking the largest model's answer whenever they disagree"
+  ],
+  "c": 1,
+  "e": "Fit the model to the task, measured on your own data. A simple, high-volume, latency-sensitive classifier that already clears the bar on the small model doesn't earn the large model's price. C skips the evidence you already have; D pays for both models on every request."
+ },
+ {
+  "d": "Model selection · EP 01",
+  "s": "A product manager asks for a monthly cost forecast for a summariser: about 200,000 requests, roughly 3,000 input tokens and 400 output tokens each, with the same 2,000-token system prompt on every call. Which forecast is sound?",
+  "o": [
+   "Requests × input tokens × the input price, since output is small enough to ignore",
+   "Last quarter's bill for a different product, scaled by expected user count",
+   "Requests × (input tokens × input price + output tokens × output price), with the repeated system prompt priced at prompt-caching rates",
+   "Requests × total tokens × the output price, as a deliberately pessimistic worst case"
+  ],
+  "c": 2,
+  "e": "A real forecast prices input and output separately (output tokens cost more per token) and accounts for caching on the repeated prefix. A drops the expensive side; B borrows someone else's traffic shape; D is a guess dressed up as caution."
+ },
+ {
+  "d": "Model selection · EP 01",
+  "s": "An internal assistant sends the same 6,000-token policy manual ahead of every employee's question, and the bill is dominated by input tokens. What reduces cost most directly without changing answer quality?",
+  "o": [
+   "Put the manual first as a stable prefix and mark it for prompt caching, so repeat requests read it at the cached rate",
+   "Store Claude's answers and return a stored answer whenever a new question looks similar",
+   "Move the manual after the employee's question so the changing part of the prompt comes first",
+   "Send these interactive questions through the Message Batches API to get the batch discount"
+  ],
+  "c": 0,
+  "e": "Prompt caching works on a stable prefix, which is exactly what a repeated manual is. B replaces fresh answers with stale guesses for 'similar' questions; C breaks the prefix so nothing caches; D is for non-interactive work and makes users wait."
+ },
+ {
+  "d": "Model selection · EP 01",
+  "s": "An application checks loan agreements for covenant breaches. Hard cases need several reasoning steps across clauses, a few extra seconds of latency is acceptable, and accuracy on those hard cases is poor. Which change targets the problem?",
+  "o": [
+   "Raise the temperature so the model explores more possibilities",
+   "Raise max_tokens and change nothing else",
+   "Shorten the prompt so the model has less to read",
+   "Enable extended thinking with a sensible budget, then compare accuracy on the hard cases"
+  ],
+  "c": 3,
+  "e": "Multi-step reasoning with latency to spare is what extended thinking is for, and the eval on hard cases tells you whether it paid off. Temperature (A) changes randomness, not reasoning depth; max_tokens alone (B) only lifts the output ceiling; C removes context the reasoning needs."
+ },
+ {
+  "d": "Agents & workflows · EP 02",
+  "s": "About 90% of expense claims follow the same steps: extract the receipt, check it against policy, post it. The rest have unusual receipts that need judgement: ask the employee, escalate, or reject. Which architecture fits?",
+  "o": [
+   "A fully autonomous agent that decides every step for every claim",
+   "A fixed workflow for the standard path, with an agent called only at the exception point",
+   "One large prompt that handles extraction, policy checks and exceptions in a single call",
+   "A separate subagent for each step of the standard path, coordinated by a manager agent"
+  ],
+  "c": 1,
+  "e": "Use a workflow where the steps are known and an agent only where judgement is needed. A pays for flexibility on the 90% that doesn't need it; C gives up the checkpoints; D adds coordination overhead to steps that are already deterministic."
+ },
+ {
+  "d": "Agents & workflows · EP 02",
+  "s": "An agent writes research briefs that need four independent, document-heavy investigations. Its main conversation fills up with raw search output, and later steps lose track of the brief's goal. What change fits best?",
+  "o": [
+   "Raise the context window and keep every search result in the main conversation",
+   "Run the four investigations one after another in the main conversation, with a reminder of the goal between each",
+   "Have an orchestrator hand each investigation to a subagent with its own context, and return only condensed findings",
+   "Drop the search tool and let the model answer from what it already knows"
+  ],
+  "c": 2,
+  "e": "Subagents isolate the heavy, independent work and hand back only what the orchestrator needs, which keeps the main context focused. A and B keep the noise that caused the problem; D throws away the evidence."
+ },
+ {
+  "d": "Agents & workflows · EP 02",
+  "s": "An agent sometimes calls the same search tool 40 times in a row on one task, running up cost without making progress. What is the most reliable fix?",
+  "o": [
+   "Enforce a tool-call budget and repeat detection in the agent loop's code, and stop with a clear status when the limit is reached",
+   "Add a line to the system prompt telling the agent not to repeat searches",
+   "Switch to a larger model, which is less likely to loop",
+   "Remove the search tool so the loop cannot happen"
+  ],
+  "c": 0,
+  "e": "Limits that must always hold belong in code, not in the prompt. B is a request the model may ignore; C may reduce loops but guarantees nothing; D fixes the loop by breaking the agent."
+ },
+ {
+  "d": "Agents & workflows · EP 02",
+  "s": "A support agent can issue refunds through a tool. Most refunds are correct, but two large wrong refunds went out last month. What control should be added?",
+  "o": [
+   "A stronger system-prompt instruction to double-check refund amounts",
+   "A rule that the agent only runs during business hours",
+   "Retiring the refund tool and handling every refund manually",
+   "A code-level gate on the refund tool: amounts above a threshold need human approval before they execute, and every refund is logged"
+  ],
+  "c": 3,
+  "e": "Irreversible, costly actions get a deterministic gate plus a human for the risky band. A is advice, not a control; B moves the risk to different hours; C throws away the automation that works for most refunds."
+ },
+ {
+  "d": "The Messages API · EP 03",
+  "s": "Users of a chat interface stare at a blank screen for about eight seconds before a long answer appears all at once. The answer is correct. What improves the experience?",
+  "o": [
+   "Stream the response so text appears as it is generated",
+   "Send the requests through the Message Batches API",
+   "Lower max_tokens so answers are shorter",
+   "Cache the model's previous answers and show one of them first"
+  ],
+  "c": 0,
+  "e": "Streaming delivers tokens as they're generated, so time-to-first-text drops even though total time doesn't. Batches (B) are slower by design; C cuts the content users came for; D shows the wrong answer quickly."
+ },
+ {
+  "d": "The Messages API · EP 03",
+  "s": "A nightly job classifies 25,000 product reviews. Nobody is waiting on any single result, and the output is needed by the next working day. Which approach fits?",
+  "o": [
+   "Streaming each review so partial labels can be saved as they arrive",
+   "The Message Batches API, which is built for large non-interactive jobs and costs less per request",
+   "Standard Messages calls, sent one at a time to keep the order stable",
+   "Standard Messages calls at the highest concurrency the rate limits allow"
+  ],
+  "c": 1,
+  "e": "Large, non-interactive, deadline-tolerant work is the Message Batches API's job, at a discount. Streaming (A) is for a person watching; C is slow; D works but pays full price and spends rate-limit headroom on work that doesn't need it."
+ },
+ {
+  "d": "The Messages API · EP 03",
+  "s": "During traffic spikes, an application starts receiving 429 rate-limit errors from the API. What is the right response?",
+  "o": [
+   "Retry immediately in a tight loop until each request succeeds",
+   "Issue a new API key for each burst of traffic so every key stays under its limit",
+   "Retry with exponential backoff and jitter (honouring retry-after), smooth or queue bursts, and size traffic to your known limits",
+   "Catch the 429 errors and return empty answers so users aren't kept waiting"
+  ],
+  "c": 2,
+  "e": "Back off, respect the server's hint, and shape traffic to the limits you actually have. The SDKs already retry some errors by default, and you can tune that. A makes the spike worse; B is trying to get around limits rather than designing for them; D hides the failure from users."
+ },
+ {
+  "d": "The Messages API · EP 03",
+  "s": "Your company's cloud agreement requires all Claude traffic to go through Amazon Bedrock rather than the Anthropic API. You're starting a new application. How should you build it?",
+  "o": [
+   "Build on the Anthropic API now and move to Bedrock in a later release",
+   "Build two complete code paths, one per provider, and choose at random per request",
+   "Build on the Anthropic API and treat the agreement as a procurement detail",
+   "Call Claude through Bedrock from the start, with the provider client and model IDs kept in configuration rather than spread through the code"
+  ],
+  "c": 3,
+  "e": "Contractual routing is a requirement from day one, not a later migration. Keeping provider details in configuration keeps the rest of the code clean. A and C break the agreement; B doubles the surface area for no benefit."
+ },
+ {
+  "d": "Prompt & context engineering · EP 04",
+  "s": "Extraction output keeps changing shape from one request to the next. You have four labelled input/output pairs that show exactly the format you want. What is the most direct way to use them?",
+  "o": [
+   "Fine-tune a custom model on the four pairs before going any further",
+   "Describe the format again in longer prose and leave the pairs out",
+   "Include the pairs in the prompt as clearly tagged few-shot examples",
+   "Raise the temperature so the model tries more formats until one fits"
+  ],
+  "c": 2,
+  "e": "A handful of well-chosen examples in the prompt is the cheapest, strongest way to pin down format. A is a big project for a few examples; B is what's already failing; D adds variation when you want less."
+ },
+ {
+  "d": "Prompt & context engineering · EP 04",
+  "s": "You send an 80-page contract and ask one specific question about the indemnity clause. Where should each part go?",
+  "o": [
+   "The question first, so the model knows what to look for, then the contract",
+   "The contract first in its own tagged section, with the question at the end",
+   "The contract and the question in separate requests, so each stays short",
+   "The question repeated after every chapter of the contract"
+  ],
+  "c": 1,
+  "e": "Long documents go at the top, wrapped in clear tags, with the question at the end, closest to where the answer starts. A buries the question under 80 pages; C means the model never sees both together; D is noise."
+ },
+ {
+  "d": "Prompt & context engineering · EP 04",
+  "s": "A downstream service rejects any record that doesn't match its JSON schema, and about 2% of model outputs fail. What should the application do?",
+  "o": [
+   "Define the schema explicitly (structured output or a tool input schema), validate every response in code, and retry or repair on failure before passing anything on",
+   "Ask the model in the prompt to always produce valid JSON and send the output straight downstream",
+   "Switch to free text and let the downstream team write their own parser",
+   "Have a person check every response before it goes downstream"
+  ],
+  "c": 0,
+  "e": "Constrain the output, then verify it in code: a known failure path with retry or repair. B relies on a request; C moves the problem to someone else; D doesn't scale and still lets mistakes through."
+ },
+ {
+  "d": "Prompt & context engineering · EP 04",
+  "s": "After about 30 tool calls, a long-running agent starts ignoring constraints set at the start of the task, even though the full history still fits in the context window. What helps most?",
+  "o": [
+   "Move to a model with an even larger context window",
+   "Restart the agent from scratch every five tool calls",
+   "Repeat the full instruction set inside every tool result",
+   "Compact the history: clear or summarise stale tool output, and keep the task's goal and constraints visible as active state"
+  ],
+  "c": 3,
+  "e": "The problem is relevance, not capacity: old tool output is burying what matters. Compaction and pruning keep the active state in front of the model. A makes room for more noise; B loses progress; C bloats every turn."
+ },
+ {
+  "d": "Prompt & context engineering · EP 04",
+  "s": "A prompt change was edited straight into production through an admin screen and broke a downstream report. Prompts live in three places: the repository, a config file, and inline strings. What prevents a repeat?",
+  "o": [
+   "Restrict the admin screen to senior engineers only",
+   "Keep prompts in one version-controlled place, require review for changes, and run the eval set before any prompt change ships",
+   "Copy the current prompts into a shared document as a backup",
+   "Freeze all prompts permanently in their current form"
+  ],
+  "c": 1,
+  "e": "Prompts are code: one source of truth, version history, review, and evals as a gate. A still allows unreviewed changes; C is a snapshot, not a process; D stops the prompts from ever improving."
+ },
+ {
+  "d": "Tools & MCP · EP 05",
+  "s": "An agent keeps calling lookup_customer when it should call lookup_account. Both tools have short, similar descriptions. What is the first fix?",
+  "o": [
+   "Rename the tools and leave the descriptions as they are",
+   "Add three more lookup tools so every case has an exact match",
+   "Rewrite both descriptions to say what each tool returns, when to use it and when not to, and merge the two if they truly overlap",
+   "Tell users to name the right tool in their requests"
+  ],
+  "c": 2,
+  "e": "The model chooses tools mainly from their descriptions, so make each one distinct and explicit. A helps a little but leaves the ambiguity; B multiplies it; D pushes the job onto the user."
+ },
+ {
+  "d": "Tools & MCP · EP 05",
+  "s": "An agent passes date: \"next Tuesday\" to a booking tool that expects an ISO date, and the booking service fails with an unhelpful error. What is the best fix?",
+  "o": [
+   "Keep the input schema strict (format and description), validate arguments before calling the service, and return a tool result marked as an error that explains the expected format",
+   "Loosen the schema so any string is accepted and let the booking service deal with it",
+   "Quietly guess a date from the text and book it without telling the model",
+   "Stop the whole run whenever a tool argument is invalid"
+  ],
+  "c": 0,
+  "e": "Validate before you dispatch, and turn invalid input into an error the model can read and fix. B passes bad data further down; C books the wrong date silently; D turns a recoverable mistake into an outage."
+ },
+ {
+  "d": "Tools & MCP · EP 05",
+  "s": "A team wraps the company ticketing API as an MCP server. People across the organisation will connect to it from their own Claude clients. How should it be deployed?",
+  "o": [
+   "As a stdio server copied to every laptop, sharing one admin token",
+   "As instructions in each repository's CLAUDE.md describing the ticketing API",
+   "As a separate custom tool rewritten by each team inside its own application",
+   "As a remote MCP server over HTTP, hosted centrally, with authentication and scoped permissions"
+  ],
+  "c": 3,
+  "e": "A shared, many-client server belongs on a remote transport with real authentication. stdio suits a single local process. A spreads one powerful credential everywhere; B describes the API but doesn't connect to it; C duplicates the integration in every team."
+ },
+ {
+  "d": "Settings & CLAUDE.md · EP 06",
+  "s": "A team wants every developer using Claude Code in a repository to get the same permission rules, while still letting individuals add personal tweaks. Where should the shared rules live?",
+  "o": [
+   "In .claude/settings.json committed to the repository, with personal overrides in .claude/settings.local.json, which isn't committed",
+   "In each developer's own user settings, copied by hand from a wiki page",
+   "In environment variables that each developer exports in their shell",
+   "In a paragraph of CLAUDE.md asking Claude to follow the team's permission rules"
+  ],
+  "c": 0,
+  "e": "Project settings are committed and shared; local settings are personal and stay out of git. B and C drift across machines; D turns enforced permissions into advice."
+ },
+ {
+  "d": "Settings & CLAUDE.md · EP 06",
+  "s": "A developer has personal preferences (tone of commit messages, preferred test runner) they want in every repository, plus project rules that belong to one repository. How should they arrange the memory files?",
+  "o": [
+   "Copy the personal preferences into every repository's CLAUDE.md",
+   "Put personal preferences in the user-level CLAUDE.md in their home .claude folder, and project rules in the repository's CLAUDE.md",
+   "Put everything in one repository's CLAUDE.md and link to it from all the others",
+   "Skip memory files and retype the preferences at the start of each session"
+  ],
+  "c": 1,
+  "e": "CLAUDE.md files are layered: user-level for what's yours everywhere, project-level for what belongs to the repository. A spreads personal taste into shared files; C ties every repository to one; D forgets everything each time."
+ },
+ {
+  "d": "Settings & CLAUDE.md · EP 06",
+  "s": "A teammate adds the staging database password to the project's CLAUDE.md \"so Claude can run migrations\". What should happen?",
+  "o": [
+   "Leave it, because CLAUDE.md is only read by Claude",
+   "Move the password to the bottom of the file where it's less visible",
+   "Remove it, rotate the password, and give Claude access through the environment or a secret store with permissions limited to what migrations need",
+   "Base64-encode the password inside CLAUDE.md"
+  ],
+  "c": 2,
+  "e": "CLAUDE.md is committed and loaded into context, so a secret there is leaked twice. Remove it, rotate it (git history keeps the old value), and supply credentials the proper way. A and B leave it exposed; D is not encryption."
+ },
+ {
+  "d": "Claude Code: hooks, skills, headless · EP 07",
+  "s": "A team wants to make sure Claude Code can never run destructive shell commands such as recursive deletes against protected paths, whatever the prompt says. What fits?",
+  "o": [
+   "A strongly worded rule in CLAUDE.md",
+   "Running with all permission checks bypassed and reviewing the transcript afterwards",
+   "Asking developers to watch every command as it runs",
+   "A PreToolUse hook that inspects each Bash command and blocks the destructive patterns before they execute"
+  ],
+  "c": 3,
+  "e": "Hooks run your code at fixed points, so the block happens every time. A PreToolUse hook can refuse the call before it runs. A is guidance the model can miss; B removes the safety net; C depends on attention that runs out."
+ },
+ {
+  "d": "Claude Code: hooks, skills, headless · EP 07",
+  "s": "A CI pipeline needs Claude Code to run a fixed review task on every pull request, with no one there to approve prompts, and pass the result to the next pipeline step. How should it be set up?",
+  "o": [
+   "Run it non-interactively in print (headless) mode, allow only the tools the task needs, and capture structured output for the next step",
+   "Run an interactive session and have an engineer approve each prompt from the pipeline logs",
+   "Turn off permission checks globally on every machine so nothing ever asks",
+   "Replace Claude Code with a shell script that pastes the diff into a chat window"
+  ],
+  "c": 0,
+  "e": "Headless mode is built for automation: non-interactive, scoped permissions, machine-readable output. B isn't automation; C removes safeguards everywhere, not just in CI; D gives up the tooling."
+ },
+ {
+  "d": "Claude Code: hooks, skills, headless · EP 07",
+  "s": "Your team has a release-notes procedure: a set of instructions plus two helper scripts. You want Claude to pick it up automatically whenever someone asks for release notes in the repository. What's the best home for it?",
+  "o": [
+   "Paste the full procedure into the repository's CLAUDE.md so it's always in context",
+   "A Skill in the repository's .claude/skills folder: a SKILL.md with a clear description, plus the scripts, committed for the whole team",
+   "A text file in each developer's downloads folder, attached when needed",
+   "An MCP server that returns the instructions as a single text resource"
+  ],
+  "c": 1,
+  "e": "Skills package instructions and scripts, and load only when their description matches the task. A puts the procedure into every session's context whether it's needed or not; C isn't shared or discoverable; D builds a server for something that is mostly instructions."
+ },
+ {
+  "d": "Requirements & build life cycle · EP 08",
+  "s": "The business brief says: \"Use agents to help analysts produce client memos faster.\" You're asked to turn it into work engineering can start on. What comes first?",
+  "o": [
+   "Choose the model tier the memos will run on",
+   "Build a prototype and show it to the analysts",
+   "Write the functional and non-functional requirements: inputs, outputs, data access, latency, review steps and how \"faster\" will be measured",
+   "Look up what agent products competitors have released"
+  ],
+  "c": 2,
+  "e": "Requirements translate the goal into something testable, and every later choice is judged against them. A and B pick solutions before the problem is defined; D gathers background, not requirements."
+ },
+ {
+  "d": "Requirements & build life cycle · EP 08",
+  "s": "An API parameter your application uses in about 40 places is deprecated, with six months before removal and a replacement that behaves slightly differently. How should you migrate?",
+  "o": [
+   "Change all 40 call sites in one commit the week before removal",
+   "Wrap the old parameter in a helper and leave it until it breaks",
+   "Change all 40 call sites today in one large commit, with no extra tests",
+   "Add regression tests that pin the current behaviour, then migrate the call sites in batches, checking each batch against the tests"
+  ],
+  "c": 3,
+  "e": "Tests first, then small batches you can check: the semantics differ, so you need evidence at each step. A and C are big-bang changes with no safety net; B delays the problem until it becomes an outage."
+ },
+ {
+  "d": "Eval, testing & debugging · EP 09",
+  "s": "A team wants to rewrite a production prompt to improve answers on billing questions. How do they know the rewrite is safe to ship?",
+  "o": [
+   "Run a representative eval set, including billing and other edge cases with graded expectations, on both the old and new prompt, and ship only if billing improves without regressions elsewhere",
+   "Try five billing questions by hand and ship if they look better",
+   "Ship it to everyone and watch for complaints",
+   "Ask the model to rate its own new answers"
+  ],
+  "c": 0,
+  "e": "Evals compare before and after on the cases that matter, including the ones you're not trying to change. B is anecdote; C makes users the test suite; D is self-grading with no reference."
+ },
+ {
+  "d": "Eval, testing & debugging · EP 09",
+  "s": "An application starts mentioning facts that aren't in the documents it was given. The team calls it hallucination and proposes a bigger model. What should come first?",
+  "o": [
+   "Upgrade to the bigger model and see whether the problem goes away",
+   "Look at full traces of the failing requests to find out what happened (missing or wrong retrieved context, truncation, injected text, or genuine fabrication) before choosing a fix",
+   "Add \"do not make things up\" to the system prompt",
+   "Lower the temperature to zero for all requests"
+  ],
+  "c": 1,
+  "e": "Diagnose before you treat. The same symptom has different causes, and the trace shows which one this is. A, C and D are fixes chosen before the fault has been found."
+ }
+];
+
+const EXAM_MINUTES = parseInt(new URLSearchParams(location.search).get("min")) || 60;
+const LETTERS = ["A","B","C","D"];
+const GUIDE_BASE = "";
+const GUIDES = {
+ "Model selection": "https://github.com/chittychat-studio/ccdvf-course/tree/main/ep01-models",
+ "Agents & workflows": "https://github.com/chittychat-studio/ccdvf-course/tree/main/ep02-agents",
+ "The Messages API": "https://github.com/chittychat-studio/ccdvf-course/tree/main/ep03-messages",
+ "Prompt & context engineering": "https://github.com/chittychat-studio/ccdvf-course/tree/main/ep04-prompting",
+ "Tools & MCP": "https://github.com/chittychat-studio/ccdvf-course/tree/main/ep05-tools-mcp",
+ "Settings & CLAUDE.md": "https://github.com/chittychat-studio/ccdvf-course/tree/main/ep06-config-checker",
+ "Claude Code: hooks, skills, headless": "https://github.com/chittychat-studio/ccdvf-course/tree/main/ep07-guard-hook",
+ "Requirements & build life cycle": "https://github.com/chittychat-studio/ccdvf-course/tree/main/ep08-gate-checker",
+ "Eval, testing & debugging": "https://github.com/chittychat-studio/ccdvf-course/tree/main/ep09-failure-checker"
+};
+
+/* qualifier words that decide between two plausible answers */
+const QUALIFIERS = /\b(highest-value|single most|most effective|first|best|right|strongest|durable|guarantees|must|never|always|only|before anything else)\b/gi;
+
+/* append text to el, wrapping qualifier words in <mark> (text nodes only, no innerHTML) */
+function appendMarked(el, text){
+  let last = 0;
+  text.replace(QUALIFIERS, (m, _w, at)=>{
+    el.appendChild(document.createTextNode(text.slice(last, at)));
+    const mk = document.createElement("mark"); mk.className = "q"; mk.textContent = m;
+    el.appendChild(mk);
+    last = at + m.length;
+    return m;
+  });
+  el.appendChild(document.createTextNode(text.slice(last)));
+}
+
+/* split a stem into the scenario and the closing ask ("The right door is:", "Where should ... go?") */
+function splitStem(s){
+  const m = s.match(/^([\s\S]*[.?!][”"]?)\s+([^.?!]*[:?])$/);
+  return m ? {scenario:m[1], ask:m[2]} : {scenario:"", ask:s};
+}
+
+/* authored order is shown as-is: correct letters are already balanced across A-D */
+Q.forEach(q=>{ q.disp = [0,1,2,3]; q.correctDisp = q.c; });
+
+let cur = 0, timeLeft = EXAM_MINUTES*60, timerId = null, submitted = false;
+const sel = Array(Q.length).fill(null);            // selected display index
+const struck = Q.map(()=>[false,false,false,false]);
+const flags = Array(Q.length).fill(false);
+
+const $ = id => document.getElementById(id);
+
+function startExam(){
+  $("startScreen").classList.add("hidden");
+  $("topbar").classList.remove("hidden");
+  $("examScreen").classList.remove("hidden");
+  $("navbar").classList.remove("hidden");
+  timerId = setInterval(tick, 1000);
+  render();
+}
+
+function tick(){
+  timeLeft--;
+  const m = Math.floor(timeLeft/60), s = timeLeft%60;
+  $("timer").textContent = `${m}:${String(s).padStart(2,"0")}`;
+  if(timeLeft <= 300) $("timer").classList.add("low");
+  if(timeLeft <= 0){ clearInterval(timerId); submitExam(true); }
+}
+
+function render(){
+  const q = Q[cur];
+  $("qpos").textContent = `Question ${cur+1} of ${Q.length}`;
+  const done = sel.filter(s=>s!==null).length;
+  $("progressBar").style.width = `${done/Q.length*100}%`;
+  $("progress").title = `${done} of ${Q.length} answered`;
+  $("domainTag").textContent = q.d;
+  const st = $("stem"), parts = splitStem(q.s); st.innerHTML = "";
+  if(parts.scenario){
+    const sc = document.createElement("div"); sc.className = "scenario";
+    sc.innerHTML = '<span class="label">Scenario</span>';
+    sc.appendChild(document.createTextNode(parts.scenario));
+    st.appendChild(sc);
+  }
+  const ask = document.createElement("div"); ask.className = "ask";
+  ask.innerHTML = '<span class="label">The question</span>';
+  appendMarked(ask, parts.ask);
+  st.appendChild(ask);
+  $("flagNote").classList.toggle("hidden", !flags[cur]);
+  $("flagBtn").classList.toggle("flagged", flags[cur]);
+  $("flagBtn").textContent = flags[cur] ? "⚑ Flagged" : "⚑ Flag for review";
+  $("prevBtn").disabled = cur === 0;
+  $("nextBtn").textContent = cur === Q.length-1 ? "Review →" : "Next →";
+  const box = $("opts"); box.innerHTML = "";
+  q.disp.forEach((authIdx, dPos)=>{
+    const div = document.createElement("div");
+    div.className = "opt" + (sel[cur]===dPos?" selected":"") + (struck[cur][dPos]?" struck":"");
+    div.innerHTML = `<div class="letter">${LETTERS[dPos]}</div><div class="txt"></div><button class="strike-btn" title="Strike out">abc̶</button>`;
+    div.querySelector(".txt").textContent = q.o[authIdx];
+    div.onclick = e => {
+      if(e.target.classList.contains("strike-btn")) return;
+      if(struck[cur][dPos]) struck[cur][dPos] = false;   // selecting clears strike
+      sel[cur] = (sel[cur]===dPos) ? null : dPos;
+      render();
+    };
+    div.oncontextmenu = e => { e.preventDefault(); toggleStrike(dPos); };
+    div.querySelector(".strike-btn").onclick = e => { e.stopPropagation(); toggleStrike(dPos); };
+    box.appendChild(div);
+  });
+}
+
+function toggleStrike(dPos){
+  struck[cur][dPos] = !struck[cur][dPos];
+  if(struck[cur][dPos] && sel[cur]===dPos) sel[cur] = null;  // striking deselects
+  render();
+}
+
+function go(dir){
+  if(dir===1 && cur===Q.length-1){ openReview(); return; }
+  cur = Math.min(Q.length-1, Math.max(0, cur+dir));
+  render();
+}
+
+$("flagBtn").onclick = ()=>{ flags[cur] = !flags[cur]; render(); };
+
+document.addEventListener("keydown", e=>{
+  if($("examScreen").classList.contains("hidden")) return;
+  if(e.key==="ArrowRight") go(1);
+  else if(e.key==="ArrowLeft") go(-1);
+  else if(e.key.toLowerCase()==="f") $("flagBtn").onclick();
+  else{
+    const i = LETTERS.indexOf(e.key.toUpperCase());
+    if(i>=0){ if(struck[cur][i]) struck[cur][i]=false; sel[cur]=(sel[cur]===i)?null:i; render(); }
+  }
+});
+
+function openReview(){
+  $("examScreen").classList.add("hidden"); $("navbar").classList.add("hidden");
+  $("reviewScreen").classList.remove("hidden");
+  const g = $("reviewGrid"); g.innerHTML = "";
+  let unans = 0;
+  Q.forEach((_,i)=>{
+    const b = document.createElement("div");
+    b.className = "rq " + (sel[i]!==null ? "answered" : "unanswered") + (flags[i] ? " flag" : "");
+    if(sel[i]===null) unans++;
+    b.textContent = i+1;
+    b.onclick = ()=>{ cur=i; backToExam(); };
+    g.appendChild(b);
+  });
+  const fl = flags.filter(Boolean).length;
+  $("reviewSummary").innerHTML = `<b>${Q.length-unans}</b> answered · <b>${unans}</b> unanswered · <b style="color:var(--orange-ink)">${fl}</b> flagged`;
+}
+
+function backToExam(){
+  $("reviewScreen").classList.add("hidden");
+  $("examScreen").classList.remove("hidden");
+  $("navbar").classList.remove("hidden");
+  render();
+}
+
+function submitExam(auto){
+  if(submitted) return;
+  const unans = sel.filter(s=>s===null).length;
+  if(!auto && unans>0 && !confirm(`${unans} question${unans>1?"s are":" is"} still unanswered. Submit anyway?`)) return;
+  submitted = true;
+  clearInterval(timerId);
+  $("reviewScreen").classList.add("hidden"); $("examScreen").classList.add("hidden");
+  $("navbar").classList.add("hidden"); $("topbar").classList.add("hidden");
+  $("resultsScreen").classList.remove("hidden");
+
+  let right = 0; const dom = {};
+  Q.forEach((q,i)=>{
+    const ok = sel[i]===q.correctDisp;
+    if(ok) right++;
+    const key = q.d.split(" ·")[0];
+    dom[key] = dom[key] || {ok:0,n:0,name:q.d};
+    dom[key].n++; if(ok) dom[key].ok++;
+  });
+  const pct = Math.round(right/Q.length*100);
+  $("scoreLine").innerHTML = `${right} / ${Q.length} <small>(${pct}%)</small>`;
+  $("passNote").textContent = auto
+    ? "Time expired — the exam submitted automatically. Any topic below two-thirds here deserves a rewatch of its episode and a run through its companion code."
+    : "Any topic below two-thirds here deserves a rewatch of its episode and a run through its companion code.";
+
+  let t = "<tr><th>Topic</th><th>Score</th><th>Verdict</th></tr>";
+  const weak = [];
+  Object.entries(dom).forEach(([k,v])=>{
+    const good = v.ok/v.n >= 2/3;
+    const link = `<a href="${GUIDE_BASE}${GUIDES[k]}" target="_blank" rel="noopener">${v.name}</a>`;
+    if(!good) weak.push(`<li>${link} — ${v.ok} / ${v.n}</li>`);
+    t += `<tr><td>${v.name}</td><td>${v.ok} / ${v.n}</td><td class="${good?"good":"bad"}">${good?"✔ Solid":`<a href="${GUIDE_BASE}${GUIDES[k]}" target="_blank" rel="noopener">Open the episode code →</a>`}</td></tr>`;
+  });
+  $("domainTable").innerHTML = t;
+  renderBadge(pct, weak.length);
+  const fb = $("focusBox");
+  fb.className = "focus " + (weak.length ? "weak" : "strong");
+  fb.innerHTML = weak.length
+    ? `<span class="label" style="color:var(--red)">Focus your study here</span><b>${weak.length} topic${weak.length>1?"s":""} below two-thirds.</b> Work through these episodes, then retake the exam:<ul>${weak.join("")}</ul>`
+    : `<span class="label" style="color:var(--green)">Every domain is solid</span><b>Every topic at two-thirds or better.</b> Skim the key takeaways below for any question you got right by guessing.`;
+
+  const list = $("reviewList"); list.innerHTML = "";
+  Q.forEach((q,i)=>{
+    const ok = sel[i]===q.correctDisp;
+    const your = sel[i]===null ? "—" : `${LETTERS[sel[i]]}. ${q.o[q.disp[sel[i]]]}`;
+    const div = document.createElement("div");
+    div.className = "rev-item " + (ok ? "right" : "wrong");
+    div.innerHTML = `<span class="pill">Q${i+1} · ${q.d}</span>
+      <div class="rstem"></div>
+      <div class="ans">Your answer: <span class="${ok?"ok":"no"}">${ok?"✔":"✘"} </span><span class="ya"></span></div>
+      <div class="ans">Correct: <span class="ok"></span></div>
+      <div class="why"><span class="label">Key takeaway</span><span class="wt"></span></div>`;
+    div.querySelector(".rstem").textContent = q.s;
+    div.querySelector(".ya").textContent = your;
+    div.querySelectorAll(".ans")[1].querySelector(".ok").textContent = `${LETTERS[q.correctDisp]}. ${q.o[q.c]}`;
+    div.querySelector(".wt").textContent = q.e;
+    list.appendChild(div);
+  });
+  $("showMissed").textContent = `Only the ones I missed (${Q.length - right})`;
+}
+
+/* practice badge tier: a study signal only, never a certification claim */
+function renderBadge(pct, weakCount){
+  const tiers = [
+    {min:80, weak:0, name:"Exam Ready", c1:"#d4a017", c2:"#232838", fg:"#f7e3a1", icon:"★",
+     msg:"80%+ with every topic solid. Book it — and skim the takeaways for anything you guessed."},
+    {min:67, weak:7, name:"Almost There", c1:"#9aa3b5", c2:"#232838", fg:"#e3e7ef", icon:"▲",
+     msg:"Two-thirds or better overall. Close the weak topics below, then retake."},
+    {min:0, weak:7, name:"Keep Studying", c1:"#c27a3a", c2:"#232838", fg:"#f6d9be", icon:"●",
+     msg:"A baseline, not a verdict. Work through the episodes flagged below, then retake."}
+  ];
+  const t = tiers.find(x => pct >= x.min && weakCount <= x.weak);
+  const box = $("earned");
+  box.style.borderColor = t.c1;
+  box.innerHTML = `
+    <svg class="emblem" viewBox="0 0 120 120" role="img" aria-label="${t.name} practice badge">
+      <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="${t.c1}"/>
+      <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="${t.c2}"/>
+      <text x="60" y="54" text-anchor="middle" fill="${t.c1}" font-size="20">${t.icon}</text>
+      <text x="60" y="70" text-anchor="middle" fill="#fff" font-size="15" font-weight="800">${pct}%</text>
+      <text x="60" y="81" text-anchor="middle" fill="${t.fg}" font-size="8" font-weight="700" textLength="46" lengthAdjust="spacingAndGlyphs">PRACTICE</text>
+    </svg>
+    <div>
+      <span class="label">Practice badge earned</span>
+      <h3>${t.name}</h3>
+      <p>${t.msg}</p>
+      <small>Practice badge from this unofficial mock exam — not an Anthropic certification or score prediction.</small>
+    </div>`;
+}
+
+function filterReview(missedOnly){
+  $("reviewList").classList.toggle("missed-only", missedOnly);
+  $("showAll").classList.toggle("on", !missedOnly);
+  $("showMissed").classList.toggle("on", missedOnly);
+}
+</script>
+</body>
+</html>
