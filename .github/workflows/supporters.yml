@@ -1,0 +1,29 @@
+name: Update supporter count
+
+on:
+  schedule:
+    - cron: "17 3 * * *"   # daily, 03:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency: supporters
+
+jobs:
+  count:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Count paid coffees
+        env:
+          STRIPE_KEY: ${{ secrets.STRIPE_SUPPORTERS_KEY }}
+        run: python3 .github/scripts/count_supporters.py
+      - name: Commit if the count changed
+        run: |
+          if git diff --quiet -- supporters.json; then echo "No change."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add supporters.json
+          git commit -m "Update supporter count"
+          git push

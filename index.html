@@ -61,6 +61,7 @@
   .coffee p{color:#3a3f4d; font-size:17px; max-width:640px;}
   .coffee-cta{display:flex; flex-direction:column; align-items:center; gap:6px;}
   .coffee-cta small{color:var(--grey); font-size:13px;}
+  .supporters{margin-top:4px; background:#fff; border:1px solid #f2c48d; color:#6f4e37; font-weight:700; font-size:15px; padding:5px 12px; border-radius:999px;}
   .btn.coffee-btn{background:#6f4e37; color:#fff; font-size:18px; padding:14px 24px; box-shadow:0 6px 16px rgba(111,78,55,.3);}
   .btn.coffee-btn:hover{filter:brightness(1.1);}
   .thanks{position:fixed; left:50%; bottom:22px; transform:translateX(-50%); background:var(--green); color:#fff; font-weight:700; padding:14px 22px; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.2); z-index:10;}
@@ -455,6 +456,7 @@
       <div class="coffee-cta">
         <a class="btn coffee-btn" href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener">☕ Buy me a coffee</a>
         <small>Optional · secure checkout by Stripe</small>
+        <span class="supporters hidden" id="supporters"></span>
       </div>
     </div>
   </div>
@@ -482,6 +484,20 @@
 </footer>
 
 <script>
+  /* Supporter count: written daily by .github/workflows/supporters.yml (count only).
+     Shown only once it reaches MIN, so a new page never says "0 coffees". */
+  const MIN_SUPPORTERS = 3;
+  fetch("supporters.json", { cache: "no-store" })
+    .then(r => r.ok ? r.json() : null)
+    .then(d => {
+      const n = d && Number.isInteger(d.count) ? d.count : 0;
+      if (n < MIN_SUPPORTERS) return;
+      const el = document.getElementById("supporters");
+      el.textContent = `☕ ${n} coffees bought so far`;
+      el.classList.remove("hidden");
+    })
+    .catch(() => {});
+
   /* Stripe can redirect here with ?thanks=1 after a tip */
   if (new URLSearchParams(location.search).get("thanks") === "1") {
     const t = document.getElementById("thanks");
