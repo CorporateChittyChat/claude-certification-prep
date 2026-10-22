@@ -8,10 +8,13 @@
   :root{
     --navy:#232838; --panel:#2e3446; --ink:#1c2130; --paper:#f7f5f0;
     --card:#ffffff; --orange:#e8822a; --orange-soft:#f6d9be;
-    --green:#2e8b57; --red:#c0392b; --grey:#8a8f9c; --line:#d8d4cc;
+    --green:#2e8b57; --red:#c0392b; --grey:#5f6473; --line:#d8d4cc;
+    --orange-ink:#a8520d; --mark:#ffe08a; --green-soft:#e9f3ec; --red-soft:#fbeae8;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  body{font-family:"Segoe UI",system-ui,Arial,sans-serif; background:var(--paper); color:var(--ink); font-size:19px;}
+  body{font-family:"Segoe UI",system-ui,Arial,sans-serif; background:var(--paper); color:var(--ink); font-size:19px; line-height:1.5;}
+  mark.q{background:var(--mark); color:inherit; padding:0 5px; border-radius:4px; font-weight:700;}
+  .label{display:block; font-size:13px; font-weight:800; letter-spacing:.9px; text-transform:uppercase; color:var(--orange-ink); margin-bottom:6px;}
   .hidden{display:none!important;}
 
   /* ---------- header bar ---------- */
@@ -37,6 +40,24 @@
   .fact span{font-size:14px; color:var(--grey); text-transform:uppercase; letter-spacing:.5px;}
   .rules{line-height:1.75; margin-bottom:26px;}
   .rules li{margin-left:22px;}
+  /* ---------- badges ---------- */
+  .hero{display:flex; align-items:center; gap:26px; margin-bottom:8px;}
+  .emblem{flex:none; width:118px; height:118px; filter:drop-shadow(0 6px 14px rgba(232,130,42,.35));}
+  .emblem text{font-family:"Segoe UI",system-ui,Arial,sans-serif;}
+  .chips{display:flex; flex-wrap:wrap; gap:10px; margin:6px 0 4px;}
+  .chip{display:inline-flex; align-items:center; gap:6px; background:var(--navy); color:#fff; font-size:15px; font-weight:600; padding:6px 14px; border-radius:999px;}
+  .chip.hot{background:var(--orange); color:#1c2130;}
+  .earned{display:flex; align-items:center; gap:24px; border-radius:14px; padding:22px 26px; margin:6px 0 18px; border:2px solid var(--line); background:var(--paper);}
+  .earned .emblem{width:104px; height:104px; animation:pop .6s ease-out;}
+  .earned h3{font-size:28px; line-height:1.2;}
+  .earned p{font-size:18px; margin-top:4px;}
+  .earned small{display:block; color:var(--grey); font-size:14px; margin-top:6px;}
+  @keyframes pop{0%{transform:scale(.4) rotate(-12deg); opacity:0} 70%{transform:scale(1.08)} 100%{transform:scale(1)}}
+  @media (prefers-reduced-motion:reduce){ .earned .emblem, #timer.low{animation:none;} }
+  .progress{position:absolute; left:0; right:0; bottom:-8px; height:8px; background:#e6e2da;}
+  .progress i{display:block; height:100%; width:0; background:linear-gradient(90deg,var(--orange),#f4b26b); transition:width .25s;}
+  @media (max-width:640px){ .hero{flex-direction:column; align-items:flex-start;} .start-card{padding:28px 20px;} .start-card h1{font-size:30px;} .earned{flex-direction:column; align-items:flex-start;} }
+  .tip{background:#fff8ec; border:2px solid var(--orange); border-radius:12px; padding:18px 22px; margin-bottom:24px; font-size:19px; line-height:1.6;}
   .disclaimer{background:var(--orange-soft); border-radius:10px; padding:14px 18px; font-size:16px; margin-bottom:28px;}
   .big-btn{background:var(--orange); color:#fff; border:none; font-size:22px; font-weight:700; padding:16px 42px; border-radius:10px; cursor:pointer;}
   .big-btn:hover{filter:brightness(1.06);}
@@ -45,8 +66,10 @@
   .exam-wrap{max-width:1100px; margin:34px auto 120px; padding:0 28px;}
   .meta-row{display:flex; align-items:center; gap:12px; margin-bottom:14px;}
   .domain-tag{background:var(--navy); color:#fff; font-size:14px; letter-spacing:.6px; text-transform:uppercase; padding:5px 14px; border-radius:999px;}
-  .flag-note{color:var(--orange); font-weight:600; font-size:16px;}
-  .stem{background:var(--card); border:1px solid var(--line); border-left:6px solid var(--orange); border-radius:12px; padding:26px 30px; font-size:23px; line-height:1.55; margin-bottom:22px;}
+  .flag-note{color:var(--orange-ink); font-weight:700; font-size:16px;}
+  .stem{background:var(--card); border:1px solid var(--line); border-left:6px solid var(--orange); border-radius:12px; padding:26px 30px; font-size:22px; line-height:1.55; margin-bottom:22px;}
+  .stem .scenario{color:#2f3445; margin-bottom:18px;}
+  .stem .ask{font-size:24px; font-weight:700; color:var(--ink); background:#fff8ec; border-radius:8px; padding:12px 16px;}
   .opt{display:flex; align-items:center; gap:16px; background:var(--card); border:2px solid var(--line); border-radius:12px; padding:16px 20px; margin-bottom:12px; cursor:pointer; transition:border-color .12s;}
   .opt:hover{border-color:#b9b2a4;}
   .opt .letter{flex:none; width:40px; height:40px; border-radius:50%; border:2px solid var(--ink); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:19px;}
@@ -56,7 +79,7 @@
   .opt.struck .txt, .opt.struck .letter{text-decoration:line-through; opacity:.38;}
   .opt .strike-btn{flex:none; border:1px solid var(--line); background:var(--paper); color:var(--grey); border-radius:8px; font-size:14px; padding:6px 10px; cursor:pointer;}
   .opt .strike-btn:hover{color:var(--red); border-color:var(--red);}
-  .hint{color:var(--grey); font-size:15px; margin-top:6px;}
+  .hint{color:var(--grey); font-size:16px; margin-top:8px;}
 
   /* ---------- footer nav ---------- */
   .navbar{position:fixed; bottom:0; left:0; right:0; background:var(--navy); padding:14px 28px; display:flex; gap:14px; align-items:center; z-index:5;}
@@ -68,8 +91,8 @@
   /* ---------- review screen ---------- */
   .review-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(74px,1fr)); gap:12px; margin:26px 0 30px;}
   .rq{position:relative; border:2px solid var(--line); background:var(--card); border-radius:10px; padding:14px 0; text-align:center; font-weight:700; font-size:19px; cursor:pointer;}
-  .rq.answered{background:#e9f3ec; border-color:var(--green);}
-  .rq.unanswered{background:#f1f1f1; color:var(--grey);}
+  .rq.answered{background:var(--green-soft); border-color:var(--green);}
+  .rq.unanswered{background:#f1f1f1; color:var(--grey); border-style:dashed;}
   .rq.flag::after{content:"⚑"; position:absolute; top:-10px; right:-4px; color:var(--orange); font-size:19px;}
   .legend{display:flex; gap:22px; color:var(--grey); font-size:16px; margin-bottom:8px; flex-wrap:wrap;}
   .legend i{display:inline-block; width:14px; height:14px; border-radius:4px; margin-right:6px; vertical-align:-1px;}
@@ -80,12 +103,26 @@
   table{border-collapse:collapse; width:100%; margin:20px 0 30px; background:var(--card); border-radius:10px; overflow:hidden;}
   th,td{border:1px solid var(--line); padding:12px 16px; text-align:left; font-size:18px;}
   th{background:var(--navy); color:#fff; font-size:15px; letter-spacing:.5px; text-transform:uppercase;}
-  td.good{color:var(--green); font-weight:700;} td.bad{color:var(--red); font-weight:700;}
-  .rev-item{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:22px 26px; margin-bottom:18px;}
+  td.good{color:var(--green); font-weight:700;} td.bad{color:var(--red); font-weight:700; background:var(--red-soft);}
+  td.bad a{color:var(--red);}
+  .callout{background:var(--paper); border-left:5px solid var(--navy); border-radius:8px; padding:12px 16px; font-size:18px; margin:6px 0 18px;}
+  .focus{border-radius:12px; padding:18px 22px; margin:4px 0 20px; font-size:19px;}
+  .focus.weak{background:var(--red-soft); border:2px solid var(--red);}
+  .focus.strong{background:var(--green-soft); border:2px solid var(--green);}
+  .focus ul{margin:8px 0 0 22px;} .focus li{margin:4px 0;}
+  .focus a{color:var(--ink); font-weight:700;}
+  .rev-head{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:8px 0 16px;}
+  .rev-head h2{font-size:24px; margin-right:auto;}
+  .seg{background:var(--card); color:var(--ink); border:2px solid var(--line); border-radius:999px; padding:7px 16px; font-size:16px; cursor:pointer;}
+  .seg.on{background:var(--navy); border-color:var(--navy); color:#fff;}
+  .rev-item{background:var(--card); border:1px solid var(--line); border-left:6px solid var(--line); border-radius:12px; padding:22px 26px; margin-bottom:18px;}
+  .rev-item.right{border-left-color:var(--green);}
+  .rev-item.wrong{border-left-color:var(--red);}
   .rev-item .rstem{font-size:20px; font-weight:600; margin:6px 0 12px; line-height:1.5;}
   .rev-item .ans{font-size:18px; margin:4px 0;}
   .rev-item .ok{color:var(--green); font-weight:700;} .rev-item .no{color:var(--red); font-weight:700;}
-  .rev-item .why{background:var(--paper); border-left:4px solid var(--orange); border-radius:8px; padding:12px 16px; margin-top:10px; font-size:18px; line-height:1.55;}
+  .rev-item .why{background:#fff8ec; border-left:5px solid var(--orange); border-radius:8px; padding:14px 18px; margin-top:12px; font-size:19px; line-height:1.6; font-weight:500;}
+  .reviewList.missed-only .rev-item.right{display:none;}
   .pill{display:inline-block; background:var(--navy); color:#fff; font-size:13px; padding:4px 12px; border-radius:999px; letter-spacing:.5px; text-transform:uppercase;}
 </style>
 </head>
@@ -96,13 +133,32 @@
   <div class="qpos" id="qpos"></div>
   <button class="hbtn" id="flagBtn">⚑ Flag for review</button>
   <div id="timer">60:00</div>
+  <div class="progress" id="progress" title="Questions answered"><i id="progressBar"></i></div>
 </header>
 
 <!-- START -->
 <section id="startScreen" class="center-wrap">
   <div class="start-card">
-    <h1>CCAO-F Mock Exam</h1>
-    <div class="sub">Claude Certified Associate – Foundations · half-length practice sitting</div>
+    <div class="hero">
+      <svg class="emblem" viewBox="0 0 120 120" role="img" aria-label="CCAO-F practice exam badge">
+        <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="#e8822a"/>
+        <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="#232838"/>
+        <text x="60" y="52" text-anchor="middle" fill="#f6d9be" font-size="11" font-weight="700" letter-spacing="1.5">PRACTICE</text>
+        <text x="60" y="74" text-anchor="middle" fill="#fff" font-size="20" font-weight="800">CCAO-F</text>
+        <text x="60" y="90" text-anchor="middle" fill="#e8822a" font-size="10" font-weight="700" letter-spacing="1">MOCK EXAM</text>
+      </svg>
+      <div>
+        <h1>CCAO-F Mock Exam</h1>
+        <div class="sub" style="margin-bottom:12px">Claude Certified Associate – Foundations · half-length practice sitting</div>
+        <div class="chips">
+          <span class="chip hot">🎯 Exam-style scenarios</span>
+          <span class="chip">⏱ Timed</span>
+          <span class="chip">📊 Per-domain results</span>
+          <span class="chip">🏅 Earn a practice badge</span>
+          <span class="chip">Free · no sign-up</span>
+        </div>
+      </div>
+    </div>
     <div class="facts">
       <div class="fact"><b>30</b><span>questions</span></div>
       <div class="fact"><b>60:00</b><span>minutes</span></div>
@@ -113,8 +169,10 @@
       <li>Click an option to select it. Use <b>abc̶</b> (or right-click an option) to strike out answers you have eliminated.</li>
       <li><b>⚑ Flag</b> questions to revisit; the review screen shows everything flagged or unanswered before you submit.</li>
       <li>The timer starts when you begin and submits the exam automatically at zero.</li>
-      <li>Eliminate the clearly wrong pair first, then choose between the remaining two.</li>
     </ul>
+    <div class="tip"><span class="label">Exam strategy</span>
+      <b>Eliminate the clearly wrong pair first, then choose between the remaining two.</b>
+      Each question shows the scenario first and <b>what's actually being asked</b> below it. Watch the <mark class="q">highlighted</mark> qualifier words such as <i>first</i>, <i>best</i> and <i>most</i>: they usually decide between the last two options.</div>
     <div class="disclaimer"><b>Every question here is original study material</b> written for the claude-certification-prep project, in the exam's style. Nothing is from, or derived from, the real exam. Study guides and answer explanations: github.com/CorporateChittyChat/claude-certification-prep</div>
     <button class="big-btn" onclick="startExam()">Begin exam</button>
   </div>
@@ -138,7 +196,7 @@
     <div class="legend">
       <span><i style="background:#e9f3ec;border:1px solid var(--green)"></i>Answered</span>
       <span><i style="background:#f1f1f1;border:1px solid var(--line)"></i>Unanswered</span>
-      <span style="color:var(--orange)">⚑ Flagged</span>
+      <span style="color:var(--orange-ink); font-weight:700">⚑ Flagged</span>
     </div>
     <div class="review-grid" id="reviewGrid"></div>
     <div id="reviewSummary" style="margin-bottom:22px; font-size:19px;"></div>
@@ -151,11 +209,17 @@
 <section id="resultsScreen" class="center-wrap hidden" style="max-width:1000px;">
   <div class="start-card">
     <h1 style="font-size:32px;">Results</h1>
+    <div class="earned" id="earned"></div>
     <div class="score-line" id="scoreLine"></div>
-    <div id="passNote" style="color:var(--grey); font-size:18px; margin-bottom:8px;"></div>
+    <div id="passNote" class="callout"></div>
+    <div id="focusBox" class="focus"></div>
     <table id="domainTable"></table>
-    <h2 style="margin:8px 0 16px; font-size:24px;">Question review</h2>
-    <div id="reviewList"></div>
+    <div class="rev-head">
+      <h2>Question review</h2>
+      <button class="seg on" id="showAll" onclick="filterReview(false)">All questions</button>
+      <button class="seg" id="showMissed" onclick="filterReview(true)">Only the ones I missed</button>
+    </div>
+    <div id="reviewList" class="reviewList"></div>
   </div>
 </section>
 
@@ -272,6 +336,34 @@ const Q = [
 
 const EXAM_MINUTES = parseInt(new URLSearchParams(location.search).get("min")) || 60;
 const LETTERS = ["A","B","C","D"];
+const GUIDE_BASE = "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/";
+const GUIDES = {
+  "Domain 1":"01-prompting.md", "Domain 2":"02-output-evaluation.md", "Domain 3":"03-product-and-model-selection.md",
+  "Domain 4":"04-workflow-integration.md", "Domain 5":"05-configuration-and-knowledge.md",
+  "Domain 6":"06-governance-risk-responsible-use.md", "Domain 7":"07-troubleshooting-and-optimization.md"
+};
+
+/* qualifier words that decide between two plausible answers */
+const QUALIFIERS = /\b(highest-value|single most|most effective|first|best|right|strongest|durable|guarantees|must|never|always|only|before anything else)\b/gi;
+
+/* append text to el, wrapping qualifier words in <mark> (text nodes only, no innerHTML) */
+function appendMarked(el, text){
+  let last = 0;
+  text.replace(QUALIFIERS, (m, _w, at)=>{
+    el.appendChild(document.createTextNode(text.slice(last, at)));
+    const mk = document.createElement("mark"); mk.className = "q"; mk.textContent = m;
+    el.appendChild(mk);
+    last = at + m.length;
+    return m;
+  });
+  el.appendChild(document.createTextNode(text.slice(last)));
+}
+
+/* split a stem into the scenario and the closing ask ("The right door is:", "Where should ... go?") */
+function splitStem(s){
+  const m = s.match(/^([\s\S]*[.?!][”"]?)\s+([^.?!]*[:?])$/);
+  return m ? {scenario:m[1], ask:m[2]} : {scenario:"", ask:s};
+}
 
 /* rotate display order per question so correct letters spread across A-D */
 Q.forEach((q,i)=>{
@@ -307,8 +399,21 @@ function tick(){
 function render(){
   const q = Q[cur];
   $("qpos").textContent = `Question ${cur+1} of ${Q.length}`;
+  const done = sel.filter(s=>s!==null).length;
+  $("progressBar").style.width = `${done/Q.length*100}%`;
+  $("progress").title = `${done} of ${Q.length} answered`;
   $("domainTag").textContent = q.d;
-  $("stem").textContent = q.s;
+  const st = $("stem"), parts = splitStem(q.s); st.innerHTML = "";
+  if(parts.scenario){
+    const sc = document.createElement("div"); sc.className = "scenario";
+    sc.innerHTML = '<span class="label">Scenario</span>';
+    sc.appendChild(document.createTextNode(parts.scenario));
+    st.appendChild(sc);
+  }
+  const ask = document.createElement("div"); ask.className = "ask";
+  ask.innerHTML = '<span class="label">The question</span>';
+  appendMarked(ask, parts.ask);
+  st.appendChild(ask);
   $("flagNote").classList.toggle("hidden", !flags[cur]);
   $("flagBtn").classList.toggle("flagged", flags[cur]);
   $("flagBtn").textContent = flags[cur] ? "⚑ Flagged" : "⚑ Flag for review";
@@ -371,7 +476,7 @@ function openReview(){
     g.appendChild(b);
   });
   const fl = flags.filter(Boolean).length;
-  $("reviewSummary").innerHTML = `<b>${Q.length-unans}</b> answered · <b>${unans}</b> unanswered · <b style="color:var(--orange)">${fl}</b> flagged`;
+  $("reviewSummary").innerHTML = `<b>${Q.length-unans}</b> answered · <b>${unans}</b> unanswered · <b style="color:var(--orange-ink)">${fl}</b> flagged`;
 }
 
 function backToExam(){
@@ -396,7 +501,7 @@ function submitExam(auto){
     const ok = sel[i]===q.correctDisp;
     if(ok) right++;
     const key = q.d.split(" ·")[0];
-    dom[key] = dom[key] || {ok:0,n:0};
+    dom[key] = dom[key] || {ok:0,n:0,name:q.d};
     dom[key].n++; if(ok) dom[key].ok++;
   });
   const pct = Math.round(right/Q.length*100);
@@ -406,29 +511,74 @@ function submitExam(auto){
     : "On the real paper the passing score is 720 out of 1000; any domain below two-thirds here deserves a reread of its study guide.";
 
   let t = "<tr><th>Domain</th><th>Score</th><th>Verdict</th></tr>";
+  const weak = [];
   Object.entries(dom).forEach(([k,v])=>{
     const good = v.ok/v.n >= 2/3;
-    t += `<tr><td>${k}</td><td>${v.ok} / ${v.n}</td><td class="${good?"good":"bad"}">${good?"Solid":"Reread the guide"}</td></tr>`;
+    const link = `<a href="${GUIDE_BASE}${GUIDES[k]}" target="_blank" rel="noopener">${v.name}</a>`;
+    if(!good) weak.push(`<li>${link} — ${v.ok} / ${v.n}</li>`);
+    t += `<tr><td>${v.name}</td><td>${v.ok} / ${v.n}</td><td class="${good?"good":"bad"}">${good?"✔ Solid":`<a href="${GUIDE_BASE}${GUIDES[k]}" target="_blank" rel="noopener">Reread the guide →</a>`}</td></tr>`;
   });
   $("domainTable").innerHTML = t;
+  renderBadge(pct, weak.length);
+  const fb = $("focusBox");
+  fb.className = "focus " + (weak.length ? "weak" : "strong");
+  fb.innerHTML = weak.length
+    ? `<span class="label" style="color:var(--red)">Focus your study here</span><b>${weak.length} domain${weak.length>1?"s":""} below two-thirds.</b> Reread these study guides, then retake the exam:<ul>${weak.join("")}</ul>`
+    : `<span class="label" style="color:var(--green)">Every domain is solid</span><b>All seven domains at two-thirds or better.</b> Skim the key takeaways below for any question you got right by guessing.`;
 
   const list = $("reviewList"); list.innerHTML = "";
   Q.forEach((q,i)=>{
     const ok = sel[i]===q.correctDisp;
     const your = sel[i]===null ? "—" : `${LETTERS[sel[i]]}. ${q.o[q.disp[sel[i]]]}`;
     const div = document.createElement("div");
-    div.className = "rev-item";
+    div.className = "rev-item " + (ok ? "right" : "wrong");
     div.innerHTML = `<span class="pill">Q${i+1} · ${q.d}</span>
       <div class="rstem"></div>
       <div class="ans">Your answer: <span class="${ok?"ok":"no"}">${ok?"✔":"✘"} </span><span class="ya"></span></div>
       <div class="ans">Correct: <span class="ok"></span></div>
-      <div class="why"></div>`;
+      <div class="why"><span class="label">Key takeaway</span><span class="wt"></span></div>`;
     div.querySelector(".rstem").textContent = q.s;
     div.querySelector(".ya").textContent = your;
     div.querySelectorAll(".ans")[1].querySelector(".ok").textContent = `${LETTERS[q.correctDisp]}. ${q.o[q.c]}`;
-    div.querySelector(".why").textContent = q.e;
+    div.querySelector(".wt").textContent = q.e;
     list.appendChild(div);
   });
+  $("showMissed").textContent = `Only the ones I missed (${Q.length - right})`;
+}
+
+/* practice badge tier: a study signal only, never a certification claim */
+function renderBadge(pct, weakCount){
+  const tiers = [
+    {min:80, weak:0, name:"Exam Ready", c1:"#d4a017", c2:"#232838", fg:"#f7e3a1", icon:"★",
+     msg:"80%+ with every domain solid. Book it — and skim the takeaways for anything you guessed."},
+    {min:67, weak:7, name:"Almost There", c1:"#9aa3b5", c2:"#232838", fg:"#e3e7ef", icon:"▲",
+     msg:"Two-thirds or better overall. Close the weak domains below, then retake."},
+    {min:0, weak:7, name:"Keep Studying", c1:"#c27a3a", c2:"#232838", fg:"#f6d9be", icon:"●",
+     msg:"A baseline, not a verdict. Work through the domain guides flagged below, then retake."}
+  ];
+  const t = tiers.find(x => pct >= x.min && weakCount <= x.weak);
+  const box = $("earned");
+  box.style.borderColor = t.c1;
+  box.innerHTML = `
+    <svg class="emblem" viewBox="0 0 120 120" role="img" aria-label="${t.name} practice badge">
+      <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="${t.c1}"/>
+      <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="${t.c2}"/>
+      <text x="60" y="56" text-anchor="middle" fill="${t.c1}" font-size="26">${t.icon}</text>
+      <text x="60" y="78" text-anchor="middle" fill="#fff" font-size="15" font-weight="800">${pct}%</text>
+      <text x="60" y="93" text-anchor="middle" fill="${t.fg}" font-size="9" font-weight="700" letter-spacing="1">CCAO-F PRACTICE</text>
+    </svg>
+    <div>
+      <span class="label">Practice badge earned</span>
+      <h3>${t.name}</h3>
+      <p>${t.msg}</p>
+      <small>Practice badge from this unofficial mock exam — not an Anthropic certification or score prediction.</small>
+    </div>`;
+}
+
+function filterReview(missedOnly){
+  $("reviewList").classList.toggle("missed-only", missedOnly);
+  $("showAll").classList.toggle("on", !missedOnly);
+  $("showMissed").classList.toggle("on", missedOnly);
 }
 </script>
 </body>
