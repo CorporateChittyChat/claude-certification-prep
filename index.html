@@ -43,6 +43,9 @@
   .btn.ghost:hover{background:#3a4158;}
   .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
   .chip{display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18); color:#fff; font-size:15px; font-weight:600; padding:6px 14px; border-radius:999px;}
+  .free-badge{display:inline-flex; align-items:center; gap:10px; background:#2fbf71; color:#0e2a1b; font-size:18px; font-weight:800; letter-spacing:.3px; padding:9px 18px 9px 10px; border-radius:999px; margin-bottom:20px; box-shadow:0 6px 18px rgba(47,191,113,.35);}
+  .free-badge .tick{width:28px; height:28px; border-radius:50%; background:#0e2a1b; color:#2fbf71; display:inline-flex; align-items:center; justify-content:center; font-size:15px;}
+  .free-badge .dot{opacity:.55;}
   a.chip{text-decoration:none;}
   a.chip:hover{background:rgba(255,255,255,.22);}
   .emblems{display:grid; grid-template-columns:repeat(2,132px); gap:14px 28px; justify-content:center;}
@@ -56,6 +59,7 @@
 
   /* ---------- sections ---------- */
   section.block{padding:56px 0 8px;}
+  section[id]{scroll-margin-top:72px;}
   h2{font-size:34px; line-height:1.2; margin-bottom:8px;}
   .section-sub{color:var(--grey); font-size:19px; margin-bottom:28px; max-width:820px;}
 
@@ -95,6 +99,26 @@
   .planned{background:var(--card); border:2px dashed var(--line); border-radius:16px; padding:20px 28px; display:flex; align-items:center; gap:16px; color:var(--grey);}
   .planned b{color:var(--ink);}
 
+  /* ---------- video series ---------- */
+  .videos{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:22px;}
+  .video{display:flex; flex-direction:column; background:var(--card); border:1px solid var(--line); border-top:5px solid var(--accent); border-radius:16px; padding:22px 22px 24px; text-decoration:none; color:inherit; box-shadow:0 6px 24px rgba(0,0,0,.05); transition:transform .15s, box-shadow .15s;}
+  a.video:hover{transform:translateY(-3px); box-shadow:0 12px 30px rgba(0,0,0,.10);}
+  a.video:focus-visible{outline:3px solid var(--accent); outline-offset:3px;}
+  .video-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .video-top .emblem{width:64px; height:64px; filter:none;}
+  .video .play{width:46px; height:46px; border-radius:50%; background:#e62117; color:#fff; display:flex; align-items:center; justify-content:center; font-size:18px; padding-left:3px; box-shadow:0 4px 12px rgba(230,33,23,.35);}
+  .video h3{font-size:20px; line-height:1.3; margin-bottom:8px;}
+  .video .meta{font-size:15px; color:var(--grey); margin-bottom:8px;}
+  .video .meta b{color:var(--ink);}
+  .video .blurb{font-size:15px; color:var(--grey); margin-bottom:18px;}
+  .video .watch{margin-top:auto; display:inline-flex; align-self:flex-start; align-items:center; gap:6px; background:#e62117; color:#fff; font-weight:700; font-size:15px; padding:10px 16px; border-radius:9px; text-decoration:none;}
+  .video .watch.ghost{background:transparent; color:var(--ink); border:2px solid var(--line);}
+  .video .watch.ghost:hover{border-color:#e62117; color:#e62117;}
+  .video.soon{border-style:dashed; border-top-style:solid; background:#fbfaf7; box-shadow:none;}
+  .video.soon .emblem{opacity:.7;}
+  .all-videos{margin-top:18px; font-size:17px;}
+  .all-videos a{color:var(--orange-ink); font-weight:700;}
+
   /* ---------- start here ---------- */
   .paths{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px;}
   .path{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:26px 30px;}
@@ -115,6 +139,7 @@
   /* ---------- responsive ---------- */
   @media (max-width:980px){
     .hero .wrap, .tracks, .paths, footer .wrap{grid-template-columns:minmax(0,1fr);}
+    .videos{grid-template-columns:repeat(2,minmax(0,1fr));}
     .emblems{justify-content:flex-start;}
     .emblems{grid-template-columns:repeat(4,minmax(0,92px)); gap:10px; justify-content:start;}
     .emblem{width:100%; height:auto;} .emblem.second{margin-top:0;}
@@ -125,6 +150,7 @@
     .hero{padding:40px 0 56px;} .hero h1{font-size:34px;} .hero p.lead{font-size:18px;}
     .track, .path{padding:22px 18px;}
     .stats{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .videos{grid-template-columns:minmax(0,1fr);}
     h2{font-size:28px;}
   }
 </style>
@@ -138,6 +164,7 @@
       <a href="ccao-f/practice/mock-exam-player.html">CCAO-F exam</a>
       <a href="ccdv-f/practice/mock-exam-player.html">CCDV-F exam</a>
       <a href="#tracks">Certifications</a>
+      <a href="#videos">Videos</a>
       <a href="#start">Start here</a>
       <a href="https://github.com/CorporateChittyChat/claude-certification-prep">GitHub</a>
     </nav>
@@ -147,6 +174,7 @@
 <section class="hero">
   <div class="wrap">
     <div>
+      <p class="free-badge"><span class="tick">✔</span> 100% free <span class="dot">·</span> no sign-up <span class="dot">·</span> no paywall</p>
       <h1>Free study material for <em>Claude certifications</em></h1>
       <p class="lead">Study notes per exam domain, original practice questions, timed mock exams for both tracks, a printable recap deck and a hands-on developer series. Built alongside the CorporateChittyChat exam-prep videos.</p>
       <div class="cta-row">
@@ -155,10 +183,9 @@
         <a class="btn ghost" href="#tracks">Browse the tracks</a>
       </div>
       <div class="chips">
-        <a class="chip" href="#tracks">🎯 Exam-style scenarios</a>
-        <a class="chip" href="https://www.youtube.com/@Corporatechittychat/playlists">📺 Video series</a>
+        <a class="chip" href="#start">🧭 Study path</a>
+        <a class="chip" href="#videos">📺 Video series</a>
         <a class="chip" href="https://github.com/chittychat-studio/ccdvf-course">🧑‍💻 Runnable code</a>
-        <span class="chip">Free · no sign-up</span>
       </div>
     </div>
     <div class="emblems" aria-hidden="true">
@@ -300,6 +327,74 @@
         </ul>
       </article>
     </div>
+  </div>
+</section>
+
+<section class="block" id="videos">
+  <div class="wrap">
+    <h2>Video series</h2>
+    <p class="section-sub">One playlist per certification. Pick yours and it opens straight on YouTube.</p>
+    <div class="videos">
+        <a class="video" href="https://www.youtube.com/playlist?list=PLFbwN1bk0S4c" style="--accent:#e8822a">
+          <div class="video-top">
+            <svg class="emblem" viewBox="0 0 120 120" aria-hidden="true">
+            <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="#e8822a"/>
+            <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="#1c2130"/>
+            <text x="60" y="68" text-anchor="middle" fill="#fff" font-size="16" font-weight="800" textLength="60" lengthAdjust="spacingAndGlyphs">CCAO-F</text>
+          </svg>
+            <span class="play" aria-hidden="true">▶</span>
+          </div>
+          <span class="label">CCAO-F playlist</span>
+          <h3>Claude Certified Associate – Foundations</h3>
+          <p class="meta"><b>9 episodes</b> · EP 00–08 · about 6–7 minutes each</p>
+          <p class="blurb">One domain per episode, each ending with a worked practice question.</p>
+          <span class="watch">▶ Watch on YouTube</span>
+        </a>
+        <a class="video" href="https://www.youtube.com/playlist?list=PLHvgccck0QgI" style="--accent:#d4a017">
+          <div class="video-top">
+            <svg class="emblem" viewBox="0 0 120 120" aria-hidden="true">
+            <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="#d4a017"/>
+            <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="#1c2130"/>
+            <text x="60" y="68" text-anchor="middle" fill="#fff" font-size="16" font-weight="800" textLength="60" lengthAdjust="spacingAndGlyphs">CCDV-F</text>
+          </svg>
+            <span class="play" aria-hidden="true">▶</span>
+          </div>
+          <span class="label">CCDV-F playlist</span>
+          <h3>Claude Certified Developer – Foundations</h3>
+          <p class="meta"><b>10 episodes</b> · EP 00–09</p>
+          <p class="blurb">Episode 00 covers the exam itself, then one domain per episode with a hands-on build.</p>
+          <span class="watch">▶ Watch on YouTube</span>
+        </a>
+        <div class="video soon" style="--accent:#2a9d8f">
+          <div class="video-top">
+            <svg class="emblem" viewBox="0 0 120 120" aria-hidden="true">
+            <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="#2a9d8f"/>
+            <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="#1c2130"/>
+            <text x="60" y="68" text-anchor="middle" fill="#fff" font-size="16" font-weight="800" textLength="60" lengthAdjust="spacingAndGlyphs">CCAR-F</text>
+          </svg>
+            <span class="status plan">Coming soon</span>
+          </div>
+          <span class="label">CCAR-F playlist</span>
+          <h3>Claude Certified Architect – Foundations</h3>
+          <p class="blurb">Not published yet. Subscribe to the channel to catch the first episode.</p>
+          <a class="watch ghost" href="https://www.youtube.com/@Corporatechittychat?sub_confirmation=1">Subscribe on YouTube</a>
+        </div>
+        <div class="video soon" style="--accent:#8e6cc0">
+          <div class="video-top">
+            <svg class="emblem" viewBox="0 0 120 120" aria-hidden="true">
+            <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="#8e6cc0"/>
+            <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="#1c2130"/>
+            <text x="60" y="68" text-anchor="middle" fill="#fff" font-size="16" font-weight="800" textLength="60" lengthAdjust="spacingAndGlyphs">CCAR-P</text>
+          </svg>
+            <span class="status plan">Coming soon</span>
+          </div>
+          <span class="label">CCAR-P playlist</span>
+          <h3>Claude Certified Architect – Professional</h3>
+          <p class="blurb">Not published yet. Subscribe to the channel to catch the first episode.</p>
+          <a class="watch ghost" href="https://www.youtube.com/@Corporatechittychat?sub_confirmation=1">Subscribe on YouTube</a>
+        </div>
+    </div>
+    <p class="all-videos"><a href="https://www.youtube.com/@Corporatechittychat/playlists">All playlists on the CorporateChittyChat channel →</a></p>
   </div>
 </section>
 
