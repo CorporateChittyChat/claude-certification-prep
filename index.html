@@ -45,9 +45,10 @@
   .chip{display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18); color:#fff; font-size:15px; font-weight:600; padding:6px 14px; border-radius:999px;}
   a.chip{text-decoration:none;}
   a.chip:hover{background:rgba(255,255,255,.22);}
-  .emblems{display:flex; justify-content:center; gap:22px;}
-  .emblem{width:150px; height:150px; filter:drop-shadow(0 10px 22px rgba(0,0,0,.35));}
-  .emblem.second{margin-top:70px;}
+  .emblems{display:grid; grid-template-columns:repeat(2,132px); gap:14px 28px; justify-content:center;}
+  .emblem.soon{opacity:.85;}
+  .emblem{width:132px; height:132px; filter:drop-shadow(0 10px 22px rgba(0,0,0,.35));}
+  .emblem.second{margin-top:56px;}
   .emblem text{font-family:"Segoe UI",system-ui,Arial,sans-serif;}
 
   /* ---------- footer disclaimer ---------- */
@@ -62,6 +63,9 @@
   .tracks{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px;}
   .track{background:var(--card); border:1px solid var(--line); border-top:6px solid var(--orange); border-radius:16px; padding:30px 32px; box-shadow:0 6px 24px rgba(0,0,0,.05); display:flex; flex-direction:column;}
   .track.dev{border-top-color:var(--navy);}
+  .track.arch{border-top-color:#2a9d8f; background:linear-gradient(180deg,#fff 0%,#f8fbfa 100%);}
+  .track.arch.pro{border-top-color:#8e6cc0; background:linear-gradient(180deg,#fff 0%,#faf8fd 100%);}
+  .track.arch .links{margin-bottom:0;}
   .track-head{display:flex; gap:18px; align-items:center; margin-bottom:14px;}
   .track-head .emblem{width:84px; height:84px; flex:none; filter:none;}
   .track h3{font-size:25px; line-height:1.25;}
@@ -88,7 +92,6 @@
   .eps{list-style:none; display:grid; gap:6px; margin-bottom:22px; font-size:16px;}
   .eps li{display:flex; gap:10px; align-items:baseline;}
   .eps b{flex:none; font-size:13px; background:var(--navy); color:#fff; border-radius:6px; padding:2px 8px; font-variant-numeric:tabular-nums;}
-  .planned-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px; margin-top:24px;}
   .planned{background:var(--card); border:2px dashed var(--line); border-radius:16px; padding:20px 28px; display:flex; align-items:center; gap:16px; color:var(--grey);}
   .planned b{color:var(--ink);}
 
@@ -111,9 +114,10 @@
 
   /* ---------- responsive ---------- */
   @media (max-width:980px){
-    .hero .wrap, .tracks, .paths, .planned-grid, footer .wrap{grid-template-columns:minmax(0,1fr);}
+    .hero .wrap, .tracks, .paths, footer .wrap{grid-template-columns:minmax(0,1fr);}
     .emblems{justify-content:flex-start;}
-    .emblem{width:110px; height:110px;} .emblem.second{margin-top:0;}
+    .emblems{grid-template-columns:repeat(4,minmax(0,92px)); gap:10px; justify-content:start;}
+    .emblem{width:100%; height:auto;} .emblem.second{margin-top:0;}
     .topbar nav{display:none;}
   }
   @media (max-width:560px){
@@ -172,6 +176,20 @@
         <text x="60" y="68" text-anchor="middle" fill="#fff" font-size="16" font-weight="800" textLength="60" lengthAdjust="spacingAndGlyphs">CCDV-F</text>
         <text x="60" y="81" text-anchor="middle" fill="#d4a017" font-size="8.5" font-weight="700" textLength="50" lengthAdjust="spacingAndGlyphs">EXAM PREP</text>
       </svg>
+      <svg class="emblem soon" viewBox="0 0 120 120">
+        <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="#2a9d8f"/>
+        <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="#1c2130"/>
+        <text x="60" y="50" text-anchor="middle" fill="#bfe7e1" font-size="9" font-weight="700" textLength="48" lengthAdjust="spacingAndGlyphs">ARCHITECT</text>
+        <text x="60" y="68" text-anchor="middle" fill="#fff" font-size="16" font-weight="800" textLength="60" lengthAdjust="spacingAndGlyphs">CCAR-F</text>
+        <text x="60" y="81" text-anchor="middle" fill="#2a9d8f" font-size="8.5" font-weight="700" textLength="50" lengthAdjust="spacingAndGlyphs">COMING SOON</text>
+      </svg>
+      <svg class="emblem second soon" viewBox="0 0 120 120">
+        <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="#8e6cc0"/>
+        <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="#1c2130"/>
+        <text x="60" y="50" text-anchor="middle" fill="#e0d3f5" font-size="9" font-weight="700" textLength="48" lengthAdjust="spacingAndGlyphs">ARCHITECT</text>
+        <text x="60" y="68" text-anchor="middle" fill="#fff" font-size="16" font-weight="800" textLength="60" lengthAdjust="spacingAndGlyphs">CCAR-P</text>
+        <text x="60" y="81" text-anchor="middle" fill="#8e6cc0" font-size="8.5" font-weight="700" textLength="50" lengthAdjust="spacingAndGlyphs">COMING SOON</text>
+      </svg>
     </div>
   </div>
 </section>
@@ -222,39 +240,65 @@
           </svg>
           <div>
             <h3>Claude Certified Developer – Foundations</h3>
-            <span class="status done">✔ Complete · EP 00–09</span>
+            <span class="status done">✔ Complete</span>
           </div>
         </div>
         <p class="who">For people who build with Claude: the API, agents, tools and MCP, and Claude Code. Written by someone who sat and passed it.</p>
         <div class="stats">
           <div class="stat"><b>8</b><span>domains</span></div>
           <div class="stat"><b>10</b><span>episodes</span></div>
-          <div class="stat"><b>9</b><span>hands-on builds</span></div>
+          <div class="stat"><b>9</b><span>code builds</span></div>
           <div class="stat"><b>30</b><span>Q mock exam</span></div>
         </div>
-        <ul class="eps">
-          <li><b>EP 01</b>Model selection and optimization</li>
-          <li><b>EP 02</b>Agents and workflows</li>
-          <li><b>EP 03</b>The Messages API</li>
-          <li><b>EP 04</b>Prompt and context engineering</li>
-          <li><b>EP 05</b>Tools and MCP</li>
-          <li><b>EP 06</b>Settings and CLAUDE.md</li>
-          <li><b>EP 07</b>Claude Code: permissions, hooks, subagents, skills, plugins</li>
-          <li><b>EP 08</b>Requirements, the build life cycle and the seams</li>
-          <li><b>EP 09</b>Eval, testing and debugging</li>
-        </ul>
         <ul class="links">
-          <li><a class="feature" href="ccdv-f/practice/mock-exam-player.html"><span class="ic">▶</span><span>Interactive mock exam<small>30 questions, one topic per episode, timed with per-topic results</small></span></a></li>
-          <li><a href="https://github.com/chittychat-studio/ccdvf-course"><span class="ic">⌨</span><span>Companion code<small>Python and TypeScript, one folder per episode, with a README and practice set</small></span></a></li>
-          <li><a href="https://www.youtube.com/playlist?list=PLHvgccck0QgI"><span class="ic">📺</span><span>Video series<small>Episode 00 covers the exam itself, then one domain per episode</small></span></a></li>
+          <li><a class="feature" href="ccdv-f/practice/mock-exam-player.html"><span class="ic">▶</span><span>Interactive mock exam<small>Timed, flag-for-review, per-topic results and a practice badge</small></span></a></li>
+          <li><a href="https://github.com/CorporateChittyChat/claude-certification-prep/tree/main/ccdv-f"><span class="ic">📘</span><span>Episode guide<small>EP 00–09 mapped to their exam domains and code</small></span></a></li>
+          <li><a href="https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccdv-f/practice/mock-exam-answers.md"><span class="ic">❓</span><span>Mock exam answers<small>All 30 questions explained, with links to each episode's code</small></span></a></li>
+          <li><a href="https://github.com/chittychat-studio/ccdvf-course"><span class="ic">⌨</span><span>Companion code<small>Nine hands-on builds in Python and TypeScript</small></span></a></li>
+          <li><a href="https://www.youtube.com/playlist?list=PLHvgccck0QgI"><span class="ic">📺</span><span>Video series<small>Episode 00 covers the exam, then one domain per episode</small></span></a></li>
         </ul>
         <a class="btn dark" href="https://github.com/CorporateChittyChat/claude-certification-prep/tree/main/ccdv-f">Open the CCDV-F track →</a>
       </article>
-    </div>
 
-    <div class="planned-grid">
-      <div class="planned"><span class="status plan">Planned</span><span><b>CCAR-F</b> · Claude Certified Architect – Foundations</span></div>
-      <div class="planned"><span class="status plan">Planned</span><span><b>CCAR-P</b> · Claude Certified Architect – Professional</span></div>
+      <!-- CCAR-F -->
+      <article class="track arch">
+        <div class="track-head">
+          <svg class="emblem" viewBox="0 0 120 120" aria-hidden="true">
+            <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="#2a9d8f"/>
+            <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="#1c2130"/>
+            <text x="60" y="68" text-anchor="middle" fill="#fff" font-size="16" font-weight="800" textLength="60" lengthAdjust="spacingAndGlyphs">CCAR-F</text>
+          </svg>
+          <div>
+            <h3>Claude Certified Architect – Foundations</h3>
+            <span class="status plan">Planned</span>
+          </div>
+        </div>
+        <p class="who">Architect track, foundations level. Study material is planned in the same format as the tracks above: videos, study notes and an interactive mock exam.</p>
+        <ul class="links">
+          <li><a href="https://www.youtube.com/@Corporatechittychat"><span class="ic">📺</span><span>Follow the YouTube channel<small>New exam-prep series are announced there first</small></span></a></li>
+          <li><a href="https://github.com/CorporateChittyChat/claude-certification-prep"><span class="ic">⭐</span><span>Watch this repo on GitHub<small>Get notified when the CCAR-F track is added</small></span></a></li>
+        </ul>
+      </article>
+
+      <!-- CCAR-P -->
+      <article class="track arch pro">
+        <div class="track-head">
+          <svg class="emblem" viewBox="0 0 120 120" aria-hidden="true">
+            <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="#8e6cc0"/>
+            <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="#1c2130"/>
+            <text x="60" y="68" text-anchor="middle" fill="#fff" font-size="16" font-weight="800" textLength="60" lengthAdjust="spacingAndGlyphs">CCAR-P</text>
+          </svg>
+          <div>
+            <h3>Claude Certified Architect – Professional</h3>
+            <span class="status plan">Planned</span>
+          </div>
+        </div>
+        <p class="who">Architect track, professional level. Study material is planned in the same format as the tracks above: videos, study notes and an interactive mock exam.</p>
+        <ul class="links">
+          <li><a href="https://www.youtube.com/@Corporatechittychat"><span class="ic">📺</span><span>Follow the YouTube channel<small>New exam-prep series are announced there first</small></span></a></li>
+          <li><a href="https://github.com/CorporateChittyChat/claude-certification-prep"><span class="ic">⭐</span><span>Watch this repo on GitHub<small>Get notified when the CCAR-P track is added</small></span></a></li>
+        </ul>
+      </article>
     </div>
   </div>
 </section>
