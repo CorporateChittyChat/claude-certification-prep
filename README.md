@@ -19,7 +19,7 @@ Each certification gets its own top-level folder with the same shape: `domains/`
 
 ## Start here (CCAO-F)
 
-1. **Watch or skim** the [video series](https://www.youtube.com/playlist?list=PLFbwN1bk0S4c) — one domain per episode, ~6–7 minutes each, each ending with a worked practice question.
+1. **Watch or skim** the [video series](https://www.youtube.com/playlist?list=PLFbwN1bk0S4c) — 10 videos: one domain per episode plus a bonus on why people fail the exam, ~6–7 minutes each, each ending with a worked practice question.
 2. **Read** the [domain study guides](ccao-f/domains/) for the written version of every move, trap, and rule.
 3. **Test yourself** with the [episode questions](ccao-f/practice/episode-questions.md) and the [30-question mock exam](ccao-f/practice/mock-exam.md).
 4. **The night before**, run through the [recap deck](ccao-f/assets/ccaof-recap-deck.pdf) and the [exam tips](ccao-f/exam-tips.md).

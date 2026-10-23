@@ -11,6 +11,7 @@ The exam's one big idea, which every domain guide here comes back to: **it tests
 | # | Domain | Study guide | Video |
 |---|---|---|---|
 | — | Series intro + 5 exam tips | [exam-tips.md](exam-tips.md) | EP 00 |
+| — | Why people fail the CCAO-F exam, and how to fix it (bonus) | — | bonus, between EP 00 and EP 01 |
 | 1 | Prompting and Task Execution | [domains/01-prompting.md](domains/01-prompting.md) | EP 01 |
 | 2 | Output Evaluation and Validation (the biggest slice) | [domains/02-output-evaluation.md](domains/02-output-evaluation.md) | EP 02 + EP 03 |
 | 3 | Product and Model Selection | [domains/03-product-and-model-selection.md](domains/03-product-and-model-selection.md) | EP 04 |
@@ -19,7 +20,7 @@ The exam's one big idea, which every domain guide here comes back to: **it tests
 | 6 | Governance, Risk, and Responsible Use | [domains/06-governance-risk-responsible-use.md](domains/06-governance-risk-responsible-use.md) | EP 07 |
 | 7 | Troubleshooting and Optimization | [domains/07-troubleshooting-and-optimization.md](domains/07-troubleshooting-and-optimization.md) | EP 08 |
 
-All episodes: **[CCAO-F Exam Prep playlist](https://www.youtube.com/playlist?list=PLFbwN1bk0S4c)**
+All 10 videos: **[CCAO-F Exam Prep playlist](https://www.youtube.com/playlist?list=PLFbwN1bk0S4c)**
 
 ## Practice
 
