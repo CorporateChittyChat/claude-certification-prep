@@ -462,6 +462,7 @@ function setTrack(t){
   const sel = $("topicSel"); sel.innerHTML = "";
   const all = el("option", "", `All ${d.title} topics (${d.cards.length} cards)`); all.value = "all"; sel.appendChild(all);
   d.topics.forEach((tp, i) => { const o = el("option", "", tp.name); o.value = String(i); sel.appendChild(o); });
+  const tq = params.get("topic"); if(tq !== null && d.topics[tq] && !sel.dataset.used){ sel.value = tq; sel.dataset.used = "1"; }
   buildOrder(false); renderSheet(); syncUrl();
 }
 

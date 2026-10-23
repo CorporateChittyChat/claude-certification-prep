@@ -544,6 +544,7 @@ function submitExam(auto){
   });
   $("domainTable").innerHTML = t;
   renderBadge(pct, weak.length);
+  saveResult(pct, right, dom);
   const fb = $("focusBox");
   fb.className = "focus " + (weak.length ? "weak" : "strong");
   fb.innerHTML = weak.length
@@ -568,6 +569,28 @@ function submitExam(auto){
     list.appendChild(div);
   });
   $("showMissed").textContent = `Only the ones I missed (${Q.length - right})`;
+}
+
+/* Remember the result in this browser only (no account, no server), so the learning path can show a
+   readiness score and unlock the completion certificate. Storage is optional: every call is guarded. */
+function saveResult(pct, right, dom){
+  const key = "exam-ccao-f";
+  try{
+    const prev = JSON.parse(localStorage.getItem(key) || "null");
+    const domains = {};
+    Object.entries(dom).forEach(([k, v]) => { domains[k] = {ok: v.ok, n: v.n, name: v.name}; });
+    const last = {pct, right, n: Q.length, date: Date.now(), domains};
+    const best = prev && prev.best && prev.best.pct > pct ? prev.best : last;
+    localStorage.setItem(key, JSON.stringify({last, best, attempts: (prev && prev.attempts || 0) + 1}));
+  }catch(e){}
+  const box = $("earned");
+  if(box && !document.getElementById("pathLink")){
+    const p = document.createElement("p");
+    p.id = "pathLink"; p.style.cssText = "margin:14px 0 4px; font-size:17px; font-weight:700;";
+    const a = document.createElement("a");
+    a.href = "../../path.html?track=ccao-f"; a.textContent = "See your readiness score and claim your certificate on the learning path \u2192";
+    p.appendChild(a); box.insertAdjacentElement("afterend", p);
+  }
 }
 
 /* practice badge tier: a study signal only, never a certification claim */
