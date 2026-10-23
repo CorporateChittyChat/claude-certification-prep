@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Paths</title>
+<meta name="description" content="The CCAO-F and CCDV-F study material as a course: what you will learn, every lesson in order with time estimates, a readiness score and a completion certificate. Free, unofficial, no account.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23e8822a'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%23232838'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --navy:#232838; --panel:#2e3446; --ink:#1c2130; --paper:#f7f5f0; --card:#fff;
+    --orange:#e8822a; --orange-ink:#a8520d; --gold:#d4a017; --line:#d8d4cc; --grey:#5f6473;
+    --green:#2e8b57; --green-soft:#e9f3ec; --red:#c0392b; --red-soft:#fbeae8;
+    --accent:var(--orange); --accent-ink:var(--orange-ink); --accent-soft:#fff3e6;
+  }
+  body.dv{--accent:var(--gold); --accent-ink:#7a5a00; --accent-soft:#fbf3d9;}
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Segoe UI",system-ui,Arial,sans-serif; background:var(--paper); color:var(--ink); font-size:18px; line-height:1.55;}
+  a{color:inherit;}
+  .wrap{max-width:1100px; margin:0 auto; padding:0 24px;}
+  .topbar{background:var(--navy); color:#fff;}
+  .topbar .wrap{display:flex; align-items:center; gap:20px; height:58px;}
+  .topbar .brand{font-weight:800; text-decoration:none; margin-right:auto;}
+  .topbar .brand span{color:var(--orange);}
+  .topbar a.nav{color:#dfe3ee; text-decoration:none; font-size:16px;}
+  .topbar a.nav:hover{color:#fff; text-decoration:underline;}
+  .label{display:block; font-size:13px; font-weight:800; letter-spacing:.9px; text-transform:uppercase; color:var(--accent-ink); margin-bottom:8px;}
+
+  .head{padding:26px 0 8px; display:flex; flex-wrap:wrap; gap:16px; align-items:center;}
+  .head h1{font-size:38px; line-height:1.15; flex:1 1 100%;}
+  .seg{display:inline-flex; background:var(--card); border:2px solid var(--line); border-radius:999px; padding:3px;}
+  .seg button{border:0; background:transparent; font:inherit; font-size:16px; font-weight:700; padding:7px 16px; border-radius:999px; cursor:pointer; color:var(--ink);}
+  .seg button[aria-pressed="true"][data-track="ccao-f"]{background:var(--orange); color:#1c2130;}
+  .seg button[aria-pressed="true"][data-track="ccdv-f"]{background:var(--gold); color:#1c2130;}
+  .who{color:var(--grey); font-size:18px; max-width:760px;}
+
+  .grid{display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:22px; margin-top:18px; align-items:start;}
+  .box{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:22px 26px; box-shadow:0 6px 24px rgba(0,0,0,.05);}
+  .box h2{font-size:22px; margin-bottom:10px;}
+  .outcomes{list-style:none; display:grid; gap:8px;}
+  .outcomes li{display:flex; gap:10px; font-size:16.5px;}
+  .outcomes li::before{content:"✔"; color:var(--green); font-weight:800;}
+  .prereqs{margin-top:14px; display:flex; flex-wrap:wrap; gap:8px;}
+  .prereqs span{background:var(--paper); border:1px solid var(--line); border-radius:999px; padding:4px 12px; font-size:14px;}
+
+  /* readiness */
+  .ready{display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:center;}
+  .ring{width:132px; height:132px; position:relative;}
+  .ring svg{transform:rotate(-90deg); width:100%; height:100%;}
+  .ring circle{fill:none; stroke-width:12;}
+  .ring .bg{stroke:#e6e2da;}
+  .ring .fg{stroke:var(--accent); stroke-linecap:round; transition:stroke-dasharray .4s;}
+  .ring .num{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; font-weight:800; font-size:30px; line-height:1;}
+  .ring .num small{font-size:11px; font-weight:700; letter-spacing:.6px; color:var(--grey); margin-top:4px;}
+  .meters{display:grid; gap:9px;}
+  .meter{font-size:14.5px;}
+  .meter .row{display:flex; justify-content:space-between; gap:8px;}
+  .meter .row b{font-weight:700;}
+  .meter .row span{color:var(--grey);}
+  .meter i{display:block; height:7px; border-radius:999px; background:#e6e2da; overflow:hidden; margin-top:3px;}
+  .meter i b{display:block; height:100%; background:var(--accent); width:0;}
+  .weak{margin-top:14px; background:var(--paper); border-radius:12px; padding:12px 14px; font-size:15.5px;}
+  .weak a{color:var(--accent-ink); font-weight:700;}
+  .verdict{margin-top:10px; font-size:15px; color:var(--grey);}
+
+  /* curriculum */
+  .section{margin-top:22px;}
+  .section h2{font-size:21px; display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:10px;}
+  .section h2 small{font-size:14px; color:var(--grey); font-weight:600;}
+  .lesson{display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:start; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px 18px; margin-bottom:10px;}
+  .lesson.done{background:var(--green-soft); border-color:#b9dcc6;}
+  .lesson.done .t{text-decoration:line-through; color:#3a3f4d;}
+  .lesson input{width:24px; height:24px; margin-top:3px; accent-color:var(--green); cursor:pointer;}
+  .lesson .t{font-weight:700; font-size:17px; line-height:1.35;}
+  .lesson .opt{font-size:12px; font-weight:800; letter-spacing:.6px; text-transform:uppercase; color:var(--grey); background:var(--paper); border-radius:999px; padding:2px 9px; margin-left:8px; vertical-align:middle;}
+  .lesson .links{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;}
+  .lesson .links a{display:inline-flex; align-items:center; gap:6px; font-size:14.5px; font-weight:600; text-decoration:none; background:var(--paper); border:1px solid var(--line); border-radius:9px; padding:5px 11px;}
+  .lesson .links a:hover{border-color:var(--accent); background:var(--accent-soft);}
+  .lesson .mins{font-size:14px; color:var(--grey); white-space:nowrap; padding-top:4px;}
+  .lesson .score{display:block; font-size:13px; color:var(--green); font-weight:700;}
+
+  /* certificate */
+  .cert{margin-top:22px; border-top:6px solid var(--accent);}
+  .reqs{list-style:none; display:grid; gap:6px; margin:8px 0 14px; font-size:16px;}
+  .reqs li{display:flex; gap:10px; align-items:flex-start;}
+  .reqs li .st{flex:none; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; background:#e6e2da; color:var(--grey);}
+  .reqs li.ok .st{background:var(--green); color:#fff;}
+  .name-row{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:8px;}
+  .name-row input{font:inherit; font-size:17px; padding:10px 14px; border:2px solid var(--line); border-radius:10px; flex:1 1 220px; min-width:0;}
+  .btn{font:inherit; font-size:16px; font-weight:700; border:2px solid var(--line); background:var(--card); color:var(--ink); border-radius:10px; padding:10px 16px; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px;}
+  .btn:hover{border-color:var(--accent);}
+  .btn.primary{background:var(--accent); border-color:var(--accent); color:#1c2130;}
+  .btn:disabled{opacity:.45; cursor:default;}
+  .btn.coffee{background:#6f4e37; border-color:#6f4e37; color:#fff;}
+  .preview{margin-top:14px; display:none;}
+  .preview img{width:100%; height:auto; border:1px solid var(--line); border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.12);}
+  .share{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;}
+  .locked{color:var(--grey); font-size:15.5px;}
+  .tip{margin-top:18px; background:linear-gradient(135deg,#fff8ec 0%,#fdf0dc 100%); border:2px solid #f2c48d; border-radius:14px; padding:16px 18px; display:flex; flex-wrap:wrap; gap:12px; align-items:center;}
+  .tip p{flex:1 1 320px; font-size:15.5px; color:#3a3f4d;}
+  .supporters{background:#fff; border:1px solid #f2c48d; color:#6f4e37; font-weight:700; font-size:14px; padding:4px 12px; border-radius:999px;}
+  .toast{position:fixed; left:50%; bottom:22px; transform:translateX(-50%); background:var(--green); color:#fff; font-weight:700; padding:12px 20px; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.2); z-index:10;}
+  footer{margin-top:40px; padding:22px 0 34px; color:var(--grey); font-size:13px; border-top:1px solid var(--line);}
+  .hidden{display:none!important;}
+  @media (max-width:860px){
+    .grid{grid-template-columns:1fr;}
+    .head h1{font-size:30px;}
+    .lesson{grid-template-columns:auto 1fr;} .lesson .mins{grid-column:2; padding-top:0;}
+    .wrap{padding:0 16px;}
+    .topbar a.nav.opt{display:none;}
+  }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="./">Claude Certification <span>Prep</span></a>
+    <a class="nav opt" href="flashcards.html">Flashcards</a>
+    <a class="nav" id="examNav" href="#">Mock exam</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="head">
+    <h1>Learning path</h1>
+    <div class="seg" role="group" aria-label="Certification">
+      <button type="button" data-track="ccao-f">CCAO-F</button>
+      <button type="button" data-track="ccdv-f">CCDV-F</button>
+    </div>
+    <p class="who" id="who"></p>
+  </div>
+
+  <div class="grid">
+    <section class="box">
+      <h2>What you'll learn</h2>
+      <ul class="outcomes" id="outcomes"></ul>
+      <div class="prereqs" id="prereqs"></div>
+    </section>
+    <section class="box" aria-live="polite">
+      <h2>Your readiness</h2>
+      <div class="ready">
+        <div class="ring">
+          <svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="52"></circle><circle class="fg" id="ringFg" cx="60" cy="60" r="52" stroke-dasharray="0 999"></circle></svg>
+          <div class="num"><span id="readyPct">0%</span><small>READY</small></div>
+        </div>
+        <div class="meters">
+          <div class="meter"><div class="row"><b>Lessons</b><span id="mLessons"></span></div><i><b id="bLessons"></b></i></div>
+          <div class="meter"><div class="row"><b>Flashcards known</b><span id="mCards"></span></div><i><b id="bCards"></b></i></div>
+          <div class="meter"><div class="row"><b>Best mock exam</b><span id="mExam"></span></div><i><b id="bExam"></b></i></div>
+        </div>
+      </div>
+      <div class="weak" id="weak"></div>
+      <p class="verdict" id="verdict"></p>
+    </section>
+  </div>
+
+  <div id="curriculum"></div>
+
+  <section class="box cert" id="cert">
+    <span class="label">Completion certificate</span>
+    <h2>Finish the path, pass the mock, claim it</h2>
+    <ul class="reqs" id="reqs"></ul>
+    <div id="certLocked" class="locked"></div>
+    <div id="certOpen" class="hidden">
+      <div class="name-row">
+        <input type="text" id="certName" maxlength="60" placeholder="Your name, as it should appear" aria-label="Your name for the certificate">
+        <button type="button" class="btn primary" id="makeCert">🎓 Make my certificate</button>
+      </div>
+      <div class="preview" id="preview"><img id="certImg" alt="Your completion certificate"></div>
+      <div class="share hidden" id="share">
+        <a class="btn" id="dlCert" download="">⬇ Download PNG</a>
+        <a class="btn" id="liShare" target="_blank" rel="noopener">🔗 Share on LinkedIn</a>
+        <button type="button" class="btn" id="copyPost">📋 Copy a post</button>
+      </div>
+    </div>
+    <div class="tip">
+      <span style="font-size:34px">☕</span>
+      <p id="tipText">Everything here is free, with no sign-up. If this path got you ready, buy me a coffee: it funds the next tracks, CCAR-F and CCAR-P.</p>
+      <a class="btn coffee" href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener">☕ Buy me a coffee</a>
+      <span class="supporters hidden" id="supporters"></span>
+    </div>
+  </section>
+
+  <footer>Independent study material. Not affiliated with, endorsed by, or approved by Anthropic. The certificate records that you completed this free, unofficial study path and your score on its original mock exam; it is not an Anthropic certification, score or prediction. Progress is kept in this browser only.</footer>
+</main>
+<div class="toast hidden" id="toast" role="status"></div>
+
+<script src="path-data.js"></script>
+<script src="flashcards-data.js"></script>
+<script>
+const PATHS = window.PATH_DATA, FC = window.FC_DATA;
+const SITE = "https://corporatechittychat.github.io/claude-certification-prep/";
+const $ = id => document.getElementById(id);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if(cls) e.className = cls; if(text !== undefined) e.textContent = text; return e; };
+function load(key, fallback){ try{ const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }catch(e){ return fallback; } }
+function save(key, val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
+function toast(msg){ const t = $("toast"); t.textContent = msg; t.classList.remove("hidden"); setTimeout(() => t.classList.add("hidden"), 4000); }
+
+const params = new URLSearchParams(location.search);
+let track = PATHS[params.get("track")] ? params.get("track") : load("fc-track", "ccao-f");
+if(!PATHS[track]) track = "ccao-f";
+let done = {};
+let certPng = null;
+
+const P = () => PATHS[track];
+const lessons = () => P().sections.flatMap(s => s.lessons);
+const required = () => lessons().filter(l => !l.opt);
+const fmtMins = m => m >= 60 ? `${Math.floor(m / 60)} h ${m % 60 ? (m % 60) + " min" : ""}`.trim() : `${m} min`;
+
+/* ---------- progress sources (all browser-local) ---------- */
+function examRecord(){ return load("exam-" + track, null); }
+function cardStatus(){ return load("fc-status-" + track, {}); }
+
+function readiness(){
+  const req = required(), doneN = req.filter(l => done[l.id]).length;
+  const fc = FC[track], st = cardStatus(), known = fc.cards.filter(c => st[c.id] === "known").length;
+  const ex = examRecord(), best = ex && ex.best ? ex.best : null;
+  const lessonPct = doneN / req.length, cardPct = known / fc.cards.length, examPct = best ? best.pct / 100 : 0;
+  const score = Math.round(30 * lessonPct + 30 * cardPct + 40 * examPct);
+  /* weakest topic: average of flashcard share and exam share where data exists */
+  let weakest = null;
+  fc.topics.forEach((tp, ti) => {
+    if(/exam technique/i.test(tp.name)) return;
+    const cards = fc.cards.filter(c => c.t === ti), seen = cards.filter(c => st[c.id]);
+    const parts = [];
+    if(seen.length) parts.push(cards.filter(c => st[c.id] === "known").length / cards.length);
+    if(best){ const key = Object.keys(P().examMap).find(k => P().examMap[k] === ti); const d = key && best.domains && best.domains[key]; if(d && d.n) parts.push(d.ok / d.n); }
+    if(!parts.length) return;
+    const v = parts.reduce((a, b) => a + b, 0) / parts.length;
+    if(!weakest || v < weakest.v) weakest = {v, ti, name: tp.name};
+  });
+  return {score, doneN, reqN: req.length, known, cardsN: fc.cards.length, best, weakest};
+}
+
+function renderReadiness(){
+  const r = readiness();
+  $("readyPct").textContent = r.score + "%";
+  $("ringFg").setAttribute("stroke-dasharray", `${r.score / 100 * 2 * Math.PI * 52} 999`);
+  $("mLessons").textContent = `${r.doneN} of ${r.reqN}`; $("bLessons").style.width = (r.doneN / r.reqN * 100) + "%";
+  $("mCards").textContent = `${r.known} of ${r.cardsN}`; $("bCards").style.width = (r.known / r.cardsN * 100) + "%";
+  $("mExam").textContent = r.best ? `${r.best.pct}% (${r.best.right} of ${r.best.n})` : "not sat yet"; $("bExam").style.width = (r.best ? r.best.pct : 0) + "%";
+  const w = $("weak"); w.textContent = "";
+  if(r.weakest){
+    w.appendChild(el("b", "", "Weakest area: "));
+    const a = el("a", "", r.weakest.name); a.href = `${P().flash}&topic=${r.weakest.ti}`; w.appendChild(a);
+    w.appendChild(document.createTextNode(` · ${Math.round(r.weakest.v * 100)}% right so far. Drill its flashcards, then reread that lesson.`));
+  } else {
+    w.textContent = "Flip a few flashcards or sit the mock exam and the weakest area shows up here.";
+  }
+  $("verdict").textContent = r.score >= 85 ? "Exam ready. Book it, and run the traps sheet the night before."
+    : r.score >= 60 ? "Getting close. Close the weakest area and retake the mock exam."
+    : r.score > 0 ? "Keep going: lessons count 30%, flashcards 30%, the best mock score 40%."
+    : "Tick lessons as you finish them. Flashcards and the mock exam feed in automatically.";
+  renderCert(r);
+}
+
+/* ---------- curriculum ---------- */
+function renderCurriculum(){
+  const box = $("curriculum"); box.textContent = "";
+  const ex = examRecord();
+  P().sections.forEach(sec => {
+    const s = el("section", "section");
+    const h = el("h2", "", sec.title);
+    const mins = sec.lessons.reduce((a, l) => a + (l.opt ? 0 : l.mins), 0);
+    const doneN = sec.lessons.filter(l => !l.opt && done[l.id]).length, n = sec.lessons.filter(l => !l.opt).length;
+    h.appendChild(el("small", "", `${doneN} of ${n} done · about ${fmtMins(mins)}`));
+    s.appendChild(h);
+    sec.lessons.forEach(l => {
+      const row = el("div", "lesson" + (done[l.id] ? " done" : ""));
+      const cb = el("input"); cb.type = "checkbox"; cb.checked = !!done[l.id]; cb.setAttribute("aria-label", "Mark done: " + l.title);
+      cb.onchange = () => { if(cb.checked) done[l.id] = true; else delete done[l.id]; save("path-done-" + track, done); renderCurriculum(); renderReadiness(); };
+      const body = el("div");
+      const t = el("div", "t", l.title); if(l.opt) t.appendChild(el("span", "opt", "optional")); body.appendChild(t);
+      if(l.exam && ex && ex.best){ body.appendChild(el("span", "score", `Best score ${ex.best.pct}% (${ex.best.right} of ${ex.best.n}) · ${ex.attempts} attempt${ex.attempts > 1 ? "s" : ""}`)); }
+      const links = el("div", "links");
+      l.links.forEach(([ic, label, url]) => { const a = el("a"); a.href = url; a.appendChild(el("span", "", ic)); a.appendChild(document.createTextNode(label)); if(/^https?:/.test(url) || /\.pdf$/.test(url)){ a.target = "_blank"; a.rel = "noopener"; } links.appendChild(a); });
+      body.appendChild(links);
+      row.append(cb, body, el("span", "mins", fmtMins(l.mins)));
+      s.appendChild(row);
+    });
+    box.appendChild(s);
+  });
+}
+
+/* ---------- certificate ---------- */
+const PASS = 67;
+function renderCert(r){
+  const reqs = $("reqs"); reqs.textContent = "";
+  const lessonsOk = r.doneN >= r.reqN, examOk = !!(r.best && r.best.pct >= PASS);
+  [[lessonsOk, `Every lesson ticked (${r.doneN} of ${r.reqN})`], [examOk, r.best ? `Mock exam at ${PASS}% or better (best so far ${r.best.pct}%)` : `Mock exam at ${PASS}% or better (not sat yet)`]].forEach(([ok, text]) => {
+    const li = el("li", ok ? "ok" : ""); li.appendChild(el("span", "st", ok ? "✔" : "·")); li.appendChild(el("span", "", text)); reqs.appendChild(li);
+  });
+  const open = lessonsOk && examOk;
+  $("certOpen").classList.toggle("hidden", !open);
+  $("certLocked").classList.toggle("hidden", open);
+  $("certLocked").textContent = open ? "" : "Both ticks unlock a named, dated certificate you can download and share. It is a record of this free practice path, not an official credential.";
+  $("tipText").textContent = open
+    ? "You did the work; the certificate is yours. Everything here is free with no sign-up. If it got you ready, buy me a coffee: it funds the next tracks, CCAR-F and CCAR-P."
+    : "Everything here is free, with no sign-up. If this path got you ready, buy me a coffee: it funds the next tracks, CCAR-F and CCAR-P.";
+}
+
+function hexagon(ctx, x, y, r, fill){
+  ctx.beginPath();
+  for(let i = 0; i < 6; i++){ const a = Math.PI / 3 * i - Math.PI / 2; ctx.lineTo(x + r * Math.cos(a), y + r * Math.sin(a)); }
+  ctx.closePath(); ctx.fillStyle = fill; ctx.fill();
+}
+function wrapText(ctx, text, x, y, maxW, lh){
+  const words = text.split(" "); let line = "";
+  words.forEach(w => { const test = line ? line + " " + w : w; if(ctx.measureText(test).width > maxW && line){ ctx.fillText(line, x, y); line = w; y += lh; } else line = test; });
+  if(line) ctx.fillText(line, x, y);
+  return y;
+}
+function makeCert(){
+  const name = $("certName").value.trim();
+  if(!name){ $("certName").focus(); toast("Add your name first"); return; }
+  save("path-name", name);
+  const r = readiness(), p = P();
+  const accent = track === "ccdv-f" ? "#d4a017" : "#e8822a";
+  const W = 1600, H = 1131, c = document.createElement("canvas"); c.width = W; c.height = H;
+  const ctx = c.getContext("2d");
+  ctx.fillStyle = "#f7f5f0"; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = "#232838"; ctx.fillRect(0, 0, W, 26); ctx.fillRect(0, H - 26, W, 26);
+  ctx.strokeStyle = accent; ctx.lineWidth = 6; ctx.strokeRect(60, 70, W - 120, H - 140);
+  ctx.strokeStyle = "#d8d4cc"; ctx.lineWidth = 2; ctx.strokeRect(76, 86, W - 152, H - 172);
+  hexagon(ctx, W / 2, 230, 78, accent); hexagon(ctx, W / 2, 230, 56, "#232838");
+  ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.font = "800 26px Segoe UI, Arial, sans-serif"; ctx.fillText(p.title, W / 2, 240);
+  ctx.fillStyle = "#5f6473"; ctx.font = "700 22px Segoe UI, Arial, sans-serif"; ctx.fillText("CLAUDE CERTIFICATION PREP  ·  CORPORATECHITTYCHAT", W / 2, 350);
+  ctx.fillStyle = "#1c2130"; ctx.font = "800 64px Segoe UI, Arial, sans-serif"; ctx.fillText("Certificate of Completion", W / 2, 430);
+  ctx.fillStyle = "#5f6473"; ctx.font = "400 28px Segoe UI, Arial, sans-serif"; ctx.fillText("This certifies that", W / 2, 500);
+  ctx.fillStyle = accent === "#d4a017" ? "#7a5a00" : "#a8520d"; ctx.font = "italic 700 76px Georgia, 'Times New Roman', serif"; ctx.fillText(name, W / 2, 600);
+  ctx.fillStyle = "#1c2130"; ctx.font = "400 30px Segoe UI, Arial, sans-serif";
+  wrapText(ctx, `completed the ${p.name} (${p.title}) learning path:`, W / 2, 670, 1200, 40);
+  ctx.font = "700 30px Segoe UI, Arial, sans-serif";
+  ctx.fillText(`${r.reqN} lessons  ·  best mock exam score ${r.best.pct}% (${r.best.right} of ${r.best.n})  ·  ${r.known} of ${r.cardsN} flashcards known`, W / 2, 730);
+  const date = new Date().toLocaleDateString("en-GB", {day: "numeric", month: "long", year: "numeric"});
+  ctx.fillStyle = "#5f6473"; ctx.font = "400 26px Segoe UI, Arial, sans-serif"; ctx.fillText(date, W / 2, 800);
+  ctx.strokeStyle = "#d8d4cc"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(500, 880); ctx.lineTo(1100, 880); ctx.stroke();
+  ctx.font = "700 22px Segoe UI, Arial, sans-serif"; ctx.fillStyle = "#1c2130"; ctx.fillText("CorporateChittyChat  ·  " + SITE.replace("https://", ""), W / 2, 920);
+  ctx.font = "400 19px Segoe UI, Arial, sans-serif"; ctx.fillStyle = "#5f6473";
+  wrapText(ctx, "Independent, free practice material. Not an Anthropic certification, score or endorsement. The mock exam is original material written for this project.", W / 2, 985, 1200, 26);
+  certPng = c.toDataURL("image/png");
+  $("certImg").src = certPng; $("preview").style.display = "block"; $("share").classList.remove("hidden");
+  const dl = $("dlCert"); dl.href = certPng; dl.download = `${p.title}-learning-path-certificate.png`;
+  $("liShare").href = "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(SITE + "path.html?track=" + track);
+  $("preview").scrollIntoView({behavior: "smooth", block: "nearest"});
+}
+function copyPost(){
+  const r = readiness(), p = P();
+  const text = `I completed the ${p.title} (${p.name}) learning path on Claude Certification Prep, with a best mock exam score of ${r.best.pct}%. Free, unofficial study material built alongside the CorporateChittyChat videos: ${SITE}path.html?track=${track}`;
+  (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(() => toast("Post copied. Attach the PNG when you share it."), () => toast("Copy failed; select and copy the text from the certificate instead."));
+}
+
+/* ---------- track switching ---------- */
+function setTrack(t){
+  track = t; save("fc-track", t);
+  done = load("path-done-" + track, {});
+  document.body.classList.toggle("dv", t === "ccdv-f");
+  document.querySelectorAll(".seg button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.track === t)));
+  const p = P();
+  document.title = `${p.title} Learning Path`;
+  $("examNav").href = p.exam; $("examNav").textContent = p.title + " mock exam";
+  $("who").textContent = `${p.name}. ${p.who} About ${fmtMins(required().reduce((a, l) => a + l.mins, 0))} in all.`;
+  const oc = $("outcomes"); oc.textContent = ""; p.outcomes.forEach(o => oc.appendChild(el("li", "", o)));
+  const pr = $("prereqs"); pr.textContent = ""; p.prereqs.forEach(x => pr.appendChild(el("span", "", x)));
+  $("preview").style.display = "none"; $("share").classList.add("hidden"); certPng = null;
+  renderCurriculum(); renderReadiness();
+  try{ history.replaceState(null, "", `?track=${track}`); }catch(e){}
+}
+
+document.querySelectorAll(".seg button").forEach(b => b.onclick = () => setTrack(b.dataset.track));
+$("makeCert").onclick = makeCert;
+$("copyPost").onclick = copyPost;
+$("certName").value = load("path-name", "");
+$("certName").addEventListener("keydown", e => { if(e.key === "Enter") makeCert(); });
+window.addEventListener("storage", () => { done = load("path-done-" + track, {}); renderCurriculum(); renderReadiness(); });
+window.addEventListener("pageshow", () => { done = load("path-done-" + track, {}); renderCurriculum(); renderReadiness(); });
+
+/* Supporter count, written daily by .github/workflows/supporters.yml; shown once it reaches 3 */
+fetch("supporters.json", {cache: "no-store"}).then(r => r.ok ? r.json() : null).then(d => {
+  const n = d && Number.isInteger(d.count) ? d.count : 0;
+  if(n < 3) return;
+  $("supporters").textContent = `☕ ${n} coffees bought so far`; $("supporters").classList.remove("hidden");
+}).catch(() => {});
+
+setTrack(track);
+</script>
+</body>
+</html>
