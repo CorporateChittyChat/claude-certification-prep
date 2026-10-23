@@ -4,15 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flashcards &amp; Traps</title>
-<meta name="description" content="Flip-card revision and a printable traps-and-tricks sheet for the CCAO-F and CCDV-F Claude certifications. Free, unofficial, original material.">
+<meta name="description" content="Illustrated flip-card revision and a printable traps-and-tricks sheet for the CCAO-F and CCDV-F Claude certifications. Every answer comes with a mini diagram, a worked example and a memory hook. Free, unofficial, original material.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23e8822a'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%23232838'/%3E%3C/svg%3E">
 <style>
   :root{
     --navy:#232838; --panel:#2e3446; --ink:#1c2130; --paper:#f7f5f0; --card:#fff;
     --orange:#e8822a; --orange-ink:#a8520d; --gold:#d4a017; --line:#d8d4cc; --grey:#5f6473;
-    --green:#2e8b57; --green-soft:#e9f3ec; --red:#c0392b; --red-soft:#fbeae8; --accent:var(--orange);
+    --green:#2e8b57; --green-soft:#e9f3ec; --red:#c0392b; --red-soft:#fbeae8;
+    --accent:var(--orange); --accent-ink:var(--orange-ink); --accent-soft:#fff3e6;
   }
-  body.dv{--accent:var(--gold);}
+  body.dv{--accent:var(--gold); --accent-ink:#7a5a00; --accent-soft:#fbf3d9;}
   *{box-sizing:border-box; margin:0; padding:0;}
   body{font-family:"Segoe UI",system-ui,Arial,sans-serif; background:var(--paper); color:var(--ink); font-size:18px; line-height:1.55;}
   a{color:inherit;}
@@ -26,7 +27,10 @@
 
   .head{padding:26px 0 4px;}
   .head h1{font-size:38px; line-height:1.15;}
-  .head p{color:var(--grey); font-size:18px; margin-top:6px; max-width:760px;}
+  .head p{color:var(--grey); font-size:18px; margin-top:6px; max-width:800px;}
+  .legend{display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:12px; font-size:14px; color:var(--grey);}
+  .legend span{display:inline-flex; align-items:center; gap:6px;}
+  .legend i{display:inline-block; width:14px; height:14px; border-radius:4px;}
   .bar{display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:22px 0 8px;}
   .seg{display:inline-flex; background:var(--card); border:2px solid var(--line); border-radius:999px; padding:3px;}
   .seg button{border:0; background:transparent; font:inherit; font-size:16px; font-weight:700; padding:7px 16px; border-radius:999px; cursor:pointer; color:var(--ink);}
@@ -49,24 +53,73 @@
   .meter b{color:var(--ink);}
   .progress{height:8px; background:#e6e2da; border-radius:999px; overflow:hidden; margin-bottom:18px;}
   .progress i{display:block; height:100%; width:0; background:var(--accent); transition:width .25s;}
-  .stage{perspective:1600px;}
-  .card{position:relative; width:100%; min-height:280px; cursor:pointer; transform-style:preserve-3d; transition:transform .45s ease; display:block; border-radius:18px;}
+  .stage{perspective:1800px;}
+  /* both faces share one grid cell, so the card grows to fit whichever face is taller */
+  .card{display:grid; width:100%; min-height:300px; cursor:pointer; transform-style:preserve-3d; transition:transform .5s ease; border-radius:18px;}
   .card:focus-visible{outline:3px solid var(--accent); outline-offset:4px;}
   .card.flipped{transform:rotateY(180deg);}
-  .face{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; background:var(--card); border:1px solid var(--line); border-top:6px solid var(--accent); border-radius:18px; padding:30px 34px; display:flex; flex-direction:column; box-shadow:0 10px 30px rgba(0,0,0,.07);}
+  .face{grid-area:1/1; backface-visibility:hidden; -webkit-backface-visibility:hidden; background:var(--card); border:1px solid var(--line); border-top:6px solid var(--accent); border-radius:18px; padding:26px 32px 24px; display:flex; flex-direction:column; box-shadow:0 10px 30px rgba(0,0,0,.07);}
   .face.back{transform:rotateY(180deg); background:#fffdf8;}
   .card.trap .face{border-top-color:var(--red);}
   .card.trap .face.back{background:#fffafa;}
-  .tag{display:inline-flex; align-self:flex-start; gap:6px; font-size:13px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; padding:4px 12px; border-radius:999px; background:var(--paper); color:var(--grey); margin-bottom:16px;}
-  .tag.rule{background:#fff3e6; color:var(--orange-ink);}
-  body.dv .tag.rule{background:#fbf3d9; color:#7a5a00;}
+  .tag{display:inline-flex; align-self:flex-start; gap:6px; font-size:13px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; padding:4px 12px; border-radius:999px; background:var(--paper); color:var(--grey);}
+  .tag.rule{background:var(--accent-soft); color:var(--accent-ink);}
   .tag.trap{background:var(--red-soft); color:var(--red);}
   .tag.ans{background:var(--green-soft); color:var(--green);}
-  .topic{font-size:14px; color:var(--grey); margin-left:auto;}
-  .row1{display:flex; align-items:center; gap:10px;}
-  .front-text{font-size:27px; font-weight:700; line-height:1.35; margin:auto 0;}
-  .back-text{font-size:22px; line-height:1.5; margin:auto 0;}
-  .hint{font-size:14px; color:var(--grey); margin-top:14px;}
+  .topic{font-size:14px; color:var(--grey); margin-left:auto; text-decoration:none; display:inline-flex; gap:6px; align-items:center;}
+  a.topic:hover{color:var(--accent-ink); text-decoration:underline;}
+  .row1{display:flex; align-items:center; gap:10px; margin-bottom:14px;}
+  .scene{display:flex; gap:18px; align-items:center; margin:auto 0;}
+  .scene .ico{flex:none; width:68px; height:68px; border-radius:18px; background:var(--accent-soft); display:flex; align-items:center; justify-content:center; font-size:34px;}
+  .card.trap .scene .ico{background:var(--red-soft);}
+  .front-text{font-size:26px; font-weight:700; line-height:1.35;}
+  .card.trap .front-text{font-size:23px; font-weight:600; font-style:italic; background:var(--red-soft); border-radius:16px 16px 16px 4px; padding:14px 18px; position:relative;}
+  .says{display:block; font-size:12px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; color:var(--red); margin-bottom:6px; font-style:normal;}
+  .hint{font-size:14px; color:var(--grey); margin-top:16px;}
+  .back-text{font-size:21px; font-weight:600; line-height:1.45;}
+  .viz{margin:16px 0 0; font-size:15px; line-height:1.4;}
+  .ex{margin-top:16px; display:flex; gap:12px; background:var(--paper); border-radius:12px; padding:12px 14px; font-size:15.5px; line-height:1.5;}
+  .ex .lbl, .hook .lbl{flex:none; font-size:12px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; color:var(--grey); padding-top:3px; width:84px;}
+  .hook{margin-top:12px; display:flex; gap:12px; font-size:16px; font-weight:700; color:var(--accent-ink); padding:0 14px;}
+  .card.trap .hook{color:#8f2a1f;}
+
+  /* ---------- visuals ---------- */
+  .steps{display:flex; flex-wrap:wrap; align-items:stretch; gap:6px;}
+  .step{flex:1 1 110px; min-width:0; display:flex; flex-direction:column; justify-content:center; background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:8px 12px;}
+  .step .n{font-size:11px; font-weight:800; letter-spacing:.6px; text-transform:uppercase; color:var(--accent-ink);}
+  .step small{color:var(--grey); font-size:12.5px; line-height:1.3; margin-top:2px;}
+  .step.gate{background:var(--accent-soft); border:2px dashed var(--accent-ink);}
+  .step.gate .n{color:var(--accent-ink);}
+  .arrow{align-self:center; color:var(--grey); font-size:18px; line-height:1;}
+  .vs{display:grid; grid-template-columns:1fr auto 1fr; gap:8px; align-items:stretch;}
+  .side{border-radius:12px; padding:10px 14px; border:1px solid var(--line); background:var(--paper);}
+  .side h4{font-size:13px; letter-spacing:.6px; text-transform:uppercase; margin-bottom:6px; color:var(--grey);}
+  .side ul{list-style:none; display:grid; gap:3px;}
+  .side li{display:flex; gap:7px;}
+  .side li::before{content:"•"; color:var(--grey);}
+  .side.bad{background:var(--red-soft); border-color:#f0c2bc;} .side.bad h4{color:var(--red);} .side.bad li::before{content:"✗"; color:var(--red);}
+  .side.good{background:var(--green-soft); border-color:#b9dcc6;} .side.good h4{color:var(--green);} .side.good li::before{content:"✔"; color:var(--green);}
+  .side.b{background:var(--accent-soft);} .side.b h4{color:var(--accent-ink);}
+  .vs .mid{align-self:center; font-size:12px; font-weight:800; color:var(--grey); letter-spacing:.5px;}
+  .chk{list-style:none; display:grid; gap:7px;}
+  .chk li{display:flex; gap:10px; align-items:flex-start;}
+  .chk .ic{flex:none; width:30px; height:30px; border-radius:8px; background:var(--paper); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:15px;}
+  .stack{display:grid; gap:4px;}
+  .blk{background:var(--paper); border:1px solid var(--line); border-left:4px solid var(--accent); padding:6px 12px; border-radius:6px; font-family:Consolas,"Courier New",monospace; font-size:14px; white-space:pre-wrap;}
+  .blk:last-child{border-left-color:var(--navy);}
+  .ladder{display:flex; align-items:flex-end; gap:8px;}
+  .rung{flex:1; min-width:0; display:flex; flex-direction:column; justify-content:flex-end; text-align:center;}
+  .rung i{display:block; background:var(--accent); border-radius:6px 6px 0 0; margin-bottom:6px;}
+  .rung b{font-size:14px; line-height:1.25;} .rung small{font-size:12px; color:var(--grey); line-height:1.3;}
+  .axis{display:flex; justify-content:space-between; font-size:12px; color:var(--grey); border-top:2px solid var(--line); margin-top:6px; padding-top:4px;}
+  .mono{font-family:Consolas,"Courier New",monospace; font-size:14px; background:var(--ink); color:#f3f1ea; border-radius:10px; padding:12px 14px; white-space:pre-wrap; overflow-x:auto; line-height:1.5;}
+  .tbl{width:100%; border-collapse:collapse; font-size:14.5px;}
+  .tbl th{font-size:12px; text-transform:uppercase; letter-spacing:.6px; color:var(--grey); text-align:left; padding:4px 8px; border-bottom:2px solid var(--line);}
+  .tbl td{padding:5px 8px; border-bottom:1px solid var(--line); vertical-align:top;}
+  .tbl td:first-child{font-weight:600;}
+  .pills{display:flex; flex-wrap:wrap; gap:6px;}
+  .pill{background:var(--accent-soft); border:1px solid var(--line); border-radius:999px; padding:4px 13px; font-size:14px; font-weight:600;}
+
   .controls{display:grid; grid-template-columns:auto 1fr 1fr auto; gap:12px; margin-top:18px;}
   .controls button{font:inherit; font-size:17px; font-weight:700; border-radius:12px; padding:13px 16px; cursor:pointer; border:2px solid var(--line); background:var(--card); color:var(--ink);}
   .controls .again{background:var(--red-soft); border-color:#f0c2bc; color:#8f2a1f;}
@@ -98,27 +151,30 @@
   .col.rules .item{border-left-color:var(--green);}
   .item b{display:block; font-size:16px;}
   .item span{color:#3a3f4d;}
+  .item em{display:block; font-size:14px; color:var(--grey); margin-top:3px;}
   footer{margin-top:40px; padding:22px 0 34px; color:var(--grey); font-size:13px; border-top:1px solid var(--line);}
   .hidden{display:none!important;}
 
   @media (max-width:760px){
     .head h1{font-size:30px;}
     .cols{grid-template-columns:1fr;}
-    .face{padding:22px 20px;}
-    .front-text{font-size:22px;} .back-text{font-size:19px;}
-    .card{min-height:360px;}
+    .face{padding:20px 18px;}
+    .front-text{font-size:22px;} .card.trap .front-text{font-size:19px;} .back-text{font-size:18px;}
+    .scene{gap:12px; align-items:flex-start;} .scene .ico{width:48px; height:48px; font-size:24px; border-radius:12px;}
+    .vs{grid-template-columns:1fr;} .vs .mid{justify-self:center;}
+    .ex, .hook{flex-direction:column; gap:4px;} .ex .lbl, .hook .lbl{width:auto;}
     .controls{grid-template-columns:1fr 1fr;}
     .controls .prev{order:3;} .controls .next{order:4;}
     .topbar a.nav.opt{display:none;}
     .topbar .brand{white-space:nowrap; font-size:16px;}
     .topbar a.nav{white-space:nowrap; font-size:14px;}
-    .head p{display:none;}
+    .head p, .legend{display:none;}
     .bar{margin-top:14px;}
     .wrap{padding:0 16px;}
   }
   @media (prefers-reduced-motion:reduce){ .card{transition:none;} .progress i{transition:none;} }
   @media print{
-    .topbar, .bar, .filters, #cardsView, footer, .sheet-intro button{display:none!important;}
+    .topbar, .bar, .filters, #cardsView, footer, .sheet-intro button, .legend{display:none!important;}
     body{background:#fff; font-size:13px;}
     .group{border:1px solid #bbb; box-shadow:none;}
   }
@@ -136,7 +192,14 @@
 <main class="wrap">
   <div class="head">
     <h1>Flashcards &amp; traps</h1>
-    <p>Flip through the rules each exam domain is built on, and learn to spot the answer that only <i>sounds</i> right. Red cards are traps: the tempting move on the front, why it fails on the back.</p>
+    <p>Flip through the rules each exam domain is built on, and learn to spot the answer that only <i>sounds</i> right. Every answer comes with a picture of the idea, a worked example and a one-line memory hook. Red cards are traps: the tempting move on the front, why it fails on the back.</p>
+    <div class="legend" aria-hidden="true">
+      <span><i style="background:var(--accent)"></i> Rule card</span>
+      <span><i style="background:var(--red)"></i> Trap card</span>
+      <span><i style="background:var(--green-soft); border:1px solid var(--green)"></i> What works</span>
+      <span><i style="background:var(--red-soft); border:1px solid var(--red)"></i> What fails</span>
+      <span><i style="background:var(--accent-soft); border:2px dashed var(--accent-ink)"></i> A gate: a person or a check that must pass</span>
+    </div>
   </div>
 
   <div class="bar">
@@ -169,13 +232,19 @@
       <div class="stage">
         <div class="card" id="card" role="button" tabindex="0" aria-label="Flashcard: press Space to flip" aria-live="polite">
           <div class="face front">
-            <div class="row1"><span class="tag" id="fTag"></span><span class="topic" id="fTopic"></span></div>
-            <div class="front-text" id="fText"></div>
+            <div class="row1"><span class="tag" id="fTag"></span><a class="topic" id="fTopic"></a></div>
+            <div class="scene">
+              <div class="ico" id="fIcon" aria-hidden="true"></div>
+              <div class="front-text" id="fText"></div>
+            </div>
             <div class="hint">Click, tap or press Space to flip</div>
           </div>
           <div class="face back">
-            <div class="row1"><span class="tag" id="bTag"></span><span class="topic" id="bTopic"></span></div>
+            <div class="row1"><span class="tag" id="bTag"></span><a class="topic" id="bTopic"></a></div>
             <div class="back-text" id="bText"></div>
+            <div class="viz" id="bViz"></div>
+            <div class="ex" id="bEx"><span class="lbl">In practice</span><span id="bExText"></span></div>
+            <div class="hook" id="bHook"><span class="lbl">Remember</span><span id="bHookText"></span></div>
             <div class="hint" id="bHint"></div>
           </div>
         </div>
@@ -204,18 +273,20 @@
   <!-- TRAPS SHEET -->
   <section id="trapsView" class="hidden">
     <div class="sheet-intro">
-      <span>Every trap next to the rule that beats it, one block per domain. Print it for the night before.</span>
+      <span>Every trap next to the rule that beats it, with its memory hook, one block per domain. Print it for the night before.</span>
       <button class="btn" type="button" onclick="window.print()">🖨 Print / save as PDF</button>
     </div>
     <div id="sheet"></div>
   </section>
 
-  <footer><a href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener" style="color:#6f4e37; font-weight:700">☕ Buy me a coffee</a> · Independent study material. Not affiliated with, endorsed by, or approved by Anthropic. Every card restates this project's own original study guides and episode material; nothing here is from, or derived from, any real exam.</footer>
+  <footer><a href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener" style="color:#6f4e37; font-weight:700">☕ Buy me a coffee</a> · Independent study material. Not affiliated with, endorsed by, or approved by Anthropic. Every card restates this project's own original study guides and episode material; the examples are illustrative scenarios written for this project. Nothing here is from, or derived from, any real exam.</footer>
 </main>
 
+<script src="flashcards-data.js"></script>
 <script>
-const DATA = {"ccao-f": {"title": "CCAO-F", "name": "Claude Certified Associate – Foundations", "exam": "ccao-f/practice/mock-exam-player.html", "topics": [{"name": "D1 · Prompting", "link": "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/01-prompting.md"}, {"name": "D2 · Output evaluation", "link": "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/02-output-evaluation.md"}, {"name": "D3 · Product & model selection", "link": "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/03-product-and-model-selection.md"}, {"name": "D4 · Workflow integration", "link": "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/04-workflow-integration.md"}, {"name": "D5 · Configuration & knowledge", "link": "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/05-configuration-and-knowledge.md"}, {"name": "D6 · Governance & risk", "link": "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/06-governance-risk-responsible-use.md"}, {"name": "D7 · Troubleshooting", "link": "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/07-troubleshooting-and-optimization.md"}, {"name": "Exam technique", "link": "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/exam-tips.md"}], "cards": [{"id": "ccao-f-0", "t": 0, "k": "rule", "f": "What does a strong prompt name?", "b": "The role, the context, the audience, the format, and what to skip. Colleague test: if someone with no context would be confused, so is Claude."}, {"id": "ccao-f-1", "t": 0, "k": "rule", "f": "A long document and one question: where does each go?", "b": "Document at the top, question at the end. Fence instructions, context and document in separate labelled sections."}, {"id": "ccao-f-2", "t": 0, "k": "rule", "f": "A big multi-stage task keeps failing as one prompt. Which pattern?", "b": "Chain it: each step's output feeds the next, small enough to inspect. Or draft → review → refine on the same model."}, {"id": "ccao-f-3", "t": 0, "k": "rule", "f": "Output format keeps drifting. What fixes it?", "b": "Three to five examples, close to the real thing and varied. Claude copies the pattern it's shown."}, {"id": "ccao-f-4", "t": 0, "k": "trap", "f": "\"The prompt has been rewritten five times and still fails. Write a sixth.\"", "b": "If the answers are good but slow or expensive, it isn't a prompt problem. Look at the model or the setup."}, {"id": "ccao-f-5", "t": 0, "k": "trap", "f": "\"Phrase every rule as 'do not…'.\"", "b": "Say what you want, not what to avoid, and show the structure you mean."}, {"id": "ccao-f-6", "t": 1, "k": "rule", "f": "How are confidence and accuracy related?", "b": "They aren't. Score against criteria written before you read: faithful, complete, consistent, right tone."}, {"id": "ccao-f-7", "t": 1, "k": "rule", "f": "The four tells of a fabricated fact", "b": "A citation that leads nowhere · a precise number with no source · an answer that contradicts itself · \"definitely\" with nothing behind it."}, {"id": "ccao-f-8", "t": 1, "k": "rule", "f": "Three instructions that make output easier to verify", "b": "\"I don't know\" is an acceptable answer · quote the source before using it · cite every claim and withdraw what can't be cited."}, {"id": "ccao-f-9", "t": 1, "k": "rule", "f": "When must a qualified human sign before anything acts?", "b": "When the output touches someone's rights, health, money or livelihood. Claude's draft is an input, never the decision, and AI use is disclosed."}, {"id": "ccao-f-10", "t": 1, "k": "rule", "f": "Which container does the output go in?", "b": "Edit and reuse → its own document. Into another system → a fixed, structured shape. One-off answer → plain prose."}, {"id": "ccao-f-11", "t": 1, "k": "trap", "f": "\"Ask Claude to double-check its own answer.\"", "b": "That's the same model marking its own homework. Verification means you open the source and read it."}, {"id": "ccao-f-12", "t": 1, "k": "trap", "f": "\"It passed format validation, so it's correct.\"", "b": "A fixed shape guarantees the shape and nothing else. The contents are still checked by you."}, {"id": "ccao-f-13", "t": 1, "k": "trap", "f": "\"Found and fixed one error, so ship it.\"", "b": "One found error starts the audit. The tells travel in groups."}, {"id": "ccao-f-14", "t": 2, "k": "rule", "f": "How do you pick the right Claude feature?", "b": "Say the job's verb first. Gather → Research · compute → code execution · same weekly work → project · edit and reuse → artifact · repeated procedure → skill · remember next session → memory."}, {"id": "ccao-f-15", "t": 2, "k": "rule", "f": "The model ladder trade-off", "b": "Haiku for volume, Sonnet for balance, Opus and Fable for the deepest reasoning. As capability climbs, speed drops and cost rises. Measure on your own tasks."}, {"id": "ccao-f-16", "t": 2, "k": "rule", "f": "An answer disappoints. The staircase, in order?", "b": "1. Supply what's missing. 2. Same model, more room to think. 3. Only then, climb one rung."}, {"id": "ccao-f-17", "t": 2, "k": "rule", "f": "A long session has gone soft. What now?", "b": "Prune what's no longer needed, pack the decisions, and restart clean with the key state. Carry decisions, not transcripts."}, {"id": "ccao-f-18", "t": 2, "k": "trap", "f": "\"Run the same request again.\"", "b": "Same input, same model, same answer. A retry without new information is a lottery ticket."}, {"id": "ccao-f-19", "t": 2, "k": "trap", "f": "\"Paste the whole transcript into a fresh session.\"", "b": "That rebuilds the same overloaded window. Carry the decisions only."}, {"id": "ccao-f-20", "t": 3, "k": "rule", "f": "Where in a process does Claude pay off?", "b": "On the step where time eaten and language work (reading, drafting, summarising, comparing) both run high. Rank by impact against effort."}, {"id": "ccao-f-21", "t": 3, "k": "rule", "f": "The pattern ladder", "b": "Simple prompt → chain → router → parallel → agent, last."}, {"id": "ccao-f-22", "t": 3, "k": "rule", "f": "Augment or redesign?", "b": "Augment what's healthy: wire Claude into the tools that already hold the data. Redesign only what's already broken."}, {"id": "ccao-f-23", "t": 3, "k": "rule", "f": "What does an honest pitch include?", "b": "Your own pilot numbers, what it costs, where it still fails, and which steps keep a human, framed as capacity moved, not people replaced."}, {"id": "ccao-f-24", "t": 3, "k": "trap", "f": "\"Rebuild the whole workflow around an AI agent.\"", "b": "Complexity before evidence. Rebuilding a healthy process around a new tool is how it dies."}, {"id": "ccao-f-25", "t": 3, "k": "trap", "f": "\"Quote the vendor's case-study numbers.\"", "b": "Borrowed numbers don't survive the first question. Use your own pilot's numbers, limits included."}, {"id": "ccao-f-26", "t": 4, "k": "rule", "f": "What makes a good project setup?", "b": "Instructions set the role and rules; knowledge sources ground the answers. Split projects by purpose."}, {"id": "ccao-f-27", "t": 4, "k": "rule", "f": "The fence, word for word", "b": "\"Answer only from these materials, and say unknown for anything not in them.\""}, {"id": "ccao-f-28", "t": 4, "k": "rule", "f": "How should project instructions be structured?", "b": "Role, constraints and output shape in separate tagged blocks, and say which rule wins when two collide."}, {"id": "ccao-f-29", "t": 4, "k": "rule", "f": "How do you keep a setup healthy?", "b": "Audit on a rhythm: reread, remove what expired, refresh what changed. Memory stores decisions and preferences, never transcripts."}, {"id": "ccao-f-30", "t": 4, "k": "trap", "f": "\"Connect the whole shared drive and tell Claude to ignore irrelevant files.\"", "b": "The irrelevant files join every search anyway. Scope each connector to the minimum it needs."}, {"id": "ccao-f-31", "t": 4, "k": "trap", "f": "\"Prefer the uploaded documents where possible.\"", "b": "That leaves the gap-filling door open. Fence it: only these sources, unknown otherwise."}, {"id": "ccao-f-32", "t": 5, "k": "rule", "f": "The seven high-stakes areas", "b": "Legal · healthcare · insurance · finance · employment and housing · academic testing · media."}, {"id": "ccao-f-33", "t": 5, "k": "rule", "f": "The two duties in every high-stakes area", "b": "A qualified human reviews before anything acts, and people are told AI is involved at the start."}, {"id": "ccao-f-34", "t": 5, "k": "rule", "f": "Three tells of a slanted output", "b": "Only one side shows up · opposing views are dismissed in a line · a group is treated unfairly or as a stereotype."}, {"id": "ccao-f-35", "t": 5, "k": "rule", "f": "Personal data and an AI tool: what decides?", "b": "Your organisation's policy: anonymise, get explicit authorisation, or keep it out. Unsure? Escalate to compliance."}, {"id": "ccao-f-36", "t": 5, "k": "trap", "f": "\"Disclose AI involvement only if the customer asks.\"", "b": "Disclosure happens at the start of the session, always, for anything customer-facing."}, {"id": "ccao-f-37", "t": 5, "k": "trap", "f": "\"Paste the customer list, then delete the chat afterwards.\"", "b": "Deleting afterwards doesn't undo the sharing. The policy gate comes first."}, {"id": "ccao-f-38", "t": 6, "k": "rule", "f": "Diagnose a bad output, in order", "b": "Prompt → information → effort → escalate. Each check costs less than the one after it."}, {"id": "ccao-f-39", "t": 6, "k": "rule", "f": "The levers, cheapest first", "b": "Rewrite the prompt (free) → add source material → more room to think → a stronger model (every run) → change the setup (days)."}, {"id": "ccao-f-40", "t": 6, "k": "rule", "f": "How do you know a change helped?", "b": "Write the criteria first, change one thing at a time, and score the output against the list."}, {"id": "ccao-f-41", "t": 6, "k": "rule", "f": "Fit cost to workload", "b": "Light model for volume, capable model for judgement. Heavyweight for everything is wasteful; lightweight for judgement calls is risky."}, {"id": "ccao-f-42", "t": 6, "k": "trap", "f": "\"Upgrade the model first.\"", "b": "You haven't earned the model switch until the prompt and the inputs are fixed."}, {"id": "ccao-f-43", "t": 6, "k": "trap", "f": "\"Change the prompt and the model together to fix it faster.\"", "b": "Then you learn nothing about either. One change at a time."}, {"id": "ccao-f-44", "t": 7, "k": "rule", "f": "How do you work a four-option question?", "b": "Strike the two clearly wrong answers first (one panics, one does nothing), then compare the last two."}, {"id": "ccao-f-45", "t": 7, "k": "rule", "f": "Who makes the decision?", "b": "AI drafts, you decide. Options that hand the decision itself to Claude are traps."}, {"id": "ccao-f-46", "t": 7, "k": "rule", "f": "When is escalation the right answer?", "b": "When you're rewriting prompts repeatedly, or the need is integration, custom tooling or anything beyond configuration."}, {"id": "ccao-f-47", "t": 7, "k": "trap", "f": "\"Pick the option that feels most thorough and responsible.\"", "b": "The trap usually feels diligent. The right answer is usually cheaper, more scoped, more boring. When torn, pick the boring one."}, {"id": "ccao-f-48", "t": 7, "k": "trap", "f": "\"A clever prompt technique gets around the data rule.\"", "b": "No prompt technique overrides a data rule. Policy and data sensitivity outrank everything."}]}, "ccdv-f": {"title": "CCDV-F", "name": "Claude Certified Developer – Foundations", "exam": "ccdv-f/practice/mock-exam-player.html", "topics": [{"name": "EP 01 · Model selection", "link": "https://github.com/chittychat-studio/ccdvf-course/tree/main/ep01-models"}, {"name": "EP 02 · Agents & workflows", "link": "https://github.com/chittychat-studio/ccdvf-course/tree/main/ep02-agents"}, {"name": "EP 03 · Messages API", "link": "https://github.com/chittychat-studio/ccdvf-course/tree/main/ep03-messages"}, {"name": "EP 04 · Prompt & context", "link": "https://github.com/chittychat-studio/ccdvf-course/tree/main/ep04-prompting"}, {"name": "EP 05 · Tools & MCP", "link": "https://github.com/chittychat-studio/ccdvf-course/tree/main/ep05-tools-mcp"}, {"name": "EP 06 · Settings & CLAUDE.md", "link": "https://github.com/chittychat-studio/ccdvf-course/tree/main/ep06-config-checker"}, {"name": "EP 07 · Claude Code", "link": "https://github.com/chittychat-studio/ccdvf-course/tree/main/ep07-guard-hook"}, {"name": "EP 08 · Requirements & life cycle", "link": "https://github.com/chittychat-studio/ccdvf-course/tree/main/ep08-gate-checker"}, {"name": "EP 09 · Eval & debugging", "link": "https://github.com/chittychat-studio/ccdvf-course/tree/main/ep09-failure-checker"}, {"name": "Exam technique", "link": ""}], "cards": [{"id": "ccdv-f-0", "t": 0, "k": "rule", "f": "High-volume, simple task: which model?", "b": "The smallest model that clears the bar on your own labelled data. Measure, don't assume."}, {"id": "ccdv-f-1", "t": 0, "k": "rule", "f": "How do you forecast API cost?", "b": "Requests × (input tokens × input price + output tokens × output price), with any cached prefix at cache rates. Output tokens cost more per token."}, {"id": "ccdv-f-2", "t": 0, "k": "rule", "f": "What does prompt caching work on?", "b": "A stable prefix: system prompt, tools and long reference material first, changing content after."}, {"id": "ccdv-f-3", "t": 0, "k": "rule", "f": "When is extended thinking worth it?", "b": "Multi-step reasoning where some extra latency is acceptable. Confirm the gain with an eval on the hard cases."}, {"id": "ccdv-f-4", "t": 0, "k": "trap", "f": "\"Cache Claude's answers to save money.\"", "b": "That serves stale answers to 'similar' questions. Prompt caching caches the input prefix, not the output."}, {"id": "ccdv-f-5", "t": 0, "k": "trap", "f": "\"Raise the temperature for better reasoning.\"", "b": "Temperature changes randomness, not reasoning depth or context capacity."}, {"id": "ccdv-f-6", "t": 1, "k": "rule", "f": "Workflow or agent?", "b": "A workflow where the steps are known; an agent only at the decision point that needs judgement."}, {"id": "ccdv-f-7", "t": 1, "k": "rule", "f": "What are subagents for?", "b": "Isolating heavy, independent work in its own context and handing condensed results back to the orchestrator."}, {"id": "ccdv-f-8", "t": 1, "k": "rule", "f": "Where do limits that must always hold live?", "b": "In code: tool-call budgets, repeat detection, stop conditions."}, {"id": "ccdv-f-9", "t": 1, "k": "rule", "f": "Irreversible or costly tool actions", "b": "A deterministic gate in code, human approval above a threshold, and a log of every action."}, {"id": "ccdv-f-10", "t": 1, "k": "trap", "f": "\"Tell the agent in the system prompt not to loop.\"", "b": "A prompt is a request. Enforce the budget in the agent loop's code."}, {"id": "ccdv-f-11", "t": 1, "k": "trap", "f": "\"Make the whole process a fully autonomous agent.\"", "b": "You pay for flexibility the standard path doesn't need, and lose control of it."}, {"id": "ccdv-f-12", "t": 2, "k": "rule", "f": "Long answer, user waiting", "b": "Stream the response, so text appears as it's generated."}, {"id": "ccdv-f-13", "t": 2, "k": "rule", "f": "Large job, nobody waiting", "b": "The Message Batches API: asynchronous and cheaper per request."}, {"id": "ccdv-f-14", "t": 2, "k": "rule", "f": "429 rate-limit errors", "b": "Exponential backoff with jitter, honour retry-after, smooth bursts. The SDKs already retry some errors by default, and that's configurable."}, {"id": "ccdv-f-15", "t": 2, "k": "rule", "f": "The contract says Claude traffic must go through Bedrock", "b": "Call Claude through Bedrock from day one, with provider details kept in configuration."}, {"id": "ccdv-f-16", "t": 2, "k": "trap", "f": "\"Retry immediately in a tight loop until it works.\"", "b": "That makes the spike worse. Back off and let the limit recover."}, {"id": "ccdv-f-17", "t": 2, "k": "trap", "f": "\"Retry the bad-API-key error a few more times.\"", "b": "An auth error fails the same way every time. Fail fast and fix the input."}, {"id": "ccdv-f-18", "t": 3, "k": "rule", "f": "How do you pin down the output format?", "b": "A few tagged examples, varied enough that they don't teach an accidental pattern."}, {"id": "ccdv-f-19", "t": 3, "k": "rule", "f": "Untrusted text (tickets, emails) inside a prompt", "b": "Wrap it in tags as data, constrain what the output can be (such as a fixed label set), and enforce consequences in code. Tags reduce injection risk; they don't remove it."}, {"id": "ccdv-f-20", "t": 3, "k": "rule", "f": "Downstream code parses the output", "b": "Define the schema, validate every response in code, and retry or repair on failure."}, {"id": "ccdv-f-21", "t": 3, "k": "rule", "f": "An agent forgets early constraints after many tool calls", "b": "Compact: clear or summarise stale tool output and keep the goal and constraints visible."}, {"id": "ccdv-f-22", "t": 3, "k": "trap", "f": "\"Ask for valid JSON and send it straight downstream.\"", "b": "A request isn't a guarantee. Validate before passing it on."}, {"id": "ccdv-f-23", "t": 3, "k": "trap", "f": "\"Use examples that all look alike.\"", "b": "They teach a pattern you never meant to teach. Vary them."}, {"id": "ccdv-f-24", "t": 4, "k": "rule", "f": "How does the model choose between tools?", "b": "Mostly from the description: what it returns, when to use it, and when not to (\"Never use this for…\")."}, {"id": "ccdv-f-25", "t": 4, "k": "rule", "f": "A tool gets a bad argument", "b": "Keep the schema strict, validate before dispatch, and return a result marked as an error that says what went wrong and what to try next."}, {"id": "ccdv-f-26", "t": 4, "k": "rule", "f": "Which MCP transport?", "b": "stdio for a local, single-process server; remote HTTP with authentication for a shared server many clients use."}, {"id": "ccdv-f-27", "t": 4, "k": "trap", "f": "\"Loosen the schema so every call goes through.\"", "b": "That passes bad data downstream. Keep it strict and return a readable error."}, {"id": "ccdv-f-28", "t": 4, "k": "trap", "f": "\"Cap refunds with a system-prompt rule.\"", "b": "Limits belong in the tool: let it start a refund but never complete one on its own."}, {"id": "ccdv-f-29", "t": 5, "k": "rule", "f": "Shared vs personal settings", "b": ".claude/settings.json is committed for the team; .claude/settings.local.json is personal and not committed."}, {"id": "ccdv-f-30", "t": 5, "k": "rule", "f": "Which settings win? (highest first)", "b": "Managed policy → command-line arguments → local project → shared project → user. Committed doesn't mean higher."}, {"id": "ccdv-f-31", "t": 5, "k": "rule", "f": "Where does each kind of instruction live?", "b": "~/.claude/CLAUDE.md for you everywhere; the project CLAUDE.md for the repo; folder-specific rules in .claude/rules/ with a paths glob."}, {"id": "ccdv-f-32", "t": 5, "k": "trap", "f": "\"Put the database password in CLAUDE.md so Claude can use it.\"", "b": "It's committed and loaded into context: leaked twice. Remove it, rotate it, and use the environment or a secret store."}, {"id": "ccdv-f-33", "t": 5, "k": "trap", "f": "\"Keep every rule in one big CLAUDE.md.\"", "b": "A long rulebook gets skimmed and the rule that mattered gets lost. Split folder rules into .claude/rules/."}, {"id": "ccdv-f-34", "t": 6, "k": "rule", "f": "Block a dangerous command every time", "b": "A PreToolUse hook that exits with code 2 and a reason, or a deny rule in settings, which blocks in every mode."}, {"id": "ccdv-f-35", "t": 6, "k": "rule", "f": "Claude Code in CI", "b": "Headless print mode, only the tools the task needs allowed, and structured output captured for the next step."}, {"id": "ccdv-f-36", "t": 6, "k": "rule", "f": "A reusable procedure with helper scripts", "b": "A Skill: .claude/skills/<name>/SKILL.md with a clear description, loaded only when the task matches."}, {"id": "ccdv-f-37", "t": 6, "k": "trap", "f": "\"Add 'never run rm -rf' to CLAUDE.md.\"", "b": "That's guidance, not enforcement. Use a hook or a deny rule."}, {"id": "ccdv-f-38", "t": 6, "k": "trap", "f": "\"The guard hook exits with code 1 to block.\"", "b": "Only exit code 2 blocks. Other non-zero codes are non-blocking errors, and the call carries on."}, {"id": "ccdv-f-39", "t": 7, "k": "rule", "f": "Business brief → engineering work. First step?", "b": "Functional and non-functional requirements: inputs, outputs, data access, latency, review steps, and how success is measured."}, {"id": "ccdv-f-40", "t": 7, "k": "rule", "f": "A hard constraint such as data residency", "b": "Treat it as a requirement that picks the architecture before the build starts: the rule decides, not familiarity."}, {"id": "ccdv-f-41", "t": 7, "k": "rule", "f": "A deprecated parameter with a six-month window", "b": "Regression tests first, then migrate the call sites in batches you check against them."}, {"id": "ccdv-f-42", "t": 7, "k": "trap", "f": "\"Build a prototype first and work out requirements later.\"", "b": "That picks a solution before the problem is defined."}, {"id": "ccdv-f-43", "t": 8, "k": "rule", "f": "Is a prompt change safe to ship?", "b": "Run an eval set (target cases plus edge cases) on the old and new prompt, and ship only without regressions."}, {"id": "ccdv-f-44", "t": 8, "k": "rule", "f": "Checking a structural rule (format, required fields)", "b": "Let code decide: deterministic and free per case. Save model grading for judgement criteria."}, {"id": "ccdv-f-45", "t": 8, "k": "rule", "f": "Output mentions facts that weren't in the input", "b": "Read the traces first: missing or wrong context, truncation, injected text or fabrication. Then fix."}, {"id": "ccdv-f-46", "t": 8, "k": "trap", "f": "\"Ask the model to rate its own new answers.\"", "b": "Self-grading with no reference proves nothing."}, {"id": "ccdv-f-47", "t": 8, "k": "trap", "f": "\"A bigger model will fix the hallucinations.\"", "b": "That's a fix chosen before the fault has been found."}, {"id": "ccdv-f-48", "t": 9, "k": "rule", "f": "The CCDV-F theme that resolves most questions", "b": "If it must always hold, enforce it in code: hooks, validation, gates, budgets. Prompts guide; code guarantees."}, {"id": "ccdv-f-49", "t": 9, "k": "rule", "f": "How do you work a four-option question?", "b": "Strike the two clearly wrong answers first, then compare the last two: one of them is the trap."}, {"id": "ccdv-f-50", "t": 9, "k": "trap", "f": "\"Add a sentence to the system prompt.\"", "b": "For a hard requirement, a prompt line is rarely the answer. Look for the code-level control."}]}};
+const DATA = window.FC_DATA;
 const $ = id => document.getElementById(id);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if(cls) e.className = cls; if(text !== undefined) e.textContent = text; return e; };
 
 /* per-viewer progress: optional, so every storage call is guarded */
 function load(key, fallback){ try{ const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }catch(e){ return fallback; } }
@@ -230,6 +301,63 @@ let status = load("fc-status-" + track, {});   // id -> "known" | "again"
 
 function deck(){ return DATA[track]; }
 
+/* ---------- visual renderers: every string goes in via textContent, card text is data ---------- */
+function vizSteps(v){
+  const box = el("div", "steps");
+  v.i.forEach((it, i) => {
+    const o = typeof it === "string" ? {l: it} : it;
+    if(i) box.appendChild(el("span", "arrow", "→"));
+    const s = el("div", "step" + (o.g ? " gate" : ""));
+    s.appendChild(el("span", "n", o.g ? "Gate" : "Step " + (i + 1)));
+    s.appendChild(el("span", "", o.l));
+    if(v.s && v.s[i]) s.appendChild(el("small", "", v.s[i]));
+    box.appendChild(s);
+  });
+  return box;
+}
+function vizVs(v){
+  const box = el("div", "vs");
+  const side = (items, cls) => {
+    const d = el("div", "side " + cls);
+    d.appendChild(el("h4", "", items[0]));
+    const ul = el("ul"); items.slice(1).forEach(t => ul.appendChild(el("li", "", t))); d.appendChild(ul);
+    return d;
+  };
+  box.appendChild(side(v.l, v.n ? "a" : "bad"));
+  box.appendChild(el("span", "mid", "vs"));
+  box.appendChild(side(v.r, v.n ? "b" : "good"));
+  return box;
+}
+function vizList(v){
+  const ul = el("ul", "chk");
+  v.i.forEach(([ic, t]) => { const li = el("li"); li.appendChild(el("span", "ic", ic)); li.appendChild(el("span", "", t)); ul.appendChild(li); });
+  return ul;
+}
+function vizStack(v){ const d = el("div", "stack"); v.i.forEach(t => d.appendChild(el("div", "blk", t))); return d; }
+function vizLadder(v){
+  const wrap = el("div");
+  const l = el("div", "ladder"); const n = v.i.length;
+  v.i.forEach(([name, sub], i) => {
+    const r = el("div", "rung");
+    const bar = el("i"); bar.style.height = (26 + i * (64 / Math.max(1, n - 1))) + "px"; bar.style.opacity = String(0.45 + i * (0.55 / Math.max(1, n - 1)));
+    r.appendChild(bar); r.appendChild(el("b", "", name)); if(sub) r.appendChild(el("small", "", sub));
+    l.appendChild(r);
+  });
+  wrap.appendChild(l);
+  if(v.x || v.y){ const a = el("div", "axis"); a.appendChild(el("span", "", v.x || "")); a.appendChild(el("span", "", v.y || "")); wrap.appendChild(a); }
+  return wrap;
+}
+function vizMono(v){ return el("pre", "mono", v.i); }
+function vizTable(v){
+  const t = el("table", "tbl");
+  const tr = el("tr"); v.h.forEach(h => tr.appendChild(el("th", "", h))); t.appendChild(tr);
+  v.r.forEach(row => { const r = el("tr"); row.forEach(c => r.appendChild(el("td", "", c))); t.appendChild(r); });
+  return t;
+}
+function vizPills(v){ const d = el("div", "pills"); v.i.forEach(t => d.appendChild(el("span", "pill", t))); return d; }
+const RENDER = {steps: vizSteps, vs: vizVs, list: vizList, stack: vizStack, ladder: vizLadder, formula: vizMono, code: vizMono, table: vizTable, pills: vizPills};
+function renderViz(v){ const r = v && RENDER[v.t]; return r ? r(v) : null; }
+
 function buildOrder(shuffle){
   const d = deck(), t = $("topicSel").value, trapsOnly = $("trapsOnly").checked, hideKnown = $("unknownOnly").checked;
   order = d.cards.filter(c =>
@@ -241,6 +369,12 @@ function buildOrder(shuffle){
   idx = 0; showCard();
 }
 
+function setTopicLabel(a, tp){
+  a.textContent = tp.name;
+  if(tp.link){ a.href = tp.link; a.target = "_blank"; a.rel = "noopener"; a.title = "Open the study material for this topic"; }
+  else { a.removeAttribute("href"); }
+}
+
 function showCard(){
   const d = deck();
   const known = d.cards.filter(c => status[c.id] === "known").length;
@@ -248,16 +382,22 @@ function showCard(){
   $("bar").style.width = `${known / d.cards.length * 100}%`;
   if(!order.length || idx >= order.length){ return finish(); }
   $("deck").classList.remove("hidden"); $("done").classList.add("hidden");
-  const c = order[idx], topic = d.topics[c.t].name, trap = c.k === "trap";
+  const c = order[idx], tp = d.topics[c.t], trap = c.k === "trap";
   flipped = false; $("card").classList.remove("flipped");
   $("card").classList.toggle("trap", trap);
   $("fTag").className = "tag " + (trap ? "trap" : "rule");
   $("fTag").textContent = trap ? "⚠ Trap · sounds right" : "Rule";
   $("bTag").className = "tag " + (trap ? "trap" : "ans");
   $("bTag").textContent = trap ? "Why it fails · do this instead" : "Answer";
-  $("fTopic").textContent = $("bTopic").textContent = topic;
-  $("fText").textContent = c.f;
+  setTopicLabel($("fTopic"), tp); setTopicLabel($("bTopic"), tp);
+  $("fIcon").textContent = trap ? "🪤" : (tp.icon || "💡");
+  const ft = $("fText"); ft.textContent = "";
+  if(trap){ ft.appendChild(el("span", "says", "Someone suggests…")); }
+  ft.appendChild(document.createTextNode(c.f));
   $("bText").textContent = c.b;
+  const vz = $("bViz"); vz.textContent = ""; const node = renderViz(c.v); if(node) vz.appendChild(node); vz.classList.toggle("hidden", !node);
+  $("bExText").textContent = c.ex || ""; $("bEx").classList.toggle("hidden", !c.ex);
+  $("bHookText").textContent = c.hook || ""; $("bHook").classList.toggle("hidden", !c.hook);
   const s = status[c.id];
   $("bHint").textContent = s === "known" ? "You marked this one as known." : s === "again" ? "Marked for review." : "Got it, or see it again?";
   $("pos").innerHTML = `Card <b>${idx + 1}</b> of ${order.length}` + (reviewOnly ? " · review pass" : "");
@@ -290,19 +430,20 @@ function renderSheet(){
   const d = deck(), box = $("sheet"); box.innerHTML = "";
   d.topics.forEach((tp, ti) => {
     const cards = d.cards.filter(c => c.t === ti);
-    const g = document.createElement("div"); g.className = "group";
-    const h = document.createElement("h2"); h.textContent = tp.name;
-    if(tp.link){ const a = document.createElement("a"); a.href = tp.link; a.target = "_blank"; a.rel = "noopener"; a.textContent = d.title === "CCDV-F" ? "Episode code →" : "Study guide →"; h.appendChild(a); }
+    if(!cards.length) return;
+    const g = el("div", "group");
+    const h = el("h2", "", (tp.icon ? tp.icon + " " : "") + tp.name);
+    if(tp.link){ const a = el("a", "", d.title === "CCDV-F" ? "Episode code →" : "Study guide →"); a.href = tp.link; a.target = "_blank"; a.rel = "noopener"; h.appendChild(a); }
     g.appendChild(h);
-    const cols = document.createElement("div"); cols.className = "cols";
+    const cols = el("div", "cols");
     [["traps", "⚠ Traps (sounds right)", "trap"], ["rules", "✔ Rules that beat them", "rule"]].forEach(([cls, label, kind]) => {
-      const col = document.createElement("div"); col.className = "col " + cls;
-      const h3 = document.createElement("h3"); h3.textContent = label; col.appendChild(h3);
+      const col = el("div", "col " + cls);
+      col.appendChild(el("h3", "", label));
       cards.filter(c => c.k === kind).forEach(c => {
-        const it = document.createElement("div"); it.className = "item";
-        const b = document.createElement("b"); b.textContent = c.f;
-        const s = document.createElement("span"); s.textContent = c.b;
-        it.append(b, s); col.appendChild(it);
+        const it = el("div", "item");
+        it.appendChild(el("b", "", c.f)); it.appendChild(el("span", "", c.b));
+        if(c.hook) it.appendChild(el("em", "", "Remember: " + c.hook));
+        col.appendChild(it);
       });
       cols.appendChild(col);
     });
@@ -319,8 +460,8 @@ function setTrack(t){
   $("examLink").href = $("examNav").href = $("doneExam").href = d.exam;
   $("examNav").textContent = d.title + " mock exam";
   const sel = $("topicSel"); sel.innerHTML = "";
-  const all = document.createElement("option"); all.value = "all"; all.textContent = `All ${d.title} topics (${d.cards.length} cards)`; sel.appendChild(all);
-  d.topics.forEach((tp, i) => { const o = document.createElement("option"); o.value = String(i); o.textContent = tp.name; sel.appendChild(o); });
+  const all = el("option", "", `All ${d.title} topics (${d.cards.length} cards)`); all.value = "all"; sel.appendChild(all);
+  d.topics.forEach((tp, i) => { const o = el("option", "", tp.name); o.value = String(i); sel.appendChild(o); });
   buildOrder(false); renderSheet(); syncUrl();
 }
 
@@ -336,7 +477,7 @@ function syncUrl(){ try{ history.replaceState(null, "", `?track=${track}${mode =
 
 document.querySelectorAll(".seg.track button").forEach(b => b.onclick = () => setTrack(b.dataset.track));
 document.querySelectorAll(".seg.mode button").forEach(b => b.onclick = () => setMode(b.dataset.mode));
-$("card").onclick = flip;
+$("card").onclick = e => { if(e.target.closest("a")) return; flip(); };
 $("prevBtn").onclick = () => move(-1);
 $("nextBtn").onclick = () => move(1);
 $("againBtn").onclick = () => mark("again");
