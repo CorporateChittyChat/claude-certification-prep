@@ -29,13 +29,13 @@ Exam format, registration, and validity details: [`ccao-f/exam-logistics.md`](cc
 ## Start here (CCDV-F)
 
 1. **Read** the [CCDV-F overview](ccdv-f/) for the episode-by-domain map.
-2. **Watch** the [video series](https://www.youtube.com/playlist?list=PLHvgccck0QgI) — Episode 00 covers the exam itself, then one domain per episode.
+2. **Watch** the [video series](https://www.youtube.com/playlist?list=PLHvgccck0QgI) — 12 videos: Episode 00 covers the exam itself, then one domain per episode, EP 10 on security, and a wrap-up.
 3. **Build** each episode's hands-on project from the [companion code repo](https://github.com/chittychat-studio/ccdvf-course) — Python and TypeScript, one folder per episode.
 4. **Test yourself** with the [30-question mock exam](ccdv-f/practice/mock-exam.md) ([interactive version](https://corporatechittychat.github.io/claude-certification-prep/ccdv-f/practice/mock-exam-player.html)) and each episode's `PRACTICE.md` (EP 04 onward).
 
 ## Flashcards and traps
 
-**[Flashcards & traps](https://corporatechittychat.github.io/claude-certification-prep/flashcards.html)** — flip-card revision for both tracks (CCAO-F and CCDV-F), with a "traps only" filter, saved progress, and a printable sheet that puts every exam trap next to the rule that beats it. ([source](flashcards.html))
+**[Flashcards & traps](https://corporatechittychat.github.io/claude-certification-prep/flashcards.html)** — illustrated flip-card revision for both tracks (CCAO-F and CCDV-F), each answer with a mini diagram, a worked example and a memory hook, plus a "traps only" filter, saved progress, and a printable sheet that puts every exam trap next to the rule that beats it. ([source](flashcards.html))
 
 ## Contributing
 

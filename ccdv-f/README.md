@@ -2,7 +2,7 @@
 
 Study material for Anthropic's developer-track Claude certification, written by someone who sat and passed it. Where the [CCAO-F track](../ccao-f/) is for people who use Claude at work without writing code, this one is for people who build with it: the API, agents, tools and MCP, and Claude Code.
 
-Episode 00 covers the exam itself: format, eligibility, the eight domains and what to expect on the day. Then one domain per episode: a concept walkthrough, a hands-on build you can run yourself, and a practice question in the exam's own style.
+Episode 00 covers the exam itself: format, eligibility, the eight domains and what to expect on the day. Then one domain per episode: a concept walkthrough, a hands-on build you can run yourself, and a practice question in the exam's own style. EP 10 covers prompt injection and AI security, and the wrap-up closes the series with tips and traps per domain. Twelve videos in all.
 
 > Independent study material — not affiliated with or endorsed by Anthropic. All practice questions are original, written for this project. None are from the real exam. Exam details change; confirm the current exam guide before you book.
 
@@ -11,7 +11,7 @@ Episode 00 covers the exam itself: format, eligibility, the eight domains and wh
 The developer track is code-first, so its runnable material lives in its own repo:
 
 - **Companion code:** [chittychat-studio/ccdvf-course](https://github.com/chittychat-studio/ccdvf-course) — one folder per episode, each with a README (how to run it) and, from EP 04 on, a `PRACTICE.md` with hands-on exercises and original practice questions.
-- **Videos:** [CCDV-F Exam Prep playlist](https://www.youtube.com/playlist?list=PLHvgccck0QgI)
+- **Videos:** [CCDV-F Exam Prep playlist](https://www.youtube.com/playlist?list=PLHvgccck0QgI) — 12 videos: EP 00–10 and a wrap-up
 
 ## Episodes
 
@@ -27,6 +27,8 @@ The developer track is code-first, so its runnable material lives in its own rep
 | EP 07 | Claude Code: permission modes, hooks, subagents, skills and plugins | [`ep07-guard-hook`](https://github.com/chittychat-studio/ccdvf-course/tree/main/ep07-guard-hook) | TypeScript | No |
 | EP 08 | Applications and integration, part 3: requirements, the build life cycle and the seams | [`ep08-gate-checker`](https://github.com/chittychat-studio/ccdvf-course/tree/main/ep08-gate-checker) | Python | No |
 | EP 09 | Eval, testing and debugging | [`ep09-failure-checker`](https://github.com/chittychat-studio/ccdvf-course/tree/main/ep09-failure-checker) | TypeScript | No |
+| EP 10 | Prompt injection and AI security for Claude apps | — (no build; the lesson is applied in EP 04, 05 and 07) | — | — |
+| Wrap-up | Certificate and score proof, tips and traps per domain, speed round | — | — | — |
 
 ## How to use it
 
