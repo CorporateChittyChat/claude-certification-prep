@@ -15,7 +15,7 @@ window.LEARN_DATA = window.LEARN_DATA || {};
 window.LEARN_DATA["ccao-f"] = {
   title: "CCAO-F study notes",
   name: "Claude Certified Associate – Foundations",
-  intro: "Every domain and skill from Anthropic's CCAO-F exam guide, with the official domain weights (the guide weights domains, not individual skills). Each skill has the lesson, the decision tables, the facts to know and the traps the questions are built around, linked to its episode, its study guide and a worked question. For people who use Claude at work; no code needed.",
+  intro: "Every skill in the CCAO-F exam guide: lesson, traps and a worked question.",
   asOf: "3 November 2026",
   guide: ["📄", "Official exam guide (v1.0, July 2026)", "https://everpath-course-content.s3-accelerate.amazonaws.com/instructor/6nizmqk8tpzpfjvt6qmmav7rh/public/1783542847/Claude+Certified+Associate+%E2%80%93+Foundations+Exam+Guide.pdf"],
   glance: [["Items", "60, multiple choice and multiple response"], ["Time", "120 minutes"], ["Pass mark", "720 on a 100–1,000 scale"], ["Fee", "$99 USD"], ["Delivery", "Pearson VUE, online or test centre"], ["Valid for", "12 months"]],
@@ -50,11 +50,24 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Create effective prompts", w: null,
         scope: "Write prompts for business and technical tasks that state clearly what is wanted, with the background and structure Claude needs to do it well.",
+        short: "A good prompt carries everything Claude cannot guess. Check five parts (role, context, task, constraints, output format) and fill in the ones the job needs; context is the one people forget.",
+        terms: [
+          ["prompt", "the instruction and material you give Claude in one message"],
+          ["role", "who you ask Claude to act as, such as an editor or a financial analyst; it sets vocabulary and depth"],
+          ["context", "the background Claude cannot know unless you supply it: the reader, the situation, earlier decisions, the source material"],
+          ["task", "the one action you want, stated with a clear verb such as summarise, compare or draft"],
+          ["constraints", "the limits on the answer: length, tone, what to include and what to leave out"],
+          ["output format", "the shape you want back: a table, three bullets, a short email"],
+          ["Description", "the AI Fluency Framework name for telling Claude precisely what you want instead of hoping it infers it"],
+          ["labelled tags", "markers such as <policy_change> that fence off each part of a prompt so instructions and documents do not blur"]
+        ],
         lesson: [
-          "The same request phrased two ways gives two different levels of quality, and the model did not change between them. Prompting is a communication skill with a learnable structure, not a knack. Anthropic's course calls the competency Description: telling Claude precisely what you want instead of assuming it will infer it.",
-          "Five components carry almost every professional prompt. The role sets the vocabulary and depth Claude brings (an editor, a financial analyst, a policy reviewer). The context is everything Claude cannot know unless you say it: who the reader is, the situation, earlier decisions, the source material. The task is one clear action with one main verb: summarise, compare, draft, identify. Constraints are the limits: length, tone, what to include and what to leave out. The output format is the shape you want back: a table, three bullets, a short memo, an email. A one-line question may need only the task; a deliverable for a client usually needs every component. Judging which ones a given job needs is the skill.",
+          "The same request phrased two ways gives two different levels of quality, and the model did not change between them. Prompting is a communication skill with a learnable structure, not a knack. Anthropic's course calls the competency Description: telling Claude precisely what you want instead of assuming it will infer it. It is the first of four competencies in Anthropic's AI Fluency Framework (Description, Discernment, Diligence, Delegation) that run through the whole course.",
+          "Five components carry almost every professional prompt. The role sets the vocabulary and depth Claude brings (an editor, a financial analyst, a policy reviewer). The context is everything Claude cannot know unless you say it: who the reader is, the situation, earlier decisions, the source material. The task is one clear action with one main verb: summarise, compare, draft, identify. Constraints are the limits: length, tone, what to include and what to leave out. The output format is the shape you want back: a table, three bullets, a short memo, an email.",
+          "A one-line question may need only the task; a deliverable for a client usually needs every component. Judging which ones a given job needs is the skill.",
           "Context is the part people forget, and a context gap is the most common reason a prompt underperforms. Claude cannot see your inbox, your organisation chart or last week's meeting unless you paste it or connect a source, and even a connector shows only what you have allowed. A useful test from Anthropic's guidance: imagine handing the prompt to a capable colleague with no background. If they would need to ask questions, so will Claude, and it will answer them with guesses.",
-          "Structure is the other half of clarity. When one prompt carries instructions, background and a document, fence each part with labelled tags so nothing is guessed about where the instructions end and the document begins. Put steps that must happen in order in a numbered list. With a long document, put the document first and the question at the end. Say what you want rather than only what to avoid: 'keep the existing column headings' gives Claude something to aim at; 'do not change the structure' does not. When the output must follow an exact format, three to five short examples teach the pattern better than more description."
+          "Structure is the other half of clarity. When one prompt carries instructions, background and a document, fence each part with labelled tags so nothing is guessed about where the instructions end and the document begins. Put steps that must happen in order in a numbered list. With a long document, put the document first and the question at the end. Say what you want rather than only what to avoid: 'keep the existing column headings' gives Claude something to aim at; 'do not change the structure' does not. When the output must follow an exact format, three to five short examples teach the pattern better than more description.",
+          "The exam guide says business and technical tasks, and the same components carry both. For a technical task an associate meets (a spreadsheet formula, a data clean-up, a query for a reporting tool) the context is the shape of the data: the column names, a sample row, what counts as blank. The format is exact: just the formula, or numbered steps you can follow. Example: 'Column C holds order dates typed three different ways and column F the order value. Give me one formula for column G that returns the month as YYYY-MM, and explain it in two sentences for a colleague who will maintain the sheet.'"
         ],
         tables: [{
           cap: "The component stack",
@@ -75,7 +88,9 @@ window.LEARN_DATA["ccao-f"] = {
           "Fence instructions, background and documents in labelled tags; number steps that must happen in order.",
           "Long document first, question last.",
           "Say what to do, not only what to avoid. For a strict format, show three to five examples.",
-          "Thirty seconds of specification usually saves several rounds of correction."
+          "Thirty seconds of specification usually saves several rounds of correction.",
+          "Technical tasks use the same components: the data's shape is the context, and the format is exact.",
+          "AI Fluency Framework, four competencies: Description, Discernment, Diligence, Delegation."
         ],
         build: ["Worked question Q1: the format lottery", WQ + "q1--domain-1-the-format-lottery"],
         traps: [
@@ -84,12 +99,22 @@ window.LEARN_DATA["ccao-f"] = {
           { move: "Tell Claude the last version was poor and to do better", why: "Encouragement carries no information. Say who it is for, what matters and what shape you want back." },
           { move: "Tell Claude not to change the structure, without saying what the structure is", why: "A rule that only names what to avoid leaves Claude guessing. Describe or show the structure to keep." },
           { move: "Put the question first and paste the sixty-page document underneath", why: "With long material, the document goes first and the question last, so the question is fresh when Claude answers." },
-          { move: "Write instructions, background and the document as one block of prose", why: "Claude has to guess where each part ends. Fence each part in its own labelled section." }
+          { move: "Write instructions, background and the document as one block of prose", why: "Claude has to guess where each part ends. Fence each part in its own labelled section." },
+          { move: "Paste the draft and ask Claude only to make it better", why: "Better for whom, and in what way? Name the reader, the purpose and what to change, or Claude guesses." }
         ]
       },
       {
         title: "Apply task decomposition", w: null,
         scope: "Break complex, multi-part requests into discrete, ordered steps so that each step can be done well and checked.",
+        short: "Task decomposition means splitting a big request into ordered steps and running them one at a time. Each step gives a result you can check before the next step builds on it.",
+        terms: [
+          ["task decomposition", "breaking a multi-part request into separate, ordered steps"],
+          ["chaining", "running steps in sequence so each step's output becomes the next step's input"],
+          ["draft, review, refine", "ask for a draft, ask Claude to review it against criteria you name, then ask for the improved version"],
+          ["intermediate result", "the output of one step, such as a list of criteria, that you check before moving on"],
+          ["shared foundation", "one confirmed piece of work, such as a list of policy changes, that several deliverables are built from"],
+          ["auditable", "the reasoning can be shown step by step when someone asks how a decision was reached"]
+        ],
         lesson: [
           "Some requests are several tasks wearing one sentence. 'Evaluate these three suppliers and tell me which to pick' hides four jobs: invent criteria, apply them, weigh the trade-offs and recommend. Done in a single pass, each gets a thin treatment, and the reasoning stays invisible. Decomposition splits the job into ordered steps and runs them in sequence: derive the criteria from the requirements, score each option against them, set out the trade-offs, then recommend.",
           "The gain is not only quality. Each step leaves a result you can check. If the criteria in step one are wrong, you catch it before anything is scored, not after the recommendation has gone to your manager. The work also becomes auditable, which matters when someone asks how the decision was reached. Anthropic calls this chaining: one step's output becomes the next step's input. A related pattern is draft, review, refine: ask for a draft, ask Claude to review it against criteria you name, then ask for the improved version.",
@@ -126,6 +151,15 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Iterate prompts to improve output", w: null,
         scope: "Refine prompts based on what the output reveals, changing the part that failed, and recognise when further iteration has stopped paying.",
+        short: "When a draft disappoints, treat it as a clue to which part of the prompt was weak and change only that part. Stop when another round changes little; then edit by hand, or change the model or feature if the problem is not in the prompt.",
+        terms: [
+          ["iteration", "improving a result over several rounds, each round changing one specific thing"],
+          ["targeted revision", "changing the one prompt component the output showed was weak, and keeping the rest"],
+          ["wholesale rewrite", "starting the prompt again from scratch; it loses what worked and hides what fixed the problem"],
+          ["success criteria", "what a good output must contain, written down before you prompt so you compare against it"],
+          ["convergence", "the point where more rounds bring only marginal change: time to stop prompting"],
+          ["diminishing returns", "each extra round gives less improvement than the one before"]
+        ],
         lesson: [
           "First drafts seldom land exactly. When one disappoints, resist rewriting the whole prompt. Treat the output as evidence of which component was weak, and change only that. Output that is generic points to thin context. An answer to the wrong question points to an unclear task verb. The right content at the wrong length, tone or shape points to a missing constraint or format. Output that is good except for one section calls for revising that section, not discarding the draft.",
           "A full rewrite costs twice: the good parts go in the bin, and afterwards nobody knows which edit made the difference. Adjust one component, resend, compare. Write down what a good output looks like before you start, so you are comparing against criteria rather than against a feeling.",
@@ -164,9 +198,21 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Adapt prompting strategy to the task type", w: null,
         scope: "Fit the prompting approach to the kind of work: analysis, research, drafting or brainstorming, each with a different balance of specification and latitude.",
+        short: "Different kinds of work need differently set prompts. Analysis wants tight criteria, research wants a clear question and checkable sources, drafting wants the reader and tone fixed, and brainstorming wants room.",
+        terms: [
+          ["analysis", "judging material against criteria; needs tight specification and little latitude"],
+          ["research", "finding and combining information; needs a clear question, a scope and citations"],
+          ["drafting", "writing for a reader; you fix the audience, tone and format, Claude finds the words"],
+          ["brainstorming", "producing many options; give the goal and a guardrail, ask for range, narrow later"],
+          ["latitude", "how much freedom you leave Claude: low for analysis, high for brainstorming"],
+          ["examples (few-shot)", "three to five sample outputs in the prompt that show the exact format you want"],
+          ["grounded citation", "a source that came from a web search or Research result you can open, not one recalled from training"],
+          ["Research", "the claude.ai feature (research mode) that runs many searches and combines the results, for deep or current questions"]
+        ],
         lesson: [
           "Every prompt uses the same components; what changes with the task is which ones you tighten. One fixed style used for everything costs quality wherever it does not fit. The underlying decision is the same each time: where do you need control, and where do you need range?",
-          "Analysis wants tight constraints and explicit criteria: what to measure, against which standard, how to handle ambiguity, and the exact output shape. For deep analysis, give Claude room to reason before it answers, and check the result against your criteria. Research wants a clear question, defined scope and source discipline: say whether current sources are needed and ask for citations so every claim can be checked. A quick current fact can come from web search in a chat; deep investigation across many sources is what Research is for (check plan availability at docs.claude.com). Citations from a grounded search can be checked; citations produced from training memory alone look just as confident and must be verified.",
+          "Analysis wants tight constraints and explicit criteria: what to measure, against which standard, how to handle ambiguity, and the exact output shape. For deep analysis, give Claude room to reason before it answers, and check the result against your criteria.",
+          "Research wants a clear question, defined scope and source discipline: say whether current sources are needed and ask for citations so every claim can be checked. A quick current fact can come from web search in a chat; deep investigation across many sources is what Research is for (check plan availability at docs.claude.com). Citations from a grounded search can be checked; citations produced from training memory alone look just as confident and must be verified.",
           "Drafting wants the audience, tone and format fixed, with room for Claude to find the wording: the shape is yours and the wording is Claude's. Brainstorming wants the lightest touch: give the goal and a guardrail or two, ask for volume and range, and narrow afterwards. Over-specifying a brainstorm kills the divergence you wanted. Rules of any kind work better phrased as what to do; formats that must be exact are taught best by three to five examples.",
           "Example: a marketing lead asks for twenty campaign angles for faster month-end close, with only the goal and one guardrail, and the instruction not to self-edit yet. Once the range exists, a second prompt applies the brand rules and picks a shortlist. Putting the brand rules in the first prompt would have produced twenty variations of the same safe idea."
         ],
@@ -227,11 +273,23 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Evaluate output for accuracy and completeness", w: null,
         scope: "Judge Claude-generated output against the requirements, the source material and professional standards, checking both what is there and what is missing.",
+        short: "Check every output against three things: what you asked for, the source material, and your field's standards. Accuracy (is what is there right?) and completeness (is anything missing?) are separate checks.",
+        terms: [
+          ["accuracy", "whether what is on the page is correct"],
+          ["completeness", "whether anything that matters is missing; gaps are harder to spot than errors because there is nothing to look at"],
+          ["Discernment", "AI Fluency Framework name for critically evaluating output against requirements, sources and standards"],
+          ["Diligence", "AI Fluency Framework name for deciding when verification is needed and taking ownership of the result"],
+          ["stakes calibration", "matching how deeply you review to what an error would cost in that field"],
+          ["triage", "sorting each output into ready to use, needs revision, or needs human override"],
+          ["needs human override", "the verdict for output that must not go out on Claude's draft; a person takes over"],
+          ["training cut-off", "the date Claude's built-in knowledge stops; later facts need a connected source, web search or Research"]
+        ],
         lesson: [
           "Your name on a deliverable makes every claim in it yours, whether you typed it or Claude did. Accountability is why this domain carries the most weight. The time Claude saves is small and visible; the cost of an unchecked error is large and arrives later, usually in front of someone whose trust you needed. The course calls the evaluating skill Discernment and the deciding-and-owning skill Diligence.",
           "Evaluating is not deciding the output looks fine. It is a repeatable check against three references, done the same way each time. Requirements: go back to your own request and tick off each part, including the awkward ones. Source material: follow individual claims back to the documents you gave Claude rather than assuming it read them closely. Professional standards: would a peer in your field accept it? Figures missing their units, advice with no reasons and references you cannot find all fail, however smooth the prose. Write the criteria before you read, or the fluency will have charmed you.",
           "Accuracy and completeness fail independently. Accuracy is about whether what is on the page is right; completeness is about what is not on the page at all. An output can be entirely accurate and still leave out the one factor that changes the decision, and missing things are harder to spot because a gap gives you nothing to look at. A common pattern: asked to compare a batch of documents, Claude produces a thorough-looking list of differences that is silent on the single most important file. Completeness failures gather where attention is lowest.",
-          "Depth of review follows the stakes, and stakes depend on the field. Legal analysis, financial figures and compliance reporting are zero-tolerance: every claim is checked. An internal brainstorm needs a light read. The mistake is giving both the same casual glance, or wasting the saved time by over-checking a low-stakes draft. After review, sort the output into one of three states and note why: ready to use, needs revision (name the gap and iterate), or needs a person to take over (the stakes, errors or uncertainty mean it cannot go out on Claude's draft)."
+          "Depth of review follows the stakes, and stakes depend on the field. Legal analysis, financial figures and compliance reporting are zero-tolerance: every claim is checked. An internal brainstorm needs a light read. The mistake is giving both the same casual glance, or wasting the saved time by over-checking a low-stakes draft. After review, sort the output into one of three states and note why: ready to use, needs revision (name the gap and iterate), or needs human override (a person takes over, because the stakes, errors or uncertainty mean it cannot go out on Claude's draft alone).",
+          "Five properties of generative AI hold whichever feature you use, and each is a reason review is built into the process rather than added when something looks wrong. Responses vary: the same question twice gives two different answers, and neither is the one correct response. Confident tone is not a signal of accuracy. Context is a budget that runs down in a long session. Knowledge stops at a training cut-off unless you connect a current source. And a configured procedure, such as a Skill, reduces variation without removing it."
         ],
         tables: [{
           cap: "Three verdicts after review",
@@ -239,7 +297,7 @@ window.LEARN_DATA["ccao-f"] = {
           r: [
             ["Ready to use", "Meets the requirements, matches the sources, clears your field's standards, stakes fit the review done", "Five agenda ideas for an internal away-day"],
             ["Needs revision", "Close, with a specific, nameable gap", "A comparison of three quotes that left out a delivery surcharge stated in one of the PDFs"],
-            ["Needs a person", "Stakes, errors or uncertainty mean it cannot ship on Claude's draft", "A gap analysis against an employment rule Claude recalled from training rather than a copy you supplied"]
+            ["Needs human override", "Stakes, errors or uncertainty mean it cannot ship on Claude's draft", "A gap analysis against an employment rule Claude recalled from training rather than a copy you supplied"]
           ]
         }],
         know: [
@@ -247,9 +305,10 @@ window.LEARN_DATA["ccao-f"] = {
           "Three references: requirements, source material, professional standards. Same check every time.",
           "Completeness is a separate check from accuracy: look for what is missing, especially in the hardest material.",
           "Decide the stakes before you decide how deep to review.",
-          "Three verdicts: ready, needs revision, needs a person. Write down why.",
+          "Three verdicts: ready to use, needs revision, needs human override. Write down why.",
           "Responses vary run to run, even with a configured Skill. Review is part of the process, not a sign something broke.",
-          "Claude's knowledge stops at a training date; current facts need a connected source, web search or Research."
+          "Claude's knowledge stops at a training date; current facts need a connected source, web search or Research.",
+          "Five properties hold for every feature: responses vary, tone is not accuracy, context is a budget, knowledge has a cut-off, Skills still vary."
         ],
         build: ["Worked question Q2: the statistic and the hour", WQ + "q2--domain-2a-the-statistic-and-the-hour"],
         traps: [
@@ -263,8 +322,19 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Identify hallucinations, inconsistencies and bias", w: null,
         scope: "Recognise the signatures of fabricated content, internal contradictions and biased framing in Claude's responses.",
+        short: "A hallucination is something Claude states that is invented or unsupported, said just as fluently as the truth. Learn the shapes: dead citations, unsourced precise numbers, self-contradiction, certainty with nothing behind it, and slanted framing.",
+        terms: [
+          ["hallucination", "content that sounds right but is invented, or not supported by the source or the facts"],
+          ["plausible but unsupported claim", "a reasonable-sounding statement with no basis in the source; the hardest kind to spot"],
+          ["fabricated specific", "an invented statistic, date, name, quote or citation; the precision is what makes it convincing"],
+          ["internal inconsistency", "two parts of the same output disagree, such as two figures for one thing"],
+          ["capability hallucination", "Claude says it did something (sent, saved, booked) that it had no tool to do"],
+          ["confirmation bias", "the answer leans towards what your prompt hinted you wanted"],
+          ["slant", "unfair framing: one side missing or dismissed in a line, or a group stereotyped"]
+        ],
         lesson: [
-          "Claude writes with the same fluency whether it is right or wrong, so you cannot use tone to find errors. What you can do is learn the shapes errors take. The most dangerous is the plausible but unsupported claim: it fits the topic and sounds reasonable, with no basis in the source or in fact. Close behind are fabricated specifics: invented statistics, dates, names, quotations and citations. Detail feels like evidence, and that is what makes made-up detail convincing. An uncited '58 per cent of regional logistics firms' is a guess wearing a number's clothes; real figures that precise come with a source.",
+          "Claude writes with the same fluency whether it is right or wrong, so you cannot use tone to find errors. What you can do is learn the shapes errors take. The most dangerous is the plausible but unsupported claim: it fits the topic and sounds reasonable, with no basis in the source or in fact.",
+          "Close behind are fabricated specifics: invented statistics, dates, names, quotations and citations. Detail feels like evidence, and that is what makes made-up detail convincing. An uncited '58 per cent of regional logistics firms' is a guess wearing a number's clothes; real figures that precise come with a source.",
           "Four tells to scan for: a citation that leads nowhere (a plausible report title or link that does not exist); a precise number with no source; an answer that contradicts itself; and words like 'definitely' and 'clearly' with nothing behind them. Confident tone also masks uncertainty: a question about whether a contract clause is enforceable in a particular jurisdiction should hedge and often does not. Assurance is not evidence. When you find one error, do not relax after fixing it; one error means there are likely others. Finding it starts the audit.",
           "Inconsistencies hide in long outputs because nobody reads fifty pages with every number in mind. Section 2 puts the customer base at about 40,000; section 9 builds its forecast on 46,000. Each reads fine alone. Long outputs need a consistency pass across the whole document, not just a paragraph-by-paragraph read. A related failure is capability hallucination: Claude says 'I have emailed your team' or 'I have saved the file' when it had no tool to do so. Treat any claimed external action as unverified until you see it happened.",
           "Bias has two sources worth naming. Confirmation bias in framing: if your prompt hints at the answer you want, Claude may lean towards it, so be wary of output that agrees with you too readily on a question that should be open. Slant on sensitive topics: only one side of a live debate appears, the other side appears but is dismissed in a line, or a group of people is treated unfairly or as a stereotype. Ask two questions of anything people-facing: are both sides treated fairly, and would every group described recognise itself?"
@@ -297,16 +367,28 @@ window.LEARN_DATA["ccao-f"] = {
           { move: "Claude said it emailed the summary to the team, so tick that off", why: "Claude cannot act without a tool for it. Confirm the email exists before relying on it." },
           { move: "The output mentions both sides, so it is balanced", why: "A view dismissed in a single line is not fair treatment. Check how each side is handled." },
           { move: "Read each page carefully on its own and approve the document", why: "Contradictions sit between pages. Run a consistency pass across the whole document." },
-          { move: "It agrees with my view, which confirms I was right", why: "A prompt that signals the answer you want invites agreement. Re-ask neutrally and test the opposite case." }
+          { move: "It agrees with my view, which confirms I was right", why: "A prompt that signals the answer you want invites agreement. Re-ask neutrally and test the opposite case." },
+          { move: "The cited report cannot be found, so it is probably paywalled; cite it as given", why: "A source that leads nowhere is a fabrication tell. Find the real source, or remove every claim that rests on it." }
         ]
       },
       {
         title: "Apply fact-checking and validation techniques", w: null,
         scope: "Use prompt techniques and external checks to reduce fabrication and to verify claims before relying on them.",
+        short: "Build checking into the prompt (allow 'I don't know', restrict Claude to your sources, demand citations you can trace), then check the claims that matter against an authoritative source yourself. Claude checking itself is not verification.",
+        terms: [
+          ["grounding", "tying an answer to specific source material rather than general knowledge"],
+          ["source restriction", "telling Claude to answer only from the materials supplied and to list what they do not cover"],
+          ["auditable citation", "a reference precise enough to check, such as section and clause number"],
+          ["quote-grounding", "asking Claude to pull out the exact supporting sentences before it analyses"],
+          ["best-of-N comparison", "running the same request several times and comparing; where the runs differ is where to look hardest"],
+          ["authoritative source", "the original: the regulation itself, the report, the system of record"],
+          ["code execution", "Claude writes and runs code on your data, so figures are calculated, not guessed"],
+          ["reconcile", "check that a total matches the line items it is built from"]
+        ],
         lesson: [
           "The cheapest verification happens in the prompt, before there is any output to check. Three lines from Anthropic's guidance do most of the work. Give permission not to know: say that 'the provided materials do not cover this' is an acceptable answer; a model that thinks it must always answer will sometimes plug the gap with an invention. Restrict to the sources: for document work, tell Claude to answer only from the materials supplied and to list anything they do not cover; that turns open-ended generation into bounded retrieval. Require citations you can audit: ask for the section and clause behind each claim, and tell Claude to withdraw any claim it cannot cite.",
-          "Two more techniques help with long or important material. Quote first, then analyse: ask Claude to extract the exact sentences that bear on the question before it draws conclusions, so both the reasoning and any errors become visible. Compare several runs: re-run the same request and compare. Where runs agree, confidence rises a little; where they differ is where a person should look hardest.",
-          "None of that replaces the last step. For claims that matter, check against an authoritative external source: the regulation itself, the original report, the system of record. A citation is not verification; a real-looking reference can be wrong or not say what the answer claims, so you open it and read it. A second Claude response, or Claude rating its own confidence, is not an independent check. In some tools, in-product aids help: Claude in Excel, for example, can cite the specific cells a figure came from (confirm availability on your plan).",
+          "Two more techniques help with long or important material. Quote first, then analyse: ask Claude to extract the exact sentences that bear on the question before it draws conclusions, so both the reasoning and any errors become visible. Best-of-N comparison: re-run the same request several times and compare. Where runs agree, confidence rises a little; where they differ is where a person should look hardest.",
+          "None of that replaces the last step. For claims that matter, check against an authoritative external source: the regulation itself, the original report, the system of record. A citation is not verification; a real-looking reference can be wrong or not say what the answer claims, so you open it and read it. A second Claude response, or Claude rating its own confidence, is not an independent check. In some tools, in-product aids help: Claude for Excel, for example, can give cell-level citations that tie a figure back to the cells it came from (confirm availability on your plan).",
           "Numbers are a special case. A figure written in prose is the model's best guess at a calculation. When a number will be reported or will feed a decision, have Claude compute it with code execution and check that totals reconcile with their line items. A subtotal that does not match its rows is a stop sign, whatever the formatting looks like."
         ],
         code: { cap: "Verification lines to paste into a document prompt (our wording)", text: "Answer using only the attached supplier contract. Do not use general knowledge.\nIf the contract does not address something I ask, list it under 'Not covered by this contract'.\nIt is fine to say you do not know.\n\nBefore you analyse, copy the exact clauses that bear on my question.\nThen base your answer only on those clauses, and cite the clause number after every claim.\nIf you cannot cite a clause for a statement, remove the statement." },
@@ -315,7 +397,7 @@ window.LEARN_DATA["ccao-f"] = {
           "Restrict to the supplied sources and ask for a 'not covered' list.",
           "Require auditable citations (section, clause, page) and tell Claude to drop what it cannot cite.",
           "Quote first, then analyse, for long documents.",
-          "Comparing several runs shows where the answer is soft; agreement is not proof.",
+          "Comparing several runs (best-of-N) shows where the answer is soft; agreement is not proof.",
           "Verification means opening an authoritative source and reading it. Self-checks and self-rated confidence are not verification.",
           "Numbers that matter are computed with code execution, and totals are reconciled before use."
         ],
@@ -326,12 +408,23 @@ window.LEARN_DATA["ccao-f"] = {
           { move: "It cites a subsection, so the claim is verified", why: "A citation can be invented or misread. Open the cited text and confirm it says what the answer claims." },
           { move: "Generate several answers and treat the majority view as verified", why: "Agreement between guesses is still a guess. Restrict to sources, require citations and check the important claims." },
           { move: "Tidy the wording and layout so the briefing looks authoritative", why: "Polish does nothing for correctness. Verify the claims first." },
-          { move: "The other figures look plausible, so let one total that does not add up pass", why: "A total that does not reconcile is an error. Recompute with code execution and resolve it before use." }
+          { move: "The other figures look plausible, so let one total that does not add up pass", why: "A total that does not reconcile is an error. Recompute with code execution and resolve it before use." },
+          { move: "Add a line telling Claude to be accurate and double-check everything", why: "A wish is not a technique, and a self-check is the model marking itself. Permit not knowing, restrict to sources and require citations." }
         ]
       },
       {
         title: "Determine when human review is required", w: null,
         scope: "Recognise the thresholds at which an output needs human review or further verification before use, and escalate rather than iterate when judgement is needed.",
+        short: "Decide in advance which work always gets a person's review, using four tests: stakes, reversibility, audience and regulatory exposure. When output affects someone's rights, health, money or livelihood, a qualified person decides; Claude only drafts.",
+        terms: [
+          ["human review", "an accountable person checks the output before it is used"],
+          ["stakes", "what an error would cost: money, safety, reputation or someone's opportunity"],
+          ["reversibility", "whether an action can be undone; sent, filed and published things usually cannot"],
+          ["regulatory exposure", "whether a law, rule or contract governs the content"],
+          ["qualified reviewer", "someone competent and accountable in that field, not a colleague with a spare minute"],
+          ["escalation", "handing the work to a person with the expertise or authority, instead of prompting again"],
+          ["sign-off", "a recorded approval you can point to later"]
+        ],
         lesson: [
           "Some work should never leave on a Claude draft alone, no matter how polished. Diligence is deciding where those lines sit before you need them, so escalation follows a rule you set calmly rather than a judgement made after something has slipped. Four questions set the threshold. Stakes: what does it cost if this is wrong? Reversibility: can it be undone? Once a report is filed or a deliverable sent, it cannot be pulled back, so it needs more checking than a draft. Audience: external, executive and regulatory readers raise the bar above internal working drafts. Regulatory exposure: does a law, rule or contract govern this content?",
           "Agree a short list of things that always get human review, and do not reopen it under deadline: finished work for clients; figures that matter to an audit or the accounts; anything touching regulated, confidential or very sensitive data; public statements and legal correspondence where an error would last. When output touches a person's rights, health, money or livelihood (legal advice, medical answers, lending, hiring), Claude's draft is an input, never the decision. A qualified person, accountable in that field, reviews before anyone acts. A colleague skimming it is not qualified review.",
@@ -363,12 +456,22 @@ window.LEARN_DATA["ccao-f"] = {
           { move: "Iterate the proposal a sixth time to get it over the line", why: "Rounds have stopped improving it. Escalate to a colleague or expert for a fresh read." },
           { move: "Send the report on time and correct the figures in a follow-up note", why: "Irreversible and regulated: resolve it before it leaves. Review comes before use, not after." },
           { move: "It is only an internal agenda, but send it for formal review to be safe", why: "Low stakes, reversible and internal: over-reviewing wastes the time saved. Review depth follows the thresholds." },
-          { move: "Add a disclaimer that AI drafted it instead of having it reviewed", why: "A label does not replace accountable review. High-stakes output needs a qualified person's sign-off." }
+          { move: "Add a disclaimer that AI drafted it instead of having it reviewed", why: "A label does not replace accountable review. High-stakes output needs a qualified person's sign-off." },
+          { move: "Act on the AI ranking for the rejections only, since those are quicker", why: "Rejections are decisions about someone's livelihood. A qualified person reviews every recommendation before it touches a candidate." },
+          { move: "Have Claude recheck its own ranking for bias, then use it", why: "The same model marking its own homework. An accountable person reviews the ranking, including who was left out." }
         ]
       },
       {
         title: "Edit, adapt, refine and compare outputs for the audience", w: null,
         scope: "Turn raw output into a finished deliverable for its intended reader, and compare candidate drafts to pick the strongest base.",
+        short: "Claude drafts; you deliver. Name the reader, then edit for clarity, tone and format, and when quality matters compare two or three drafts and edit the strongest.",
+        terms: [
+          ["audience calibration", "changing the selection, depth and tone for who will read it, while the facts stay the same"],
+          ["clarity pass", "cutting hedges and padding so the point is said exactly"],
+          ["register", "how formal the language is"],
+          ["executive version", "a cut that leads with the decision and its impact in a line or two"],
+          ["comparing outputs", "generating more than one draft, across runs or models, and editing the strongest base"]
+        ],
         lesson: [
           "Claude drafts; you deliver. An accurate draft is still not finished. The editing pass is where your knowledge of the reader and your professional standards are applied. Three passes do most of it. Clarity: strip the hedges, firm up slack sentences and delete whatever adds nothing; Claude errs towards saying more, and editing is where you say it exactly. Tone: set the register for the relationship, because a colleague, a customer and an inspector hear the same words differently. Format: lay it out for the way it will be read, quick to scan for a director, full for the people doing the work, tidy for anyone outside.",
           "One analysis often has to become several deliverables. An executive version leads with the decision and the impact in a line or two. A working-team version keeps the method and the detail and adds the next action and owner. An external version decides what may be shared and how to put it. The facts do not change; the selection, depth and tone do. Name the reader in one phrase before you edit anything, then ask for that shape.",
@@ -404,6 +507,16 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Organise information and select output formats", w: null,
         scope: "Curate inputs so outputs come back organised, and choose the format (artifact, inline, structured data, code-executed) that fits the use and the reliability needed.",
+        short: "Pick the output container by what the result is for and how reliable it must be: inline for answers in the chat, an artifact for a deliverable, structured data for something another tool reads, code execution for numbers that must be right.",
+        terms: [
+          ["inline response", "an answer in the chat thread, for things you act on there and then"],
+          ["artifact", "a separate, editable panel beside the chat holding a document, table, report, code or small tool"],
+          ["structured data", "a table or fixed schema that a reader or another tool can use directly"],
+          ["schema", "a fixed shape with named fields; it guarantees the shape, not the values"],
+          ["code execution", "Claude writes and runs code over your file and returns a computed, traceable result"],
+          ["sandbox", "the isolated environment where code execution runs and uploaded files are processed"],
+          ["curating inputs", "de-duplicating, labelling and pruning what you give Claude so the output comes back organised"]
+        ],
         lesson: [
           "The output format is a reliability decision as well as a presentation choice. Inline replies are for answers you will act on within the conversation. Artifacts are for deliverables: documents, tables, reports and code that appear as a separate, editable block beside the chat, ready to refine and reuse. Structured formats (tables, fixed schemas) are for data that a reader or another tool will consume directly. And when numbers must be right, have Claude compute them with code execution rather than write them.",
           "Code execution is the verified-output path. A total written in prose is a plausible guess at adding up a column; code execution runs the calculation over the actual file and returns a computed figure you can trace to the rows that produced it, plus charts and processed files. Be precise about what that guarantees: Claude writes the code, so the logic can still contain a bug. The guarantee is that the calculation can be read, checked and re-run, not that it is automatically correct. For a low-stakes gut check a prose figure may be fine; for anything that gets reported, use code execution.",
@@ -435,7 +548,8 @@ window.LEARN_DATA["ccao-f"] = {
           { move: "Request the figure as a neatly formatted table to make it reliable", why: "Formatting does not make arithmetic right. Compute it with code execution." },
           { move: "Include every draft version of the memo so nothing is missed", why: "Duplicates and contradictions muddle the result. Keep the approved version, label inputs, prune the rest." },
           { move: "Fix the muddled summary by moving to a bigger model with the same pile of files", why: "The inputs are the problem. Curate them before reaching for a bigger model." },
-          { move: "Code execution produced the number, so it needs no review", why: "Claude wrote the code, and code can be wrong. Read and re-run the logic behind figures that matter." }
+          { move: "Code execution produced the number, so it needs no review", why: "Claude wrote the code, and code can be wrong. Read and re-run the logic behind figures that matter." },
+          { move: "Tell Claude in the prompt to be precise with the arithmetic", why: "Asking for precision is hoping, not computing. Run the calculation with code execution." }
         ]
       }
     ],
@@ -466,11 +580,23 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Select appropriate Claude product features", w: null,
         scope: "Choose between Chat, Projects, Research and Artifacts, and the capability features layered on them (Skills, code execution, Memory), for a given professional task.",
+        short: "Choose where to work before you prompt: Chat for one-offs, a Project for recurring work on the same background, an artifact for a deliverable, Research (research mode) for deep or current information. Then add Skills, code execution or Memory only if the job needs them.",
+        terms: [
+          ["Chat", "a single, unstructured conversation; right for one-off work"],
+          ["Project", "a persistent workspace with standing instructions, a knowledge base and its own list of conversations"],
+          ["knowledge base", "documents uploaded to a Project once so every conversation in it can draw on them"],
+          ["artifact", "a separate, editable output panel for documents, tables, code or small tools"],
+          ["research mode", "Research: multi-step searching across many sources, combined into one cited answer"],
+          ["web search", "a per-chat toggle that lets Claude look up current information quickly"],
+          ["Skill", "a reusable procedure Claude follows the same way each time; built-in ones cover Excel, Word, PowerPoint and PDF"],
+          ["Memory", "work-relevant facts Claude carries from one session to the next"]
+        ],
         lesson: [
-          "Claude has one interface but several working entry points, and choosing before you start decides how efficient the session is and whether today's context carries forward. Chat is the default: an unstructured conversation for one-off questions, quick drafts and exploration. Chats are saved and can be continued, and Memory can carry some context forward, but Chat does not give you a Project's deliberate persistence. Once you catch yourself re-pasting last week's background paragraph, the work belongs somewhere more permanent.",
+          "Claude has one interface but several working entry points, and choosing before you start decides how efficient the session is and whether today's context carries forward. Chat is the default: an unstructured conversation for one-off questions, quick drafts and exploration. Chats are saved and can be continued, and Memory plus past-chat search can carry key context into new sessions, but Chat does not give you a Project's deliberate persistence. Once you catch yourself re-pasting last week's background paragraph, the work belongs somewhere more permanent.",
           "A Project is a persistent workspace with three things: standing instructions that apply to every conversation in it, a knowledge base of documents uploaded once, and its own list of conversations. Conversations in a Project share the instructions and knowledge but not each other's context. The test for building one: does the task recur, is the background the same each time, is the output format consistent? Two yeses and the set-up time is usually recovered within two or three sessions. Example: a team lead who re-types the client background into a new chat before every fortnightly update moves that background and the update template into a Project; the quarter of an hour spent setting the scene disappears, and the updates are no worse.",
-          "Artifacts are the right output when the result is a deliverable rather than a reply: draft documents, data tables, formatted reports, code, even a small interactive tool, shown as a separate editable block. Research runs multi-step searches across many sources and synthesises them; use it for deep investigation or current information beyond a quick lookup. Ordinary Chat can also search the web through a per-chat toggle; on Team and Enterprise plans an owner may have to enable web search for the organisation first. Plan availability for these features changes: confirm at docs.claude.com and support.claude.com.",
-          "On top of the entry point sit capability layers, each solving a different problem. Projects carry context. Skills carry procedure: reusable instructions for doing a task type the same way every time; Anthropic provides built-in ones for spreadsheets, documents, slide decks and PDFs, and custom Skills can be added. Skills live at account level and Claude invokes them where relevant, inside or outside a Project. Code execution carries correctness: it runs calculations and processes files in a sandbox so results are computed, not guessed. Memory carries continuity: work-relevant facts that follow you between sessions. The layers are independent; a one-off question needs none, a recurring analytical workflow may use all four. Even a well-built Skill reduces variation without removing it, so review stays in the workflow."
+          "Artifacts are the right output when the result is a deliverable rather than a reply: draft documents, data tables, formatted reports, code, even a small interactive tool, shown as a separate editable block. Research (the exam guide calls it research mode) runs multi-step searches across many sources and synthesises them; use it for deep investigation or current information beyond a quick lookup. Ordinary Chat can also search the web through a per-chat toggle; on Team and Enterprise plans an owner may have to enable web search for the organisation first. Plan availability for these features changes: confirm at docs.claude.com and support.claude.com.",
+          "On top of the entry point sit capability layers, each solving a different problem. Projects carry context. Skills carry procedure: reusable instructions for doing a task type the same way every time; Anthropic provides built-in ones for spreadsheets, documents, slide decks and PDFs, and custom Skills can be added. Skills live at account level and Claude invokes them where relevant, inside or outside a Project. Code execution carries correctness: it runs calculations and processes files in a sandbox so results are computed, not guessed. Memory carries continuity: work-relevant facts that follow you between sessions.",
+          "The layers are independent; a one-off question needs none, a recurring analytical workflow may use all four. Even a well-built Skill reduces variation without removing it, so review stays in the workflow."
         ],
         tables: [
           {
@@ -513,7 +639,8 @@ window.LEARN_DATA["ccao-f"] = {
           "Projects carry context, Skills carry procedure, code execution carries correctness, Memory carries continuity.",
           "Skills sit at account level and apply wherever relevant; built-in ones cover Excel, Word, PowerPoint and PDF work.",
           "Configured Skills reduce variation; they do not remove the need to review.",
-          "Feature names and plan availability change: confirm at docs.claude.com on the day."
+          "Feature names and plan availability change: confirm at docs.claude.com on the day.",
+          "Research is the guide's research mode: deep, multi-source investigation. Web search in Chat covers a quick current fact."
         ],
         build: ["Worked question Q4: the shallow analysis", WQ + "q4--domain-3-the-shallow-analysis"],
         traps: [
@@ -528,6 +655,15 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Differentiate Claude model types", w: null,
         scope: "Distinguish Haiku, Sonnet and Opus by their capability characteristics and the kinds of task each fits.",
+        short: "Haiku is the fast, light tier for structured work at volume; Sonnet is the balanced default for most work; Opus is the most capable of the three, for complex, high-stakes judgement. More capability costs speed and, on metered plans, money.",
+        terms: [
+          ["model tier", "a level in the Claude family, traded off between speed, cost and capability"],
+          ["Haiku", "the fastest, most efficient tier: classifying, extracting and formatting at volume"],
+          ["Sonnet", "the balanced tier and the usual starting point for drafting, synthesis and analysis"],
+          ["Opus", "the higher-capability tier for nuanced judgement, ambiguous inputs and high-stakes work"],
+          ["latency", "how long you wait for a response"],
+          ["model picker", "the control in claude.ai where you choose the model; what it lists varies by plan and over time"]
+        ],
         lesson: [
           "The capability layer decides what Claude does; the model decides how well it does it, and at what cost in speed. The exam uses a three-tier frame. Haiku is the fastest and most efficient: it handles structured work well (classification, extraction, formatting, straightforward summaries) and high-volume routine jobs where speed matters and an imperfect output costs little. When a task runs across hundreds of items, Haiku's speed advantage compounds.",
           "Sonnet is the balanced tier and the right starting point for most knowledge work: drafting, synthesis, analysis, research help and document review, with strong quality across task types. If quality falls short on a complex task, move up to Opus; if the task is structured and speed or volume matters most, consider Haiku.",
@@ -562,6 +698,15 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Align model selection with task requirements", w: null,
         scope: "Match the model to the task's needs for quality, speed and cost, and adjust before switching when results fall short.",
+        short: "Fit the model to what the task needs in quality, speed and cost. If an answer is weak, first supply missing information, then give the same model more room to think, and only then move up one tier.",
+        terms: [
+          ["task profile", "what the job needs: volume and structure, everyday knowledge work, or complex judgement"],
+          ["metered plan", "a plan or API access where usage is counted, so a higher tier costs more per call"],
+          ["usage headroom", "how much of your plan's allowance is left; the practical stand-in for cost on a subscription"],
+          ["more room to think", "letting the same model reason for longer before it answers (extended thinking, where your plan offers it)"],
+          ["the staircase", "missing information first, more thinking second, one tier up last"],
+          ["routing", "sending easy items to a fast tier and hard ones to a more capable tier"]
+        ],
         lesson: [
           "Matching tier to task avoids two opposite mistakes: paying for depth that routine work never uses, and starving important analysis of the depth it needs. Start with the task profile. Repetitive, well-structured sorting or extraction in bulk: Haiku. Everyday drafting, synthesis and analysis: Sonnet. Hard judgement, high-stakes output, ambiguous or layered inputs: Opus. Example: a large batch of short, routine reply drafts, where turnaround and cost count for more than depth, suits a fast, low-cost tier, with the most capable model kept for the rare complex case.",
           "Cost depends on the plan. On metered or usage-budgeted plans (including API access), the speed-versus-capability trade is also a per-call cost trade: a higher tier uses more per call. On a standard claude.ai subscription, treat efficiency (speed and usage headroom) as the practical stand-in for cost. The selection logic is the same either way. Cost is managed by fitting the tier to the task, never by switching features off.",
@@ -598,11 +743,24 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Manage context limitations and memory", w: null,
         scope: "Recognise context limits and decide when to restart, summarise or persist information, including how Memory, project-scoped Memory and Incognito behave.",
+        short: "The context window is everything Claude can see in one conversation, and it fills up. When a long session drifts, restart, carry a summary of decisions into a new chat, or persist what every session needs in Memory or the Project knowledge base.",
+        terms: [
+          ["context window", "everything Claude can see in one conversation at once; when it fills, early details get compressed or missed"],
+          ["automatic summarisation", "claude.ai condensing earlier messages as a chat nears its limit; detail can be lost"],
+          ["restart", "open a new conversation; Project instructions and knowledge carry over, the thread does not"],
+          ["summarise", "ask for the current state (decisions, work in progress, open questions) and paste it into the new chat"],
+          ["persist", "save what every future session needs in Memory or the knowledge base"],
+          ["project-scoped Memory", "each Project keeps its own Memory, so one client's details never appear in another's"],
+          ["Incognito", "a standalone chat kept out of chat history and Memory; it does not override organisational retention"],
+          ["usage limits", "caps on how much you can use Claude in a time window; they vary by plan"]
+        ],
         lesson: [
-          "Every conversation has a working-memory budget, and it runs down as messages and documents pile up. The course describes claude.ai automatically summarising earlier messages as a conversation nears its limit (on paid plans with code execution enabled), so the session can continue. Summaries compress detail. That is why instructions Claude followed in the first ten minutes can lose force ninety minutes later: Claude has not chosen to ignore them; the summary has squeezed them. Long piles of material also have a soft middle, where things are most easily missed.",
-          "Signs a session needs help: Claude stops following instructions it followed earlier; responses address only the latest message and ignore earlier decisions; accuracy drops in ways consistent with missing early context. Three responses. Restart: open a new conversation; in a Project the instructions and knowledge carry over, the thread does not. Right when the session has drifted beyond recovery or you are starting a genuinely new task. Summarise: before restarting, ask Claude for the current state (decisions made, work in progress, open questions) and paste that into the new conversation. Carry decisions forward, not transcripts. Persist: information every future session needs goes into Memory or the Project knowledge base, so it never has to be re-entered.",
-          "Memory keeps work-relevant facts across sessions: your role, format preferences, frequent collaborators, standing constraints. It is most useful when curated. A memory that was true last quarter and never reviewed can actively mislead, so review it regularly (the course suggests monthly for active users), delete what has expired and keep it to what genuinely recurs. Project-scoped Memory keeps each Project's memory separate, so client A's context never appears in client B's sessions. Incognito chats stay out of Memory and chat history; use them for sensitive or exploratory conversations, remembering that they still follow your organisation's data retention (Domain 6). Memory import from other assistants was described as experimental in mid-2026; check availability on your plan.",
-          "Usage limits also shape long work. Per the course, limits apply over more than one period (a rolling short window and, on paid plans, a weekly allowance), and the details differ by plan. Heavy sessions on higher tiers can hit a limit mid-task. Plan for it: split big jobs into parts, park interim results in the knowledge base, and pick up from a summary instead of running one marathon session. Confirm current limits in the Help Center."
+          "Every conversation has a working-memory budget, and it runs down as messages and documents pile up. The course describes claude.ai automatically summarising earlier messages as a conversation nears its limit (on paid plans with code execution enabled), so the session can continue. Summaries compress detail. That is why instructions Claude followed in the first ten minutes can lose force ninety minutes later: Claude has not chosen to ignore them; the summary has squeezed them. Long piles of material also have a soft middle, where things are most easily missed. Prune what the task no longer needs (superseded drafts, documents you have finished with) before the window fills.",
+          "Signs a session needs help: Claude stops following instructions it followed earlier; responses address only the latest message and ignore earlier decisions; accuracy drops in ways consistent with missing early context.",
+          "Three responses. Restart: open a new conversation; in a Project the instructions and knowledge carry over, the thread does not. Right when the session has drifted beyond recovery or you are starting a genuinely new task. Summarise: before restarting, ask Claude for the current state (decisions made, work in progress, open questions) and paste that into the new conversation. Carry decisions forward, not transcripts. Persist: information every future session needs goes into Memory or the Project knowledge base, so it never has to be re-entered.",
+          "Example: two hours into drafting a tender response, Claude starts ignoring the agreed word limit. Ask it for a state summary (the agreed structure, the word limits, sections finished, open questions), open a new conversation in the same Project and paste the summary in. Then add the word limit to the Project instructions so it can never fade again: that is restart, summarise and persist in one move.",
+          "Memory keeps work-relevant facts across sessions: your role, format preferences, frequent collaborators, standing constraints. It is most useful when curated. A memory that was true last quarter and never reviewed can actively mislead, so review it regularly (the course suggests monthly for active users), delete what has expired and keep it to what genuinely recurs. Project-scoped Memory keeps each Project's memory separate, so client A's context never appears in client B's sessions. Incognito chats (standalone chats, not conversations inside a Project) stay out of Memory and chat history; use them for sensitive or exploratory conversations, remembering that they still follow your organisation's data retention (Domain 6). Memory import from other assistants was described as experimental in mid-2026 and documented for Free, Pro, Max and Team plans but not Enterprise. Where it is not available, the course's fallback is to add the key facts to Memory by hand in your memory settings, not to route them into a Project knowledge base. Confirm current availability at support.claude.com.",
+          "Usage limits also shape long work. Per the course, limits apply over more than one period (a rolling short window and, on paid plans, weekly limits across models, with a separate weekly pool for the highest tier), and the details differ by plan. Heavy sessions on higher tiers can hit a limit mid-task. Plan for it: split big jobs into parts, park interim results in the knowledge base, and pick up from a summary instead of running one marathon session. Confirm current limits in the Help Center."
         ],
         tables: [{
           cap: "Restart, summarise or persist",
@@ -620,7 +778,9 @@ window.LEARN_DATA["ccao-f"] = {
           "Memory is curated: review regularly, delete what expired, keep what recurs.",
           "Project-scoped Memory keeps workstreams and clients apart.",
           "Incognito keeps a chat out of Memory and history; it does not override organisational retention.",
-          "Plan long work around usage limits: segment, save interim results, restart from a summary."
+          "Plan long work around usage limits: segment, save interim results, restart from a summary.",
+          "Prune what the task no longer needs before the window fills.",
+          "Incognito applies to standalone chats, not to conversations inside a Project."
         ],
         build: ["Worked question Q4: the shallow analysis", WQ + "q4--domain-3-the-shallow-analysis"],
         traps: [
@@ -628,7 +788,8 @@ window.LEARN_DATA["ccao-f"] = {
           { move: "Repeat the formatting instruction louder in the same two-hour session", why: "The session's early context has degraded. Restart from a summary, or persist the format as a standing instruction." },
           { move: "Let Memory keep everything so Claude never forgets", why: "Stale and excess entries mislead. Keep what genuinely recurs and review it." },
           { move: "Keep one long conversation running all week to save setting up", why: "Quality sags as the window fills. Persist what recurs and start fresh conversations." },
-          { move: "Use one Project for two competing clients and rely on careful prompting to keep them apart", why: "Separate Projects with their own scoped Memory are what keep contexts apart." }
+          { move: "Use one Project for two competing clients and rely on careful prompting to keep them apart", why: "Separate Projects with their own scoped Memory are what keep contexts apart." },
+          { move: "Switch to a bigger model mid-session to recover the lost detail", why: "The window has degraded, not the model. Restart from a summary of decisions and key state." }
         ]
       }
     ],
@@ -659,6 +820,16 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Analyse requirements and use cases with Claude", w: null,
         scope: "Use Claude to turn messy inputs into structured, testable requirements, and to identify where in a process Claude adds value.",
+        short: "Give Claude the messy inputs and ask for a table of requirements, each traced to its source and marked answered or open. Then have it attack its own list for ambiguous and hidden requirements, and check the list against the source yourself.",
+        terms: [
+          ["requirement", "something the solution must do or meet, stated so you can check it was met"],
+          ["task definition", "a vague need made specific: what, for whom, how often, from which data, in which format"],
+          ["traceability", "each requirement points back to the section it came from"],
+          ["pressure-testing", "asking Claude which requirements are ambiguous, readable two ways or only implied"],
+          ["implied requirement", "one stated only indirectly, for example through a scoring criterion"],
+          ["use case", "a specific job in a process where Claude could help"],
+          ["impact against effort", "ranking candidate steps by value gained against work needed; start high impact, low effort"]
+        ],
         lesson: [
           "Work rarely arrives tidy. It comes as a long document, a tangle of emails or something said in a corridor. Claude is good at converting that into requirements others can work from. Upload the raw inputs and ask for a structured analysis rather than a narrative summary: each requirement as a row, with its source, its status and anything ambiguous or missing flagged.",
           "A business need stated as 'we need better reporting' is not actionable. Claude can help turn it into task definitions you can build against and check: which report, for whom, how often, from which data, in which format. Example: a bid team turns a 40-page tender document and a scattered email thread into a table of every distinct requirement, each traced to its section, marked answered or open, with ambiguities flagged as clarifying questions for the client. Because this recurs, it lives in a Project: past winning bids in the knowledge base, the extraction format in the standing instructions, the formatting procedure in a Skill. No technical build is needed.",
@@ -685,6 +856,14 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Leverage Claude for research, planning and process optimisation", w: null,
         scope: "Use Claude to synthesise research, build plans and improve processes, pairing synthesis with computed analysis and keeping judgement steps human.",
+        short: "Let Claude pull ideas together and lay out options, but have code execution compute the numbers a plan rests on. Claude recommends; the person who owns the budget and the risk decides.",
+        terms: [
+          ["synthesis", "pulling many considerations and sources into one structured view"],
+          ["verified analysis", "figures computed with code execution from the actual data, not estimated in prose"],
+          ["assumptions", "what a recommendation takes as given; listed separately so they can be challenged"],
+          ["judgement step", "a decision weighing risk appetite, budget or politics Claude cannot see; it stays human"],
+          ["process optimisation", "improving a process one step at a time against a measure chosen in advance"]
+        ],
         lesson: [
           "Plans combine two kinds of work that need different treatment: pulling ideas together, which Claude does well, and arithmetic, which must be computed and checked. Claude can gather the considerations, lay out the options and set out the trade-offs. For information after its training date, web search covers quick lookups and Research supplies deeper current inputs. Synthesis is also where unverified claims enter a plan, so the checking habits from Domain 2 apply throughout.",
           "Where the plan depends on figures, get them computed. Give Claude the dataset and let code execution work out trends, rates and totals and to draw the charts, then have Claude synthesise the recommendation from those computed figures. A staffing plan built on a guessed utilisation rate is a guess; one built on a computed analysis of the actual timesheets stands up to questions about every line. Marking which parts of a plan depend on a figure shows you where checking matters most.",
@@ -710,10 +889,19 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Support solution design, development and iteration", w: null,
         scope: "Use Claude as a design collaborator through an explicit loop of ideation, prototype, feedback and refinement, and recognise when a solution has outgrown the associate's scope.",
+        short: "Build solutions in a loop (ideas, a prototype, feedback, refinement) inside a Project so earlier decisions hold. Once other people depend on the result as a system, hand it to a Claude Developer or Architect.",
+        terms: [
+          ["iteration loop", "ideate, prototype, gather feedback, refine, repeat"],
+          ["prototype", "a first working version that makes one option concrete enough to test"],
+          ["artifact", "Claude's editable output panel; it can hold a small interactive tool such as a dashboard"],
+          ["escalation signal", "others now rely on the solution (uptime, security, integration), so it has left associate scope"],
+          ["Claude Developer", "the role for API integration, agent building and tool development"],
+          ["Claude Architect", "the role for enterprise architecture, integration design and governance at scale"]
+        ],
         lesson: [
           "Treat Claude as a partner in design rather than a machine that dispenses answers. The value comes from a deliberate loop: generate options, make one concrete as a prototype, gather feedback, refine, and repeat until the solution holds. Running the loop inside a Project keeps the context, constraints and earlier decisions stable, so every round starts from where the previous one ended.",
           "Non-developers can get a long way by describing changes rather than coding them. Example: a team wants a simple holiday-cover planner. Round one asks Claude for an artifact showing who is off when, from the attached rota. Round two highlights days that fall below minimum cover and adds a filter by team. Round three adds a printable month view. Three rounds, and nobody on the team wrote any code. The same loop works for a process design, a template or a training plan.",
-          "Know the escalation signal. The planner worked because it served one small team's internal need. When a solution becomes something others depend on, with expectations of uptime, security, access control or integration with other systems, it has outgrown associate scope. If other departments start planning their staffing around that planner, the next step is to bring in a Claude Developer or Architect, not another prompt. Recognising that boundary and escalating across it is itself a tested skill.",
+          "Know the escalation signal. The planner worked because it served one small team's internal need. When a solution becomes something others depend on, with expectations of uptime, security, access control or integration with other systems, it has outgrown associate scope. If other departments start planning their staffing around that planner, the next step is to bring in a Claude Developer or Architect, not another prompt. The course draws the line like this: API integration, agent building and tool development belong with a Claude Developer; enterprise architecture, integration design and governance at scale belong with a Claude Architect. Recognising that boundary and escalating across it is itself a tested skill.",
           "Keep the loop honest: test each version against the need you started from, collect feedback from the people who will use it, and change one thing per cycle so you know what helped."
         ],
         know: [
@@ -721,7 +909,8 @@ window.LEARN_DATA["ccao-f"] = {
           "Run it in a Project so context and decisions stay stable between cycles.",
           "Describe the change you want; artifacts let non-developers build small tools by iteration.",
           "When others depend on it as infrastructure (uptime, security, integration), escalate to Developer or Architect expertise.",
-          "Test each version against the original need, with the real users."
+          "Test each version against the original need, with the real users.",
+          "Developer: API integration, agents, tools. Architect: enterprise architecture, integration design, governance at scale."
         ],
         build: ["Worked question Q5: the impressive rebuild", WQ + "q5--domain-4-the-impressive-rebuild"],
         traps: [
@@ -734,9 +923,22 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Integrate Claude into existing workflows", w: null,
         scope: "Augment or redesign workflows by deciding, step by step, which work is AI-appropriate, collaborative or human-retained, and embedding the right feature at each AI step.",
+        short: "Map the workflow step by step and decide for each step whether it is AI-appropriate, collaborative or human-retained, judged on reversibility, stakes and accountability. Augment a process that works; redesign only one that is broken.",
+        terms: [
+          ["Delegation", "AI Fluency Framework name for deciding what Claude does, what a person keeps and what they do together"],
+          ["delegation map", "a step-by-step table that classifies each step of a workflow"],
+          ["AI-appropriate", "Claude can do the step with normal checks (the course's exercise calls this automate)"],
+          ["collaborative", "Claude drafts and a named person reviews and edits"],
+          ["human-retained", "a person does and owns the step, such as approving or sending"],
+          ["review gate", "a named checkpoint where a specific person checks specific things before work moves on"],
+          ["halo delegation", "handing over a step because the previous one went well"],
+          ["augment or redesign", "add Claude to a healthy process, or rebuild a broken one"]
+        ],
         lesson: [
           "There is a difference between 'I use Claude' and 'our workflow uses Claude'. The second is a repeatable process where Claude does specific steps every time, and it can go wrong when teams delegate the wrong steps. Picture two finance teams using Claude for supplier invoice queries. One has Claude draft each reply and a clerk check it against the ledger before it goes; replies get faster and stay accurate. The other lets Claude send replies itself; one promises a credit nobody approved, and the tool is switched off. Same product; different delegation. The course calls this competency Delegation.",
-          "Map the workflow step by step and classify each step as AI-appropriate, collaborative or human-retained, judged on three criteria. Reversibility: if Claude gets this step wrong, can it be put right? Stakes: what does an error at this step cost? Accountability: who answers for the result? Claude can draft; it cannot take the blame. Then fit a feature to each AI step: a Skill where a procedure repeats, code execution where data is involved, and a named review gate at every human step. A configured Skill gives the same result on a busy day; a clever prompt someone has to remember does not.",
+          "Map the workflow step by step and classify each step as AI-appropriate, collaborative or human-retained, judged on three criteria. Reversibility: if Claude gets this step wrong, can it be put right? Stakes: what does an error at this step cost? Accountability: who answers for the result? Claude can draft; it cannot take the blame.",
+          "Then fit a feature to each AI step: a Skill where a procedure repeats, code execution where data is involved, and a named review gate at every human step. A configured Skill gives the same result on a busy day; a clever prompt someone has to remember does not.",
+          "The split repeats in unrelated work, which is how you know the criteria are doing the deciding. For new-starter offer letters: pulling the details from the HR system export (code execution) and drafting from the approved template (a Skill) are AI-appropriate; personalising the welcome note is collaborative, with the hiring manager adding the human voice; confirming the pay figures match what was approved, and sending the signed offer, stay human-retained.",
           "Watch for three mapping errors. Halo delegation: handing a step to AI because the previous one went well; judge each step on its own. Collapsing collaborative into automatic: 'AI drafts, a person reviews' becomes 'AI drafts' when nobody actually staffs the review; if nobody is actually assigned to review, the step is automated in all but name. Mapping the tool instead of the work: designing around a Skill you like rather than the actual steps. Over-delegation is giving AI an irreversible or high-accountability step because it drafted well; drafting quality is not a licence to delegate the decision.",
           "Augment or redesign? If the process works and the existing tools already hold the data, connect Claude at the step that pays and leave the rest standing. Redesign is for a process that is already broken, where steps exist only because old tools forced them. And start simple: a direct prompt and built-in features first; a chain (one step feeds the next), a router (easy items to a fast model, hard ones up) or parallel sections when needed; a free-running agent last, because flexibility costs control."
         ],
@@ -758,7 +960,8 @@ window.LEARN_DATA["ccao-f"] = {
           "Embed features: Skill for procedure steps, code execution for data steps, named review gates for human steps.",
           "Mapping errors: halo delegation, unstaffed review gates, mapping the tool instead of the work.",
           "Augment a healthy process; redesign only a broken one.",
-          "Start simple: prompt, then chain, router or parallel; an agent last."
+          "Start simple: prompt, then chain, router or parallel; an agent last.",
+          "Across unrelated work the split repeats: mechanical and drafting steps delegate; confirming figures and irreversible sends stay human."
         ],
         build: ["Worked question Q5: the impressive rebuild", WQ + "q5--domain-4-the-impressive-rebuild"],
         traps: [
@@ -767,15 +970,24 @@ window.LEARN_DATA["ccao-f"] = {
           { move: "Build an autonomous agent because it is the most advanced option", why: "Complexity before evidence. Most work is served by a prompt, a chain or a router." },
           { move: "Keep a human in the loop, without naming who reviews what and when", why: "An unstaffed gate is automation in disguise. Name the reviewer, what they check and when." },
           { move: "Design the workflow around the Skill the team already built", why: "Map the work first, then choose features for each step." },
-          { move: "Let Claude send the signed contract once the human has approved it", why: "Sending is irreversible, external and binding. Keep it human-retained." }
+          { move: "Let Claude send the signed contract once the human has approved it", why: "Sending is irreversible, external and binding. Keep it human-retained." },
+          { move: "Change nothing, because the process already works", why: "Working is not the same as improved. Add Claude at the one step that clearly pays, measure it, and grow only if the results earn it." }
         ]
       },
       {
         title: "Communicate Claude's value and limitations to stakeholders", w: null,
         scope: "Describe what a Claude-assisted workflow does and does not do, calibrated to the audience, with the human oversight named and the value measured.",
+        short: "Tell stakeholders what Claude does and does not do, with the human checkpoint named and your own pilot numbers. Pitch the detail to the audience: specialists want failure modes, executives want outcomes and safeguards, risk teams want assurance.",
+        terms: [
+          ["stakeholder", "anyone who relies on or answers for the workflow: a manager, a client, a risk team"],
+          ["AI literacy", "how much the audience already understands about AI; it sets the level of detail"],
+          ["overstatement", "claims such as fully automated or handles X that hide the human gate"],
+          ["pilot", "a small, measured trial on your own work that gives you real numbers"],
+          ["capacity framing", "describing the gain as time moved to better work, not people replaced"]
+        ],
         lesson: [
           "Once Claude is part of a team process, you will explain it to people who were not involved: your manager, a client, the risk team. They will trust you if your claims hold up, so give the limits the same airtime as the benefits. 'Claude drafts the first-pass redline, which a lawyer reviews' is accurate and credible. 'Claude handles contract review' promises more than it delivers, and the first mistake will make that obvious.",
-          "Calibrate the message to the audience's AI literacy. Take the invoice-query workflow. The finance manager wants the mechanics and the weak spots: Claude reads the query, matches it to the ledger and drafts a reply; it does not approve credits; it can misread a query that refers to two invoices at once. The finance director wants the result, the safeguards and the risk: replies out in a day instead of three, every reply still checked by a clerk. The auditors want assurance: no reply leaves without a named person approving it, and approvals are logged. Same workflow, same gate, different detail.",
+          "Calibrate the message to the audience's AI literacy. Take the invoice-query workflow. The finance manager wants the mechanics and the weak spots: Claude reads the query, matches it to the ledger and drafts a reply; it does not approve credits; it can misread a query that refers to two invoices at once. The finance director wants the result, the safeguards and the risk: replies out in a day instead of three, every reply still checked by a clerk. The auditors want assurance: no reply leaves without a named person approving it, and approvals are logged. Same workflow, same gate, different detail. This is the Description competency turned outwards: the same precise statement of what the tool can and cannot do, aimed at people instead of at Claude.",
           "Name the review gates. Naming the human checkpoints raises confidence in an AI-assisted process; it does not undermine it. Watch for phrases that quietly overstate: 'fully automated' is almost never true; 'Claude handles X' removes the human gate from the sentence; 'basically as good as a person' sets a standard the tool will eventually miss in public. The fix is always the same: say what the tool does, then name the human checkpoint.",
           "Quantify with your own pilot numbers, never a vendor's headline. Say what it costs and where it still fails, and frame the change as capacity moved to better work, not people replaced. If you cannot quantify the value yet, that is a signal to pilot longer, not a presentation problem."
         ],
@@ -833,6 +1045,16 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Configure Claude Projects with instructions and knowledge", w: null,
         scope: "Set up Projects so standing instructions, knowledge sources, Skills and scoped Memory each hold the right part of a recurring need.",
+        short: "A Project has four places to put things: standing instructions for behaviour, the knowledge base for facts, Skills for procedures, and scoped Memory for what the Project has already settled. Ask of each item: is it a rule, a reference or a procedure?",
+        terms: [
+          ["configuration", "setting Claude up in advance so every conversation starts from the right baseline"],
+          ["standing instructions", "Project-level rules about behaviour (tone, format, checking) that apply to every chat in it"],
+          ["knowledge base", "the Project's uploaded documents: policies, templates, past work"],
+          ["Skill", "a reusable procedure stored at account level (under Customize) and available to any Project"],
+          ["scoped Memory", "a Project's own memory of settled decisions and preferences, kept apart from other Projects"],
+          ["fencing the knowledge", "instructing Claude to answer only from the Project's materials and to say unknown otherwise"],
+          ["pairing rule", "many needs use two slots together, such as a citation rule in instructions and the documents in knowledge"]
+        ],
         lesson: [
           "Using Claude means typing a good prompt today. Operating Claude means preparing the ground so that context, rules and procedures are waiting before anyone types, and each conversation begins from a prepared starting point. Configuration is leverage: set it up once and benefit on every conversation after. It also turns individual skill into team capability: with a well-kept set-up, colleagues asking the same thing get answers of the same standard.",
           "A Project offers four places to put things, and most of the craft is choosing the right one. Standing instructions set how Claude behaves in every chat in the Project: its tone, default formats and checking habits. The knowledge base holds facts and reference material Claude draws on without re-uploading: policies, templates, past deliverables, the brand guide. Skills hold repeatable procedures; they live at account level (under Customize, in the course's description) and are available to every Project. Scoped Memory keeps what this Project has already agreed (stakeholder names, standing preferences, earlier decisions), kept apart from your other Projects. Ask of each item: rule, reference or procedure? A stable fact goes in knowledge; an evolving record of Project decisions goes in Memory.",
@@ -866,12 +1088,22 @@ window.LEARN_DATA["ccao-f"] = {
           { move: "Upload the policy files and assume Claude will stick to them", why: "Without a fence it fills gaps from general knowledge. Instruct it to answer only from the materials and say unknown." },
           { move: "Store the brand colours and template as Memory entries", why: "Stable reference material goes in the knowledge base. Memory is for settled Project decisions and preferences." },
           { move: "Use one Project for two competing clients and separate them by careful prompting", why: "Prompting is not a boundary. Separate Projects with scoped Memory keep the contexts apart." },
-          { move: "Switch Memory off for everyone to stop client details mixing", why: "That loses useful continuity. Scoped Memory per Project gives continuity without crossover." }
+          { move: "Switch Memory off for everyone to stop client details mixing", why: "That loses useful continuity. Scoped Memory per Project gives continuity without crossover." },
+          { move: "Instruct Claude to prefer the uploaded documents where possible", why: "A preference leaves gap-filling open, and you still cannot tell which is which. Fence it: answer only from these materials, say unknown otherwise." }
         ]
       },
       {
         title: "Manage uploaded knowledge and connectors", w: null,
         scope: "Curate uploaded knowledge and connected sources such as Google Drive and Gmail: what to connect, how narrowly, and where each connector's capability ends.",
+        short: "A connector lets Claude reach a tool you already use, such as Google Drive or Gmail, but only what you authorise. Connect the narrowest scope the job needs, learn what each connector can and cannot do, and keep uploaded files current.",
+        terms: [
+          ["connector", "an authorised link from Claude to an outside system such as Google Drive or Gmail"],
+          ["scope", "which folders, labels or records the connector can see"],
+          ["least access", "giving a connector only what the job needs (least privilege)"],
+          ["capability boundary", "what a connector can do (search, read) and cannot (send, edit)"],
+          ["vetted connector", "the version your organisation has approved, added through the approved path"],
+          ["superseded file", "an old version replaced by a newer one; remove it so Claude cannot cite it"]
+        ],
         lesson: [
           "Connectors let Claude reach into tools you already use, for example to look up a file in Google Drive or locate a message in Gmail. Claude sees only what you authorise, and the set should be deliberate rather than everything by default. Narrow each connector to the minimum the job needs. Connecting a whole shared drive and telling Claude to ignore the irrelevant files does not work: the irrelevant files still join the search, and accuracy pays for it.",
           "Each connector can do some things and not others. A mail connector might find and read messages yet be unable to send one. Ask it for something outside its range and you may get a puzzling non-result rather than a clear refusal, and the course reports a field pattern where such failures look like bugs, get reported to the wrong team and stall. Learn each connector's boundary before you build a workflow on it, and check the current list of connectors and capabilities at support.claude.com.",
@@ -908,8 +1140,16 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Create effective system-level instructions", w: null,
         scope: "Write persistent instructions precise enough to change output in every conversation, embedding format, tone and verification guardrails ahead of need.",
+        short: "System-level instructions (in claude.ai, a Project's standing instructions) are rules Claude follows in every conversation without being reminded. Write them precisely enough that two people would read them the same way.",
+        terms: [
+          ["system-level instructions", "the exam guide's term for persistent instructions; in claude.ai, Project instructions"],
+          ["guardrail", "a standing rule that heads off a known failure, such as cite every figure or mark unverified figures"],
+          ["silent failure", "a vague instruction changes nothing, and no error tells you"],
+          ["precision test", "two different readers would interpret the instruction the same way"],
+          ["priority rule", "a line saying which rule wins when two collide, such as brevity over completeness"]
+        ],
         lesson: [
-          "Teams keep asking whether the guardrails can be set once instead of re-typed every conversation. Standing instructions are exactly that. Start with whatever you find yourself typing again and again: verification behaviours (cite the source for every claim, say you do not know rather than guess), format defaults and tone. Written once, every conversation in the Project inherits them without anyone remembering to ask.",
+          "Teams keep asking whether the guardrails can be set once instead of re-typed every conversation. Standing instructions are exactly that. The exam guide calls them system-level instructions; in claude.ai they are a Project's instructions. Start with whatever you find yourself typing again and again: verification behaviours (cite the source for every claim, say you do not know rather than guess), format defaults and tone. Written once, every conversation in the Project inherits them without anyone remembering to ask.",
           "Anticipate the use cases. If the Project exists to produce client work, set its format and register in advance, so first drafts arrive nearly finished instead of needing the same corrections every time.",
           "Precision is the whole game, because vague instructions fail silently. 'Be professional' or 'make the reports good and accurate' give Claude almost nothing to act on, and quality keeps varying. 'Use a formal register, define every acronym on first use, keep paragraphs under four sentences' changes the output. 'Give the source of each figure; label any figure absent from the supplied data as unverified; begin with a one-sentence headline' makes the verification behaviour consistent and the headline appear every time. The test: would two different people read the instruction the same way?",
           "Structure helps instructions hold. Keep the role, the constraints and the output shape in separate, labelled blocks; rules packed into one long paragraph lose their middle. When two rules can collide, say which wins (brevity over completeness, or the reverse). Keep instructions about behaviour; put facts in the knowledge base and procedures in a Skill. The colleague test applies here too."
@@ -930,7 +1170,8 @@ window.LEARN_DATA["ccao-f"] = {
           "Vague instructions fail silently. Precise, testable ones change every output.",
           "Test: two different readers would interpret it the same way.",
           "Separate role, constraints and output shape; say which rule wins when two collide.",
-          "Behaviour in instructions; facts in knowledge; procedures in Skills."
+          "Behaviour in instructions; facts in knowledge; procedures in Skills.",
+          "System-level instructions (the guide's term) are a Project's standing instructions."
         ],
         build: ["Worked question Q6: the weekly report setup", WQ + "q6--domain-5-the-weekly-report-setup"],
         traps: [
@@ -942,13 +1183,23 @@ window.LEARN_DATA["ccao-f"] = {
         ]
       },
       {
-        title: "Maintain and update configurations", w: null,
-        scope: "Keep instructions, knowledge sources, Skills and Memory current through scheduled review, and recognise stale configuration as the cause of quietly degrading output.",
+        title: "Inform, maintain and update configurations", w: null,
+        scope: "Keep Claude informed when facts change, keep instructions, knowledge sources, Skills and Memory current through scheduled review, and recognise stale configuration as the cause of quietly degrading output.",
+        short: "Configuration goes stale without warning: old rules, replaced files, out-of-date Skills, wrong Memory entries. Tell the set-up when facts change, review active Projects on a schedule (monthly is the course's suggestion), and fix the configuration rather than re-prompting.",
+        terms: [
+          ["stale configuration", "instructions, files, Skills or Memory that no longer match how the team works"],
+          ["drift", "quality slipping gradually as the configuration falls out of date"],
+          ["review cadence", "a fixed schedule for checking the set-up"],
+          ["custom Skill", "a Skill you uploaded; unlike built-in or organisation Skills, it changes only when you re-upload it"],
+          ["Memory lifecycle", "review, edit or delete, export before big changes, reset when polluted"],
+          ["inform", "add a changed fact to the configuration once, in the right slot, instead of re-supplying it every chat"]
+        ],
         lesson: [
           "Configurations are living assets, and every part drifts towards stale: rules written for how the team worked last quarter, reference files that have since been replaced, a Skill out of date, a Memory entry about someone who has left. Stale configuration degrades output quietly, with no error message. If quality is slipping and nothing obvious has changed, the review is overdue.",
           "Set a recurring review for each active Project; the course suggests monthly. Do the instructions describe how the team works today? Has every replaced document gone from knowledge? Are the right Skills switched on, and up to date? Is Memory still true? Skills change in two ways, per the course: Anthropic-built and organisation-provisioned Skills update automatically, whereas a custom Skill you uploaded stays as it is until you upload a new version. If a Skill turns out a slightly wrong format each time, fix the Skill; better prompting will not.",
           "Look after Memory as you would a live document: read it through, edit or delete stale entries, and keep an exported copy before big changes. If a Project's Memory has collected so much out-of-date material that it misleads, clear it and start again. A few correct entries beat many doubtful ones. Configuration is also additive: when a fact that matters keeps having to be re-supplied (a constraint, a preference, some background), add it explicitly to the instructions or Memory.",
-          "Example of a quiet failure: a client-updates Project starts addressing a contact who left in the spring and quoting last year's service levels. The audit finds a Memory entry still naming the old contact, two versions of the service agreement in the knowledge base, and an instruction pointing at the old one by name. The fix is maintenance (correct the Memory entry, retire the old agreement, update the instruction), not a new prompt and not a bigger model."
+          "Example of a quiet failure: a client-updates Project starts addressing a contact who left in the spring and quoting last year's service levels. The audit finds a Memory entry still naming the old contact, two versions of the service agreement in the knowledge base, and an instruction pointing at the old one by name. The fix is maintenance (correct the Memory entry, retire the old agreement, update the instruction), not a new prompt and not a bigger model.",
+          "Inform is the first verb in the official skill, and it is the cheapest maintenance there is. When a fact the set-up relies on changes (a new escalation contact, a revised service-level target, a renamed product, a new template), update the configuration that day, in the one place it belongs: behaviour in the instructions, reference in knowledge, a settled preference in Memory. Correcting it in each conversation instead means every colleague using the Project gets the old version until someone notices."
         ],
         tables: [{
           cap: "Monthly maintenance checklist",
@@ -967,7 +1218,8 @@ window.LEARN_DATA["ccao-f"] = {
           "Built-in and organisation Skills update automatically; custom Skills change only when re-uploaded.",
           "Memory: review, edit, delete, export before big changes, reset when polluted.",
           "Something you keep re-supplying belongs in instructions or Memory.",
-          "It used to work and now it does not: suspect stale configuration first."
+          "It used to work and now it does not: suspect stale configuration first.",
+          "Inform: when a fact the set-up relies on changes, update the configuration that day, in the right slot."
         ],
         build: ["Worked question Q6: the weekly report setup", WQ + "q6--domain-5-the-weekly-report-setup"],
         traps: [
@@ -975,7 +1227,8 @@ window.LEARN_DATA["ccao-f"] = {
           { move: "Add a note asking Claude to watch out for outdated material", why: "That hands your maintenance job to the model. Update or remove the stale items yourself." },
           { move: "Remove the up-to-date files because Claude keeps mixing versions", why: "Remove the superseded one, and fix the instruction and Memory that still point at it." },
           { move: "Set up the Project once and leave it; good configuration does not need touching", why: "Every part drifts. Review on a schedule." },
-          { move: "Write a new prompt each time the output goes stale", why: "The cause sits in configuration, so prompts only patch it for one conversation. Fix the set-up." }
+          { move: "Write a new prompt each time the output goes stale", why: "The cause sits in configuration, so prompts only patch it for one conversation. Fix the set-up." },
+          { move: "Start a fresh Project every month as a rule so nothing goes stale", why: "Rebuilding on a timer throws away settled set-up. Audit what changed and update that." }
         ]
       }
     ],
@@ -1006,11 +1259,22 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Identify appropriate and inappropriate use cases", w: null,
         scope: "Classify proposed uses of Claude as fully appropriate, appropriate with human review, or inappropriate, with reasons and a defined review gate.",
+        short: "Screen each proposed use with four questions: can mistakes be reversed, what does an error cost, does it need human creativity or empathy, and who is accountable. Classify it as fully appropriate, appropriate with human review (with a named gate), or inappropriate.",
+        terms: [
+          ["use case", "a proposed job for Claude, judged as a whole"],
+          ["consequence of error", "what a wrong output costs, and to whom"],
+          ["load-bearing criterion", "the one criterion that, if it changed, would move the use case into another class"],
+          ["appropriate with human review", "useful, but only with a defined gate: who reviews, what they check, when"],
+          ["defined gate", "a review step with a named reviewer, a specific check and a timing before use"],
+          ["high-risk areas", "areas Anthropic's usage policy singles out: legal, healthcare, insurance, finance, employment and housing, academic testing, media"],
+          ["usage policy", "Anthropic's rules on how Claude may be used; confirm the current text at anthropic.com"]
+        ],
         lesson: [
           "One inappropriate use case can freeze an organisation's whole AI programme, so screen each proposal with a method, not instinct. The course reuses the Delegation criteria from Domain 4. Reversibility: if the output is wrong, can someone catch and reverse it before damage is done? Consequence of error: what does it cost if the output is wrong? Need for human creativity or empathy: does the task need judgement, relationship or care that AI cannot supply? Accountability: who answers for the outcome, and can they exercise that over an AI-produced result?",
           "The criteria interact; they are not a checklist where one failure ends the discussion. A note of sympathy to a client carries little risk and can be revised, yet because it is about a relationship, a person should write and own it. A financial summary that feeds a decision is consequential, yet appropriate when a named reviewer signs off before use, which restores reversibility and accountability. Run all four, then name the load-bearing criterion: the one that, if it changed, would move the use case into a different class. Naming it makes your call defensible to a risk reviewer; 'it feels risky' does not travel.",
           "Three classes, each with written reasons. Fully appropriate: can be undone, little harm if wrong, nothing that needs a human touch; hand it over with the usual checks (an internal FAQ drafted from approved policy). Appropriate with human review: useful, but stakes or accountability need a human gate (summarising CVs into a shortlist, with bias safeguards and the hiring manager owning the selection). Inappropriate: the consequence, irreversibility or human element means AI should not do it, and you name the human role that must (a final medical, legal or benefits determination).",
-          "The middle class is the one people get wrong: they stop at the label. A real gate names three things: the reviewer (whoever is accountable, not whoever has a spare minute), the check (the particular risk, such as accuracy, fairness or policy) and the timing (before anyone uses the output). 'A support agent checks each drafted billing reply against the account record and adjusts tone before it is sent' is a gate; 'we will keep a human in the loop' is not. Anthropic's usage policy also names high-risk areas (legal, healthcare, insurance, finance, employment and housing, academic testing, media) where consumer-facing uses need a qualified person's review and disclosure that AI is involved; confirm the current wording at anthropic.com."
+          "The middle class is the one people get wrong: they stop at the label. A real gate names three things: the reviewer (whoever is accountable, not whoever has a spare minute), the check (the particular risk, such as accuracy, fairness or policy) and the timing (before anyone uses the output). 'A support agent checks each drafted billing reply against the account record and adjusts tone before it is sent' is a gate; 'we will keep a human in the loop' is not.",
+          "Anthropic's usage policy also names high-risk areas (legal, healthcare, insurance, finance, employment and housing, academic testing, media) where consumer-facing uses need a qualified person's review and disclosure that AI is involved; confirm the current wording at anthropic.com."
         ],
         tables: [
           {
@@ -1050,17 +1314,31 @@ window.LEARN_DATA["ccao-f"] = {
           { move: "It is low-stakes and reversible, so the condolence note can go out as drafted", why: "The relationship element is load-bearing. A person owns that message." },
           { move: "It is consequential, so ban the use case outright", why: "Many consequential uses are fine with a defined gate. Classify; do not reflexively ban." },
           { move: "A smarter model makes it safe to let AI decide the claims", why: "Capability does not transfer accountability. The classification depends on the criteria, not the tier." },
-          { move: "It feels risky, so decline it", why: "A feeling is not a reason a reviewer can test. Name the criterion that makes it inappropriate." }
+          { move: "It feels risky, so decline it", why: "A feeling is not a reason a reviewer can test. Name the criterion that makes it inappropriate." },
+          { move: "Let it send the rejection letters unreviewed once testing shows high accuracy", why: "Accuracy does not transfer accountability. Employment decisions get a qualified person's review before anything reaches a candidate." }
         ]
       },
       {
         title: "Apply data sensitivity, regulatory and privacy considerations", w: null,
         scope: "Classify data before it enters any feature, and use redaction, approved paths and feature controls (Incognito, Memory settings, the code execution sandbox) to match handling to sensitivity.",
+        short: "Know how sensitive data is before it goes into any feature: green to use, yellow to check first, red to keep out unless there is an approved path. Redaction, Incognito and Memory settings manage data; none of them makes forbidden data allowed.",
+        terms: [
+          ["data classification", "sorting data by sensitivity before use; here green, yellow and red"],
+          ["personal data (PII)", "anything that identifies a person: names, contact details, account numbers"],
+          ["regulated data", "data governed by law or rules, such as health, financial or government records"],
+          ["redaction", "removing identifiers the task does not need before upload"],
+          ["anonymisation", "replacing identifiers so nobody can be identified, such as Customer 1, Customer 2"],
+          ["partial redaction", "removing some identifiers but leaving others that still point to a person"],
+          ["approved path", "an entry point your organisation has confirmed for that kind of data"],
+          ["data retention", "how long your organisation keeps records of use; Incognito does not change it"]
+        ],
         lesson: [
-          "Before any data enters any feature, know its sensitivity. A three-level scheme is quick enough to use every time. Green, fine to use: anything already public, data that is anonymised or aggregated, internal material approved for broad circulation. Yellow, check first: internal-only documents, anything carrying people's names or contact details, drafts about a deal or launch not yet announced. Red, out unless there is an approved route: regulated records such as health, financial or government data, passwords and keys, and anything you hold under a confidentiality agreement with another party. Unsure between two tiers? Treat it as the more sensitive until you can confirm. Your organisation's policy is the authority, and when unsure you ask before uploading.",
+          "Before any data enters any feature, know its sensitivity. A three-level scheme is quick enough to use every time.",
+          "Green, fine to use: anything already public, data that is anonymised or aggregated, internal material approved for broad circulation. Yellow, check first: internal-only documents, anything carrying people's names or contact details, drafts about a deal or launch not yet announced. Red, out unless there is an approved route: regulated records such as health, financial or government data, passwords and keys, and anything you hold under a confidentiality agreement with another party. Unsure between two tiers? Treat it as the more sensitive until you can confirm. Your organisation's policy is the authority, and when unsure you ask before uploading.",
           "Redaction gets the analytical value without exposing the data, when the task does not depend on the identifiers. Trends across a customer list do not need the customers' names; 'Customer 1, Customer 2' loses nothing. Two failure modes. Partial redaction: take out the name but leave an account number, an unusual job title or an exact date, and in a small group the person may still be identifiable; remove every field that could point to someone. Redaction that defeats the purpose: when the analysis really depends on the sensitive details, removing them is not a fix; confirm an approved path or keep the data out.",
-          "Feature controls act on the classification. Code execution runs in a sandbox and processes uploaded files there, so review what you upload before running analysis. Memory carries information across sessions, and for sensitive work that carry-over can be the problem. Incognito keeps a chat out of chat history and Memory, but per the course it still follows the organisation's data-retention policy and can appear in organisational exports: memory exclusion and data retention are separate controls. Organisation-level Memory controls differ by plan (the course describes Enterprise owners holding them and Team plans lacking them); check the current Help Center article.",
-          "A frequent mistake is to switch on Incognito and treat the data as safe from then on. Incognito decides whether something is remembered, not whether the data was allowed there in the first place. For regulated data the order is fixed: first settle whether this entry point is approved for that data at all; only then decide how to handle it. Regulated work may also need outputs logged and retained the way the rules demand. If no approved, compliant path exists, stop and escalate to your admin or compliance team. No prompt instruction overrides a data rule."
+          "Feature controls act on the classification. Code execution runs in a sandbox and processes uploaded files there, so review what you upload before running analysis. Memory carries information across sessions, and for sensitive work that carry-over can be the problem. Incognito keeps a chat out of chat history and Memory, but per the course it still follows the organisation's data-retention policy and can appear in organisational exports: memory exclusion and data retention are separate controls. Organisation-level Memory controls differ by plan (the course describes Enterprise owners holding them and Team plans lacking them); check the current Help Center article. On Enterprise, per the course, Owners and Primary Owners can switch Memory off for the whole organisation.",
+          "A frequent mistake is to switch on Incognito and treat the data as safe from then on. Incognito decides whether something is remembered, not whether the data was allowed there in the first place. For regulated data the order is fixed: first settle whether this entry point is approved for that data at all; only then decide how to handle it. Regulated work may also need outputs logged and retained the way the rules demand. If no approved, compliant path exists, stop and escalate to your admin or compliance team. No prompt instruction overrides a data rule.",
+          "Entry points can differ as well. Depending on how your organisation has configured Claude, different entry points may handle data retention differently. You do not need the technical detail; you need the habit of asking before you upload when you are unsure about an entry point. Example: a team member wants to summarise a confidential acquisition memo. It is yellow: check it against policy first, and if the entry point is approved, use Incognito so it stays out of Memory and history, remembering that organisational retention still applies. If policy does not allow that entry point, the memo stays out."
         ],
         tables: [
           {
@@ -1090,7 +1368,8 @@ window.LEARN_DATA["ccao-f"] = {
           "If the task needs the sensitive data, find an approved path or keep it out.",
           "Incognito: out of history and Memory; still subject to organisational retention.",
           "Regulated data: is this entry point approved? comes before how do I handle it here?",
-          "No prompt instruction overrides a data rule. Escalate to compliance when unsure."
+          "No prompt instruction overrides a data rule. Escalate to compliance when unsure.",
+          "Retention can differ by entry point and organisation set-up: when unsure, ask before uploading."
         ],
         build: ["Worked question Q7: the launch question", WQ + "q7--domain-6-the-launch-question"],
         traps: [
@@ -1105,6 +1384,15 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Follow organisational AI policies and governance standards", w: null,
         scope: "Apply organisational policy consistently in routine decisions, audit real usage against it, stay current, and vet Skills and other features for source and reach before enabling them.",
+        short: "Governance means applying your organisation's AI policy to every routine decision, not only when someone is watching. Audit real use against the policy, keep up with changes, and check every Skill's source, reach and fit before enabling it.",
+        terms: [
+          ["governance", "the policies and habits that keep AI use safe, legal and consistent"],
+          ["AI policy", "your organisation's rules on which tools, accounts and data may be used"],
+          ["usage audit", "comparing what people actually do with what the policy requires"],
+          ["Skill trust check", "source, reach and appropriateness, checked before a Skill is enabled"],
+          ["reach", "what a Skill could touch in the session it runs in; Skills inherit the session's access"],
+          ["least privilege", "grant the narrowest access that gets the job done, and revisit it when the job changes"]
+        ],
         lesson: [
           "Rules kept only under supervision are not governance. Risk sits between the written policy and everyday practice, and that gap grows in routine, low-visibility decisions rather than in the obvious high-stakes ones. Diligence is applying the framework every time, including on a busy Friday.",
           "Audit usage against policy periodically. Compare what the team does, or plans to do, with what the policy requires, and close the gaps you find. Example: a department head looks back over a quarter of use and finds a salary spreadsheet analysed in a personal account, a connector given the whole shared drive, and a press release published without the communications sign-off. Nobody meant harm; each was a habit slipping. The fixes are habits too: a reminder of which accounts are approved, connector scope added to the Project set-up checklist, and a sign-off step that cannot be skipped for anything public. When people route around an approved path because it is slower, fix the friction so the compliant route is the easy one; blame and blanket bans do not close the gap. Policies and features both move, so something that was within the rules in the spring may not be in the autumn: stay current with both.",
@@ -1143,6 +1431,15 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Understand the ethical implications of AI use", w: null,
         scope: "Evaluate everyday outputs for bias, fairness and transparency, decide when to disclose AI assistance, and reason through or escalate ambiguous cases.",
+        short: "Ethical issues hide in ordinary work: a summary that favours one group, a screen nobody checks, AI help passed off as your own. Check fairness in routine review, disclose AI use where the setting calls for it (when unsure, disclose), and escalate the big questions.",
+        terms: [
+          ["bias", "a systematic lean that treats some people or views unfairly"],
+          ["fairness", "everyone held to the same standard and treated even-handedly"],
+          ["transparency", "being open that AI was involved"],
+          ["disclosure", "telling people that AI helped produce what they are reading or using"],
+          ["unreviewed exclusion", "people filtered out with no person looking at who was dropped"],
+          ["escalating an ethics question", "taking a large or high-harm question to your governance or ethics function, with your reasoning"]
+        ],
         lesson: [
           "Ethical problems rarely look like ethical problems; they turn up inside ordinary work. A summary that leans towards one group, a recommendation built on a slanted framing, an AI-assisted document presented as wholly human-written: routine outputs with ethical weight. Checking for bias, fairness and transparency belongs in normal review, not a separate ethics exercise.",
           "Bias can enter through your wording, through how the question is framed, or through patterns in the text the model generates. Wherever output affects people (recruitment, appraisals, messages aimed at particular groups), check that everyone is treated fairly and that the framing has not pushed the answer one way. The more an individual stands to lose, the more this matters. An automated screen that filters people out with no human looking at the exclusions is the sharpest case: a systematic disadvantage to some group can go undetected because nobody ever sees who was dropped. Apply the slant tells from Domain 2: one side only, the other side dismissed, a group stereotyped.",
@@ -1176,7 +1473,8 @@ window.LEARN_DATA["ccao-f"] = {
           { move: "Pass on only the applicants the filter kept, with nobody looking at those it rejected", why: "Unreviewed exclusions hide bias. A person reviews the exclusions as well as the shortlist." },
           { move: "The output is polished and accurate, so there is no fairness issue", why: "Accuracy and fairness are separate. Check how each group is treated." },
           { move: "No policy covers this case, so go ahead as you see fit", why: "Reason it through and document it; escalate if the harm or scale is large." },
-          { move: "Present the AI-assisted analysis as entirely your own work", why: "Concealment undermines trust and may breach policy. Disclose AI assistance where the setting calls for it." }
+          { move: "Present the AI-assisted analysis as entirely your own work", why: "Concealment undermines trust and may breach policy. Disclose AI assistance where the setting calls for it." },
+          { move: "Leave out the AI disclosure because it might lower customer trust", why: "Disclosure is required, not optional. Tell people at the start; trust is lost when they find out later." }
         ]
       }
     ],
@@ -1207,8 +1505,19 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Identify, diagnose and resolve underperforming prompts and outputs", w: null,
         scope: "Trace a poor output to its root cause (under-specification, context overload, wrong feature or model, stale configuration, or a task that does not fit) and apply the matching fix.",
+        short: "When output is poor, note when it went wrong, then check in order from cheapest: the prompt, the information and context, the feature or model, the configuration, and only then whether the task suits Claude at all.",
+        terms: [
+          ["root cause", "the underlying reason an output failed, not the symptom"],
+          ["under-specification", "the prompt lacked context, constraints or format; wrong from the first answer"],
+          ["context overload", "a long session has compressed early detail; quality drops over time"],
+          ["wrong feature or model", "a specific, repeatable error, such as arithmetic in prose or a speed tier on deep work"],
+          ["stale configuration", "it used to work; something in the set-up has gone out of date"],
+          ["expectation mismatch", "the task asks for something no tool can do, such as an exact future number"],
+          ["diagnostic sequence", "the cheapest-first order of checks"]
+        ],
         lesson: [
-          "When an output disappoints, most people either give up ('Claude cannot do this') or thrash, changing random things until something works. Diagnosis replaces both with a sequence. Four common causes give much the same disappointing result, so look at when the problem appeared. Wrong from the first response: under-specification; the prompt never carried the context, constraints or format it needed. Degraded over a long session: context overload; earlier content has been compressed and early instructions have lost force. A specific, repeatable error type: the wrong feature or model, such as subtly wrong numbers (needed code execution) or shallow analysis on a speed tier. Used to work, now does not: stale configuration; an instruction, knowledge file or Skill has drifted.",
+          "When an output disappoints, most people either give up ('Claude cannot do this') or thrash, changing random things until something works. Diagnosis replaces both with a sequence. Four common causes give much the same disappointing result, so look at when the problem appeared.",
+          "Wrong from the first response: under-specification; the prompt never carried the context, constraints or format it needed. Degraded over a long session: context overload; earlier content has been compressed and early instructions have lost force. A specific, repeatable error type: the wrong feature or model, such as subtly wrong numbers (needed code execution) or shallow analysis on a speed tier. Used to work, now does not: stale configuration; an instruction, knowledge file or Skill has drifted.",
           "Run the checks in order, cheapest first. One: hold the prompt up against the five components; is something missing? Two: did Claude have the information it needed, and is the conversation long enough to need a restart or summary? Three: does a calculation need code execution, or is a demanding task running on a fast tier when it needs more thinking time or a stronger model? Four: are the instructions, knowledge and Skills current? Five, only then: is this a task Claude can do at all? The order is deliberate. Re-reading the prompt costs seconds and fixes the most common failure; deciding the task does not fit is the most expensive conclusion because it ends the attempt. Most people invert the order and reach for the biggest model or 'impossible' first.",
           "Some failures are genuine expectation mismatches. Asking for the exact number of job applications the next advert will attract, and getting a wrong number, is not fixed by any prompt, restart, feature or configuration, because the task asks for something no tool can do. The answer is a different question: a range with its assumptions spelt out, or a model of the drivers you can vary yourself. Spotting a task that cannot be done is as useful as fixing one that can.",
           "Escalation has a place too. When the first checks pass and the problem remains, or the need is an integration, custom tooling or a system others depend on, it is beyond the associate's layer: bring in a Claude Developer or Architect. Working through the checks rarely takes more than a couple of minutes, and you finish with either a specific, cheap fix or a reasoned 'this needs reshaping or escalating'. Both beat guessing."
@@ -1252,12 +1561,21 @@ window.LEARN_DATA["ccao-f"] = {
           { move: "Rebuild the whole set-up to fix inconsistent answers", why: "That is the most expensive lever pulled first. Work up from the prompt." },
           { move: "Change the prompt, the model and the files at once to fix it faster", why: "If it improves, you will not know why. One change at a time, cheapest first." },
           { move: "The forecast number was wrong, so keep refining the prompt", why: "Exact prediction is beyond any tool. Reshape it into a range with stated assumptions." },
-          { move: "Conclude Claude cannot do the task and do it by hand", why: "That is the last and most expensive conclusion. Run the cheaper checks first." }
+          { move: "Conclude Claude cannot do the task and do it by hand", why: "That is the last and most expensive conclusion. Run the cheaper checks first." },
+          { move: "Attach every related document so Claude has more to go on", why: "More material adds noise, not signal. Diagnose first: is the prompt specific, and does the task have the information it needs?" }
         ]
       },
       {
         title: "Adjust approach based on feedback and results", w: null,
         scope: "Turn output critique into a specific adjustment to the prompt, context or configuration, and capture fixes so they persist.",
+        short: "Turn each complaint about an output into a specific change, and name the lever it pulls: prompt, context or configuration. If the fix will be needed again, capture it in standing instructions or a Skill so nobody has to rediscover it.",
+        terms: [
+          ["feedback loop", "using each round's output to improve the set-up for the next round"],
+          ["reaction", "how the output feels (too bland, missed the point); not yet something to act on"],
+          ["instruction", "what to change so the next output is different"],
+          ["lever", "the part of the set-up a fix belongs to: the prompt, the context or the configuration"],
+          ["capturing a fix", "writing a working correction into instructions or a Skill so it persists and is shared"]
+        ],
         lesson: [
           "Every disappointing output is diagnostic data, and letting it evaporate (fixing the same thing by hand each time) is the missed opportunity. For recurring work, treat each round's output as a signal about the set-up. A report that needs the same correction every week is telling you the prompt, the context or the configuration is missing something.",
           "Convert the complaint into a change. A complaint describes the output: bland, a bit off, beside the point. A change says what to do differently next time. Ask what the output would need to contain to be right, and which part of the set-up governs that. 'Too bland' becomes 'say who will read it and the single thing they should do next'. 'Missed the point' becomes 'state the single question the output must answer, up front'. 'Wrong tone' becomes a tone constraint in the standing instructions. Until you can point to the lever, you are still complaining, and the next try is guesswork.",
@@ -1295,6 +1613,16 @@ window.LEARN_DATA["ccao-f"] = {
       {
         title: "Optimise workflows for efficiency and effectiveness", w: null,
         scope: "Find redundancy and friction in recurring Claude workflows, promote fixes into Projects, Skills and instructions, and measure the improvement against the metric that matters.",
+        short: "Run one full cycle of a recurring workflow and list every manual step you repeated. Remove repetition, repeated correction and variance by moving rules, references and procedures into instructions, knowledge and Skills, then measure the gain.",
+        terms: [
+          ["friction", "small repeated costs you absorb each run without noticing"],
+          ["repetition", "pasting or typing the same thing every run"],
+          ["correction", "fixing the same flaw in every output"],
+          ["variance", "different people get different results from the same task"],
+          ["consolidation", "merging steps that can run as one prompt"],
+          ["promotion", "moving a personal workaround into shared configuration"],
+          ["metric", "the measure chosen in advance: time, revision rounds, consistency or errors"]
+        ],
         lesson: [
           "Optimisation is deliberate. Friction hides because you pay for it in small amounts, one session after another. To find it, run one full cycle of the workflow with the job of writing down every manual step you also did last time. Three signals point to removable friction. Repetition: the same text pasted or typed on every run (move it into knowledge or the standing instructions). Correction: the same flaw edited out of every output (change the configuration so it stops appearing). Variance: colleagues doing the same task get different results (give them one shared Skill or knowledge base).",
           "Most gains come from two moves: merge steps that could run as one instead of separate prompts, and promote repeated patterns into configuration. The fix must land in the right home. A rule that should always apply goes in the standing instructions. Reference material every run needs goes in the knowledge base. A repeatable procedure with steps goes in a Skill. A procedure squeezed into a one-line instruction loses its steps; reference material crammed into instructions bloats every conversation.",
@@ -1367,6 +1695,14 @@ window.LEARN_DATA["ccao-f"] = {
     subs: [
       {
         title: "Strike, compare, pick", w: null, scope: "",
+        short: "Most items are workplace scenarios with four options. Strike the one that does nothing and the one that panics, then compare the last two against the question's qualifier and pick the narrower, cheaper, more boring fix.",
+        terms: [
+          ["stem", "the scenario and question part of an exam item"],
+          ["qualifier", "the word in the stem that decides the answer: first, best, most appropriate, most efficient"],
+          ["distractor", "a wrong option written to look right"],
+          ["multiple-response item", "a question with more than one correct option; it says how many to pick"],
+          ["scaled score", "your result on a 100 to 1,000 scale; 720 passes"]
+        ],
         lesson: [
           "Almost every item is a workplace scenario with four options. Usually one option does nothing or hands the problem to someone else, one panics (ban it, abandon it, rebuild everything), and two are plausible. Strike the first two, then read the qualifier in the stem (most appropriate, first, best, most efficient) and compare the last two against it.",
           "Of the last two, the trap usually feels diligent, thorough or impressive: a self-check, a bigger model, a full rebuild, a second reviewer. The right answer is usually narrower, cheaper and more boring: open the source, add the missing context, anonymise first, name the gate, capture the fix. The score report shows your percentage per domain; the pass is decided on the total scaled score, so do not sink five minutes into one item. Pick, flag, move on."
@@ -1376,7 +1712,8 @@ window.LEARN_DATA["ccao-f"] = {
           "Read the qualifier: first step, most appropriate and most efficient point to different answers.",
           "Prefer the option that diagnoses or verifies before changing anything.",
           "Prefer the proportionate fix over the impressive one.",
-          "Two minutes per item: pick, flag, return if time allows."
+          "Two minutes per item: pick, flag, return if time allows.",
+          "Multiple-response items state how many to choose: pick exactly that many."
         ],
         traps: [
           { move: "Pick the option that sounds most thorough and diligent", why: "Thorough at the wrong step is wrong. The right answer is usually narrower, cheaper and more boring." },
@@ -1385,8 +1722,15 @@ window.LEARN_DATA["ccao-f"] = {
       },
       {
         title: "Five habits", w: null, scope: "",
+        short: "Five habits settle most questions: a person approves anything that acts, AI drafts and people decide, escalate what is beyond the associate layer, eliminate before you compare, and put policy and data sensitivity first.",
+        terms: [
+          ["human in the loop", "a named person reviews before an output acts on anyone"],
+          ["associate layer", "what a business user can prompt and configure; integrations and custom builds sit above it"],
+          ["escalate", "pass the work to the right role: a qualified reviewer, compliance, or a Claude Developer or Architect"],
+          ["data rule", "an organisational or legal limit on what data may enter the tool; no prompt overrides it"]
+        ],
         lesson: [
-          "Five habits resolve most items. A person stays in the loop for anything that acts: a decision, a customer message, a shortlist. AI drafts, you decide: options that delegate the decision itself are traps. Know when to escalate: repeated rewrites, integrations, custom tooling or a system others depend on are beyond the associate's layer, and recognising that is the tested skill. Eliminate first. And organisation policy and data sensitivity come before any clever technique: the data has to be allowed into the tool before anything else happens.",
+          "Five habits resolve most items. A person stays in the loop for anything that acts: a decision, a customer message, a shortlist. AI drafts, you decide: options that delegate the decision itself are traps. Know when to escalate: repeated rewrites, integrations, custom tooling or a system others depend on are beyond the associate's layer, and recognising that is the tested skill. API integration, agent building and tool development go to a Claude Developer; enterprise architecture, integration design and governance at scale go to a Claude Architect. Eliminate first. And organisation policy and data sensitivity come before any clever technique: the data has to be allowed into the tool before anything else happens.",
           "The night before: run through the recap deck, redo the worked questions cold, and read your own organisation's AI usage policy so the governance items come from memory rather than instinct. Product names and plan details change; the exam is marked against its guide, and the durable judgement is what is tested."
         ],
         know: [
@@ -1396,10 +1740,20 @@ window.LEARN_DATA["ccao-f"] = {
           "Eliminate two, compare two.",
           "Policy and data sensitivity first; no prompt overrides a data rule."
         ],
-        traps: []
+        traps: [
+          { move: "Keep refining the prompt when the need is an integration with another system", why: "Integrations and custom tooling sit above the associate layer. Escalate to a Claude Developer." }
+        ]
       },
       {
         title: "Distractors that recur", w: null, scope: "",
+        short: "The same wrong answers recur in new clothes: the self-check, the blind retry, the expensive lever first, the blanket ban, the prompt used as a control, and the label instead of a gate. Learn their shapes and strike them fast.",
+        terms: [
+          ["self-check", "asking Claude to verify or rate its own answer; never verification"],
+          ["blind retry", "running the same request again with nothing new"],
+          ["blanket rule", "banning or switching off something entirely instead of managing it"],
+          ["prompt as a control", "relying on an instruction to Claude to enforce a data, scope or freshness rule"],
+          ["label instead of a gate", "saying a human is in the loop without naming who checks what, and when"]
+        ],
         lesson: [
           "The same wrong answers turn up in different clothes across all seven domains. Learn their shapes and you can strike them in seconds.",
           "The self-check (ask Claude to verify or rate itself). The blind retry (ask again, run it five times, average the answers). The expensive lever first (bigger model, full rebuild, new platform). The blanket rule (ban it, turn Memory off, skip the analysis). The prompt as a control (tell Claude to keep the data confidential, to ignore irrelevant files, to watch for stale material). The label instead of the gate (a human in the loop with nobody named, a disclaimer instead of review). Disclosure only on request. The whole-drive connector. Incognito as permission for regulated data. Borrowed vendor numbers. Halo delegation (it drafted well, so let it approve)."

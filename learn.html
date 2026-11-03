@@ -68,14 +68,14 @@
   /* domain */
   .panel{margin-top:22px; opacity:1; transition:opacity .16s ease;}
   .panel.swap{opacity:0;}
-  .dtop{display:grid; grid-template-columns:minmax(0,1fr) minmax(360px,44%); gap:28px; align-items:start;}
+  .dtop{display:grid; grid-template-columns:minmax(0,1fr) min(440px,30%); gap:28px; align-items:start;}
   .dtop.novid{grid-template-columns:1fr;}
-  .watch{background:var(--slate-deep); border-radius:16px; padding:12px; box-shadow:var(--shadow);}
+  .watch{background:var(--slate-deep); border-radius:14px; padding:8px; box-shadow:var(--shadow);}
   .watch .frame{position:relative; aspect-ratio:16/9; border-radius:10px; overflow:hidden; background:#000;}
   .watch iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
   .watch .poster{all:unset; position:absolute; inset:0; cursor:pointer; display:block;}
   .watch .poster img{width:100%; height:100%; object-fit:cover; display:block;}
-  .watch .poster span{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:72px; height:72px; border-radius:50%; background:var(--orange); color:var(--ink); display:flex; align-items:center; justify-content:center; font-size:28px; box-shadow:0 8px 22px rgba(0,0,0,.35);}
+  .watch .poster span{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:56px; height:56px; border-radius:50%; background:var(--orange); color:var(--ink); display:flex; align-items:center; justify-content:center; font-size:28px; box-shadow:0 8px 22px rgba(0,0,0,.35);}
   .watch .poster:focus-visible{outline:3px solid var(--orange); outline-offset:-3px;}
   .watch .cap{display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:space-between; color:#fff; font-size:14.5px; font-weight:700; padding:10px 4px 2px;}
   .watch .tabs{display:flex; gap:6px; flex-wrap:wrap;}
@@ -116,7 +116,7 @@
   .weight.sm{font-size:13px; padding:2px 10px; background:var(--peach);}
   .dhead p{color:#3b3e55; margin-top:8px; max-width:900px;}
   .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
-  .chip{display:inline-flex; align-items:center; gap:7px; font-size:15px; font-weight:600; text-decoration:none; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:6px 12px;}
+  .chip{display:inline-flex; align-items:center; gap:6px; font-size:14.5px; font-weight:600; text-decoration:none; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:5px 10px; white-space:nowrap;}
   a.chip:hover{border-color:var(--orange); background:var(--cream);}
 
   .hl{margin-top:22px; background:var(--cream); border:1px solid var(--peach); border-radius:var(--radius); padding:18px 22px;}
@@ -132,6 +132,21 @@
   .scope{margin-top:10px; font-size:15.5px; color:var(--muted); border-left:3px solid var(--peach); padding:4px 0 4px 12px;}
   .scope b{color:var(--ink);}
   .sub h4{font-size:13px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin:22px 0 10px;}
+  .subgrid{display:grid; grid-template-columns:minmax(0,1fr); gap:0 40px; margin-top:4px;}
+  .subgrid>*{min-width:0;}
+  .sg-side .short{margin-top:14px;}
+  @media (min-width:1500px){
+    .subgrid{grid-template-columns:minmax(0,1fr) minmax(340px,38%); grid-template-areas:"main side";}
+    .sg-main{grid-area:main;} .sg-side{grid-area:side; align-self:start;}
+    .sg-side .terms{grid-template-columns:1fr;}
+    .sg-side{background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:4px 18px 18px; margin-top:14px;}
+  }
+  .short{margin-top:14px; background:var(--cream); border-left:4px solid var(--orange); border-radius:0 12px 12px 0; padding:12px 16px; font-size:1.02em; max-width:92ch;}
+  .short b{display:block; font-size:12.5px; letter-spacing:1px; text-transform:uppercase; color:var(--orange-ink); margin-bottom:2px;}
+  .terms{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:10px; margin-top:2px;}
+  .terms div{background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:10px 12px; font-size:15.5px; line-height:1.5;}
+  .terms dt{font-family:var(--mono); font-weight:700; font-size:14.5px; color:var(--slate-deep); margin-bottom:3px;}
+  .terms dd{margin:0; color:#3B3E55;}
   .lesson p{margin-top:12px; max-width:92ch;}
   .lesson p:first-child{margin-top:0;}
 
@@ -445,7 +460,8 @@ if(!T){
     if(d.w) h2.append(el("span", "weight", pct(d.w) + " of the exam"));
     head.append(h2, el("p", "", d.summary));
     const chips = el("div", "chips");
-    d.links.forEach(l => chips.append(chip(...l)));
+    // videos play in the panel beside this, and builds are in the practice panel below: no duplicate chips for them
+    d.links.filter(l => !ytId(l[2]) && !(d.practice && d.practice.length && l[0] === "⌨")).forEach(l => chips.append(chip(...l)));
     chips.append(chip("🃏", "Flashcards for this domain", T.flash + "&topic=" + d.t));
     chips.append(chip("⏱", "Mock exam", T.exam));
     head.append(chips);
@@ -501,11 +517,20 @@ if(!T){
       sec.append(h3);
       if(s.scope){ const sc = el("p", "scope"); sc.append(el("b", "", "Exam guide covers: "), document.createTextNode(s.scope)); sec.append(sc); }
 
+      const grid = el("div", "subgrid"), main = el("div", "sg-main"), side = el("aside", "sg-side");
+      grid.append(side, main); sec.append(grid);
+      if(s.short){ const sh = el("p", "short"); sh.append(el("b", "", "In short"), document.createTextNode(s.short)); side.append(sh); }
+      if(s.terms && s.terms.length){
+        side.append(el("h4", "", "Key terms"));
+        const dl = el("dl", "terms");
+        s.terms.forEach(([t, d]) => { const box = el("div"); box.append(el("dt", "", t), el("dd", "", d)); dl.append(box); });
+        side.append(dl);
+      }
       if(s.lesson && s.lesson.length){
-        sec.append(el("h4", "", "The lesson"));
+        main.append(el("h4", "", "The lesson"));
         const ls = el("div", "lesson");
         s.lesson.forEach(t => ls.append(el("p", "", t)));
-        sec.append(ls);
+        main.append(ls);
       }
       (s.tables || []).forEach(t => {
         const wrap = el("div", "tbl"), table = el("table");
@@ -515,18 +540,18 @@ if(!T){
         thead.append(hr);
         const tb = el("tbody");
         t.r.forEach(row => { const tr = el("tr"); row.forEach(c => tr.append(el("td", "", c))); tb.append(tr); });
-        table.append(thead, tb); wrap.append(table); sec.append(wrap);
+        table.append(thead, tb); wrap.append(table); main.append(wrap);
       });
       if(s.code){
         const c = el("div", "code");
         c.append(el("div", "cap", s.code.cap), el("pre", "", s.code.text));
-        sec.append(c);
+        main.append(c);
       }
       if(s.know && s.know.length){
-        sec.append(el("h4", "", "What you need to know"));
+        side.append(el("h4", "", "What you need to know"));
         const k = el("ul", "know");
         s.know.forEach(t => k.append(el("li", "", t)));
-        sec.append(k);
+        side.append(k);
       }
       if(s.build){
         const isWQ = /episode-questions\.md#/.test(s.build[1]);
