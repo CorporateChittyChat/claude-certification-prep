@@ -5,25 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flashcards &amp; Traps</title>
 <meta name="description" content="Illustrated flip-card revision and a printable traps-and-tricks sheet for the CCAO-F and CCDV-F Claude certifications. Every answer comes with a mini diagram, a worked example and a memory hook. Free, unofficial, original material.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23e8822a'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%23232838'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23FF8500'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%232C2E43'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="theme.css">
 <style>
-  :root{
-    --navy:#232838; --panel:#2e3446; --ink:#1c2130; --paper:#f7f5f0; --card:#fff;
-    --orange:#e8822a; --orange-ink:#a8520d; --gold:#d4a017; --line:#d8d4cc; --grey:#5f6473;
-    --green:#2e8b57; --green-soft:#e9f3ec; --red:#c0392b; --red-soft:#fbeae8;
-    --accent:var(--orange); --accent-ink:var(--orange-ink); --accent-soft:#fff3e6;
-  }
-  body.dv{--accent:var(--gold); --accent-ink:#7a5a00; --accent-soft:#fbf3d9;}
+  /* palette tokens (--accent, --accent-ink, --accent-soft, --red, --green ...) come from theme.css.
+     Both tracks share the brand orange, so body.dv no longer overrides the accent. */
+  :root{ --good-line:color-mix(in srgb, var(--good) 35%, #fff); --bad-line:color-mix(in srgb, var(--bad) 30%, #fff); }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{font-family:"Segoe UI",system-ui,Arial,sans-serif; background:var(--paper); color:var(--ink); font-size:18px; line-height:1.55;}
   a{color:inherit;}
   .wrap{max-width:1100px; margin:0 auto; padding:0 24px;}
-  .topbar{background:var(--navy); color:#fff;}
-  .topbar .wrap{display:flex; align-items:center; gap:20px; height:58px;}
-  .topbar .brand{font-weight:800; text-decoration:none; margin-right:auto;}
-  .topbar .brand span{color:var(--orange);}
-  .topbar a.nav{color:#dfe3ee; text-decoration:none; font-size:16px;}
-  .topbar a.nav:hover{color:#fff; text-decoration:underline;}
 
   .head{padding:26px 0 4px;}
   .head h1{font-size:38px; line-height:1.15;}
@@ -34,9 +25,9 @@
   .bar{display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:22px 0 8px;}
   .seg{display:inline-flex; background:var(--card); border:2px solid var(--line); border-radius:999px; padding:3px;}
   .seg button{border:0; background:transparent; font:inherit; font-size:16px; font-weight:700; padding:7px 16px; border-radius:999px; cursor:pointer; color:var(--ink);}
-  .seg button[aria-pressed="true"]{background:var(--navy); color:#fff;}
-  .seg.track button[aria-pressed="true"][data-track="ccao-f"]{background:var(--orange); color:#1c2130;}
-  .seg.track button[aria-pressed="true"][data-track="ccdv-f"]{background:var(--gold); color:#1c2130;}
+  .seg button[aria-pressed="true"]{background:var(--slate-deep); color:#fff;}
+  .seg.track button[aria-pressed="true"][data-track="ccao-f"]{background:var(--orange); color:var(--ink);}
+  .seg.track button[aria-pressed="true"][data-track="ccdv-f"]{background:var(--orange); color:var(--ink);}
   .spacer{flex:1;}
   .exam-link{font-weight:700; color:var(--orange-ink);}
 
@@ -51,18 +42,18 @@
   /* ---------- flashcard ---------- */
   .meter{display:flex; justify-content:space-between; font-size:15px; color:var(--grey); margin-bottom:8px;}
   .meter b{color:var(--ink);}
-  .progress{height:8px; background:#e6e2da; border-radius:999px; overflow:hidden; margin-bottom:18px;}
+  .progress{height:8px; background:var(--line); border-radius:999px; overflow:hidden; margin-bottom:18px;}
   .progress i{display:block; height:100%; width:0; background:var(--accent); transition:width .25s;}
   .stage{perspective:1800px;}
   /* both faces share one grid cell, so the card grows to fit whichever face is taller */
   .card{display:grid; width:100%; min-height:300px; cursor:pointer; transform-style:preserve-3d; transition:transform .5s ease; border-radius:18px;}
   .card:focus-visible{outline:3px solid var(--accent); outline-offset:4px;}
   .card.flipped{transform:rotateY(180deg);}
-  .face{grid-area:1/1; backface-visibility:hidden; -webkit-backface-visibility:hidden; background:var(--card); border:1px solid var(--line); border-top:6px solid var(--accent); border-radius:18px; padding:26px 32px 24px; display:flex; flex-direction:column; box-shadow:0 10px 30px rgba(0,0,0,.07);}
-  .face.back{transform:rotateY(180deg); background:#fffdf8;}
+  .face{grid-area:1/1; backface-visibility:hidden; -webkit-backface-visibility:hidden; background:var(--card); border:1px solid var(--line); border-top:6px solid var(--accent); border-radius:18px; padding:26px 32px 24px; display:flex; flex-direction:column; box-shadow:0 10px 30px rgba(61,64,91,.09);}
+  .face.back{transform:rotateY(180deg); background:var(--paper);}
   .card.trap .face{border-top-color:var(--red);}
-  .card.trap .face.back{background:#fffafa;}
-  .tag{display:inline-flex; align-self:flex-start; gap:6px; font-size:13px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; padding:4px 12px; border-radius:999px; background:var(--paper); color:var(--grey);}
+  .card.trap .face.back{background:var(--paper);}
+  .tag{display:inline-flex; align-self:flex-start; gap:6px; font-size:13px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; padding:4px 12px; border-radius:999px; background:var(--slate-soft); color:var(--muted);}
   .tag.rule{background:var(--accent-soft); color:var(--accent-ink);}
   .tag.trap{background:var(--red-soft); color:var(--red);}
   .tag.ans{background:var(--green-soft); color:var(--green);}
@@ -78,41 +69,41 @@
   .hint{font-size:14px; color:var(--grey); margin-top:16px;}
   .back-text{font-size:21px; font-weight:600; line-height:1.45;}
   .viz{margin:16px 0 0; font-size:15px; line-height:1.4;}
-  .ex{margin-top:16px; display:flex; gap:12px; background:var(--paper); border-radius:12px; padding:12px 14px; font-size:15.5px; line-height:1.5;}
+  .ex{margin-top:16px; display:flex; gap:12px; background:var(--cream); border-radius:12px; padding:12px 14px; font-size:15.5px; line-height:1.5;}
   .ex .lbl, .hook .lbl{flex:none; font-size:12px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; color:var(--grey); padding-top:3px; width:84px;}
   .hook{margin-top:12px; display:flex; gap:12px; font-size:16px; font-weight:700; color:var(--accent-ink); padding:0 14px;}
-  .card.trap .hook{color:#8f2a1f;}
+  .card.trap .hook{color:var(--bad);}
 
   /* ---------- visuals ---------- */
   .steps{display:flex; flex-wrap:wrap; align-items:stretch; gap:6px;}
-  .step{flex:1 1 110px; min-width:0; display:flex; flex-direction:column; justify-content:center; background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:8px 12px;}
+  .step{flex:1 1 110px; min-width:0; display:flex; flex-direction:column; justify-content:center; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:8px 12px;}
   .step .n{font-size:11px; font-weight:800; letter-spacing:.6px; text-transform:uppercase; color:var(--accent-ink);}
   .step small{color:var(--grey); font-size:12.5px; line-height:1.3; margin-top:2px;}
   .step.gate{background:var(--accent-soft); border:2px dashed var(--accent-ink);}
   .step.gate .n{color:var(--accent-ink);}
   .arrow{align-self:center; color:var(--grey); font-size:18px; line-height:1;}
   .vs{display:grid; grid-template-columns:1fr auto 1fr; gap:8px; align-items:stretch;}
-  .side{border-radius:12px; padding:10px 14px; border:1px solid var(--line); background:var(--paper);}
+  .side{border-radius:12px; padding:10px 14px; border:1px solid var(--line); background:var(--card);}
   .side h4{font-size:13px; letter-spacing:.6px; text-transform:uppercase; margin-bottom:6px; color:var(--grey);}
   .side ul{list-style:none; display:grid; gap:3px;}
   .side li{display:flex; gap:7px;}
   .side li::before{content:"•"; color:var(--grey);}
-  .side.bad{background:var(--red-soft); border-color:#f0c2bc;} .side.bad h4{color:var(--red);} .side.bad li::before{content:"✗"; color:var(--red);}
-  .side.good{background:var(--green-soft); border-color:#b9dcc6;} .side.good h4{color:var(--green);} .side.good li::before{content:"✔"; color:var(--green);}
+  .side.bad{background:var(--red-soft); border-color:var(--bad-line);} .side.bad h4{color:var(--red);} .side.bad li::before{content:"✗"; color:var(--red);}
+  .side.good{background:var(--green-soft); border-color:var(--good-line);} .side.good h4{color:var(--green);} .side.good li::before{content:"✔"; color:var(--green);}
   .side.b{background:var(--accent-soft);} .side.b h4{color:var(--accent-ink);}
   .vs .mid{align-self:center; font-size:12px; font-weight:800; color:var(--grey); letter-spacing:.5px;}
   .chk{list-style:none; display:grid; gap:7px;}
   .chk li{display:flex; gap:10px; align-items:flex-start;}
-  .chk .ic{flex:none; width:30px; height:30px; border-radius:8px; background:var(--paper); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:15px;}
+  .chk .ic{flex:none; width:30px; height:30px; border-radius:8px; background:var(--cream); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:15px;}
   .stack{display:grid; gap:4px;}
-  .blk{background:var(--paper); border:1px solid var(--line); border-left:4px solid var(--accent); padding:6px 12px; border-radius:6px; font-family:Consolas,"Courier New",monospace; font-size:14px; white-space:pre-wrap;}
-  .blk:last-child{border-left-color:var(--navy);}
+  .blk{background:var(--card); border:1px solid var(--line); border-left:4px solid var(--accent); padding:6px 12px; border-radius:6px; font-family:Consolas,"Courier New",monospace; font-size:14px; white-space:pre-wrap;}
+  .blk:last-child{border-left-color:var(--slate);}
   .ladder{display:flex; align-items:flex-end; gap:8px;}
   .rung{flex:1; min-width:0; display:flex; flex-direction:column; justify-content:flex-end; text-align:center;}
   .rung i{display:block; background:var(--accent); border-radius:6px 6px 0 0; margin-bottom:6px;}
   .rung b{font-size:14px; line-height:1.25;} .rung small{font-size:12px; color:var(--grey); line-height:1.3;}
   .axis{display:flex; justify-content:space-between; font-size:12px; color:var(--grey); border-top:2px solid var(--line); margin-top:6px; padding-top:4px;}
-  .mono{font-family:Consolas,"Courier New",monospace; font-size:14px; background:var(--ink); color:#f3f1ea; border-radius:10px; padding:12px 14px; white-space:pre-wrap; overflow-x:auto; line-height:1.5;}
+  .mono{font-family:Consolas,"Courier New",monospace; font-size:14px; background:var(--slate-deep); color:var(--cream); border-radius:10px; padding:12px 14px; white-space:pre-wrap; overflow-x:auto; line-height:1.5;}
   .tbl{width:100%; border-collapse:collapse; font-size:14.5px;}
   .tbl th{font-size:12px; text-transform:uppercase; letter-spacing:.6px; color:var(--grey); text-align:left; padding:4px 8px; border-bottom:2px solid var(--line);}
   .tbl td{padding:5px 8px; border-bottom:1px solid var(--line); vertical-align:top;}
@@ -122,8 +113,8 @@
 
   .controls{display:grid; grid-template-columns:auto 1fr 1fr auto; gap:12px; margin-top:18px;}
   .controls button{font:inherit; font-size:17px; font-weight:700; border-radius:12px; padding:13px 16px; cursor:pointer; border:2px solid var(--line); background:var(--card); color:var(--ink);}
-  .controls .again{background:var(--red-soft); border-color:#f0c2bc; color:#8f2a1f;}
-  .controls .got{background:var(--green-soft); border-color:#b9dcc6; color:#1f6b42;}
+  .controls .again{background:var(--red-soft); border-color:var(--bad-line); color:var(--bad);}
+  .controls .got{background:var(--green-soft); border-color:var(--good-line); color:var(--good);}
   .controls button:hover{filter:brightness(.97);}
   .controls button:disabled{opacity:.45; cursor:default;}
   .keys{font-size:14px; color:var(--grey); margin-top:12px; text-align:center;}
@@ -133,10 +124,10 @@
   .done p{color:var(--grey); margin-bottom:18px;}
   .done .actions{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
   .done .actions button, .done .actions a{font:inherit; font-weight:700; font-size:17px; padding:12px 20px; border-radius:12px; border:2px solid var(--line); background:var(--card); cursor:pointer; text-decoration:none; color:var(--ink);}
-  .done .actions .primary{background:var(--accent); border-color:var(--accent); color:#1c2130;}
+  .done .actions .primary{background:var(--accent); border-color:var(--accent); color:var(--ink);}
 
   .coffee-note{margin-top:18px; font-size:15px; color:var(--grey);}
-  .coffee-note a{color:#6f4e37; font-weight:700;}
+  .coffee-note a{color:var(--orange-ink); font-weight:700;}
 
   /* ---------- traps sheet ---------- */
   .sheet-intro{display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:18px; color:var(--grey); font-size:16px;}
@@ -150,7 +141,7 @@
   .col.traps .item{border-left-color:var(--red);}
   .col.rules .item{border-left-color:var(--green);}
   .item b{display:block; font-size:16px;}
-  .item span{color:#3a3f4d;}
+  .item span{color:var(--slate);}
   .item em{display:block; font-size:14px; color:var(--grey); margin-top:3px;}
   footer{margin-top:40px; padding:22px 0 34px; color:var(--grey); font-size:13px; border-top:1px solid var(--line);}
   .hidden{display:none!important;}
@@ -165,29 +156,19 @@
     .ex, .hook{flex-direction:column; gap:4px;} .ex .lbl, .hook .lbl{width:auto;}
     .controls{grid-template-columns:1fr 1fr;}
     .controls .prev{order:3;} .controls .next{order:4;}
-    .topbar a.nav.opt{display:none;}
-    .topbar .brand{white-space:nowrap; font-size:16px;}
-    .topbar a.nav{white-space:nowrap; font-size:14px;}
-    .head p, .legend{display:none;}
+          .head p, .legend{display:none;}
     .bar{margin-top:14px;}
     .wrap{padding:0 16px;}
   }
   @media (prefers-reduced-motion:reduce){ .card{transition:none;} .progress i{transition:none;} }
   @media print{
-    .topbar, .bar, .filters, #cardsView, footer, .sheet-intro button, .legend{display:none!important;}
-    body{background:#fff; font-size:13px;}
+      body{background:#fff; font-size:13px;}
     .group{border:1px solid #bbb; box-shadow:none;}
   }
 </style>
 </head>
 <body>
-<header class="topbar">
-  <div class="wrap">
-    <a class="brand" href="./">Claude Certification <span>Prep</span></a>
-    <a class="nav opt" href="./#tracks">Certifications</a>
-    <a class="nav" id="examNav" href="#">Mock exam</a>
-  </div>
-</header>
+<header id="siteNav" data-page="flashcards"></header>
 
 <main class="wrap">
   <div class="head">
@@ -203,10 +184,6 @@
   </div>
 
   <div class="bar">
-    <div class="seg track" role="group" aria-label="Certification">
-      <button type="button" data-track="ccao-f">CCAO-F</button>
-      <button type="button" data-track="ccdv-f">CCDV-F</button>
-    </div>
     <div class="seg mode" role="group" aria-label="Mode">
       <button type="button" data-mode="cards">🃏 Flashcards</button>
       <button type="button" data-mode="traps">⚠ Traps &amp; tricks</button>
@@ -279,9 +256,10 @@
     <div id="sheet"></div>
   </section>
 
-  <footer><a href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener" style="color:#6f4e37; font-weight:700">☕ Buy me a coffee</a> · Independent study material. Not affiliated with, endorsed by, or approved by Anthropic. Every card restates this project's own original study guides and episode material; the examples are illustrative scenarios written for this project. Nothing here is from, or derived from, any real exam.</footer>
+  <footer><a href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener" style="color:var(--orange-ink); font-weight:700">☕ Buy me a coffee</a> · Independent study material. Not affiliated with, endorsed by, or approved by Anthropic. Every card restates this project's own original study guides and episode material; the examples are illustrative scenarios written for this project. Nothing here is from, or derived from, any real exam.</footer>
 </main>
 
+<script src="site-nav.js"></script>
 <script src="flashcards-data.js"></script>
 <script>
 const DATA = window.FC_DATA;
@@ -457,8 +435,7 @@ function setTrack(t){
   document.body.classList.toggle("dv", t === "ccdv-f");
   document.querySelectorAll(".seg.track button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.track === t)));
   const d = deck();
-  $("examLink").href = $("examNav").href = $("doneExam").href = d.exam;
-  $("examNav").textContent = d.title + " mock exam";
+  $("examLink").href = $("doneExam").href = d.exam;
   const sel = $("topicSel"); sel.innerHTML = "";
   const all = el("option", "", `All ${d.title} topics (${d.cards.length} cards)`); all.value = "all"; sel.appendChild(all);
   d.topics.forEach((tp, i) => { const o = el("option", "", tp.name); o.value = String(i); sel.appendChild(o); });

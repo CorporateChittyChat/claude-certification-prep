@@ -4,7 +4,7 @@ Free, community-written study material for Anthropic's Claude certifications —
 
 Built alongside the **[CCAO-F Exam Prep video series](https://www.youtube.com/playlist?list=PLFbwN1bk0S4c)** on [CorporateChittyChat](https://www.youtube.com/@Corporatechittychat), a channel for non-developer IT professionals — project managers, business analysts, delivery leads — working with AI. The **[CCDV-F Exam Prep series](https://www.youtube.com/playlist?list=PLHvgccck0QgI)** covers the developer certification, with runnable code in [ccdvf-course](https://github.com/chittychat-studio/ccdvf-course).
 
-> **Independent study material. Not affiliated with, endorsed by, or approved by Anthropic.** "Claude" and certification names are Anthropic's trademarks, used here only to identify what these materials help you study for. Every practice question in this repo is original material written for this project — nothing here is from, or derived from, any real exam.
+> **Independent study material. Not affiliated with, endorsed by, or approved by Anthropic.** "Claude" and certification names are Anthropic's trademarks, used here only to identify what these materials help you study for. Every practice question in this repo is original material written for this project; no item from any real exam is reproduced.
 
 ## Certifications covered
 
@@ -33,9 +33,16 @@ Exam format, registration, and validity details: [`ccao-f/exam-logistics.md`](cc
 3. **Build** each episode's hands-on project from the [companion code repo](https://github.com/chittychat-studio/ccdvf-course) — Python and TypeScript, one folder per episode.
 4. **Test yourself** with the [30-question mock exam](ccdv-f/practice/mock-exam.md) ([interactive version](https://corporatechittychat.github.io/claude-certification-prep/ccdv-f/practice/mock-exam-player.html)) and each episode's `PRACTICE.md` (EP 04 onward).
 
-## Study notes
+## The site: one journey per certification
 
-**[CCDV-F study notes](https://corporatechittychat.github.io/claude-certification-prep/learn.html?track=ccdv-f)** — the eight exam domains, each split into sub-domains with what you need to know, the exam traps in callouts, key highlights and a "Remember" list, linked to the domain's video, its hands-on build in the companion repo, its flashcards and the mock exam. Reading progress stays in your browser. ([source](learn.html), [notes](learn-data.js))
+The [website](https://corporatechittychat.github.io/claude-certification-prep/) gives every certification the same five steps, in the menu on every page:
+
+- **[Journey](https://corporatechittychat.github.io/claude-certification-prep/path.html?track=ccdv-f)** — the step cards, every lesson in order with time estimates, a readiness score and a completion certificate. ([source](path.html))
+- **[Learn](https://corporatechittychat.github.io/claude-certification-prep/learn.html?track=ccdv-f)** — study notes organised by Anthropic's published exam guide: every domain and weighted skill, each with the lesson, decision tables, what you need to know, the hands-on build and the exam traps. ([source](learn.html), notes in `learn-data-<track>.js`)
+- **[Videos](https://corporatechittychat.github.io/claude-certification-prep/videos.html?track=ccdv-f)** — every episode in study order, linked to its notes and build. ([source](videos.html))
+- **Flashcards** and the **mock exam** — see below.
+
+Not affiliated with Anthropic; the home page FAQ says so plainly.
 
 ## Learning paths
 

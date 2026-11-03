@@ -1,0 +1,119 @@
+/* Shared site header: brand, certification picker, the per-exam journey links, and the mock-exam button.
+   Usage: <header id="siteNav" data-page="learn"></header> then <script src="site-nav.js"></script>.
+   data-page: home | journey | learn | videos | flashcards. Built with DOM calls and textContent only. */
+(function(){
+  const TRACKS = {
+    "ccao-f": { code: "CCAO-F", name: "Associate Operator", exam: "ccao-f/practice/mock-exam-player.html" },
+    "ccdv-f": { code: "CCDV-F", name: "Developer", exam: "ccdv-f/practice/mock-exam-player.html" }
+  };
+  const PAGES = [
+    ["journey", "Journey", "path.html"],
+    ["learn", "Learn", "learn.html"],
+    ["videos", "Videos", "videos.html"],
+    ["flashcards", "Flashcards", "flashcards.html"]
+  ];
+  const host = document.getElementById("siteNav");
+  if(!host) return;
+  const page = host.dataset.page || "";
+  const params = new URLSearchParams(location.search);
+  let saved = null;
+  try{ saved = JSON.parse(localStorage.getItem("fc-track")); }catch(e){}
+  const track = TRACKS[params.get("track")] ? params.get("track") : (TRACKS[saved] ? saved : null);
+  const shown = track || "ccdv-f";
+
+  const css = `
+  .sn{background:#2C2E43; color:#fff; position:sticky; top:0; z-index:20; box-shadow:0 1px 0 rgba(255,255,255,.06);}
+  .sn-in{max-width:1440px; margin:0 auto; padding:0 28px; height:64px; display:flex; align-items:center; gap:18px;}
+  .sn a{color:inherit; text-decoration:none;}
+  .sn-brand{font-weight:800; font-size:18px; letter-spacing:.2px; white-space:nowrap;}
+  .sn-brand span{color:#FF8500;}
+  .sn-pick{position:relative;}
+  .sn-pick>button{font:inherit; font-size:14px; font-weight:700; letter-spacing:1px; color:#fff; background:transparent; border:1px solid #5A5D78; border-radius:8px; padding:7px 12px; cursor:pointer; display:flex; gap:8px; align-items:center;}
+  .sn-pick>button:hover, .sn-pick>button[aria-expanded="true"]{border-color:#FF8500;}
+  .sn-menu{position:absolute; top:44px; left:0; min-width:300px; background:#fff; color:#24263A; border-radius:12px; box-shadow:0 16px 40px rgba(0,0,0,.25); padding:6px; display:none;}
+  .sn-menu.open{display:block;}
+  .sn-menu a{display:block; padding:10px 12px; border-radius:8px; font-size:15.5px;}
+  .sn-menu a b{display:block; font-size:14px; letter-spacing:.8px;}
+  .sn-menu a:hover, .sn-menu a[aria-current="true"]{background:#FFF1DC;}
+  .sn-menu .soon{display:block; padding:10px 12px; font-size:14.5px; color:#5D6078;}
+  .sn-links{display:flex; align-items:center; gap:4px; flex:1;}
+  .sn-links a{font-size:16px; color:#dfe3ee; padding:8px 12px; border-radius:8px; white-space:nowrap;}
+  .sn-links a:hover{color:#fff; background:rgba(255,255,255,.06);}
+  .sn-links a[aria-current="page"]{color:#fff; box-shadow:inset 0 -2px 0 #FF8500; border-radius:0;}
+  .sn-sep{width:1px; height:22px; background:#5A5D78; margin:0 8px;}
+  .sn-cta{background:#FF8500; color:#24263A!important; font-weight:800; font-size:15px; padding:10px 16px; border-radius:9px; white-space:nowrap;}
+  .sn-cta:hover{filter:brightness(1.08);}
+  .sn-burger{display:none; margin-left:auto; font:inherit; font-size:22px; background:transparent; color:#fff; border:1px solid #5A5D78; border-radius:8px; width:44px; height:40px; cursor:pointer;}
+  @media (max-width:1020px){
+    .sn-in{flex-wrap:wrap; height:auto; padding:10px 16px; gap:10px;}
+    .sn-burger{display:block;}
+    .sn-links{display:none; flex-basis:100%; flex-direction:column; align-items:stretch; padding-bottom:8px;}
+    .sn-links.open{display:flex;}
+    .sn-sep{display:none;}
+    .sn-cta{text-align:center;}
+  }`;
+  const style = document.createElement("style");
+  style.textContent = css;
+  document.head.append(style);
+
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if(cls) e.className = cls; if(text !== undefined) e.textContent = text; return e; };
+  const withTrack = (href, t) => href + (href.includes("?") ? "&" : "?") + "track=" + t;
+
+  const bar = el("nav", "sn");
+  bar.setAttribute("aria-label", "Site");
+  const inner = el("div", "sn-in");
+
+  const brand = el("a", "sn-brand", "Claude Certification ");
+  brand.href = "./";
+  brand.append(el("span", "", "Prep"));
+
+  // certification picker
+  const pick = el("div", "sn-pick");
+  const btn = el("button", "", track ? TRACKS[track].code : "Pick cert");
+  btn.type = "button";
+  btn.setAttribute("aria-haspopup", "true");
+  btn.setAttribute("aria-expanded", "false");
+  btn.append(el("span", "", "▾"));
+  const menu = el("div", "sn-menu");
+  Object.entries(TRACKS).forEach(([id, t]) => {
+    const a = el("a");
+    const target = page && page !== "home" ? PAGES.find(p => p[0] === page) : null;
+    a.href = withTrack(target ? target[2] : "path.html", id);
+    if(id === track) a.setAttribute("aria-current", "true");
+    a.append(el("b", "", t.code), document.createTextNode("Claude Certified " + t.name + " – Foundations"));
+    a.addEventListener("click", () => { try{ localStorage.setItem("fc-track", JSON.stringify(id)); }catch(e){} });
+    menu.append(a);
+  });
+  menu.append(el("span", "soon", "CCAR-F and CCAR-P: coming next"));
+  btn.addEventListener("click", e => { e.stopPropagation(); const o = menu.classList.toggle("open"); btn.setAttribute("aria-expanded", String(o)); });
+  document.addEventListener("click", () => { menu.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); });
+  document.addEventListener("keydown", e => { if(e.key === "Escape"){ menu.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); } });
+  pick.append(btn, menu);
+
+  // journey links
+  const links = el("div", "sn-links");
+  PAGES.forEach(([id, label, href]) => {
+    const a = el("a", "", label);
+    a.href = withTrack(href, shown);
+    if(id === page) a.setAttribute("aria-current", "page");
+    links.append(a);
+  });
+  const mock = el("a", "", "Mock exam");
+  mock.href = TRACKS[shown].exam;
+  links.append(mock, el("span", "sn-sep"));
+  const faq = el("a", "", "FAQ"); faq.href = "./#faq";
+  const gh = el("a", "", "GitHub"); gh.href = "https://github.com/CorporateChittyChat/claude-certification-prep";
+  links.append(faq, gh);
+  const cta = el("a", "sn-cta", "Take mock exam");
+  cta.href = TRACKS[shown].exam;
+  links.append(cta);
+
+  const burger = el("button", "sn-burger", "☰");
+  burger.type = "button";
+  burger.setAttribute("aria-label", "Menu");
+  burger.addEventListener("click", () => links.classList.toggle("open"));
+
+  inner.append(brand, pick, burger, links);
+  bar.append(inner);
+  host.replaceWith(bar);
+})();

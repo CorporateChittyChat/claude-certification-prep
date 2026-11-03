@@ -1,0 +1,36 @@
+/* Site palette and type scale. Every page links this file first and builds on these tokens.
+   Palette: #FFFFFB (paper) · #FFF1DC (cream) · #FFD2A6 (peach) · #FF8500 (orange) · #3D405B (slate).
+   Contrast: orange is a fill colour (dark text on it). For orange-coloured TEXT use --orange-ink, which passes AA on paper/cream. */
+:root{
+  --paper:#FFFFFB;
+  --cream:#FFF1DC;
+  --peach:#FFD2A6;
+  --orange:#FF8500;
+  --slate:#3D405B;
+
+  --slate-deep:#2C2E43;      /* header, footer, dark panels */
+  --slate-soft:#E9EAF0;      /* quiet fills, meter tracks */
+  --orange-ink:#A84F00;      /* orange text on light backgrounds (AA) */
+  --ink:#24263A;             /* body text */
+  --muted:#5D6078;           /* secondary text (AA on paper and cream) */
+  --line:#EADFCF;            /* borders on paper/cream */
+  --card:#FFFFFF;
+  --good:#2E7D4F; --good-soft:#E6F3EA;
+  --bad:#B3261E;  --bad-soft:#FBE9E7;
+
+  /* legacy aliases so older page CSS picks up the palette */
+  --navy:var(--slate-deep); --panel:var(--slate); --grey:var(--muted);
+  --accent:var(--orange); --accent-ink:var(--orange-ink); --accent-soft:var(--cream);
+  --gold:var(--orange); --green:var(--good); --green-soft:var(--good-soft); --red:var(--bad); --red-soft:var(--bad-soft);
+
+  --radius:14px;
+  --shadow:0 6px 24px rgba(61,64,91,.08);
+  --font:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+  --mono:Consolas,"Cascadia Mono","SF Mono",monospace;
+}
+html{-webkit-text-size-adjust:100%;}
+body{font-family:var(--font); background:var(--paper); color:var(--ink); font-size:18px; line-height:1.6;}
+@media (min-width:1280px){ body{font-size:19px;} }
+a{color:inherit;}
+::selection{background:var(--peach);}
+:focus-visible{outline:3px solid var(--orange); outline-offset:2px;}

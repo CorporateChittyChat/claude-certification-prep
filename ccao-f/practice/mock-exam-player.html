@@ -4,14 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CCAO-F Mock Exam</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23e8822a'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%23232838'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23FF8500'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%232C2E43'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../../theme.css">
 <style>
-  :root{
-    --navy:#232838; --panel:#2e3446; --ink:#1c2130; --paper:#f7f5f0;
-    --card:#ffffff; --orange:#e8822a; --orange-soft:#f6d9be;
-    --green:#2e8b57; --red:#c0392b; --grey:#5f6473; --line:#d8d4cc;
-    --orange-ink:#a8520d; --mark:#ffe08a; --green-soft:#e9f3ec; --red-soft:#fbeae8;
-  }
+  /* palette tokens come from theme.css; these two are page-only names for palette colours */
+  :root{ --orange-soft:var(--peach); --mark:var(--peach); }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{font-family:"Segoe UI",system-ui,Arial,sans-serif; background:var(--paper); color:var(--ink); font-size:19px; line-height:1.5;}
   mark.q{background:var(--mark); color:inherit; padding:0 5px; border-radius:4px; font-weight:700;}
@@ -19,48 +16,48 @@
   .hidden{display:none!important;}
 
   /* ---------- header bar ---------- */
-  header{background:var(--navy); color:#fff; display:flex; align-items:center; gap:18px; padding:14px 28px; position:sticky; top:0; z-index:5;}
+  header{background:var(--slate-deep); color:#fff; display:flex; align-items:center; gap:18px; padding:14px 28px; position:sticky; top:0; z-index:5;}
   header .brand{font-weight:700; letter-spacing:.4px;}
-  header .brand small{display:block; font-weight:400; font-size:12px; color:#b9bfce;}
-  header .qpos{margin-left:auto; font-size:17px; color:#dfe3ee;}
+  header .brand small{display:block; font-weight:400; font-size:12px; color:rgba(255,241,220,.82);}
+  header .qpos{margin-left:auto; font-size:17px; color:var(--cream);}
   #timer{font-variant-numeric:tabular-nums; font-weight:700; font-size:22px; background:var(--panel); padding:6px 14px; border-radius:8px;}
   #timer.low{background:var(--red); animation:pulse 1s infinite;}
   @keyframes pulse{50%{opacity:.65}}
-  .hbtn{background:var(--panel); color:#fff; border:1px solid #4a516a; border-radius:8px; padding:8px 16px; font-size:16px; cursor:pointer;}
-  .hbtn:hover{background:#3a4158;}
-  .hbtn.flagged{background:var(--orange); border-color:var(--orange); color:#fff;}
+  .hbtn{background:var(--slate); color:#fff; border:1px solid rgba(255,241,220,.28); border-radius:8px; padding:8px 16px; font-size:16px; cursor:pointer;}
+  .hbtn:hover{background:var(--muted);}
+  .hbtn.flagged{background:var(--orange); border-color:var(--orange); color:var(--ink); font-weight:700;}
 
   /* ---------- start screen ---------- */
   .center-wrap{max-width:880px; margin:48px auto; padding:0 24px;}
-  .start-card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:44px 48px; box-shadow:0 6px 24px rgba(0,0,0,.06);}
+  .start-card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:44px 48px; box-shadow:var(--shadow);}
   .start-card h1{font-size:40px; margin-bottom:6px;}
   .start-card .sub{color:var(--grey); font-size:20px; margin-bottom:26px;}
   .facts{display:flex; gap:16px; margin:22px 0 26px; flex-wrap:wrap;}
-  .fact{flex:1; min-width:150px; background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:16px; text-align:center;}
-  .fact b{display:block; font-size:30px; color:var(--orange);}
+  .fact{flex:1; min-width:150px; background:var(--cream); border:1px solid var(--line); border-radius:10px; padding:16px; text-align:center;}
+  .fact b{display:block; font-size:30px; color:var(--orange-ink);}
   .fact span{font-size:14px; color:var(--grey); text-transform:uppercase; letter-spacing:.5px;}
   .rules{line-height:1.75; margin-bottom:26px;}
   .rules li{margin-left:22px;}
   /* ---------- badges ---------- */
   .hero{display:flex; align-items:center; gap:26px; margin-bottom:8px;}
-  .emblem{flex:none; width:118px; height:118px; filter:drop-shadow(0 6px 14px rgba(232,130,42,.35));}
+  .emblem{flex:none; width:118px; height:118px; filter:drop-shadow(0 6px 14px rgba(44,46,67,.22));}
   .emblem text{font-family:"Segoe UI",system-ui,Arial,sans-serif;}
   .chips{display:flex; flex-wrap:wrap; gap:10px; margin:6px 0 4px;}
-  .chip{display:inline-flex; align-items:center; gap:6px; background:var(--navy); color:#fff; font-size:15px; font-weight:600; padding:6px 14px; border-radius:999px;}
-  .chip.hot{background:var(--orange); color:#1c2130;}
-  .earned{display:flex; align-items:center; gap:24px; border-radius:14px; padding:22px 26px; margin:6px 0 18px; border:2px solid var(--line); background:var(--paper);}
+  .chip{display:inline-flex; align-items:center; gap:6px; background:var(--slate-deep); color:#fff; font-size:15px; font-weight:600; padding:6px 14px; border-radius:999px;}
+  .chip.hot{background:var(--orange); color:var(--ink);}
+  .earned{display:flex; align-items:center; gap:24px; border-radius:14px; padding:22px 26px; margin:6px 0 18px; border:2px solid var(--line); background:var(--cream);}
   .earned .emblem{width:104px; height:104px; animation:pop .6s ease-out;}
   .earned h3{font-size:28px; line-height:1.2;}
   .earned p{font-size:18px; margin-top:4px;}
   .earned small{display:block; color:var(--grey); font-size:14px; margin-top:6px;}
   @keyframes pop{0%{transform:scale(.4) rotate(-12deg); opacity:0} 70%{transform:scale(1.08)} 100%{transform:scale(1)}}
   @media (prefers-reduced-motion:reduce){ .earned .emblem, #timer.low{animation:none;} }
-  .progress{position:absolute; left:0; right:0; bottom:-8px; height:8px; background:#e6e2da;}
-  .progress i{display:block; height:100%; width:0; background:linear-gradient(90deg,var(--orange),#f4b26b); transition:width .25s;}
+  .progress{position:absolute; left:0; right:0; bottom:-8px; height:8px; background:var(--line);}
+  .progress i{display:block; height:100%; width:0; background:var(--orange); transition:width .25s;}
   @media (max-width:640px){ .hero{flex-direction:column; align-items:flex-start;} .start-card{padding:28px 20px;} .start-card h1{font-size:30px;} .earned{flex-direction:column; align-items:flex-start;} }
-  .tip{background:#fff8ec; border:2px solid var(--orange); border-radius:12px; padding:18px 22px; margin-bottom:24px; font-size:19px; line-height:1.6;}
+  .tip{background:var(--cream); border:2px solid var(--orange); border-radius:12px; padding:18px 22px; margin-bottom:24px; font-size:19px; line-height:1.6;}
   .disclaimer{background:var(--orange-soft); border-radius:10px; padding:14px 18px; font-size:16px; margin-bottom:28px;}
-  .big-btn{background:var(--orange); color:#fff; border:none; font-size:22px; font-weight:700; padding:16px 42px; border-radius:10px; cursor:pointer;}
+  .big-btn{background:var(--orange); color:var(--ink); border:none; font-size:22px; font-weight:700; padding:16px 42px; border-radius:10px; cursor:pointer;}
   .big-btn:hover{filter:brightness(1.06);}
   .center-wrap.wide{max-width:1240px; margin-top:32px;}
   .start-grid{display:block;}
@@ -80,35 +77,44 @@
   /* ---------- exam screen ---------- */
   .exam-wrap{max-width:1100px; margin:34px auto 120px; padding:0 28px;}
   .meta-row{display:flex; align-items:center; gap:12px; margin-bottom:14px;}
-  .domain-tag{background:var(--navy); color:#fff; font-size:14px; letter-spacing:.6px; text-transform:uppercase; padding:5px 14px; border-radius:999px;}
+  .domain-tag{background:var(--slate-deep); color:#fff; font-size:14px; letter-spacing:.6px; text-transform:uppercase; padding:5px 14px; border-radius:999px;}
   .flag-note{color:var(--orange-ink); font-weight:700; font-size:16px;}
   .stem{background:var(--card); border:1px solid var(--line); border-left:6px solid var(--orange); border-radius:12px; padding:26px 30px; font-size:22px; line-height:1.55; margin-bottom:22px;}
-  .stem .scenario{color:#2f3445; margin-bottom:18px;}
-  .stem .ask{font-size:24px; font-weight:700; color:var(--ink); background:#fff8ec; border-radius:8px; padding:12px 16px;}
+  .stem .scenario{color:var(--slate); margin-bottom:18px;}
+  .stem .ask{font-size:24px; font-weight:700; color:var(--ink); background:var(--cream); border-radius:8px; padding:12px 16px;}
   .opt{display:flex; align-items:center; gap:16px; background:var(--card); border:2px solid var(--line); border-radius:12px; padding:16px 20px; margin-bottom:12px; cursor:pointer; transition:border-color .12s;}
-  .opt:hover{border-color:#b9b2a4;}
+  .opt:hover{border-color:var(--peach);}
   .opt .letter{flex:none; width:40px; height:40px; border-radius:50%; border:2px solid var(--ink); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:19px;}
   .opt .txt{flex:1; font-size:20px; line-height:1.45;}
-  .opt.selected{border-color:var(--orange); background:#fff7ef;}
-  .opt.selected .letter{background:var(--orange); border-color:var(--orange); color:#fff;}
+  .opt.selected{border-color:var(--orange); background:var(--cream);}
+  .opt.selected .letter{background:var(--orange); border-color:var(--orange); color:var(--ink);}
   .opt.struck .txt, .opt.struck .letter{text-decoration:line-through; opacity:.38;}
   .opt .strike-btn{flex:none; border:1px solid var(--line); background:var(--paper); color:var(--grey); border-radius:8px; font-size:14px; padding:6px 10px; cursor:pointer;}
   .opt .strike-btn:hover{color:var(--red); border-color:var(--red);}
   .hint{color:var(--grey); font-size:16px; margin-top:8px;}
 
   /* ---------- footer nav ---------- */
-  .navbar{position:fixed; bottom:0; left:0; right:0; background:var(--navy); padding:14px 28px; display:flex; gap:14px; align-items:center; z-index:5;}
+  .navbar{position:fixed; bottom:0; left:0; right:0; background:var(--slate-deep); padding:14px 28px; display:flex; gap:14px; align-items:center; z-index:5;}
   .navbar .spacer{flex:1;}
-  .nbtn{background:var(--panel); color:#fff; border:1px solid #4a516a; border-radius:9px; padding:12px 26px; font-size:18px; cursor:pointer;}
-  .nbtn:hover{background:#3a4158;}
-  .nbtn.primary{background:var(--orange); border-color:var(--orange); font-weight:700;}
+  @media (max-width:640px){
+    .navbar{padding:10px 12px; gap:8px; flex-wrap:wrap;}
+    .navbar .spacer{display:none;}
+    .nbtn{flex:1 1 auto; padding:10px 12px; font-size:16px;}
+    #topbar{flex-wrap:wrap; gap:8px 12px;}
+    #topbar .brand small{display:none;}
+    #topbar .brand{white-space:nowrap;}
+    #topbar .hbtn{padding:6px 10px; font-size:14px;}
+  }
+  .nbtn{background:var(--slate); color:#fff; border:1px solid rgba(255,241,220,.28); border-radius:9px; padding:12px 26px; font-size:18px; cursor:pointer;}
+  .nbtn:hover{background:var(--muted);}
+  .nbtn.primary{background:var(--orange); border-color:var(--orange); color:var(--ink); font-weight:700;}
 
   /* ---------- review screen ---------- */
   .review-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(74px,1fr)); gap:12px; margin:26px 0 30px;}
   .rq{position:relative; border:2px solid var(--line); background:var(--card); border-radius:10px; padding:14px 0; text-align:center; font-weight:700; font-size:19px; cursor:pointer;}
   .rq.answered{background:var(--green-soft); border-color:var(--green);}
-  .rq.unanswered{background:#f1f1f1; color:var(--grey); border-style:dashed;}
-  .rq.flag::after{content:"⚑"; position:absolute; top:-10px; right:-4px; color:var(--orange); font-size:19px;}
+  .rq.unanswered{background:var(--slate-soft); color:var(--muted); border-style:dashed; border-color:var(--muted);}
+  .rq.flag::after{content:"⚑"; position:absolute; top:-10px; right:-4px; color:var(--orange-ink); font-size:19px;}
   .legend{display:flex; gap:22px; color:var(--grey); font-size:16px; margin-bottom:8px; flex-wrap:wrap;}
   .legend i{display:inline-block; width:14px; height:14px; border-radius:4px; margin-right:6px; vertical-align:-1px;}
 
@@ -117,12 +123,12 @@
   .score-line small{font-size:22px; color:var(--grey); font-weight:400;}
   table{border-collapse:collapse; width:100%; margin:20px 0 30px; background:var(--card); border-radius:10px; overflow:hidden;}
   th,td{border:1px solid var(--line); padding:12px 16px; text-align:left; font-size:18px;}
-  th{background:var(--navy); color:#fff; font-size:15px; letter-spacing:.5px; text-transform:uppercase;}
+  th{background:var(--slate-deep); color:#fff; font-size:15px; letter-spacing:.5px; text-transform:uppercase;}
   td.good{color:var(--green); font-weight:700;} td.bad{color:var(--red); font-weight:700; background:var(--red-soft);}
   td.bad a{color:var(--red);}
   .coffee-note{font-size:16px; color:var(--grey); margin:-6px 0 16px;}
-  .coffee-note a{color:#6f4e37; font-weight:700;}
-  .callout{background:var(--paper); border-left:5px solid var(--navy); border-radius:8px; padding:12px 16px; font-size:18px; margin:6px 0 18px;}
+  .coffee-note a{color:var(--orange-ink); font-weight:700;}
+  .callout{background:var(--cream); border-left:5px solid var(--slate); border-radius:8px; padding:12px 16px; font-size:18px; margin:6px 0 18px;}
   .focus{border-radius:12px; padding:18px 22px; margin:4px 0 20px; font-size:19px;}
   .focus.weak{background:var(--red-soft); border:2px solid var(--red);}
   .focus.strong{background:var(--green-soft); border:2px solid var(--green);}
@@ -131,16 +137,16 @@
   .rev-head{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:8px 0 16px;}
   .rev-head h2{font-size:24px; margin-right:auto;}
   .seg{background:var(--card); color:var(--ink); border:2px solid var(--line); border-radius:999px; padding:7px 16px; font-size:16px; cursor:pointer;}
-  .seg.on{background:var(--navy); border-color:var(--navy); color:#fff;}
+  .seg.on{background:var(--slate-deep); border-color:var(--slate-deep); color:#fff;}
   .rev-item{background:var(--card); border:1px solid var(--line); border-left:6px solid var(--line); border-radius:12px; padding:22px 26px; margin-bottom:18px;}
   .rev-item.right{border-left-color:var(--green);}
   .rev-item.wrong{border-left-color:var(--red);}
   .rev-item .rstem{font-size:20px; font-weight:600; margin:6px 0 12px; line-height:1.5;}
   .rev-item .ans{font-size:18px; margin:4px 0;}
   .rev-item .ok{color:var(--green); font-weight:700;} .rev-item .no{color:var(--red); font-weight:700;}
-  .rev-item .why{background:#fff8ec; border-left:5px solid var(--orange); border-radius:8px; padding:14px 18px; margin-top:12px; font-size:19px; line-height:1.6; font-weight:500;}
+  .rev-item .why{background:var(--cream); border-left:5px solid var(--orange); border-radius:8px; padding:14px 18px; margin-top:12px; font-size:19px; line-height:1.6; font-weight:500;}
   .reviewList.missed-only .rev-item.right{display:none;}
-  .pill{display:inline-block; background:var(--navy); color:#fff; font-size:13px; padding:4px 12px; border-radius:999px; letter-spacing:.5px; text-transform:uppercase;}
+  .pill{display:inline-block; background:var(--slate-deep); color:#fff; font-size:13px; padding:4px 12px; border-radius:999px; letter-spacing:.5px; text-transform:uppercase;}
 </style>
 </head>
 <body>
@@ -158,11 +164,11 @@
   <div class="start-card">
     <div class="hero">
       <svg class="emblem" viewBox="0 0 120 120" role="img" aria-label="CCAO-F practice exam badge">
-        <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="#e8822a"/>
-        <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="#232838"/>
-        <text x="60" y="50" text-anchor="middle" fill="#f6d9be" font-size="9" font-weight="700" textLength="48" lengthAdjust="spacingAndGlyphs">PRACTICE</text>
+        <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="#FF8500"/>
+        <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="#2C2E43"/>
+        <text x="60" y="50" text-anchor="middle" fill="#FFD2A6" font-size="9" font-weight="700" textLength="48" lengthAdjust="spacingAndGlyphs">PRACTICE</text>
         <text x="60" y="68" text-anchor="middle" fill="#fff" font-size="16" font-weight="800" textLength="60" lengthAdjust="spacingAndGlyphs">CCAO-F</text>
-        <text x="60" y="81" text-anchor="middle" fill="#e8822a" font-size="8.5" font-weight="700" textLength="50" lengthAdjust="spacingAndGlyphs">MOCK EXAM</text>
+        <text x="60" y="81" text-anchor="middle" fill="#FF8500" font-size="8.5" font-weight="700" textLength="50" lengthAdjust="spacingAndGlyphs">MOCK EXAM</text>
       </svg>
       <div>
         <h1>CCAO-F Mock Exam</h1>
@@ -217,8 +223,8 @@
   <div class="start-card">
     <h1 style="font-size:32px;">Review your answers</h1>
     <div class="legend">
-      <span><i style="background:#e9f3ec;border:1px solid var(--green)"></i>Answered</span>
-      <span><i style="background:#f1f1f1;border:1px solid var(--line)"></i>Unanswered</span>
+      <span><i style="background:var(--green-soft);border:1px solid var(--green)"></i>Answered</span>
+      <span><i style="background:var(--slate-soft);border:1px dashed var(--muted)"></i>Unanswered</span>
       <span style="color:var(--orange-ink); font-weight:700">⚑ Flagged</span>
     </div>
     <div class="review-grid" id="reviewGrid"></div>
@@ -596,11 +602,11 @@ function saveResult(pct, right, dom){
 /* practice badge tier: a study signal only, never a certification claim */
 function renderBadge(pct, weakCount){
   const tiers = [
-    {min:80, weak:0, name:"Exam Ready", c1:"#d4a017", c2:"#232838", fg:"#f7e3a1", icon:"★",
+    {min:80, weak:0, name:"Exam Ready", c1:"#FF8500", c2:"#2C2E43", fg:"#FFF1DC", ic:"#FF8500", icon:"★",
      msg:"80%+ with every domain solid. Book it — and skim the takeaways for anything you guessed."},
-    {min:67, weak:7, name:"Almost There", c1:"#9aa3b5", c2:"#232838", fg:"#e3e7ef", icon:"▲",
+    {min:67, weak:7, name:"Almost There", c1:"#FFD2A6", c2:"#2C2E43", fg:"#FFF1DC", ic:"#FFD2A6", icon:"▲",
      msg:"Two-thirds or better overall. Close the weak domains below, then retake."},
-    {min:0, weak:7, name:"Keep Studying", c1:"#c27a3a", c2:"#232838", fg:"#f6d9be", icon:"●",
+    {min:0, weak:7, name:"Keep Studying", c1:"#5D6078", c2:"#2C2E43", fg:"#FFF1DC", ic:"#FFF1DC", icon:"●",
      msg:"A baseline, not a verdict. Work through the domain guides flagged below, then retake."}
   ];
   const t = tiers.find(x => pct >= x.min && weakCount <= x.weak);
@@ -610,7 +616,7 @@ function renderBadge(pct, weakCount){
     <svg class="emblem" viewBox="0 0 120 120" role="img" aria-label="${t.name} practice badge">
       <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="${t.c1}"/>
       <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="${t.c2}"/>
-      <text x="60" y="54" text-anchor="middle" fill="${t.c1}" font-size="20">${t.icon}</text>
+      <text x="60" y="54" text-anchor="middle" fill="${t.ic}" font-size="20">${t.icon}</text>
       <text x="60" y="70" text-anchor="middle" fill="#fff" font-size="15" font-weight="800">${pct}%</text>
       <text x="60" y="81" text-anchor="middle" fill="${t.fg}" font-size="8" font-weight="700" textLength="46" lengthAdjust="spacingAndGlyphs">PRACTICE</text>
     </svg>

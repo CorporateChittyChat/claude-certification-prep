@@ -7,8 +7,11 @@ have, in the same shape, and so nothing here ever drifts into claiming to be off
 
 ## Non-negotiables
 
-- **Original material only.** Every question, flashcard, example and worked scenario is written for this project.
-  Nothing from, or derived from, any real exam, ever. If a contributor cannot say where a question came from, drop it.
+- **Original material only.** Every question, flashcard, example and worked scenario is written for this project. No
+  item from any real exam is ever reproduced; exam content is under Anthropic's NDA. If a contributor cannot say where a
+  question came from, drop it. Study notes follow the official exam guide's domains and weighted skills and may draw on
+  Anthropic's course material and on the distractor patterns of practice sets, always rewritten in our own words, never
+  pasted.
 - **Unofficial, and it says so.** Every page footer and every artefact a learner can download or share (badge,
   certificate, recap deck) carries the disclaimer: independent material, not affiliated with, endorsed by or approved by
   Anthropic; not a certification, score or prediction. Certification names are used only to identify what the material
@@ -25,9 +28,13 @@ have, in the same shape, and so nothing here ever drifts into claiming to be off
 ## Repository shape
 
 ```
-index.html              home: hero, track cards, video cards, start-here paths, coffee
+theme.css               the palette (#FFFFFB #FFF1DC #FFD2A6 #FF8500 #3D405B) and type scale; every page links it first
+site-nav.js             shared header on every page: cert picker, Journey · Learn · Videos · Flashcards · Mock exam
+index.html              home: hero, "choose your certification" cards, five-step journey, FAQ (not affiliated), coffee
+path.html               Journey per track: step cards, outcomes, lessons, readiness, certificate (data in path-data.js)
+learn.html              Learn: study notes per track (data in learn-data-<track>.js), organised by the official exam guide
+videos.html             Videos per track, built from the video links in path-data.js
 flashcards.html         flip cards + printable traps sheet (data in flashcards-data.js)
-path.html               learning path per track: outcomes, lessons, readiness, certificate (data in path-data.js)
 supporters.json         coffee count, written daily by .github/workflows/supporters.yml
 <track>/README.md       the track's map: domains or episodes -> guide, video, code
 <track>/domains/*.md    one study guide per domain (CCAO-F style) or episode map (CCDV-F style)
@@ -43,6 +50,9 @@ URL parameters (`?track=`), localStorage key suffixes and keys in the two data f
 
 Do these in order; the home page counts and the readiness maths depend on the data files being complete.
 
+0. **Official exam guide first.** Fetch Anthropic's exam guide for the track (CCDV-F: v1.0, July 2026) and take every
+   domain and skill with its weight, plus the exam facts (items, time, pass mark, fee). These drive the study notes, the
+   home card and the Journey's real-exam step. Never take weights from third-party sites.
 1. **Playlist first.** Read the real playlist: count the videos and take each video's length (the playlist page with a
    consent cookie exposes `lengthSeconds`; oEmbed gives titles). Every "N episodes / N videos" on the site must equal
    the playlist count, bonus and wrap-up videos included. Re-check whenever a video is added.
@@ -59,15 +69,17 @@ Do these in order; the home page counts and the readiness maths depend on the da
    gate), `vs` (left/right, first item is the heading; `n:1` for neutral instead of fail/works), `list` (`[icon,
    text]`), `stack`, `ladder` (`[name, sub]`), `formula`, `code`, `table` (`h`, `r`), `pills`. Trap fronts are the
    tempting move in quotes; the back says why it fails and what to do instead. Cards restate the track's own guides.
+4b. **Study notes.** Create `learn-data-<track>.js` in the shape of `learn-data-ccdv-f.js`: one domain per guide domain
+   (with `w`), one sub per guide skill (with `w`, summing to the domain), each with `scope`, a multi-paragraph `lesson`,
+   decision `tables` or a `code` sample where they help, `know`, a `build` link to the exercise, and 3–8 `traps`; then
+   an exam-technique section. Link the file from learn.html, path.html and index.html.
 5. **Learning path.** Add the track to `path-data.js`: `outcomes` (5–7, each a verb), `prereqs` (3), `examMap` (exam
    domain key -> flashcard topic index), and sections of lessons. A lesson has `id` (`<2-letter track code>-xx`),
    `title`, `mins` (video length + reading or build estimate), `links` (`[icon, label, url]`, the video label carries
    its length), `t` (flashcard topic index), optional `opt:true` (not needed for the certificate) and `exam:true` on
    the mock-exam lesson. Keep the three-section shape: before you start, the domains or episodes, exam rehearsal.
-6. **Home page.** Turn the track's "Coming soon" card and video card into the live shape: status chip, stats row (use
-   real numbers), the links list with the learning path as the `feature` link, the mock exam, guides, practice,
-   flashcards (say "N illustrated flip cards"), and the video series with its real count. Add the track to the hero
-   buttons, the start-here paths and the nav if it has a mock exam. Update README.md and the flashcards/paths blurbs.
+6. **Home page and header.** Add the track to `TRACKS` in site-nav.js and drop `soon: true` from its card in
+   index.html (the card's items, time and domain count are read from its learn data). Update README.md.
 7. **Verify live** before pushing (see below), then commit on `main` and push. This repo does not use pull requests.
 
 ## Learning-experience rules (what the live tracks do; new tracks match)
