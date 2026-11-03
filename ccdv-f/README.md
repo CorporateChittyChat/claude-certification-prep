@@ -8,6 +8,8 @@ Episode 00 covers the exam itself: format, eligibility, the eight domains and wh
 
 ## Where the material lives
 
+- **Study notes:** [learn.html?track=ccdv-f](https://corporatechittychat.github.io/claude-certification-prep/learn.html?track=ccdv-f) — the eight domains split into what to know and the exam traps, each linked to its episode and build.
+
 The developer track is code-first, so its runnable material lives in its own repo:
 
 - **Companion code:** [chittychat-studio/ccdvf-course](https://github.com/chittychat-studio/ccdvf-course) — one folder per episode, each with a README (how to run it) and, from EP 04 on, a `PRACTICE.md` with hands-on exercises and original practice questions.
@@ -32,10 +34,11 @@ The developer track is code-first, so its runnable material lives in its own rep
 
 ## How to use it
 
-1. **Watch** the episode for the concept and the exam trap.
-2. **Run** the episode's folder in the companion repo. Keep your API key in `.env`, never in code; episodes 05–09 run without a key.
-3. **Practice** with that folder's `PRACTICE.md` (EP 04 onward).
-4. **Test yourself** with the mock exam below once you've covered the episodes.
+1. **Read** the domain in the [study notes](https://corporatechittychat.github.io/claude-certification-prep/learn.html?track=ccdv-f).
+2. **Watch** the episode for the concept and the exam trap.
+3. **Run** the episode's folder in the companion repo. Keep your API key in `.env`, never in code; episodes 05–09 run without a key.
+4. **Practice** with that folder's `PRACTICE.md` (EP 04 onward).
+5. **Test yourself** with the mock exam below once you've covered the episodes.
 
 ## Practice
 

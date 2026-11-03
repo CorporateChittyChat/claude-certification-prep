@@ -33,6 +33,10 @@ Exam format, registration, and validity details: [`ccao-f/exam-logistics.md`](cc
 3. **Build** each episode's hands-on project from the [companion code repo](https://github.com/chittychat-studio/ccdvf-course) — Python and TypeScript, one folder per episode.
 4. **Test yourself** with the [30-question mock exam](ccdv-f/practice/mock-exam.md) ([interactive version](https://corporatechittychat.github.io/claude-certification-prep/ccdv-f/practice/mock-exam-player.html)) and each episode's `PRACTICE.md` (EP 04 onward).
 
+## Study notes
+
+**[CCDV-F study notes](https://corporatechittychat.github.io/claude-certification-prep/learn.html?track=ccdv-f)** — the eight exam domains, each split into sub-domains with what you need to know, the exam traps in callouts, key highlights and a "Remember" list, linked to the domain's video, its hands-on build in the companion repo, its flashcards and the mock exam. Reading progress stays in your browser. ([source](learn.html), [notes](learn-data.js))
+
 ## Learning paths
 
 **[Learning paths](https://corporatechittychat.github.io/claude-certification-prep/path.html)** — each track as a course: what you will learn, every lesson in order with time estimates and checkboxes, a readiness score that combines your lesson progress, flashcard results and best mock-exam score, and a downloadable completion certificate once the path is done and the mock exam is passed. Progress stays in your browser; no account. ([source](path.html))

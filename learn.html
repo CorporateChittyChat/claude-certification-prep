@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study notes</title>
+<meta name="description" content="Written study notes for the CCDV-F developer track: the eight exam domains split into what you need to know and the exam traps, each linked to its video and hands-on build. Free, unofficial, no account.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23e8822a'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%23232838'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --navy:#232838; --panel:#2e3446; --ink:#1c2130; --paper:#f7f5f0; --card:#fff;
+    --orange:#e8822a; --orange-ink:#a8520d; --gold:#d4a017; --line:#d8d4cc; --grey:#5f6473;
+    --green:#2e8b57; --green-soft:#e9f3ec;
+    --accent:var(--gold); --accent-ink:#7a5a00; --accent-soft:#fbf3d9;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Segoe UI",system-ui,Arial,sans-serif; background:var(--paper); color:var(--ink); font-size:18px; line-height:1.55;}
+  a{color:inherit;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 24px;}
+  .topbar{background:var(--navy); color:#fff;}
+  .topbar .wrap{display:flex; align-items:center; gap:20px; height:58px;}
+  .topbar .brand{font-weight:800; text-decoration:none; margin-right:auto;}
+  .topbar .brand span{color:var(--orange);}
+  .topbar a.nav{color:#dfe3ee; text-decoration:none; font-size:16px;}
+  .topbar a.nav:hover{color:#fff; text-decoration:underline;}
+  .label{display:block; font-size:13px; font-weight:800; letter-spacing:.9px; text-transform:uppercase; color:var(--accent-ink); margin-bottom:6px;}
+
+  .head{padding:26px 0 6px;}
+  .head h1{font-size:38px; line-height:1.15;}
+  .head .who{color:var(--grey); max-width:780px; margin-top:6px;}
+  .strip{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:14px;}
+  .chip{display:inline-flex; align-items:center; gap:6px; font-size:14.5px; font-weight:600; text-decoration:none; background:var(--card); border:1px solid var(--line); border-radius:9px; padding:5px 11px;}
+  a.chip:hover{border-color:var(--accent); background:var(--accent-soft);}
+  .progress{margin-left:auto; font-size:14.5px; color:var(--grey); font-weight:600;}
+  .note{font-size:14px; color:var(--grey); margin-top:10px;}
+
+  .layout{display:grid; grid-template-columns:270px minmax(0,1fr); gap:26px; margin-top:20px; align-items:start;}
+  .layout>*{min-width:0;}
+  .side{position:sticky; top:14px; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:10px;}
+  .side .ttl{font-size:12px; font-weight:800; letter-spacing:.9px; text-transform:uppercase; color:var(--grey); padding:6px 10px 8px;}
+  .side ol{list-style:none; display:grid; gap:2px;}
+  .side a{display:grid; grid-template-columns:34px 1fr auto; gap:8px; align-items:center; text-decoration:none; padding:8px 10px; border-radius:10px; font-size:15px; line-height:1.3;}
+  .side a:hover{background:var(--paper);}
+  .side a[aria-current="true"]{background:var(--accent-soft); box-shadow:inset 3px 0 0 var(--accent);}
+  .side .code{font-size:12.5px; font-weight:800; text-align:center; background:var(--paper); border:1px solid var(--line); border-radius:7px; padding:2px 0;}
+  .side a[aria-current="true"] .code{background:var(--accent); border-color:var(--accent);}
+  .side .eps{display:block; font-size:12px; color:var(--grey);}
+  .side .tick{color:var(--green); font-weight:800; font-size:14px; visibility:hidden;}
+  .side a.read .tick{visibility:visible;}
+
+  .panel{min-width:0; opacity:1; transition:opacity .18s ease;}
+  .panel.swap{opacity:0;}
+  .dhead h2{font-size:32px; line-height:1.2;}
+  .dhead p{color:#3a3f4d; margin-top:6px; max-width:760px;}
+  .links{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+
+  .hl{margin-top:20px; background:var(--accent-soft); border:1px solid #ecd9a0; border-radius:14px; padding:16px 20px;}
+  .hl h3{font-size:16px; margin-bottom:8px;}
+  .hl ul{list-style:none; display:grid; gap:7px;}
+  .hl li{display:flex; gap:10px; font-size:16.5px;}
+  .hl li::before{content:"★"; color:var(--accent-ink); font-weight:800;}
+
+  .sub{margin-top:22px; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px 24px; box-shadow:0 6px 24px rgba(0,0,0,.04);}
+  .sub h3{font-size:21px; display:flex; gap:12px; align-items:baseline;}
+  .sub h3 .num{font-size:14px; font-weight:800; color:var(--accent-ink); flex:none;}
+  .sub h4{font-size:13px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; color:var(--grey); margin:14px 0 8px;}
+  .know{list-style:none; display:grid; gap:8px;}
+  .know li{position:relative; padding-left:22px; font-size:16.5px;}
+  .know li::before{content:""; position:absolute; left:4px; top:.62em; width:8px; height:8px; border-radius:50%; background:var(--accent);}
+
+  .trap{position:relative; margin-top:12px; background:var(--panel); color:#e9ecf3; border-left:4px solid var(--gold); border-radius:12px; padding:14px 18px 14px 18px; overflow:hidden;}
+  .trap .tl{display:flex; align-items:center; gap:8px; font-family:Consolas,"Cascadia Mono",monospace; font-size:13px; font-weight:700; letter-spacing:1.4px; color:#f2d27a; margin-bottom:6px;}
+  .trap .mv{font-weight:700; color:#fff; font-size:16.5px;}
+  .trap .why{margin-top:6px; color:#c9cfdc; font-size:15.5px;}
+  .trap::after{content:""; position:absolute; right:16px; top:12px; width:0; height:0; border-left:22px solid transparent; border-right:22px solid transparent; border-bottom:38px solid rgba(255,255,255,.06);}
+
+  .rem{margin-top:22px; background:var(--card); border:2px dashed var(--line); border-radius:14px; padding:16px 20px;}
+  .rem h3{font-size:16px; margin-bottom:8px;}
+  .rem ol{padding-left:22px; display:grid; gap:4px; font-size:16.5px; font-weight:600;}
+
+  .foot{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:22px;}
+  .btn{font:inherit; font-size:16px; font-weight:700; border:2px solid var(--line); background:var(--card); color:var(--ink); border-radius:10px; padding:10px 16px; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px;}
+  .btn:hover{border-color:var(--accent);}
+  .btn.primary{background:var(--accent); border-color:var(--accent); color:#1c2130;}
+  .btn.done{background:var(--green-soft); border-color:#b9dcc6; color:var(--green);}
+  .foot .sp{flex:1;}
+  .tip{margin-top:26px; background:linear-gradient(135deg,#fff8ec 0%,#fdf0dc 100%); border:2px solid #f2c48d; border-radius:14px; padding:16px 18px; display:flex; flex-wrap:wrap; gap:12px; align-items:center;}
+  .tip p{flex:1 1 320px; font-size:15.5px; color:#3a3f4d;}
+  .btn.coffee{background:#6f4e37; border-color:#6f4e37; color:#fff;}
+  footer{margin-top:40px; padding:22px 0 34px; color:var(--grey); font-size:13px; border-top:1px solid var(--line);}
+  .hidden{display:none!important;}
+  @media (prefers-reduced-motion:reduce){ .panel{transition:none;} }
+  @media (max-width:880px){
+    .layout{grid-template-columns:1fr;}
+    .side{position:static; padding:8px;}
+    .side .ttl{display:none;}
+    .side ol{display:flex; overflow-x:auto; gap:6px; padding-bottom:4px;}
+    .side a{grid-template-columns:auto auto; white-space:nowrap; padding:6px 10px; border:1px solid var(--line);}
+    .side a .nm, .side .tick{display:none;}
+    .side a .code{padding:2px 6px;}
+    .head h1{font-size:30px;}
+    .dhead h2{font-size:26px;}
+    .sub{padding:16px 16px;}
+    .wrap{padding:0 16px;}
+    .topbar a.nav.opt{display:none;}
+    .progress{margin-left:0; flex-basis:100%;}
+  }
+  @media print{
+    .topbar,.side,.foot,.tip,.strip{display:none!important;}
+    .layout{display:block;} .trap{background:#fff; color:#000; border:1px solid #999; border-left:4px solid #000;}
+    .trap .mv{color:#000;} .trap .why{color:#333;} .trap .tl{color:#000;}
+  }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="./">Claude Certification <span>Prep</span></a>
+    <a class="nav opt" id="pathNav" href="path.html">Learning path</a>
+    <a class="nav opt" id="flashNav" href="flashcards.html">Flashcards</a>
+    <a class="nav" id="examNav" href="#">Mock exam</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="head">
+    <span class="label" id="trackLabel"></span>
+    <h1 id="title"></h1>
+    <p class="who" id="intro"></p>
+    <div class="strip" id="strip"></div>
+    <p class="note" id="asof"></p>
+  </div>
+
+  <div class="layout">
+    <nav class="side" aria-label="Domains">
+      <div class="ttl">Domains</div>
+      <ol id="nav"></ol>
+    </nav>
+    <article class="panel" id="panel" aria-live="polite"></article>
+  </div>
+
+  <div class="tip">
+    <span style="font-size:34px">☕</span>
+    <p>These notes are free, with no sign-up. If they helped a domain click, buy me a coffee: it funds the next tracks, CCAR-F and CCAR-P.</p>
+    <a class="btn coffee" href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener">☕ Buy me a coffee</a>
+  </div>
+
+  <footer>Independent study material. Not affiliated with, endorsed by, or approved by Anthropic. These notes are original, written for this project; they are not from the real exam and are not a certification, score or prediction. Product names, limits and prices change: confirm them at docs.claude.com. Reading progress is kept in this browser only.</footer>
+</main>
+
+<script src="learn-data.js"></script>
+<script>
+const DATA = window.LEARN_DATA;
+const $ = id => document.getElementById(id);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if(cls) e.className = cls; if(text !== undefined) e.textContent = text; return e; };
+function load(key, fallback){ try{ const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }catch(e){ return fallback; } }
+function save(key, val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
+const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const params = new URLSearchParams(location.search);
+const track = DATA[params.get("track")] ? params.get("track") : Object.keys(DATA)[0];
+const T = DATA[track];
+const READ_KEY = "learn-read-" + track;
+let read = load(READ_KEY, []);
+if(!Array.isArray(read)) read = [];
+
+function chip(icon, label, url){
+  const a = el("a", "chip");
+  a.href = url;
+  if(/^https?:/.test(url)){ a.target = "_blank"; a.rel = "noopener"; }
+  a.append(el("span", "", icon), el("span", "", label));
+  return a;
+}
+
+/* header */
+document.title = T.title;
+$("trackLabel").textContent = track.toUpperCase() + " · " + T.name;
+$("title").textContent = "Study notes";
+$("intro").textContent = T.intro;
+$("asof").textContent = "Product facts checked " + T.asOf + ". Names, limits and prices change, so confirm them at docs.claude.com before the exam.";
+$("examNav").href = T.exam;
+$("pathNav").href = T.path;
+$("flashNav").href = T.flash;
+const strip = $("strip");
+T.overview.forEach(l => strip.append(chip(...l)));
+strip.append(chip("🧭", "Learning path", T.path), chip("⌨", "Companion code", T.repo));
+const prog = el("span", "progress");
+strip.append(prog);
+
+/* sidebar */
+function drawNav(current){
+  const ol = $("nav"); ol.replaceChildren();
+  T.domains.forEach(d => {
+    const li = el("li"), a = el("a");
+    a.href = "#" + d.id;
+    if(d.id === current) a.setAttribute("aria-current", "true");
+    if(read.includes(d.id)) a.classList.add("read");
+    const nm = el("span", "nm", d.title);
+    nm.append(el("span", "eps", d.eps));
+    a.append(el("span", "code", d.code), nm, el("span", "tick", "✔"));
+    a.title = d.title;
+    li.append(a); ol.append(li);
+  });
+  prog.textContent = read.filter(id => T.domains.some(d => d.id === id)).length + " of " + T.domains.length + " sections read";
+}
+
+/* one domain */
+function drawDomain(d){
+  const p = $("panel"); p.replaceChildren();
+  const idx = T.domains.indexOf(d);
+
+  const head = el("header", "dhead");
+  head.append(el("span", "label", (d.code === "★" ? "" : d.code + " · ") + d.eps));
+  head.append(el("h2", "", d.title), el("p", "", d.summary));
+  const links = el("div", "links");
+  d.links.forEach(l => links.append(chip(...l)));
+  links.append(chip("🃏", "Flashcards for this domain", T.flash + "&topic=" + d.t));
+  links.append(chip("⏱", "Mock exam", T.exam));
+  head.append(links);
+  p.append(head);
+
+  const hl = el("section", "hl");
+  hl.append(el("h3", "", "Key exam highlights"));
+  const ul = el("ul");
+  d.highlights.forEach(h => ul.append(el("li", "", h)));
+  hl.append(ul); p.append(hl);
+
+  d.subs.forEach((s, i) => {
+    const sec = el("section", "sub");
+    const h3 = el("h3");
+    h3.append(el("span", "num", (d.code === "★" ? "" : d.code + ".") + (i + 1)), el("span", "", s.title));
+    sec.append(h3, el("h4", "", "What you need to know"));
+    const k = el("ul", "know");
+    s.know.forEach(t => k.append(el("li", "", t)));
+    sec.append(k);
+    if(s.traps.length){
+      sec.append(el("h4", "", s.traps.length > 1 ? "Exam traps" : "Exam trap"));
+      s.traps.forEach(t => {
+        const box = el("div", "trap");
+        box.append(el("div", "tl", "⚠ EXAM TRAP"), el("div", "mv", "“" + t.move + "”"), el("div", "why", t.why));
+        sec.append(box);
+      });
+    }
+    p.append(sec);
+  });
+
+  const rem = el("section", "rem");
+  rem.append(el("h3", "", "Remember"));
+  const ol = el("ol");
+  d.remember.forEach(r => ol.append(el("li", "", r)));
+  rem.append(ol); p.append(rem);
+
+  const foot = el("div", "foot");
+  if(idx > 0){ const a = el("a", "btn", "← " + T.domains[idx - 1].title); a.href = "#" + T.domains[idx - 1].id; foot.append(a); }
+  foot.append(el("span", "sp"));
+  const mark = el("button", "btn");
+  mark.type = "button";
+  const setMark = () => { const done = read.includes(d.id); mark.textContent = done ? "✔ Read" : "Mark as read"; mark.className = "btn" + (done ? " done" : ""); };
+  setMark();
+  mark.addEventListener("click", () => {
+    read = read.includes(d.id) ? read.filter(x => x !== d.id) : read.concat(d.id);
+    save(READ_KEY, read); setMark(); drawNav(d.id);
+  });
+  foot.append(mark);
+  if(idx < T.domains.length - 1){ const a = el("a", "btn primary", T.domains[idx + 1].title + " →"); a.href = "#" + T.domains[idx + 1].id; foot.append(a); }
+  else { const a = el("a", "btn primary", "Sit the mock exam →"); a.href = T.exam; foot.append(a); }
+  p.append(foot);
+}
+
+function route(scroll){
+  const id = location.hash.slice(1);
+  const d = T.domains.find(x => x.id === id) || T.domains[0];
+  drawNav(d.id);
+  const p = $("panel");
+  if(reduceMotion){ drawDomain(d); }
+  else { p.classList.add("swap"); setTimeout(() => { drawDomain(d); p.classList.remove("swap"); }, 120); }
+  if(scroll){ const top = p.getBoundingClientRect().top + window.scrollY - 12; if(window.scrollY > top) window.scrollTo({top, behavior: reduceMotion ? "auto" : "smooth"}); }
+}
+window.addEventListener("hashchange", () => route(true));
+route(false);
+</script>
+</body>
+</html>
