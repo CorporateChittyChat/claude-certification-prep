@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Videos</title>
+<title>Claude certification videos (CCAO-F, CCDV-F) · Claude Certification Prep</title>
 <meta name="description" content="Every episode of the CCAO-F and CCDV-F video series, in study order.">
 <!-- sharing -->
 <link rel="canonical" href="https://certprep.cardzo.co.in/videos.html">
@@ -80,7 +80,7 @@ const q = new URLSearchParams(location.search).get("track");
 const track = PATHS[q] ? q : (PATHS[saved] ? saved : "ccdv-f");
 try{ localStorage.setItem("fc-track", JSON.stringify(track)); }catch(e){}
 const P = PATHS[track];
-document.title = "Videos · " + track.toUpperCase();
+document.title = track.toUpperCase() + " video series in study order · Claude Certification Prep";
 $("trackLabel").textContent = track.toUpperCase() + " · " + P.name;
 $("playlist").href = P.playlist;
 

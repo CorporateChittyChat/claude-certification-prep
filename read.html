@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Read</title>
+<title>Claude certification study guides · Claude Certification Prep</title>
 <meta name="description" content="Study guides, worked questions and answer explanations for CCAO-F and CCDV-F.">
 <!-- sharing -->
 <link rel="canonical" href="https://certprep.cardzo.co.in/read.html">
@@ -112,7 +112,7 @@ if(!MD.DOC_RE.test(doc)){
     $("doc").append(MD.render(md, doc));
     const h1 = $("doc").querySelector("h1");
     const title = h1 ? h1.textContent : doc;
-    document.title = title;
+    document.title = title + " · Claude Certification Prep";
     crumbs(title);
     $("doc").querySelectorAll("h2").forEach(h => {
       const li = el("li"), a = el("a", "", h.textContent); a.href = "#" + h.id; li.append(a); $("toc").append(li);

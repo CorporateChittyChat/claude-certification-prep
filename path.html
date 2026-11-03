@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Learning Paths</title>
+<title>Claude certification study path and readiness score · Claude Certification Prep</title>
 <meta name="description" content="The CCAO-F and CCDV-F study path: lessons in order, a readiness score and a completion certificate.">
 <!-- sharing -->
 <link rel="canonical" href="https://certprep.cardzo.co.in/path.html">
@@ -403,7 +403,7 @@ function setTrack(t){
   track = t; save("fc-track", t);
   done = load("path-done-" + track, {});
   const p = P();
-  document.title = `${p.title} Journey`;
+  document.title = `${p.title} study path and readiness score · Claude Certification Prep`;
   $("trackLabel").textContent = `${p.title} · your journey`;
   renderJourney();
   $("who").textContent = `${p.name}. ${p.who} About ${fmtMins(required().reduce((a, l) => a + l.mins, 0))} in all.`;
