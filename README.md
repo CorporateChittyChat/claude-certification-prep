@@ -31,26 +31,26 @@ Exam format, registration, and validity details: [`ccao-f/exam-logistics.md`](cc
 1. **Read** the [CCDV-F overview](ccdv-f/) for the episode-by-domain map.
 2. **Watch** the [video series](https://www.youtube.com/playlist?list=PLHvgccck0QgI) — 12 videos: Episode 00 covers the exam itself, then one domain per episode, EP 10 on security, and a wrap-up.
 3. **Build** each episode's hands-on project from the [companion code repo](https://github.com/chittychat-studio/ccdvf-course) — Python and TypeScript, one folder per episode.
-4. **Test yourself** with the [30-question mock exam](ccdv-f/practice/mock-exam.md) ([interactive version](https://corporatechittychat.github.io/claude-certification-prep/ccdv-f/practice/mock-exam-player.html)) and each episode's `PRACTICE.md` (EP 04 onward).
+4. **Test yourself** with the [30-question mock exam](ccdv-f/practice/mock-exam.md) ([interactive version](https://certprep.cardzo.co.in/ccdv-f/practice/mock-exam-player.html)) and each episode's `PRACTICE.md` (EP 04 onward).
 
 ## The site: one journey per certification
 
-The [website](https://corporatechittychat.github.io/claude-certification-prep/) gives every certification the same five steps, in the menu on every page:
+The [website](https://certprep.cardzo.co.in/) gives every certification the same five steps, in the menu on every page:
 
-- **[Journey](https://corporatechittychat.github.io/claude-certification-prep/path.html?track=ccdv-f)** — the step cards, every lesson in order with time estimates, a readiness score and a completion certificate. ([source](path.html))
-- **[Learn](https://corporatechittychat.github.io/claude-certification-prep/learn.html?track=ccdv-f)** — study notes organised by Anthropic's published exam guide: every domain and weighted skill, each with the lesson, decision tables, what you need to know, the hands-on build and the exam traps. ([source](learn.html), notes in `learn-data-<track>.js`)
-- **[Videos](https://corporatechittychat.github.io/claude-certification-prep/videos.html?track=ccdv-f)** — every episode in study order, linked to its notes and build. ([source](videos.html))
+- **[Journey](https://certprep.cardzo.co.in/path.html?track=ccdv-f)** — the step cards, every lesson in order with time estimates, a readiness score and a completion certificate. ([source](path.html))
+- **[Learn](https://certprep.cardzo.co.in/learn.html?track=ccdv-f)** — study notes organised by Anthropic's published exam guide: every domain and weighted skill, each with the lesson, decision tables, what you need to know, the hands-on build and the exam traps. ([source](learn.html), notes in `learn-data-<track>.js`)
+- **[Videos](https://certprep.cardzo.co.in/videos.html?track=ccdv-f)** — every episode in study order, linked to its notes and build. ([source](videos.html))
 - **Flashcards** and the **mock exam** — see below.
 
 Not affiliated with Anthropic; the home page FAQ says so plainly.
 
 ## Learning paths
 
-**[Learning paths](https://corporatechittychat.github.io/claude-certification-prep/path.html)** — each track as a course: what you will learn, every lesson in order with time estimates and checkboxes, a readiness score that combines your lesson progress, flashcard results and best mock-exam score, and a downloadable completion certificate once the path is done and the mock exam is passed. Progress stays in your browser; no account. ([source](path.html))
+**[Learning paths](https://certprep.cardzo.co.in/path.html)** — each track as a course: what you will learn, every lesson in order with time estimates and checkboxes, a readiness score that combines your lesson progress, flashcard results and best mock-exam score, and a downloadable completion certificate once the path is done and the mock exam is passed. Progress stays in your browser; no account. ([source](path.html))
 
 ## Flashcards and traps
 
-**[Flashcards & traps](https://corporatechittychat.github.io/claude-certification-prep/flashcards.html)** — illustrated flip-card revision for both tracks (CCAO-F and CCDV-F), each answer with a mini diagram, a worked example and a memory hook, plus a "traps only" filter, saved progress, and a printable sheet that puts every exam trap next to the rule that beats it. ([source](flashcards.html))
+**[Flashcards & traps](https://certprep.cardzo.co.in/flashcards.html)** — illustrated flip-card revision for both tracks (CCAO-F and CCDV-F), each answer with a mini diagram, a worked example and a memory hook, plus a "traps only" filter, saved progress, and a printable sheet that puts every exam trap next to the rule that beats it. ([source](flashcards.html))
 
 ## Contributing
 

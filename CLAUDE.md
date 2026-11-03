@@ -1,7 +1,9 @@
 # Claude Certification Prep
 
 Free, unofficial study material for Anthropic's Claude certifications, published as a static GitHub Pages site
-(https://corporatechittychat.github.io/claude-certification-prep/). Two tracks are live (CCAO-F, CCDV-F); CCAR-F and
+(https://certprep.cardzo.co.in/; the CNAME file and a DNS-only Cloudflare CNAME to corporatechittychat.github.io keep that
+address; the old github.io links forward to it). The domain is vendor-neutral on purpose: other AI certifications may be
+added later as more tracks on the same site. Two tracks are live (CCAO-F, CCDV-F); CCAR-F and
 CCAR-P are next and must follow the same build. These rules exist so a new track ships with everything the live tracks
 have, in the same shape, and so nothing here ever drifts into claiming to be official.
 

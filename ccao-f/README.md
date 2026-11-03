@@ -26,7 +26,7 @@ All 10 videos: **[CCAO-F Exam Prep playlist](https://www.youtube.com/playlist?li
 
 - [Episode questions](practice/episode-questions.md) — the seven worked questions from the series, one per domain, with full trap analysis.
 - [Mock exam](practice/mock-exam.md) — 30 original questions weighted across the domains. Answers and explanations in [mock-exam-answers.md](practice/mock-exam-answers.md).
-- **[Interactive exam player](https://corporatechittychat.github.io/claude-certification-prep/ccao-f/practice/mock-exam-player.html)** — the same 30 questions as a timed exam simulator (60:00 countdown, strikethrough, flag-for-review, per-domain results). Opens straight in the browser; nothing to install. ([source](practice/mock-exam-player.html))
+- **[Interactive exam player](https://certprep.cardzo.co.in/ccao-f/practice/mock-exam-player.html)** — the same 30 questions as a timed exam simulator (60:00 countdown, strikethrough, flag-for-review, per-domain results). Opens straight in the browser; nothing to install. ([source](practice/mock-exam-player.html))
 
 ## Final revision
 

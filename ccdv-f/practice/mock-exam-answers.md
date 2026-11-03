@@ -102,4 +102,4 @@ Score per topic. Any topic where you missed two or more: rewatch that episode an
 
 ---
 
-**Next:** take the [interactive version](https://corporatechittychat.github.io/claude-certification-prep/ccdv-f/practice/mock-exam-player.html) for timed practice, and see the [CCDV-F overview](../README.md) for the episode map.
+**Next:** take the [interactive version](https://certprep.cardzo.co.in/ccdv-f/practice/mock-exam-player.html) for timed practice, and see the [CCDV-F overview](../README.md) for the episode map.

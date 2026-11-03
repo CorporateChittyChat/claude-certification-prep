@@ -8,7 +8,7 @@ Episode 00 covers the exam itself: format, eligibility, the eight domains and wh
 
 ## Where the material lives
 
-- **Study notes:** [learn.html?track=ccdv-f](https://corporatechittychat.github.io/claude-certification-prep/learn.html?track=ccdv-f) — the eight domains split into what to know and the exam traps, each linked to its episode and build.
+- **Study notes:** [learn.html?track=ccdv-f](https://certprep.cardzo.co.in/learn.html?track=ccdv-f) — the eight domains split into what to know and the exam traps, each linked to its episode and build.
 
 The developer track is code-first, so its runnable material lives in its own repo:
 
@@ -34,7 +34,7 @@ The developer track is code-first, so its runnable material lives in its own rep
 
 ## How to use it
 
-1. **Read** the domain in the [study notes](https://corporatechittychat.github.io/claude-certification-prep/learn.html?track=ccdv-f).
+1. **Read** the domain in the [study notes](https://certprep.cardzo.co.in/learn.html?track=ccdv-f).
 2. **Watch** the episode for the concept and the exam trap.
 3. **Run** the episode's folder in the companion repo. Keep your API key in `.env`, never in code; episodes 05–09 run without a key.
 4. **Practice** with that folder's `PRACTICE.md` (EP 04 onward).
@@ -43,7 +43,7 @@ The developer track is code-first, so its runnable material lives in its own rep
 ## Practice
 
 - [Mock exam](practice/mock-exam.md) — 30 original questions, one topic per episode. Answers and explanations in [mock-exam-answers.md](practice/mock-exam-answers.md).
-- **[Interactive exam player](https://corporatechittychat.github.io/claude-certification-prep/ccdv-f/practice/mock-exam-player.html)** — the same 30 questions as a timed exam simulator (60:00 countdown, strikethrough, flag-for-review, per-topic results with links to each episode's code). Opens in the browser; nothing to install. ([source](practice/mock-exam-player.html))
+- **[Interactive exam player](https://certprep.cardzo.co.in/ccdv-f/practice/mock-exam-player.html)** — the same 30 questions as a timed exam simulator (60:00 countdown, strikethrough, flag-for-review, per-topic results with links to each episode's code). Opens in the browser; nothing to install. ([source](practice/mock-exam-player.html))
 
 ## A note on product facts
 

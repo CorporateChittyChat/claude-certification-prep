@@ -4,7 +4,7 @@ Thirty original questions spread across the CCDV-F series, one topic per episode
 
 > **Original practice material written for this project. These questions are not from the real exam, and doing well here is practice, not a prediction.**
 
-**How to sit it:** no notes, 60 minutes, write your letters down, then mark against [mock-exam-answers.md](mock-exam-answers.md). Or take it in the **[interactive player](https://corporatechittychat.github.io/claude-certification-prep/ccdv-f/practice/mock-exam-player.html)**: timed, with per-topic results.
+**How to sit it:** no notes, 60 minutes, write your letters down, then mark against [mock-exam-answers.md](mock-exam-answers.md). Or take it in the **[interactive player](https://certprep.cardzo.co.in/ccdv-f/practice/mock-exam-player.html)**: timed, with per-topic results.
 
 ---
 
