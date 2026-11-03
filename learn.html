@@ -29,36 +29,36 @@
   .note{font-size:14px; color:var(--muted); margin-top:10px;}
 
   /* three columns */
-  .layout{display:grid; grid-template-columns:340px minmax(0,1fr); gap:0; align-items:start;}
+  .layout{display:grid; grid-template-columns:360px minmax(0,1fr); gap:0; align-items:start;}
   .layout>*{min-width:0;}
   .side{position:sticky; top:64px; height:calc(100vh - 64px); overflow:auto; background:var(--slate-deep); color:#E3E5EE; border-radius:0; padding:26px 20px 30px; box-shadow:inset -1px 0 0 rgba(255,255,255,.06); scrollbar-width:thin; scrollbar-color:#3A4558 transparent;}
-  .side .ttl{font-family:var(--mono); font-size:12.5px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--peach); margin:0 4px 10px;}
+  .side .ttl{font-family:var(--mono); font-size:14.5px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--peach); margin:0 4px 10px;}
   .side .prog{margin:0 4px 22px;}
   .side .prog i{display:block; height:8px; border-radius:99px; background:#4A4D68; overflow:hidden;}
   .side .prog i b{display:block; height:100%; width:0; background:var(--orange); border-radius:99px; transition:width .3s ease;}
-  .side .prog .row{display:flex; justify-content:space-between; font-family:var(--mono); font-size:13px; color:#C9CCDA; margin-top:8px;}
+  .side .prog .row{display:flex; justify-content:space-between; font-family:var(--mono); font-size:15px; color:#C9CCDA; margin-top:8px;}
   .side ol{list-style:none;}
   .side .ov{display:block; padding:8px 6px; color:#fff; text-decoration:none; font-weight:600; border-radius:8px;}
   .side .ov:hover{background:rgba(255,255,255,.06);}
   .dom{border-radius:12px;}
   .dom + .dom{margin-top:4px;}
-  .dom-h{display:grid; grid-template-columns:18px 34px 1fr 22px; gap:6px; align-items:start; width:100%; text-align:left; font:inherit; color:#fff; background:transparent; border:0; border-radius:10px; padding:9px 6px; cursor:pointer;}
+  .dom-h{display:grid; grid-template-columns:18px 38px 1fr 22px; gap:6px; align-items:start; width:100%; text-align:left; font:inherit; color:#fff; background:transparent; border:0; border-radius:10px; padding:9px 6px; cursor:pointer;}
   .dom-h:hover{background:rgba(255,255,255,.06);}
   .dom.cur > .dom-h{background:rgba(238,157,68,.12);}
-  .dom-h .ck{color:var(--good-soft); font-weight:800; font-size:14px; padding-top:2px; visibility:hidden;}
+  .dom-h .ck{color:var(--good-soft); font-weight:800; font-size:16px; padding-top:2px; visibility:hidden;}
   .dom.done .dom-h .ck{visibility:visible; color:#7FD3A0;}
-  .dom-h .no{font-family:var(--mono); font-size:13.5px; color:#AFB2C6; padding-top:2px;}
+  .dom-h .no{font-family:var(--mono); font-size:15.5px; color:#AFB2C6; padding-top:2px;}
   .dom.cur .dom-h .no{color:var(--orange);}
-  .dom-h .nm{font-weight:700; font-size:16px; line-height:1.3;}
-  .dom-h .nm small{display:block; font-weight:500; font-size:12.5px; color:#AFB2C6; margin-top:3px;}
+  .dom-h .nm{font-weight:700; font-size:18px; line-height:1.3;}
+  .dom-h .nm small{display:block; font-weight:500; font-size:14.5px; color:#AFB2C6; margin-top:3px;}
   .dom.cur .dom-h .nm{color:var(--orange);}
-  .dom-h .chev{color:#AFB2C6; font-size:13px; padding-top:3px; transition:transform .2s ease;}
+  .dom-h .chev{color:#AFB2C6; font-size:15px; padding-top:3px; transition:transform .2s ease;}
   .dom.open .dom-h .chev{transform:rotate(180deg);}
   .skl{display:none; padding:2px 0 8px 22px;}
   .dom.open .skl{display:block;}
-  .skl a{display:grid; grid-template-columns:34px 1fr 18px; gap:6px; align-items:start; padding:6px 6px; border-radius:8px; color:#D7DAE6; text-decoration:none; font-size:15px; line-height:1.35;}
+  .skl a{display:grid; grid-template-columns:38px 1fr 18px; gap:6px; align-items:start; padding:6px 6px; border-radius:8px; color:#D7DAE6; text-decoration:none; font-size:17px; line-height:1.35;}
   .skl a:hover{background:rgba(255,255,255,.06); color:#fff;}
-  .skl a .no{font-family:var(--mono); font-size:13px; color:#AFB2C6; padding-top:1px;}
+  .skl a .no{font-family:var(--mono); font-size:15px; color:#AFB2C6; padding-top:1px;}
   .skl a .ck{color:#7FD3A0; font-weight:800; visibility:hidden;}
   .skl a.done .ck{visibility:visible;}
   .skl a.on{color:#fff; font-weight:700; background:rgba(255,255,255,.08);}
