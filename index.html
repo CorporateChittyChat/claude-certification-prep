@@ -5,8 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Claude Certification Prep · free study material</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23EE9D44'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%232A3446'/%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="theme-color" content="#1D242F">
+<meta name="apple-mobile-web-app-title" content="Cert Prep">
 <meta name="description" content="Free study notes, videos, flashcards and mock exams for the CCAO-F and CCDV-F Claude certifications. Not affiliated with Anthropic.">
-<link rel="stylesheet" href="theme.css?v=2026110303">
+<link rel="stylesheet" href="theme.css?v=2026110304">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
   .wrap{max-width:var(--page-max); margin:0 auto; padding:0 var(--page-pad);}
@@ -30,10 +34,6 @@
   .hero .lead{font-size:21px; color:#DADCE7; margin:20px 0 30px; max-width:640px;}
   .cta{display:flex; flex-wrap:wrap; gap:14px;}
   .hero .note{margin-top:20px; font-size:14.5px; color:#AFB2C6;}
-  .facts{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px;}
-  .fact{background:var(--slate); border:1px solid #3A4558; border-radius:16px; padding:20px 22px;}
-  .fact b{display:block; font-size:38px; color:var(--orange); line-height:1.1;}
-  .fact span{font-size:15px; color:#DADCE7;}
 
   .hbadges{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px;}
   .hb{display:flex; gap:16px; align-items:center; background:var(--slate); border:1px solid #3A4558; border-radius:16px; padding:16px 18px; color:#fff; text-decoration:none;}
@@ -47,7 +47,6 @@
   .stats{display:flex; flex-wrap:wrap; gap:12px 34px; margin-top:34px; padding-top:22px; border-top:1px solid #3A4558;}
   .stat b{display:block; font-size:30px; line-height:1.1; color:var(--orange);}
   .stat span{font-size:14.5px; color:#C9CDDA;}
-  @media (max-width:560px){ .hbadges{grid-template-columns:1fr;} .hb .badge{width:64px; height:64px;} }
 
   /* certifications */
   .certs{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:20px; margin-top:30px; align-items:start;}
@@ -55,8 +54,6 @@
   .cert.soon{border-left-color:var(--peach); background:var(--cream); box-shadow:none;}
   .badge{width:84px; height:84px; flex:none; filter:drop-shadow(0 6px 14px rgba(44,46,67,.25));}
   .cert .bhead{display:flex; gap:14px; align-items:center;}
-  .badges{display:flex; flex-wrap:wrap; gap:14px; margin-bottom:18px;}
-  .badges .badge{width:104px; height:104px; filter:drop-shadow(0 10px 22px rgba(0,0,0,.35));}
   .cert .code{font-family:var(--mono); font-size:13.5px; font-weight:700; letter-spacing:1.4px; color:var(--orange-ink);}
   .cert h3{font-size:22px; line-height:1.2; margin-top:4px; color:var(--slate-deep);}
   .cert .lvl{font-family:var(--mono); font-size:12.5px; letter-spacing:1.6px; text-transform:uppercase; color:var(--muted); margin-top:6px;}
@@ -119,12 +116,35 @@
     .notice{position:static;}
     .coffee{grid-template-columns:1fr; text-align:center; justify-items:center;}
   }
+  /* Phones: a short hero so the certification cards show early; the hero badges (repeated on the cards) are
+     dropped and the four stats become one quiet line. */
   @media (max-width:640px){
     .wrap{padding:0 16px;}
-    .hero{padding:44px 0 56px;} .hero h1{font-size:36px;} .hero .lead{font-size:18px;}
-    h2{font-size:29px;}
-    .certs, .steps{grid-template-columns:1fr;}
-    .facts{grid-template-columns:repeat(2,minmax(0,1fr));} .fact b{font-size:30px;}
+    section{padding-top:44px;}
+    .hero{padding:26px 0 30px!important;} .hero .wrap{gap:18px;}
+    .pill{font-size:14px; padding:4px 12px; margin-bottom:14px;}
+    .hero h1{font-size:32px; line-height:1.12;} .hero .lead{font-size:17.5px; margin:12px 0 18px;}
+    .cta .btn{width:100%; justify-content:center; min-height:52px;}
+    .cta .btn.ghost{display:none;}
+    /* the certification tiles become a swipeable row: one tile at a time, the next one peeking in */
+    .hbadges{display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:12px; margin:0 calc(-1 * var(--page-pad)); padding:0 var(--page-pad) 8px; scrollbar-width:none;}
+    .hbadges::-webkit-scrollbar{display:none;}
+    .hb{flex:0 0 84%; scroll-snap-align:start;} .hb .badge{width:64px; height:64px;}
+    .stats{gap:6px 18px; margin-top:22px; padding-top:16px;}
+    .stat b{display:inline; font-size:20px; margin-right:6px;} .stat span{font-size:15px;}
+    h2{font-size:28px;}
+    .sub{font-size:17px;}
+    .certs{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr; gap:10px; margin-top:20px;}
+    .step{display:grid; grid-template-columns:38px 1fr; gap:2px 14px; padding:14px 16px;}
+    .step::before{grid-row:1 / span 2; margin:0;}
+    .step p{margin-top:0; font-size:16px;}
+    .notice{padding:20px 18px;}
+    details{padding:0 16px;}
+    summary{font-size:17px; min-height:56px; padding:12px 0;}
+    .coffee{padding:22px 18px; gap:14px;}
+    footer{margin-top:52px; padding:32px 0;}
+    .fine{font-size:14px;}
   }
 </style>
 </head>
@@ -260,11 +280,11 @@
   </div>
 </footer>
 
-<script src="site-nav.js?v=2026110303"></script>
-<script src="path-data.js?v=2026110303"></script>
-<script src="flashcards-data.js?v=2026110303"></script>
-<script src="learn-data-ccao-f.js?v=2026110303"></script>
-<script src="learn-data-ccdv-f.js?v=2026110303"></script>
+<script src="site-nav.js?v=2026110304"></script>
+<script src="path-data.js?v=2026110304"></script>
+<script src="flashcards-data.js?v=2026110304"></script>
+<script src="learn-data-ccao-f.js?v=2026110304"></script>
+<script src="learn-data-ccdv-f.js?v=2026110304"></script>
 <script>
 const el = (tag, cls, text) => { const e = document.createElement(tag); if(cls) e.className = cls; if(text !== undefined) e.textContent = text; return e; };
 const LD = window.LEARN_DATA || {}, PD = window.PATH_DATA || {}, FC = window.FC_DATA || {};

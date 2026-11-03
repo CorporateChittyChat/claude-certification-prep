@@ -5,7 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CCDV-F Mock Exam</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23EE9D44'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%231D242F'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="../../theme.css?v=2026110303">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../icons/icon-192.png">
+<meta name="theme-color" content="#1D242F">
+<meta name="apple-mobile-web-app-title" content="Cert Prep">
+<link rel="stylesheet" href="../../theme.css?v=2026110304">
 <style>
   /* palette tokens come from theme.css; these two are page-only names for palette colours */
   :root{ --orange-soft:var(--peach); --mark:var(--peach); }
@@ -146,6 +150,34 @@
   .rev-item .ok{color:var(--green); font-weight:700;} .rev-item .no{color:var(--red); font-weight:700;}
   .rev-item .why{background:var(--cream); border-left:5px solid var(--orange); border-radius:8px; padding:14px 18px; margin-top:12px; font-size:19px; line-height:1.6; font-weight:500;}
   .reviewList.missed-only .rev-item.right{display:none;}
+  /* phones: the question gets the width; facts sit two by two; the results table scrolls inside its box */
+  @media (max-width:640px){
+    .center-wrap{margin:20px auto; padding:0 14px;}
+    .exam-wrap{margin:18px auto 150px; padding:0 14px;}
+    .stem{padding:16px 16px; font-size:19px; border-left-width:5px;}
+    .stem .ask{font-size:19.5px; padding:10px 12px;}
+    .opt{padding:12px 12px; gap:10px; align-items:flex-start;}
+    .opt .letter{width:34px; height:34px; font-size:17px;}
+    .opt .txt{font-size:18px;}
+    .opt .strike-btn{min-height:40px;}
+    .facts{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px;}
+    .fact{min-width:0; padding:10px 4px;} .fact b{font-size:24px;} .fact span{font-size:13px;}
+    .big-btn{width:100%; font-size:20px; padding:16px 20px;}
+    .tip{font-size:17.5px; padding:14px 16px;}
+    .nbtn{min-height:48px;}
+    .rev-item{padding:16px 14px;} .rev-item .rstem{font-size:18.5px;} .rev-item .why{font-size:17.5px; padding:12px 14px;}
+    .score-line{font-size:38px;}
+    table{display:block; overflow-x:auto;}
+    th,td{font-size:16px; padding:10px 12px;}
+  }
+  /* small phones: the exam bar is one row (question count, flag, timer); the title is already on the start screen */
+  @media (max-width:480px){
+    #topbar{flex-wrap:nowrap; padding:8px 12px; gap:8px;}
+    #topbar .brand{display:none;}
+    #topbar .qpos{margin-left:0; margin-right:auto; font-size:15px; white-space:nowrap;}
+    #topbar .hbtn{min-height:40px; padding:6px 9px; white-space:nowrap;}
+    #timer{font-size:17px; padding:5px 9px;}
+  }
   .pill{display:inline-block; background:var(--slate-deep); color:#fff; font-size:13px; padding:4px 12px; border-radius:999px; letter-spacing:.5px; text-transform:uppercase;}
 </style>
 </head>

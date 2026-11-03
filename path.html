@@ -6,7 +6,11 @@
 <title>Learning Paths</title>
 <meta name="description" content="The CCAO-F and CCDV-F study path: lessons in order, a readiness score and a completion certificate.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23EE9D44'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%232A3446'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="theme.css?v=2026110303">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="theme-color" content="#1D242F">
+<meta name="apple-mobile-web-app-title" content="Cert Prep">
+<link rel="stylesheet" href="theme.css?v=2026110304">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
   a{color:inherit;}
@@ -103,7 +107,9 @@
   .hidden{display:none!important;}
   @media (max-width:860px){
     .grid{grid-template-columns:1fr;}
-    .journey{grid-template-columns:1fr;} .step{min-height:0;} .step::after{display:none;}
+    .journey{grid-template-columns:1fr;} .step{min-height:0;} .step::after, .step:not(:last-child)::after{display:none;}
+    .lesson{padding:12px 14px;} .lesson .links a{min-height:44px;} .lesson input{width:26px; height:26px;}
+    footer{font-size:14px;}
     .head h1{font-size:30px;}
     .lesson{grid-template-columns:auto 1fr;} .lesson .mins{grid-column:2; padding-top:0;}
     .wrap{padding:0 16px;}
@@ -177,11 +183,11 @@
 </main>
 <div class="toast hidden" id="toast" role="status"></div>
 
-<script src="site-nav.js?v=2026110303"></script>
-<script src="path-data.js?v=2026110303"></script>
-<script src="learn-data-ccao-f.js?v=2026110303"></script>
-<script src="learn-data-ccdv-f.js?v=2026110303"></script>
-<script src="flashcards-data.js?v=2026110303"></script>
+<script src="site-nav.js?v=2026110304"></script>
+<script src="path-data.js?v=2026110304"></script>
+<script src="learn-data-ccao-f.js?v=2026110304"></script>
+<script src="learn-data-ccdv-f.js?v=2026110304"></script>
+<script src="flashcards-data.js?v=2026110304"></script>
 <script>
 const PATHS = window.PATH_DATA, FC = window.FC_DATA;
 const SITE = "https://corporatechittychat.github.io/claude-certification-prep/";

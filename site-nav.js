@@ -25,11 +25,14 @@
   const shown = track || (TRACKS[saved] ? saved : "ccdv-f");
 
   const css = `
+  :root{--sn-h:64px;}
   .sn{background:#1D242F; color:#fff; position:sticky; top:0; z-index:20; box-shadow:0 1px 0 rgba(255,255,255,.06);}
-  .sn-in{max-width:1880px; margin:0 auto; padding:0 clamp(16px,2.6vw,48px); height:64px; display:flex; align-items:center; gap:18px;}
+  .sn-in{position:relative; max-width:1880px; margin:0 auto; padding:0 clamp(16px,2.6vw,48px); height:64px; display:flex; align-items:center; gap:18px;}
   .sn a{color:inherit; text-decoration:none;}
-  .sn-brand{font-weight:800; font-size:18px; letter-spacing:.2px; white-space:nowrap;}
-  .sn-brand span{color:#EE9D44;}
+  .sn-brand{display:flex; align-items:center; gap:9px; font-weight:800; font-size:18px; letter-spacing:.2px; white-space:nowrap;}
+  .sn-brand svg{width:26px; height:26px; flex:none;}
+  .sn-brand .sn-or{color:#EE9D44;}
+  .sn-brand .sn-short{display:none;}
   .sn-pick{position:relative;}
   .sn-pick>button{font:inherit; font-size:14px; font-weight:700; letter-spacing:1px; color:#fff; background:transparent; border:1px solid #3A4558; border-radius:8px; padding:7px 12px; cursor:pointer; display:flex; gap:8px; align-items:center;}
   .sn-pick>button:hover, .sn-pick>button[aria-expanded="true"]{border-color:#EE9D44;}
@@ -55,14 +58,31 @@
   .sn-links .sn-menu a{color:#24263A; display:block; padding:10px 12px; border-radius:8px; font-size:15.5px; white-space:normal;}
   .sn-links .sn-menu a:hover{color:#24263A; background:#FFF1DC;}
   .sn-links .sn-menu a b{color:#24263A; font-size:14px; letter-spacing:.8px;}
-  .sn-burger{display:none; margin-left:auto; font:inherit; font-size:22px; background:transparent; color:#fff; border:1px solid #3A4558; border-radius:8px; width:44px; height:40px; cursor:pointer;}
+  .sn-burger{display:none; margin-left:auto; font:inherit; font-size:15px; font-weight:700; background:transparent; color:#fff; border:1px solid #3A4558; border-radius:8px; min-width:44px; height:44px; padding:0 12px; cursor:pointer; align-items:center; gap:8px;}
+  .sn-burger[aria-expanded="true"]{border-color:#EE9D44;}
+  .sn-burger .sn-ico{font-size:20px; line-height:1;}
+  /* Narrow screens: one 56px row (mark, short name, cert picker, menu button). The links open as a panel that
+     overlays the page instead of pushing it down. */
   @media (max-width:1020px){
-    .sn-in{flex-wrap:wrap; height:auto; padding:10px 16px; gap:10px;}
-    .sn-burger{display:block;}
-    .sn-links{display:none; flex-basis:100%; flex-direction:column; align-items:stretch; padding-bottom:8px;}
+    :root{--sn-h:56px;}
+    .sn-in{height:56px; padding:0 12px 0 16px; gap:10px;}
+    .sn-burger{display:inline-flex;}
+    .sn-pick>button{min-height:44px;}
+    .sn-links{display:none; position:absolute; top:56px; left:0; right:0; flex-direction:column; align-items:stretch; gap:2px; background:#1D242F; padding:8px 12px 16px; border-top:1px solid #3A4558; box-shadow:0 18px 30px rgba(0,0,0,.3); max-height:calc(100vh - 56px); max-height:calc(100dvh - 56px); overflow:auto;}
     .sn-links.open{display:flex;}
-    .sn-sep{display:none;}
-    .sn-cta{text-align:center;}
+    .sn-links a{font-size:18px; padding:12px; min-height:48px; display:flex; align-items:center;}
+    .sn-links a[aria-current="page"]{box-shadow:inset 3px 0 0 #EE9D44; background:rgba(255,255,255,.05);}
+    .sn-sep{display:block; width:auto; height:1px; margin:6px 0;}
+    .sn-cta{justify-content:center; margin-top:8px; font-size:17px;}
+    .sn-mock .sn-cta{width:100%;}
+    .sn-mock .sn-menu{position:static; box-shadow:none; margin-top:8px; min-width:0;}
+  }
+  @media (max-width:520px){
+    .sn-brand{font-size:17px; gap:8px;}
+    .sn-brand .sn-long{display:none;}
+    .sn-brand .sn-short{display:inline;}
+    .sn-burger .sn-lbl{display:none;}
+    .sn-menu{position:fixed; left:12px; right:12px; top:62px; min-width:0;}
   }`;
   const style = document.createElement("style");
   style.textContent = css;
@@ -75,9 +95,18 @@
   bar.setAttribute("aria-label", "Site");
   const inner = el("div", "sn-in");
 
-  const brand = el("a", "sn-brand", "Claude Certification ");
+  const brand = el("a", "sn-brand");
   brand.href = "./";
-  brand.append(el("span", "", "Prep"));
+  brand.setAttribute("aria-label", "Claude Certification Prep, home");
+  // the site mark: the favicon's orange hexagon with the slate one inside
+  const NS = "http://www.w3.org/2000/svg", mark = document.createElementNS(NS, "svg");
+  mark.setAttribute("viewBox", "0 0 120 120"); mark.setAttribute("aria-hidden", "true");
+  [["60,4 108,32 108,88 60,116 12,88 12,32", "#EE9D44"], ["60,22 92,41 92,79 60,98 28,79 28,41", "#2A3446"]].forEach(([pts, fill]) => {
+    const p = document.createElementNS(NS, "polygon"); p.setAttribute("points", pts); p.setAttribute("fill", fill); mark.append(p);
+  });
+  const words = el("span");
+  words.append(el("span", "sn-long", "Claude Certification "), el("span", "sn-short", "Cert "), el("span", "sn-or", "Prep"));
+  brand.append(mark, words);
 
   // certification picker
   const pick = el("div", "sn-pick");
@@ -152,10 +181,25 @@
     links.append(wrap);
   }
 
-  const burger = el("button", "sn-burger", "☰");
+  links.id = "snLinks";
+  const burger = el("button", "sn-burger");
   burger.type = "button";
+  burger.setAttribute("aria-controls", "snLinks");
+  burger.setAttribute("aria-expanded", "false");
   burger.setAttribute("aria-label", "Menu");
-  burger.addEventListener("click", () => links.classList.toggle("open"));
+  const burgerIco = el("span", "sn-ico", "☰");
+  burgerIco.setAttribute("aria-hidden", "true");
+  burger.append(burgerIco, el("span", "sn-lbl", "Menu"));
+  const setLinks = on => {
+    links.classList.toggle("open", on);
+    burger.setAttribute("aria-expanded", String(on));
+    burgerIco.textContent = on ? "✕" : "☰";
+  };
+  burger.addEventListener("click", e => { e.stopPropagation(); closeAll(); setLinks(!links.classList.contains("open")); });
+  // the panel closes on a link, on Esc (focus back to the button) and on a tap outside the header
+  links.addEventListener("click", e => { if(e.target.closest("a")) setLinks(false); });
+  document.addEventListener("keydown", e => { if(e.key === "Escape" && links.classList.contains("open")){ setLinks(false); burger.focus(); } });
+  document.addEventListener("click", e => { if(links.classList.contains("open") && !bar.contains(e.target)) setLinks(false); });
 
   inner.append(brand, pick, burger, links);
   bar.append(inner);

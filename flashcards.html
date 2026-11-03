@@ -6,7 +6,11 @@
 <title>Flashcards &amp; Traps</title>
 <meta name="description" content="Illustrated flashcards and a printable traps sheet for CCAO-F and CCDV-F.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23EE9D44'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%231D242F'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="theme.css?v=2026110303">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="theme-color" content="#1D242F">
+<meta name="apple-mobile-web-app-title" content="Cert Prep">
+<link rel="stylesheet" href="theme.css?v=2026110304">
 <style>
   /* palette tokens (--accent, --accent-ink, --accent-soft, --red, --green ...) come from theme.css.
      Both tracks share the brand orange, so body.dv no longer overrides the accent. */
@@ -159,7 +163,10 @@
           .head p, .legend{display:none;}
     .bar{margin-top:14px;}
     .wrap{padding:0 16px;}
+    footer{font-size:14px;}
   }
+  /* touch screens have no Space or arrow keys to hint at */
+  @media (hover:none) and (pointer:coarse){ .keys{display:none;} }
   @media (prefers-reduced-motion:reduce){ .card{transition:none;} .progress i{transition:none;} }
   @media print{
       body{background:#fff; font-size:13px;}
@@ -259,8 +266,8 @@
   <footer><a href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener" style="color:var(--orange-ink); font-weight:700">☕ Buy me a coffee</a> · Independent study material. Not affiliated with, endorsed by or approved by Anthropic. Not a certification, score or prediction.</footer>
 </main>
 
-<script src="site-nav.js?v=2026110303"></script>
-<script src="flashcards-data.js?v=2026110303"></script>
+<script src="site-nav.js?v=2026110304"></script>
+<script src="flashcards-data.js?v=2026110304"></script>
 <script>
 const DATA = window.FC_DATA;
 const $ = id => document.getElementById(id);

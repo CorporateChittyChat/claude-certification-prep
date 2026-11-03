@@ -6,7 +6,11 @@
 <title>Learn</title>
 <meta name="description" content="Study notes for every skill in the CCAO-F and CCDV-F exam guides: lessons, exam traps and worked questions.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23EE9D44'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%232A3446'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="theme.css?v=2026110303">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="theme-color" content="#1D242F">
+<meta name="apple-mobile-web-app-title" content="Cert Prep">
+<link rel="stylesheet" href="theme.css?v=2026110304">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
   .wrap{max-width:var(--page-max); margin:0 auto; padding:0 var(--page-pad);}
@@ -70,6 +74,7 @@
   /* domain */
   .panel{margin-top:22px; opacity:1; transition:opacity .16s ease;}
   .panel.swap{opacity:0;}
+  #panel:focus{outline:none;}
   .dtop{display:grid; grid-template-columns:minmax(0,1fr) min(440px,30%); gap:28px; align-items:start;}
   .dtop.novid{grid-template-columns:1fr;}
   .watch{background:var(--slate-deep); border-radius:14px; padding:8px; box-shadow:var(--shadow);}
@@ -235,27 +240,90 @@
   .hidden{display:none!important;}
 
   @media (prefers-reduced-motion:reduce){ .panel{transition:none;} }
+  /* mobile-only parts: the sticky "where am I" bar, the drawer's own header, the backdrop, the facts toggle */
+  .mbar, .side-top, .scrim{display:none;}
+  .about{display:block;}
+  .about > summary{display:none;}
+  .pager .ar{display:none;}
   @media (max-width:1240px){
     .layout{grid-template-columns:300px minmax(0,1fr);}
   }
-  @media (max-width:900px){
+  /* Below 1000px the page is one column: the lesson comes first, the curriculum opens as a drawer from the
+     "Contents" button in a sticky bar, and Previous / Next sit in a bar at the bottom of the screen. */
+  @media (max-width:999.98px){
     .wrap{padding:0 16px;}
     .col{padding:0 16px;}
-    .head{grid-template-columns:1fr;}
-    .progress{text-align:left;}
-    .head h1{font-size:32px;}
-    .layout{grid-template-columns:1fr;}
-    .side{position:static; height:auto; max-height:none; padding:16px 14px;}
     .layout{display:block;}
+    .app{padding-bottom:84px;}
+
+    .mbar{display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:10px; align-items:center; position:sticky; top:var(--sn-h,56px); z-index:15; background:var(--paper); border-bottom:1px solid var(--line); padding:6px 16px 9px; box-shadow:0 4px 12px rgba(29,36,47,.06);}
+    .mb-btn{font:inherit; font-size:16px; font-weight:700; min-height:44px; padding:0 14px; border-radius:10px; border:0; background:var(--slate-deep); color:#fff; display:inline-flex; align-items:center; gap:8px; cursor:pointer;}
+    .mb-btn[aria-expanded="true"]{background:var(--orange); color:var(--ink);}
+    .mb-where{font-size:16px; line-height:1.3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--ink); font-weight:700;}
+    .mb-where b{color:var(--orange-ink); font-family:var(--mono); margin-right:6px;}
+    .mb-pct{font-size:14px; font-weight:700; color:var(--muted); font-variant-numeric:tabular-nums; white-space:nowrap;}
+    .mb-bar{position:absolute; left:0; right:0; bottom:0; height:3px; background:var(--slate-soft);}
+    .mb-bar b{display:block; height:100%; width:0; background:var(--orange);}
+
+    .side{position:fixed; top:0; left:0; bottom:0; width:min(88vw,400px); height:auto; z-index:60; padding:0 14px 30px; transform:translateX(-102%); visibility:hidden; transition:transform .22s ease, visibility 0s linear .22s; overscroll-behavior:contain; box-shadow:12px 0 40px rgba(0,0,0,.3);}
+    .side.open{transform:none; visibility:visible; transition:transform .22s ease;}
+    .side-top{display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:1; background:var(--slate-deep); padding:10px 0; margin-bottom:8px; border-bottom:1px solid #3A4558;}
+    .side-top .ttl{margin:0 4px; font-size:16px;}
+    .side-x{font:inherit; font-size:19px; width:44px; height:44px; border-radius:10px; border:1px solid #3A4558; background:transparent; color:#fff; cursor:pointer;}
+    .side .ov{min-height:44px; display:flex; align-items:center;}
+    .dom-h{min-height:48px; padding:11px 6px;}
+    .skl a{padding:11px 8px; min-height:44px;}
+    .scrim{display:block; position:fixed; inset:0; z-index:55; background:rgba(15,19,26,.55);}
+    .scrim[hidden]{display:none;}
+    html.drawer-open, html.drawer-open body{overflow:hidden;}
+
+    .head{grid-template-columns:1fr; padding:18px 0 4px; gap:6px;}
+    .head h1{font-size:30px;}
+    .head .intro{font-size:17px; margin-top:4px;}
+    .about{margin-top:14px; background:var(--cream); border:1px solid var(--peach); border-radius:12px;}
+    .about > summary{display:flex; justify-content:space-between; align-items:center; gap:12px; min-height:48px; padding:0 16px; font-weight:700; font-size:16.5px; color:var(--slate-deep); cursor:pointer; list-style:none;}
+    .about > summary::-webkit-details-marker{display:none;}
+    .about > summary::after{content:"+"; font-size:22px; font-weight:400; color:var(--orange-ink);}
+    .about[open] > summary::after{content:"\2212";}
+    .about .glance{margin:0; padding:0 12px 2px; gap:8px;}
+    .about .note{margin:8px 0 0; padding:0 16px 12px;}
+    .glance .fact{font-size:16px; padding:8px 12px; background:var(--card);}
+    .glance a.fact{min-height:44px;}
+
+    .panel{margin-top:16px;}
     .dhead h2{font-size:27px;}
+    .hl{padding:16px;}
     .hl ul, .traps, .rem ol{grid-template-columns:1fr;}
     .trap{padding:16px 18px;} .trap::after{display:none;}
     .dtop{grid-template-columns:1fr;}
-    .sub{padding:18px 16px;}
-    .sub h3{font-size:21px;}
+    .sub{padding:18px 16px; scroll-margin-top:calc(var(--sn-h,56px) + 72px);}
+    .sub h3{font-size:22px;}
+    .scope{font-size:16px;}
+    .terms, .sc-grid, .eps{grid-template-columns:minmax(0,1fr);}
+    .terms div{font-size:16px;}
+    .chip{min-height:44px; white-space:normal;}
+    .crumb{display:flex; align-items:center; min-height:44px; margin-top:10px;}
+    .watch .tabs button{min-height:40px; padding:4px 12px;}
+    .practice{padding:16px;}
+    .ep .acts a{min-height:44px; display:inline-flex; align-items:center;}
+    .wq{padding:16px 14px;}
+    .wq .opt{font-size:17px;}
+
+    .pager{position:fixed; left:0; right:0; bottom:0; z-index:14; margin:0; padding:8px 12px calc(8px + env(safe-area-inset-bottom, 0px)); background:var(--paper); border-top:1px solid var(--line); box-shadow:0 -4px 14px rgba(29,36,47,.08); flex-wrap:nowrap; gap:8px;}
+    .pager .sp{display:none;}
+    .pager .btn{min-height:52px; padding:6px 12px; max-width:none;}
+    .pager a.prev{flex:none; width:52px; justify-content:center; align-items:center; padding:0;}
+    .pager a.prev small, .pager a.prev .lb{display:none;}
+    .pager a.prev .ar{display:block; font-size:22px;}
+    .pager button.btn{flex:none; align-self:stretch; font-size:15.5px;}
+    .pager a.btn.primary{flex:1 1 auto; min-width:0; margin-left:auto;}
+    .pager a.btn.primary span{align-self:stretch; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:16px;}
+    .tip{margin-top:24px;}
+    footer{font-size:14px;}
   }
+  @media (max-width:999.98px) and (prefers-reduced-motion:reduce){ .side, .side.open{transition:none;} }
   @media print{
-    nav.sn,.side,.toc,.foot,.tip,.glance{display:none!important;}
+    nav.sn,.side,.toc,.foot,.tip,.glance,.about,.mbar,.scrim,.pager{display:none!important;}
     .layout{display:block;}
     .trap{background:#fff; color:#000; border:1px solid #999; border-left:4px solid #000;}
     .trap .mv{color:#000;} .trap .why{color:#333;} .trap .tl{color:#000;}
@@ -267,8 +335,16 @@
 <header id="siteNav" data-page="learn"></header>
 
 <main class="app" id="top">
+  <div class="mbar" id="mbar">
+    <button class="mb-btn" id="tocBtn" type="button" aria-controls="curriculum" aria-expanded="false"><span aria-hidden="true">☰</span> Contents</button>
+    <div class="mb-where" id="mbWhere"></div>
+    <div class="mb-pct" id="mbPct"></div>
+    <i class="mb-bar" aria-hidden="true"><b id="mbBar"></b></i>
+  </div>
+  <div class="scrim" id="scrim" hidden></div>
   <div class="layout">
-    <nav class="side" aria-label="Curriculum">
+    <nav class="side" id="curriculum" aria-label="Curriculum">
+      <div class="side-top"><span class="ttl">Contents</span><button class="side-x" id="tocClose" type="button" aria-label="Close contents">✕</button></div>
       <div class="ttl">Study progress</div>
       <div class="prog"><i><b id="sideBar"></b></i><div class="row"><span id="sideText"></span><span id="sidePct"></span></div></div>
       <div class="ttl">Curriculum</div>
@@ -284,9 +360,12 @@
         </div>
         <div class="progress"><span id="progText"></span><i><b id="progBar"></b></i></div>
       </div>
-      <div class="glance" id="glance"></div>
-      <p class="note" id="asof"></p>
-      <article class="panel" id="panel" aria-live="polite"></article>
+      <details class="about" id="about" open>
+        <summary>Exam facts and guides</summary>
+        <div class="glance" id="glance"></div>
+        <p class="note" id="asof"></p>
+      </details>
+      <article class="panel" id="panel" aria-live="polite" tabindex="-1"></article>
       <div class="tip">
         <span style="font-size:32px">☕</span>
         <p>Did a domain click? A coffee funds the CCAR-F and CCAR-P tracks.</p>
@@ -297,10 +376,10 @@
   </div>
 </main>
 
-<script src="site-nav.js?v=2026110303"></script>
-<script src="md-view.js?v=2026110303"></script>
-<script src="learn-data-ccao-f.js?v=2026110303"></script>
-<script src="learn-data-ccdv-f.js?v=2026110303"></script>
+<script src="site-nav.js?v=2026110304"></script>
+<script src="md-view.js?v=2026110304"></script>
+<script src="learn-data-ccao-f.js?v=2026110304"></script>
+<script src="learn-data-ccdv-f.js?v=2026110304"></script>
 <script>
 const DATA = window.LEARN_DATA || {};
 const $ = id => document.getElementById(id);
@@ -366,7 +445,6 @@ function chip(icon, label, url, cls){
   return a;
 }
 const pct = w => (w === null || w === undefined) ? "" : String(w) + "%";
-
 if(!T){
   $("panel").append(el("div", "empty", "Notes for this certification are coming."));
 } else {
@@ -412,7 +490,60 @@ if(!T){
     $("sideBar").style.width = p + "%";
     $("progText").textContent = n + " of " + all + " skills done";
     $("progBar").style.width = p + "%";
+    // the mobile bar: where you are, and progress
+    const cd = T.domains.find(x => x.id === current);
+    const where = $("mbWhere"); where.replaceChildren();
+    if(cd){
+      const isT = cd.code === "★";
+      const si = curSkill ? parseInt(curSkill.split("-")[1], 10) - 1 : null;
+      if(!isT) where.append(el("b", "", cd.code + (si === null ? "" : "." + (si + 1))));
+      where.append(document.createTextNode(si === null ? cd.title + (isT ? "" : " overview") : cd.subs[si].title));
+      where.title = where.textContent;
+    }
+    $("mbPct").textContent = n + "/" + all;
+    $("mbPct").setAttribute("aria-label", n + " of " + all + " skills done");
+    $("mbBar").style.width = p + "%";
   }
+
+  /* Curriculum drawer (below 1000px). Opens from "Contents"; closes on a choice, on Esc and on a backdrop tap.
+     Focus moves into it on open, stays inside while open and goes back to the button on close. */
+  const mq = window.matchMedia("(max-width:999.98px)");
+  const side = $("curriculum"), tocBtn = $("tocBtn"), scrim = $("scrim");
+  const isOpen = () => side.classList.contains("open");
+  function setDrawer(on, focusTo){
+    if(on && !mq.matches) return;
+    side.classList.toggle("open", on);
+    scrim.hidden = !on;
+    tocBtn.setAttribute("aria-expanded", String(on));
+    document.documentElement.classList.toggle("drawer-open", on);
+    if(on){
+      side.setAttribute("role", "dialog"); side.setAttribute("aria-modal", "true");
+      const cur = side.querySelector(".skl a.on") || side.querySelector(".dom.cur > .dom-h");
+      if(cur){ cur.focus(); cur.scrollIntoView({block: "center"}); } else $("tocClose").focus();
+    } else {
+      side.removeAttribute("role"); side.removeAttribute("aria-modal");
+      if(focusTo) focusTo.focus({preventScroll: true});
+    }
+  }
+  tocBtn.addEventListener("click", () => setDrawer(!isOpen()));
+  $("tocClose").addEventListener("click", () => setDrawer(false, tocBtn));
+  scrim.addEventListener("click", () => setDrawer(false, tocBtn));
+  side.addEventListener("click", e => { if(isOpen() && e.target.closest("a")) setDrawer(false, $("panel")); });
+  document.addEventListener("keydown", e => {
+    if(!isOpen()) return;
+    if(e.key === "Escape"){ e.preventDefault(); setDrawer(false, tocBtn); return; }
+    if(e.key !== "Tab") return;
+    const f = [...side.querySelectorAll("a[href], button")].filter(x => x.offsetParent !== null);
+    if(!f.length) return;
+    if(e.shiftKey && document.activeElement === f[0]){ e.preventDefault(); f[f.length - 1].focus(); }
+    else if(!e.shiftKey && document.activeElement === f[f.length - 1]){ e.preventDefault(); f[0].focus(); }
+    else if(!side.contains(document.activeElement)){ e.preventDefault(); f[0].focus(); }
+  });
+  // exam facts: open beside the notes on a wide screen, folded away on a phone
+  const about = $("about");
+  const fitAbout = () => { about.open = !mq.matches; if(!mq.matches && isOpen()) setDrawer(false); };
+  fitAbout();
+  if(mq.addEventListener) mq.addEventListener("change", fitAbout);
 
   function toggleSkill(sid, on){
     done = on ? (done.includes(sid) ? done : done.concat(sid)) : done.filter(x => x !== sid);
@@ -610,7 +741,13 @@ if(!T){
 
     function pager(withDone){
       const nav = el("nav", "pager"); nav.setAttribute("aria-label", "Previous and next");
-      if(prev){ const a = el("a", "btn"); a.href = "#" + pageId(prev); a.append(el("small", "", "Previous"), el("span", "", "\u2190 " + pageLabel(prev))); nav.append(a); }
+      if(prev){
+        const a = el("a", "btn prev"); a.href = "#" + pageId(prev);
+        const ar = el("span", "ar", "\u2190"); ar.setAttribute("aria-hidden", "true");
+        a.append(ar, el("small", "", "Previous"), el("span", "lb", "\u2190 " + pageLabel(prev)));
+        a.setAttribute("aria-label", "Previous: " + pageLabel(prev));
+        nav.append(a);
+      }
       nav.append(el("span", "sp"));
       if(withDone){
         const sid = d.id + "-" + (si + 1);
@@ -728,7 +865,10 @@ if(!T){
     if(si !== null && !(si >= 0 && si < d.subs.length)) si = null;
     drawNav(d.id, si === null ? null : d.id + "-" + (si + 1));
     const p = $("panel");
-    const show = () => { drawDomain(d, si); if(scroll){ const top = p.getBoundingClientRect().top + window.scrollY - 84; window.scrollTo({top: Math.max(0, top), behavior: "auto"}); } };
+    if(isOpen()) setDrawer(false, p);
+    // scroll so the new page starts just under the sticky header (and, on a phone, the sticky "Contents" bar)
+    const offset = () => { const sn = document.querySelector("nav.sn"), mb = $("mbar"); return (sn ? sn.offsetHeight : 64) + (mb && mb.offsetHeight ? mb.offsetHeight : 0) + 16; };
+    const show = () => { drawDomain(d, si); if(scroll){ const top = p.getBoundingClientRect().top + window.scrollY - offset(); window.scrollTo({top: Math.max(0, top), behavior: "auto"}); } };
     if(reduceMotion) show();
     else { p.classList.add("swap"); setTimeout(() => { show(); p.classList.remove("swap"); }, 110); }
   }
