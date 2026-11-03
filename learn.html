@@ -54,14 +54,16 @@
   .dom.cur .dom-h .nm{color:var(--orange);}
   .dom-h .chev{color:#AFB2C6; font-size:15px; padding-top:3px; transition:transform .2s ease;}
   .dom.open .dom-h .chev{transform:rotate(180deg);}
-  .skl{display:none; padding:2px 0 8px 22px;}
+  .skl{display:none; position:relative; margin:2px 0 10px 32px; padding-left:14px; border-left:2px solid #3A4558;}
   .dom.open .skl{display:block;}
-  .skl a{display:grid; grid-template-columns:38px 1fr 18px; gap:6px; align-items:start; padding:6px 6px; border-radius:8px; color:#D7DAE6; text-decoration:none; font-size:17px; line-height:1.35;}
+  .skl a{position:relative; display:grid; grid-template-columns:34px 1fr 18px; gap:4px; align-items:start; padding:6px 8px; border-radius:8px; color:#C9CCDA; text-decoration:none; font-size:17px; font-weight:500; line-height:1.35;}
+  .skl a::before{content:""; position:absolute; left:-16px; top:6px; bottom:6px; width:2px; border-radius:2px; background:transparent;}
   .skl a:hover{background:rgba(255,255,255,.06); color:#fff;}
   .skl a .no{font-family:var(--mono); font-size:15px; color:#AFB2C6; padding-top:1px;}
   .skl a .ck{color:#7FD3A0; font-weight:800; visibility:hidden;}
   .skl a.done .ck{visibility:visible;}
   .skl a.on{color:#fff; font-weight:700; background:rgba(255,255,255,.08);}
+  .skl a.on::before{background:var(--orange);}
   .skl a.on .no{color:var(--orange);}
   @media (prefers-reduced-motion:reduce){ .side .prog i b, .dom-h .chev{transition:none;} }
 
@@ -192,6 +194,28 @@
   .wq .reveal p{margin:6px 0;}
   .wq .more{margin-top:10px; font-size:14.5px;}
   .wq .more a{color:var(--orange-ink); font-weight:700;}
+  .crumb{display:inline-block; margin-top:22px; font-weight:700; font-size:15.5px; color:var(--orange-ink); text-decoration:none;}
+  .crumb:hover{text-decoration:underline;}
+  .pager{display:flex; flex-wrap:wrap; gap:12px; align-items:stretch; margin-top:26px; padding-top:18px; border-top:1px solid var(--line);}
+  .pager .sp{flex:1;}
+  .pager a.btn{flex-direction:column; align-items:flex-start; gap:2px; max-width:440px; line-height:1.3;}
+  .pager a.btn small{font-size:12.5px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; opacity:.75;}
+  .pager a.btn span{font-size:16.5px;}
+  .pager a.btn.primary{align-items:flex-end; text-align:right;}
+  .pager button.btn{align-self:center;}
+  .skillcards{margin-top:24px;}
+  .skillcards h3{font-size:20px; color:var(--slate-deep); margin-bottom:12px;}
+  .sc-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:14px;}
+  .sc{display:flex; flex-direction:column; gap:8px; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px 18px; text-decoration:none; color:var(--ink); box-shadow:var(--shadow); transition:border-color .15s ease, transform .15s ease;}
+  .sc:hover{border-color:var(--orange); transform:translateY(-2px);}
+  .sc-t{display:grid; grid-template-columns:auto 1fr auto; gap:10px; align-items:baseline;}
+  .sc-t .num{font-family:var(--mono); font-weight:800; font-size:14px; color:var(--orange-ink);}
+  .sc-t b{font-size:18.5px; color:var(--slate-deep); line-height:1.3;}
+  .sc-t .ck{color:var(--good); font-weight:800; visibility:hidden;}
+  .sc.done .sc-t .ck{visibility:visible;}
+  .sc p{font-size:16px; color:#3B3E55; line-height:1.5;}
+  .sc .meta{margin-top:auto; font-size:13.5px; color:var(--muted); font-weight:600;}
+  @media (prefers-reduced-motion:reduce){ .sc{transition:none;} .sc:hover{transform:none;} }
   .foot{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:26px;}
   .btn{font:inherit; font-size:16px; font-weight:700; border:2px solid var(--line); background:var(--card); color:var(--ink); border-radius:10px; padding:10px 16px; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px;}
   .btn:hover{border-color:var(--orange);}
@@ -350,7 +374,7 @@ if(!T){
   if(T.guide) g.append(chip(T.guide[0], T.guide[1], T.guide[2], "fact"));
   (T.overview || []).filter(l => !ytId(l[2])).forEach(l => g.append(chip(l[0], l[1], l[2], "fact")));   // videos live on the Videos page
 
-  function drawNav(current){
+  function drawNav(current, curSkill){
     const ol = $("nav"); ol.replaceChildren();
     open.add(current);
     T.domains.forEach(d => {
@@ -361,14 +385,14 @@ if(!T){
       nm.append(el("small", "", (d.w ? pct(d.w) + " of the exam · " : "") + d.subs.length + (d.subs.length > 1 ? " skills" : " skill")));
       h.append(el("span", "ck", "✓"), el("span", "no", d.code === "★" ? "★" : "0" + d.code.slice(1)), nm, el("span", "chev", "▾"));
       h.addEventListener("click", () => {
-        if(d.id !== current){ location.hash = d.id; return; }
+        if(d.id !== current || curSkill){ location.hash = d.id; return; }
         open.has(d.id) ? open.delete(d.id) : open.add(d.id);
         li.classList.toggle("open"); h.setAttribute("aria-expanded", String(open.has(d.id)));
       });
       const sk = el("ol", "skl");
       d.subs.forEach((sub, i) => {
         const sid = d.id + "-" + (i + 1);
-        const a = el("a" , done.includes(sid) ? "done" : "");
+        const a = el("a" , (done.includes(sid) ? "done" : "") + (sid === curSkill ? " on" : ""));
         a.href = "#" + sid; a.dataset.sid = sid;
         a.append(el("span", "no", (d.code === "★" ? "" : d.code.slice(1) + ".") + (i + 1)), el("span", "", sub.title), el("span", "ck", "✓"));
         const sli = el("li"); sli.append(a); sk.append(sli);
@@ -440,21 +464,126 @@ if(!T){
     } else setTimeout(go, 700);
   }
 
-  function drawDomain(d){
-    const p = $("panel"); p.replaceChildren();
-    const shownWQ = {};
-    const idx = T.domains.indexOf(d);
-    const isT = d.code === "★";
+  /* Pages in reading order: each domain's overview, then its skills one per page. */
+  const PAGES_SEQ = [];
+  T.domains.forEach(d => { PAGES_SEQ.push({ d, si: null }); d.subs.forEach((_, i) => PAGES_SEQ.push({ d, si: i })); });
+  const pageId = pg => pg.si === null ? pg.d.id : pg.d.id + "-" + (pg.si + 1);
+  const pageLabel = pg => pg.si === null ? (pg.d.code === "\u2605" ? "" : pg.d.code + " \u00b7 ") + pg.d.title + " overview"
+    : (pg.d.code === "\u2605" ? "" : pg.d.code + "." + (pg.si + 1) + " ") + pg.d.subs[pg.si].title;
 
+  function renderSkill(d, s, i, firstWQ){
+    const isT = d.code === "\u2605";
+    const sid = d.id + "-" + (i + 1);
+    const sec = el("section", "sub");
+    sec.id = sid;
+    const h3 = el("h3");
+    h3.append(el("span", "num", (isT ? "" : d.code + ".") + (i + 1)), el("span", "", s.title));
+    if(s.w) h3.append(el("span", "weight sm", pct(s.w)));
+    sec.append(h3);
+    if(s.scope){ const sc = el("p", "scope"); sc.append(el("b", "", "Exam guide covers: "), document.createTextNode(s.scope)); sec.append(sc); }
+
+    const grid = el("div", "subgrid"), main = el("div", "sg-main"), side = el("aside", "sg-side");
+    grid.append(side, main); sec.append(grid);
+    if(s.short){ const sh = el("p", "short"); sh.append(el("b", "", "In short"), document.createTextNode(s.short)); side.append(sh); }
+    if(s.terms && s.terms.length){
+      side.append(el("h4", "", "Key terms"));
+      const dl = el("dl", "terms");
+      s.terms.forEach(([t, d]) => { const box = el("div"); box.append(el("dt", "", t), el("dd", "", d)); dl.append(box); });
+      side.append(dl);
+    }
+    if(s.lesson && s.lesson.length){
+      main.append(el("h4", "", "The lesson"));
+      const ls = el("div", "lesson");
+      s.lesson.forEach(t => ls.append(el("p", "", t)));
+      main.append(ls);
+    }
+    (s.tables || []).forEach(t => {
+      const wrap = el("div", "tbl"), table = el("table");
+      table.append(el("caption", "", t.cap));
+      const thead = el("thead"), hr = el("tr");
+      t.h.forEach(h => hr.append(el("th", "", h)));
+      thead.append(hr);
+      const tb = el("tbody");
+      t.r.forEach(row => { const tr = el("tr"); row.forEach(c => tr.append(el("td", "", c))); tb.append(tr); });
+      table.append(thead, tb); wrap.append(table); main.append(wrap);
+    });
+    if(s.code){
+      const c = el("div", "code");
+      c.append(el("div", "cap", s.code.cap), el("pre", "", s.code.text));
+      main.append(c);
+    }
+    if(s.know && s.know.length){
+      side.append(el("h4", "", "What you need to know"));
+      const k = el("ul", "know");
+      s.know.forEach(t => k.append(el("li", "", t)));
+      side.append(k);
+    }
+    if(s.build){
+      const isWQ = /episode-questions\.md#/.test(s.build[1]);
+      // every skill page answers its worked question inline, even when several skills share one
+      const wq = isWQ ? workedQuestion(s.build[1]) : null;
+      sec.append(wq || chip("\u2328", s.build[0] + " \u2192", s.build[1], "build"));
+    }
+    if(s.traps && s.traps.length){
+      sec.append(el("h4", "", s.traps.length > 1 ? "Exam traps (" + s.traps.length + ")" : "Exam trap"));
+      const grid = el("div", "traps");
+      s.traps.forEach(t => {
+        const box = el("div", "trap");
+        box.append(el("div", "tl", "⚠ EXAM TRAP"), el("div", "mv", "“" + t.move + "”"), el("div", "why", t.why));
+        grid.append(box);
+      });
+      sec.append(grid);
+    }
+    return sec;
+  }
+
+  function drawDomain(d, si){
+    const p = $("panel"); p.replaceChildren();
+    const idx = T.domains.indexOf(d);
+    const isT = d.code === "\u2605";
+    const firstWQ = {};
+    d.subs.forEach((x, i) => { if(x.build && /episode-questions\.md#/.test(x.build[1]) && !firstWQ[x.build[1]]) firstWQ[x.build[1]] = { sid: d.id + "-" + (i + 1), label: (isT ? "" : d.code + ".") + (i + 1) }; });
+    const here = PAGES_SEQ.findIndex(pg => pg.d === d && pg.si === si);
+    const prev = PAGES_SEQ[here - 1], next = PAGES_SEQ[here + 1];
+
+    function pager(withDone){
+      const nav = el("nav", "pager"); nav.setAttribute("aria-label", "Previous and next");
+      if(prev){ const a = el("a", "btn"); a.href = "#" + pageId(prev); a.append(el("small", "", "Previous"), el("span", "", "\u2190 " + pageLabel(prev))); nav.append(a); }
+      nav.append(el("span", "sp"));
+      if(withDone){
+        const sid = d.id + "-" + (si + 1);
+        const mk = el("button", "btn"); mk.type = "button";
+        const setMk = () => { const on = done.includes(sid); mk.textContent = on ? "\u2713 Done" : "Mark as done"; mk.className = "btn" + (on ? " done" : ""); };
+        setMk();
+        mk.addEventListener("click", () => { toggleSkill(sid, !done.includes(sid)); setMk(); drawNav(d.id, sid); });
+        nav.append(mk);
+      }
+      if(next){
+        const a = el("a", "btn primary"); a.href = "#" + pageId(next);
+        a.append(el("small", "", withDone ? "Done? Next" : "Next"), el("span", "", pageLabel(next) + " \u2192"));
+        if(withDone) a.addEventListener("click", () => toggleSkill(d.id + "-" + (si + 1), true));
+        nav.append(a);
+      } else { const a = el("a", "btn primary"); a.href = T.exam; a.append(el("small", "", "Finished"), el("span", "", "Sit the mock exam \u2192")); nav.append(a); }
+      return nav;
+    }
+
+    if(si !== null){
+      // ---- one skill per page ----
+      const crumb = el("a", "crumb", "\u2190 " + (isT ? "" : "Domain " + d.code.slice(1) + " \u00b7 ") + d.title + (d.w ? " \u00b7 " + pct(d.w) + " of the exam" : ""));
+      crumb.href = "#" + d.id;
+      p.append(crumb, renderSkill(d, d.subs[si], si, firstWQ), pager(true));
+      return;
+    }
+
+    // ---- domain overview ----
     const head = el("header", "dhead");
-    head.append(el("span", "label", (isT ? "" : "Domain " + d.code.slice(1) + " · ") + d.eps));
+    head.append(el("span", "label", (isT ? "" : "Domain " + d.code.slice(1) + " \u00b7 ") + d.eps));
     const h2 = el("h2", "", d.title);
     if(d.w) h2.append(el("span", "weight", pct(d.w) + " of the exam"));
     head.append(h2, el("p", "", d.summary));
     const chips = el("div", "chips");
-    // videos play in the panel beside this, and builds are in the practice panel below: no duplicate chips for them
-    // no chips for what is already on the page: videos (panel beside), builds (practice panel), worked questions (inline), the mock exam (header)
-    d.links.filter(l => !ytId(l[2]) && !/episode-questions\.md#/.test(l[2]) && !(d.practice && d.practice.length && l[0] === "⌨")).forEach(l => chips.append(chip(...l)));
+    // no chips for what is already on the page: videos (panel beside), builds (practice panel), worked questions (on the skill pages), the mock exam (header)
+    d.links.filter(l => !ytId(l[2]) && !/episode-questions\.md#/.test(l[2]) && !(d.practice && d.practice.length && l[0] === "\u2328")).forEach(l => chips.append(chip(...l)));
     chips.append(chip("🃏", "Flashcards for this domain", T.flash + "&topic=" + d.t));
     head.append(chips);
     const vids = d.links.map(l => ({ id: ytId(l[2]), label: l[1] })).filter(v => v.id);
@@ -468,6 +597,22 @@ if(!T){
     const ul = el("ul");
     d.highlights.forEach(h => ul.append(el("li", "", h)));
     hl.append(ul); p.append(hl);
+
+    // the skills in this domain, one card each; each opens its own page
+    const sk = el("section", "skillcards");
+    sk.append(el("h3", "", (d.subs.length > 1 ? d.subs.length + " skills" : "1 skill") + " in this domain"));
+    const grid = el("div", "sc-grid");
+    d.subs.forEach((x, i) => {
+      const sid = d.id + "-" + (i + 1);
+      const a = el("a", "sc" + (done.includes(sid) ? " done" : "")); a.href = "#" + sid;
+      const t = el("div", "sc-t");
+      t.append(el("span", "num", (isT ? "" : d.code + ".") + (i + 1)), el("b", "", x.title), el("span", "ck", "\u2713"));
+      a.append(t, el("p", "", x.short || x.scope || ""));
+      const meta = [x.traps && x.traps.length ? x.traps.length + " traps" : null, x.terms && x.terms.length ? x.terms.length + " key terms" : null, x.w ? pct(x.w) + " of the exam" : null].filter(Boolean).join(" \u00b7 ");
+      if(meta) a.append(el("span", "meta", meta));
+      grid.append(a);
+    });
+    sk.append(grid); p.append(sk);
 
     if(d.practice && d.practice.length){
       const pr = el("section", "practice");
@@ -499,115 +644,12 @@ if(!T){
     }
 
 
-    d.subs.forEach((s, i) => {
-      const sid = d.id + "-" + (i + 1);
-      const sec = el("section", "sub");
-      sec.id = sid;
-      const h3 = el("h3");
-      h3.append(el("span", "num", (isT ? "" : d.code + ".") + (i + 1)), el("span", "", s.title));
-      if(s.w) h3.append(el("span", "weight sm", pct(s.w)));
-      sec.append(h3);
-      if(s.scope){ const sc = el("p", "scope"); sc.append(el("b", "", "Exam guide covers: "), document.createTextNode(s.scope)); sec.append(sc); }
-
-      const grid = el("div", "subgrid"), main = el("div", "sg-main"), side = el("aside", "sg-side");
-      grid.append(side, main); sec.append(grid);
-      if(s.short){ const sh = el("p", "short"); sh.append(el("b", "", "In short"), document.createTextNode(s.short)); side.append(sh); }
-      if(s.terms && s.terms.length){
-        side.append(el("h4", "", "Key terms"));
-        const dl = el("dl", "terms");
-        s.terms.forEach(([t, d]) => { const box = el("div"); box.append(el("dt", "", t), el("dd", "", d)); dl.append(box); });
-        side.append(dl);
-      }
-      if(s.lesson && s.lesson.length){
-        main.append(el("h4", "", "The lesson"));
-        const ls = el("div", "lesson");
-        s.lesson.forEach(t => ls.append(el("p", "", t)));
-        main.append(ls);
-      }
-      (s.tables || []).forEach(t => {
-        const wrap = el("div", "tbl"), table = el("table");
-        table.append(el("caption", "", t.cap));
-        const thead = el("thead"), hr = el("tr");
-        t.h.forEach(h => hr.append(el("th", "", h)));
-        thead.append(hr);
-        const tb = el("tbody");
-        t.r.forEach(row => { const tr = el("tr"); row.forEach(c => tr.append(el("td", "", c))); tb.append(tr); });
-        table.append(thead, tb); wrap.append(table); main.append(wrap);
-      });
-      if(s.code){
-        const c = el("div", "code");
-        c.append(el("div", "cap", s.code.cap), el("pre", "", s.code.text));
-        main.append(c);
-      }
-      if(s.know && s.know.length){
-        side.append(el("h4", "", "What you need to know"));
-        const k = el("ul", "know");
-        s.know.forEach(t => k.append(el("li", "", t)));
-        side.append(k);
-      }
-      if(s.build){
-        const isWQ = /episode-questions\.md#/.test(s.build[1]);
-        if(isWQ && shownWQ[s.build[1]]){
-          // the same worked question already appears earlier in this domain: point to it
-          const back = shownWQ[s.build[1]], b = el("a", "build", "↑ " + s.build[0] + " is in " + back.label);
-          b.href = "#" + back.sid; sec.append(b);
-        } else {
-          const wq = isWQ ? workedQuestion(s.build[1]) : null;
-          if(isWQ) shownWQ[s.build[1]] = { sid, label: (isT ? "" : d.code + ".") + (i + 1) };
-          sec.append(wq || chip("⌨", s.build[0] + " →", s.build[1], "build"));
-        }
-      }
-      if(s.traps && s.traps.length){
-        sec.append(el("h4", "", s.traps.length > 1 ? "Exam traps (" + s.traps.length + ")" : "Exam trap"));
-        const grid = el("div", "traps");
-        s.traps.forEach(t => {
-          const box = el("div", "trap");
-          box.append(el("div", "tl", "⚠ EXAM TRAP"), el("div", "mv", "“" + t.move + "”"), el("div", "why", t.why));
-          grid.append(box);
-        });
-        sec.append(grid);
-      }
-      const sf = el("div", "subfoot");
-      sf.append(el("span", "hint", "Tick it off when you're done."));
-      const mk = el("button", "btn"); mk.type = "button";
-      const setMk = () => { const on = done.includes(sid); mk.textContent = on ? "✓ Done" : "Mark as done"; mk.className = "btn" + (on ? " done" : ""); };
-      setMk();
-      mk.addEventListener("click", () => { toggleSkill(sid, !done.includes(sid)); setMk(); drawNav(d.id); setFootMark(); });
-      sf.append(mk); sec.append(sf);
-      p.append(sec);
-    });
-
-
     const rem = el("section", "rem");
     rem.append(el("h3", "", "Remember"));
     const ol = el("ol");
     d.remember.forEach(r => ol.append(el("li", "", r)));
     rem.append(ol); p.append(rem);
-
-    const foot = el("div", "foot");
-    if(idx > 0){ const a = el("a", "btn", "← " + T.domains[idx - 1].title); a.href = "#" + T.domains[idx - 1].id; foot.append(a); }
-    foot.append(el("span", "sp"));
-    const mark = el("button", "btn"); mark.type = "button";
-    function setFootMark(){ const all = domainDone(d); mark.textContent = all ? "✓ All skills done" : "Mark domain done"; mark.className = "btn" + (all ? " done" : ""); }
-    setFootMark();
-    mark.addEventListener("click", () => {
-      const all = domainDone(d);
-      skillIds(d).forEach(id => toggleSkill(id, !all));
-      p.querySelectorAll(".subfoot .btn").forEach((b, i) => { const on = done.includes(skillIds(d)[i]); b.textContent = on ? "✓ Done" : "Mark as done"; b.className = "btn" + (on ? " done" : ""); });
-      setFootMark(); drawNav(d.id);
-    });
-    foot.append(mark);
-    if(idx < T.domains.length - 1){ const a = el("a", "btn primary", T.domains[idx + 1].title + " →"); a.href = "#" + T.domains[idx + 1].id; foot.append(a); }
-    else { const a = el("a", "btn primary", "Sit the mock exam →"); a.href = T.exam; foot.append(a); }
-    p.append(foot);
-
-    // highlight the skill in view
-    if("IntersectionObserver" in window){
-      const io = new IntersectionObserver(es => es.forEach(e => {
-        if(e.isIntersecting) document.querySelectorAll(".skl a").forEach(a => a.classList.toggle("on", a.dataset.sid === e.target.id));
-      }), {rootMargin: "-40% 0px -55% 0px"});
-      p.querySelectorAll(".sub").forEach(s => io.observe(s));
-    }
+    p.append(pager(false));
   }
 
   function route(scroll){
@@ -615,17 +657,14 @@ if(!T){
     if(id === "top"){ window.scrollTo({top: 0, behavior: reduceMotion ? "auto" : "smooth"}); return; }
     const dm = /^([a-z]+\d*)(?:-(\d+))?$/.exec(id);
     const d = (dm && T.domains.find(x => x.id === dm[1])) || T.domains[0];
-    const skill = dm && dm[2] ? d.id + "-" + dm[2] : null;
-    if(skill && drawn === d.id){ jump(skill); return; }
-    drawn = d.id;
-    drawNav(d.id);
+    let si = dm && dm[2] ? parseInt(dm[2], 10) - 1 : null;
+    if(si !== null && !(si >= 0 && si < d.subs.length)) si = null;
+    drawNav(d.id, si === null ? null : d.id + "-" + (si + 1));
     const p = $("panel");
-    if(reduceMotion) drawDomain(d);
-    else { p.classList.add("swap"); setTimeout(() => { drawDomain(d); p.classList.remove("swap"); if(skill) jump(skill); }, 110); }
-    if(reduceMotion && skill) jump(skill);
-    if(scroll && !skill){ const top = $("panel").getBoundingClientRect().top + window.scrollY - 84; if(window.scrollY > top) window.scrollTo({top, behavior: reduceMotion ? "auto" : "smooth"}); }
+    const show = () => { drawDomain(d, si); if(scroll){ const top = p.getBoundingClientRect().top + window.scrollY - 84; window.scrollTo({top: Math.max(0, top), behavior: "auto"}); } };
+    if(reduceMotion) show();
+    else { p.classList.add("swap"); setTimeout(() => { show(); p.classList.remove("swap"); }, 110); }
   }
-  let drawn = null;
   window.addEventListener("hashchange", () => route(true));
   route(false);
 }
