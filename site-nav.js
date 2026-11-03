@@ -18,8 +18,10 @@
   const params = new URLSearchParams(location.search);
   let saved = null;
   try{ saved = JSON.parse(localStorage.getItem("fc-track")); }catch(e){}
-  const track = TRACKS[params.get("track")] ? params.get("track") : (TRACKS[saved] ? saved : null);
-  const shown = track || "ccdv-f";
+  /* On the home page no certification is assumed: the picker and the mock-exam button ask. Elsewhere the URL or the
+     last-used track decides. */
+  const track = TRACKS[params.get("track")] ? params.get("track") : (page !== "home" && TRACKS[saved] ? saved : null);
+  const shown = track || (TRACKS[saved] ? saved : "ccdv-f");
 
   const css = `
   .sn{background:#2C2E43; color:#fff; position:sticky; top:0; z-index:20; box-shadow:0 1px 0 rgba(255,255,255,.06);}
@@ -45,6 +47,13 @@
   .sn-sep{width:1px; height:22px; background:#5A5D78; margin:0 8px;}
   .sn-cta{background:#FFB020; color:#24263A!important; font-weight:800; font-size:15px; padding:10px 16px; border-radius:9px; white-space:nowrap;}
   .sn-cta:hover{filter:brightness(1.08);}
+  button.sn-cta{font-family:inherit; border:0; cursor:pointer;}
+  .sn-mock{position:relative;}
+  .sn-mock .sn-menu{left:auto; right:0; top:48px;}
+  .sn-mock .sn-menu a b{display:block;}
+  .sn-links .sn-menu a{color:#24263A; display:block; padding:10px 12px; border-radius:8px; font-size:15.5px; white-space:normal;}
+  .sn-links .sn-menu a:hover{color:#24263A; background:#FFF1DC;}
+  .sn-links .sn-menu a b{color:#24263A; font-size:14px; letter-spacing:.8px;}
   .sn-burger{display:none; margin-left:auto; font:inherit; font-size:22px; background:transparent; color:#fff; border:1px solid #5A5D78; border-radius:8px; width:44px; height:40px; cursor:pointer;}
   @media (max-width:1020px){
     .sn-in{flex-wrap:wrap; height:auto; padding:10px 16px; gap:10px;}
@@ -93,9 +102,10 @@
     s.append(b, document.createTextNode(name));
     menu.append(s);
   });
-  btn.addEventListener("click", e => { e.stopPropagation(); const o = menu.classList.toggle("open"); btn.setAttribute("aria-expanded", String(o)); });
-  document.addEventListener("click", () => { menu.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); });
-  document.addEventListener("keydown", e => { if(e.key === "Escape"){ menu.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); } });
+  btn.addEventListener("click", e => { e.stopPropagation(); const wasOpen = menu.classList.contains("open"); document.querySelectorAll(".sn-menu.open").forEach(m => m.classList.remove("open")); if(!wasOpen){ menu.classList.add("open"); btn.setAttribute("aria-expanded", "true"); } else btn.setAttribute("aria-expanded", "false"); });
+  const closeAll = () => document.querySelectorAll(".sn-menu.open").forEach(m => { m.classList.remove("open"); const b = m.previousElementSibling; if(b) b.setAttribute("aria-expanded", "false"); });
+  document.addEventListener("click", closeAll);
+  document.addEventListener("keydown", e => { if(e.key === "Escape") closeAll(); });
   pick.append(btn, menu);
 
   // journey links
@@ -106,15 +116,40 @@
     if(id === page) a.setAttribute("aria-current", "page");
     links.append(a);
   });
-  const mock = el("a", "", "Mock exam");
-  mock.href = TRACKS[shown].exam;
-  links.append(mock, el("span", "sn-sep"));
+  if(track){
+    const mock = el("a", "", "Mock exam");
+    mock.href = TRACKS[track].exam;
+    links.append(mock);
+  }
+  links.append(el("span", "sn-sep"));
   const faq = el("a", "", "FAQ"); faq.href = "./#faq";
   const gh = el("a", "", "GitHub"); gh.href = "https://github.com/CorporateChittyChat/claude-certification-prep";
   links.append(faq, gh);
-  const cta = el("a", "sn-cta", "Take mock exam");
-  cta.href = TRACKS[shown].exam;
-  links.append(cta);
+  if(track){
+    const cta = el("a", "sn-cta", "Take " + TRACKS[track].code + " mock exam");
+    cta.href = TRACKS[track].exam;
+    links.append(cta);
+  } else {
+    // no certification chosen yet: let the learner pick which mock exam
+    const wrap = el("div", "sn-mock");
+    const cb = el("button", "sn-cta", "Take a mock exam ▾");
+    cb.type = "button"; cb.setAttribute("aria-haspopup", "true"); cb.setAttribute("aria-expanded", "false");
+    const m = el("div", "sn-menu");
+    Object.entries(TRACKS).forEach(([id, t]) => {
+      const a = el("a"); a.href = t.exam;
+      a.append(el("b", "", t.code + " mock exam"), document.createTextNode("Claude Certified " + t.name + " – Foundations"));
+      a.addEventListener("click", () => { try{ localStorage.setItem("fc-track", JSON.stringify(id)); }catch(e){} });
+      m.append(a);
+    });
+    [["CCAR-F", "Architect – Foundations"], ["CCAR-P", "Architect – Professional"]].forEach(([code, name]) => {
+      const sp = el("span", "soon"); sp.setAttribute("aria-disabled", "true");
+      const b = el("b", "", code); b.append(el("i", "", "Coming soon"));
+      sp.append(b, document.createTextNode("Claude Certified " + name)); m.append(sp);
+    });
+    cb.addEventListener("click", e => { e.stopPropagation(); const wasOpen = m.classList.contains("open"); closeAll(); if(!wasOpen){ m.classList.add("open"); cb.setAttribute("aria-expanded", "true"); } });
+    wrap.append(cb, m);
+    links.append(wrap);
+  }
 
   const burger = el("button", "sn-burger", "☰");
   burger.type = "button";
