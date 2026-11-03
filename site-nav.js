@@ -20,7 +20,8 @@
   try{ saved = JSON.parse(localStorage.getItem("fc-track")); }catch(e){}
   /* On the home page no certification is assumed: the picker and the mock-exam button ask. Elsewhere the URL or the
      last-used track decides. */
-  const track = TRACKS[params.get("track")] ? params.get("track") : (page !== "home" && TRACKS[saved] ? saved : null);
+  const fromDoc = (params.get("doc") || "").split("/")[0];
+  const track = TRACKS[params.get("track")] ? params.get("track") : TRACKS[fromDoc] ? fromDoc : (page !== "home" && TRACKS[saved] ? saved : null);
   const shown = track || (TRACKS[saved] ? saved : "ccdv-f");
 
   const css = `

@@ -9,7 +9,7 @@
    traps [{move, why}]. */
 (function(){
 const YT = "https://youtu.be/";
-const AO = "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/";
+const AO = "read.html?doc=ccao-f/";   /* repo docs open in the on-site reader */
 const WQ = AO + "practice/episode-questions.md#";
 window.LEARN_DATA = window.LEARN_DATA || {};
 window.LEARN_DATA["ccao-f"] = {

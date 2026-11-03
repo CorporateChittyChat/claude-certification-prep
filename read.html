@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Read</title>
+<meta name="description" content="Study guides, worked questions and answer explanations for the Claude certification tracks, on the site. Free, unofficial.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23FFB020'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%233D405B'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="theme.css">
+<style>
+  *{box-sizing:border-box; margin:0; padding:0;}
+  .wrap{max-width:var(--page-max); margin:0 auto; padding:0 var(--page-pad);}
+  .layout{display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:48px; align-items:start; padding:28px 0 0;}
+  .crumbs{display:flex; flex-wrap:wrap; gap:10px; align-items:center; font-size:15px; color:var(--muted); margin-bottom:14px;}
+  .crumbs a{color:var(--orange-ink); font-weight:700; text-decoration:none;}
+  .crumbs a:hover{text-decoration:underline;}
+  .doc{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:34px 42px; box-shadow:var(--shadow); max-width:1100px;}
+  .doc h1{font-size:40px; line-height:1.15; color:var(--slate-deep); margin-bottom:12px;}
+  .doc h2{font-size:27px; line-height:1.25; color:var(--slate-deep); margin:34px 0 10px; padding-top:18px; border-top:1px solid var(--line); scroll-margin-top:84px;}
+  .doc h3{font-size:21px; color:var(--slate-deep); margin:24px 0 8px; scroll-margin-top:84px;}
+  .doc h4{font-size:17px; margin:18px 0 6px;}
+  .doc p{margin:10px 0; max-width:82ch;}
+  .doc ul, .doc ol{margin:10px 0 10px 26px; display:grid; gap:6px; max-width:82ch;}
+  .doc a{color:var(--orange-ink); font-weight:600;}
+  .doc code{font-family:var(--mono); font-size:.9em; background:var(--cream); border-radius:5px; padding:1px 6px;}
+  .doc pre{background:var(--slate-deep); color:#F4EFE6; border-radius:12px; padding:14px 16px; font-family:var(--mono); font-size:14.5px; line-height:1.55; overflow-x:auto; margin:14px 0;}
+  .doc blockquote{margin:14px 0; background:var(--cream); border-left:4px solid var(--orange); border-radius:10px; padding:10px 18px;}
+  .doc blockquote p{margin:6px 0;}
+  .doc hr{border:0; border-top:1px solid var(--line); margin:24px 0;}
+  .doc details{margin:14px 0; background:var(--paper); border:1px solid var(--peach); border-radius:12px; padding:0 18px;}
+  .doc details[open]{padding-bottom:6px;}
+  .doc summary{cursor:pointer; font-weight:800; color:var(--slate-deep); padding:12px 0;}
+  .md-table{overflow-x:auto; margin:14px 0; border:1px solid var(--line); border-radius:12px;}
+  .md-table table{width:100%; border-collapse:collapse; font-size:16px;}
+  .md-table th{background:var(--slate); color:#fff; text-align:left; padding:9px 14px;}
+  .md-table td{padding:9px 14px; border-top:1px solid var(--line); vertical-align:top;}
+  .toc{position:sticky; top:84px; max-height:calc(100vh - 100px); overflow:auto;}
+  .toc .ttl{font-size:12px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:var(--muted); padding:6px 12px 8px;}
+  .toc ol{list-style:none; border-left:2px solid var(--line);}
+  .toc a{display:block; padding:6px 12px; font-size:14.5px; line-height:1.35; color:var(--muted); text-decoration:none; border-left:2px solid transparent; margin-left:-2px;}
+  .toc a:hover{color:var(--ink); border-left-color:var(--orange);}
+  .side-actions{display:grid; gap:8px; margin-top:16px; padding:0 12px;}
+  .side-actions a{font-size:14.5px; font-weight:700; text-decoration:none; border:1px solid var(--line); background:var(--card); border-radius:10px; padding:8px 12px;}
+  .side-actions a:hover{border-color:var(--orange);}
+  .msg{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:24px;}
+  footer{margin-top:44px; padding:22px 0 34px; color:var(--muted); font-size:13.5px; border-top:1px solid var(--line);}
+  @media (max-width:1000px){ .layout{grid-template-columns:1fr;} .toc{display:none;} .doc{padding:22px 18px;} .doc h1{font-size:30px;} .doc h2{font-size:23px;} }
+</style>
+</head>
+<body>
+<header id="siteNav" data-page="read"></header>
+<main class="wrap">
+  <div class="layout">
+    <div>
+      <nav class="crumbs" id="crumbs" aria-label="Breadcrumb"></nav>
+      <article class="doc" id="doc" aria-live="polite"></article>
+    </div>
+    <aside class="toc" aria-label="On this page">
+      <div class="ttl">On this page</div>
+      <ol id="toc"></ol>
+      <div class="side-actions" id="actions"></div>
+    </aside>
+  </div>
+  <footer>Independent study material. Not affiliated with, endorsed by, or approved by Anthropic. Every practice question is original, written for this project; no item from any real exam is reproduced.</footer>
+</main>
+<script src="site-nav.js"></script>
+<script src="md-view.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if(cls) e.className = cls; if(text !== undefined) e.textContent = text; return e; };
+const doc = new URLSearchParams(location.search).get("doc") || "";
+const track = (doc.split("/")[0] || "").toLowerCase();
+const REPO = "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/";
+
+function crumbs(title){
+  const c = $("crumbs");
+  const home = el("a", "", "Home"); home.href = "./";
+  c.append(home);
+  if(/^cc[a-z]{2}-[fp]$/.test(track)){
+    c.append(document.createTextNode("›"));
+    const j = el("a", "", track.toUpperCase() + " journey"); j.href = "path.html?track=" + track; c.append(j);
+    c.append(document.createTextNode("›"));
+    const l = el("a", "", "Learn"); l.href = "learn.html?track=" + track; c.append(l);
+  }
+  c.append(document.createTextNode("›"), el("span", "", title));
+}
+
+if(!MD.DOC_RE.test(doc)){
+  $("doc").append(el("div", "msg", "That document isn't one of this site's study files."));
+} else {
+  fetch(doc, { cache: "no-cache" }).then(r => { if(!r.ok) throw new Error(r.status); return r.text(); }).then(md => {
+    $("doc").append(MD.render(md, doc));
+    const h1 = $("doc").querySelector("h1");
+    const title = h1 ? h1.textContent : doc;
+    document.title = title;
+    crumbs(title);
+    $("doc").querySelectorAll("h2").forEach(h => {
+      const li = el("li"), a = el("a", "", h.textContent); a.href = "#" + h.id; li.append(a); $("toc").append(li);
+    });
+    const gh = el("a", "", "View on GitHub ↗"); gh.href = REPO + doc; gh.target = "_blank"; gh.rel = "noopener";
+    const pr = el("a", "", "🖨 Print or save as PDF"); pr.href = "#"; pr.addEventListener("click", e => { e.preventDefault(); window.print(); });
+    $("actions").append(gh, pr);
+    if(location.hash){
+      const t = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if(t){ const d = t.closest("details"); if(d) d.open = true; setTimeout(() => t.scrollIntoView({ block: "start" }), 50); }
+    }
+  }).catch(() => {
+    $("doc").append(el("div", "msg", "This document couldn't be loaded. Check your connection and try again."));
+  });
+}
+</script>
+</body>
+</html>

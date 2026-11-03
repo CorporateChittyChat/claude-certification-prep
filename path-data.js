@@ -22,25 +22,25 @@ window.PATH_DATA = {
   "sections": [
     {"title": "Before you start", "lessons": [
       {"id": "ao-00", "title": "EP 00 · Before you book: five things to know", "mins": 14, "t": 7,
-       "links": [["📖", "Exam technique notes", "learn.html?track=ccao-f#technique"], ["▶", "Watch (4 min)", "https://youtu.be/NmGsB9LPrB0"], ["📄", "Exam logistics", "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/exam-logistics.md"], ["🎯", "Five exam tips", "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/exam-tips.md"]]},
+       "links": [["📖", "Exam technique notes", "learn.html?track=ccao-f#technique"], ["▶", "Watch (4 min)", "https://youtu.be/NmGsB9LPrB0"], ["📄", "Exam logistics", "read.html?doc=ccao-f/exam-logistics.md"], ["🎯", "Five exam tips", "read.html?doc=ccao-f/exam-tips.md"]]},
       {"id": "ao-bonus", "title": "Bonus · Why people fail the CCAO-F exam, and how to fix it", "mins": 66, "opt": true,
        "links": [["▶", "Watch (66 min)", "https://youtu.be/27VlyAMSqO8"]]}
     ]},
     {"title": "The seven domains", "lessons": [
       {"id": "ao-d1", "title": "Domain 1 · Prompting and task execution", "mins": 20, "t": 0,
-       "links": [["📖", "Study notes", "learn.html?track=ccao-f#d1"], ["▶", "Watch EP 01 (7 min)", "https://youtu.be/iF-ohGig97A"], ["📘", "Study guide", "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/01-prompting.md"], ["❓", "Worked question Q1", "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/practice/episode-questions.md#q1--domain-1-the-format-lottery"], ["🃏", "Flashcards", "flashcards.html?track=ccao-f"]]},
+       "links": [["📖", "Study notes", "learn.html?track=ccao-f#d1"], ["▶", "Watch EP 01 (7 min)", "https://youtu.be/iF-ohGig97A"], ["📘", "Study guide", "read.html?doc=ccao-f/domains/01-prompting.md"], ["❓", "Worked question Q1", "read.html?doc=ccao-f/practice/episode-questions.md#q1--domain-1-the-format-lottery"], ["🃏", "Flashcards", "flashcards.html?track=ccao-f"]]},
       {"id": "ao-d2", "title": "Domain 2 · Output evaluation and validation (the biggest slice)", "mins": 26, "t": 1,
-       "links": [["📖", "Study notes", "learn.html?track=ccao-f#d2"], ["▶", "Watch EP 02, part A (7 min)", "https://youtu.be/pIaL_jCyt4g"], ["▶", "Watch EP 03, part B (6 min)", "https://youtu.be/BNgWy2hHvz8"], ["📘", "Study guide", "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/02-output-evaluation.md"], ["❓", "Worked questions Q2 and Q3", "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/practice/episode-questions.md#q2--domain-2a-the-statistic-and-the-hour"]]},
+       "links": [["📖", "Study notes", "learn.html?track=ccao-f#d2"], ["▶", "Watch EP 02, part A (7 min)", "https://youtu.be/pIaL_jCyt4g"], ["▶", "Watch EP 03, part B (6 min)", "https://youtu.be/BNgWy2hHvz8"], ["📘", "Study guide", "read.html?doc=ccao-f/domains/02-output-evaluation.md"], ["❓", "Worked questions Q2 and Q3", "read.html?doc=ccao-f/practice/episode-questions.md#q2--domain-2a-the-statistic-and-the-hour"]]},
       {"id": "ao-d3", "title": "Domain 3 · Product and model selection", "mins": 19, "t": 2,
-       "links": [["📖", "Study notes", "learn.html?track=ccao-f#d3"], ["▶", "Watch EP 04 (6 min)", "https://youtu.be/6xZXW6I6gl0"], ["📘", "Study guide", "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/03-product-and-model-selection.md"], ["❓", "Worked question Q4", "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/practice/episode-questions.md#q4--domain-3-the-shallow-analysis"]]},
+       "links": [["📖", "Study notes", "learn.html?track=ccao-f#d3"], ["▶", "Watch EP 04 (6 min)", "https://youtu.be/6xZXW6I6gl0"], ["📘", "Study guide", "read.html?doc=ccao-f/domains/03-product-and-model-selection.md"], ["❓", "Worked question Q4", "read.html?doc=ccao-f/practice/episode-questions.md#q4--domain-3-the-shallow-analysis"]]},
       {"id": "ao-d4", "title": "Domain 4 · Workflow integration and solution design", "mins": 20, "t": 3,
-       "links": [["📖", "Study notes", "learn.html?track=ccao-f#d4"], ["▶", "Watch EP 05 (7 min)", "https://youtu.be/tzEhyG-QbTE"], ["📘", "Study guide", "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/04-workflow-integration.md"], ["❓", "Worked question Q5", "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/practice/episode-questions.md#q5--domain-4-the-impressive-rebuild"]]},
+       "links": [["📖", "Study notes", "learn.html?track=ccao-f#d4"], ["▶", "Watch EP 05 (7 min)", "https://youtu.be/tzEhyG-QbTE"], ["📘", "Study guide", "read.html?doc=ccao-f/domains/04-workflow-integration.md"], ["❓", "Worked question Q5", "read.html?doc=ccao-f/practice/episode-questions.md#q5--domain-4-the-impressive-rebuild"]]},
       {"id": "ao-d5", "title": "Domain 5 · Configuration and knowledge management", "mins": 19, "t": 4,
-       "links": [["📖", "Study notes", "learn.html?track=ccao-f#d5"], ["▶", "Watch EP 06 (6 min)", "https://youtu.be/2yhNNgyyDO8"], ["📘", "Study guide", "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/05-configuration-and-knowledge.md"], ["❓", "Worked question Q6", "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/practice/episode-questions.md#q6--domain-5-the-weekly-report-setup"]]},
+       "links": [["📖", "Study notes", "learn.html?track=ccao-f#d5"], ["▶", "Watch EP 06 (6 min)", "https://youtu.be/2yhNNgyyDO8"], ["📘", "Study guide", "read.html?doc=ccao-f/domains/05-configuration-and-knowledge.md"], ["❓", "Worked question Q6", "read.html?doc=ccao-f/practice/episode-questions.md#q6--domain-5-the-weekly-report-setup"]]},
       {"id": "ao-d6", "title": "Domain 6 · Governance, risk and responsible use", "mins": 19, "t": 5,
-       "links": [["📖", "Study notes", "learn.html?track=ccao-f#d6"], ["▶", "Watch EP 07 (6 min)", "https://youtu.be/p5fpyypMERM"], ["📘", "Study guide", "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/06-governance-risk-responsible-use.md"], ["❓", "Worked question Q7", "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/practice/episode-questions.md#q7--domain-6-the-launch-question"]]},
+       "links": [["📖", "Study notes", "learn.html?track=ccao-f#d6"], ["▶", "Watch EP 07 (6 min)", "https://youtu.be/p5fpyypMERM"], ["📘", "Study guide", "read.html?doc=ccao-f/domains/06-governance-risk-responsible-use.md"], ["❓", "Worked question Q7", "read.html?doc=ccao-f/practice/episode-questions.md#q7--domain-6-the-launch-question"]]},
       {"id": "ao-d7", "title": "Domain 7 · Troubleshooting and optimisation", "mins": 19, "t": 6,
-       "links": [["📖", "Study notes", "learn.html?track=ccao-f#d7"], ["▶", "Watch EP 08 (6 min)", "https://youtu.be/vfaFaZmeXBg"], ["📘", "Study guide", "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/07-troubleshooting-and-optimization.md"], ["❓", "Worked question Q8", "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/practice/episode-questions.md#q8--domain-7-the-inconsistent-answers"]]}
+       "links": [["📖", "Study notes", "learn.html?track=ccao-f#d7"], ["▶", "Watch EP 08 (6 min)", "https://youtu.be/vfaFaZmeXBg"], ["📘", "Study guide", "read.html?doc=ccao-f/domains/07-troubleshooting-and-optimization.md"], ["❓", "Worked question Q8", "read.html?doc=ccao-f/practice/episode-questions.md#q8--domain-7-the-inconsistent-answers"]]}
     ]},
     {"title": "Exam rehearsal", "lessons": [
       {"id": "ao-cards", "title": "All 49 flashcards, then the traps sheet", "mins": 25, "t": 7,
@@ -48,7 +48,7 @@ window.PATH_DATA = {
       {"id": "ao-deck", "title": "Recap deck: all seven domains on slides", "mins": 15,
        "links": [["🗂", "Recap deck (PDF)", "ccao-f/assets/ccaof-recap-deck.pdf"]]},
       {"id": "ao-exam", "title": "Timed mock exam: 30 questions in 60 minutes", "mins": 60, "exam": true,
-       "links": [["▶", "Sit the mock exam", "ccao-f/practice/mock-exam-player.html"], ["📝", "Answers explained", "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/practice/mock-exam-answers.md"]]}
+       "links": [["▶", "Sit the mock exam", "ccao-f/practice/mock-exam-player.html"], ["📝", "Answers explained", "read.html?doc=ccao-f/practice/mock-exam-answers.md"]]}
     ]}
   ]
 },
@@ -101,7 +101,7 @@ window.PATH_DATA = {
       {"id": "dv-cards", "title": "All 51 flashcards, then the traps sheet", "mins": 25, "t": 9,
        "links": [["🃏", "Flashcards", "flashcards.html?track=ccdv-f"], ["⚠", "Traps and tricks sheet", "flashcards.html?track=ccdv-f&mode=traps"]]},
       {"id": "dv-exam", "title": "Timed mock exam: 30 questions in 60 minutes", "mins": 60, "exam": true,
-       "links": [["▶", "Sit the mock exam", "ccdv-f/practice/mock-exam-player.html"], ["📝", "Answers explained", "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccdv-f/practice/mock-exam-answers.md"]]}
+       "links": [["▶", "Sit the mock exam", "ccdv-f/practice/mock-exam-player.html"], ["📝", "Answers explained", "read.html?doc=ccdv-f/practice/mock-exam-answers.md"]]}
     ]}
   ]
 }};

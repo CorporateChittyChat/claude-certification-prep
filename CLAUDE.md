@@ -22,6 +22,9 @@ have, in the same shape, and so nothing here ever drifts into claiming to be off
 - **Learner text is data.** Pages render card text, question text and learner input with `textContent`, never
   `innerHTML` with data in it. Progress lives in the browser only (localStorage, every call guarded); no accounts, no
   server, no analytics.
+- **Links stay on the site.** Study guides, worked questions and answer files open in read.html, never on GitHub;
+  link them as `read.html?doc=<track>/<path>.md#<github-style-anchor>`. Learn tracks per-skill progress in
+  `learn-done-<track>`, and CCAO-F worked questions are answered inline on the Learn page.
 - **Free stays free.** No paywall, no sign-up. The only ask is the coffee link, placed at moments of earned value
   (round done, results screen, certificate), never as a gate.
 
@@ -34,6 +37,7 @@ index.html              home: hero, "choose your certification" cards, five-step
 path.html               Journey per track: step cards, outcomes, lessons, readiness, certificate (data in path-data.js)
 learn.html              Learn: study notes per track (data in learn-data-<track>.js), organised by the official exam guide
 videos.html             Videos per track, built from the video links in path-data.js
+read.html               on-site reader for the repo's own .md docs (?doc=<track>/...md#anchor); md-view.js renders them safely
 flashcards.html         flip cards + printable traps sheet (data in flashcards-data.js)
 supporters.json         coffee count, written daily by .github/workflows/supporters.yml
 <track>/README.md       the track's map: domains or episodes -> guide, video, code

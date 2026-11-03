@@ -6,14 +6,14 @@
 window.FC_DATA = {
 "ccao-f": {"title": "CCAO-F", "name": "Claude Certified Associate – Foundations", "exam": "ccao-f/practice/mock-exam-player.html",
  "topics": [
-  {"name": "D1 · Prompting", "icon": "✍️", "link": "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/01-prompting.md"},
-  {"name": "D2 · Output evaluation", "icon": "🔍", "link": "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/02-output-evaluation.md"},
-  {"name": "D3 · Product & model selection", "icon": "🧭", "link": "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/03-product-and-model-selection.md"},
-  {"name": "D4 · Workflow integration", "icon": "🔗", "link": "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/04-workflow-integration.md"},
-  {"name": "D5 · Configuration & knowledge", "icon": "🗂️", "link": "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/05-configuration-and-knowledge.md"},
-  {"name": "D6 · Governance & risk", "icon": "⚖️", "link": "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/06-governance-risk-responsible-use.md"},
-  {"name": "D7 · Troubleshooting", "icon": "🩺", "link": "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/domains/07-troubleshooting-and-optimization.md"},
-  {"name": "Exam technique", "icon": "🎯", "link": "https://github.com/CorporateChittyChat/claude-certification-prep/blob/main/ccao-f/exam-tips.md"}],
+  {"name": "D1 · Prompting", "icon": "✍️", "link": "read.html?doc=ccao-f/domains/01-prompting.md"},
+  {"name": "D2 · Output evaluation", "icon": "🔍", "link": "read.html?doc=ccao-f/domains/02-output-evaluation.md"},
+  {"name": "D3 · Product & model selection", "icon": "🧭", "link": "read.html?doc=ccao-f/domains/03-product-and-model-selection.md"},
+  {"name": "D4 · Workflow integration", "icon": "🔗", "link": "read.html?doc=ccao-f/domains/04-workflow-integration.md"},
+  {"name": "D5 · Configuration & knowledge", "icon": "🗂️", "link": "read.html?doc=ccao-f/domains/05-configuration-and-knowledge.md"},
+  {"name": "D6 · Governance & risk", "icon": "⚖️", "link": "read.html?doc=ccao-f/domains/06-governance-risk-responsible-use.md"},
+  {"name": "D7 · Troubleshooting", "icon": "🩺", "link": "read.html?doc=ccao-f/domains/07-troubleshooting-and-optimization.md"},
+  {"name": "Exam technique", "icon": "🎯", "link": "read.html?doc=ccao-f/exam-tips.md"}],
  "cards": [
 {"id":"ccao-f-0","t":0,"k":"rule","f":"What does a strong prompt name?",
  "b":"The role, the context, the audience, the format, and what to skip.",
