@@ -105,6 +105,8 @@ Do these in order; the home page counts and the readiness maths depend on the da
 
 ## Verifying changes
 
+- Every page links theme.css and the .js files with `?v=<yyyymmdd>`; bump it across all .html files whenever a CSS or JS file
+  changes, or browsers keep mixing old data with new pages.
 - Static site, nothing to build. Serve locally with `python -m http.server 8765 --bind 127.0.0.1` from the repo root
   (file:// is blocked in the browser tools); stop it by PID when done.
 - Open the changed page in a headless browser and check: zero console errors, no horizontal overflow at 390 px, the

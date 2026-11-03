@@ -6,7 +6,7 @@
 <title>Learn</title>
 <meta name="description" content="Study notes for every skill in the CCAO-F and CCDV-F exam guides: lessons, exam traps and worked questions.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23EE9D44'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%232A3446'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="theme.css?v=20261103">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
   .wrap{max-width:var(--page-max); margin:0 auto; padding:0 var(--page-pad);}
@@ -104,7 +104,7 @@
   .ep .acts a{font-size:14.5px; font-weight:700; text-decoration:none; border-radius:9px; padding:7px 12px; border:1px solid var(--line); background:var(--card);}
   .ep .acts a.go{background:var(--slate); border-color:var(--slate); color:#fff;}
   .ep .acts a:hover{border-color:var(--orange);}
-  @media (min-width:1700px){ .panel .traps{grid-template-columns:repeat(3,minmax(0,1fr));} .panel .hl ul{grid-template-columns:repeat(4,minmax(0,1fr));} }
+  @media (min-width:1700px){ .panel .hl ul{grid-template-columns:repeat(4,minmax(0,1fr));} }
   .dhead h2{font-size:36px; line-height:1.15; color:var(--slate-deep); display:flex; flex-wrap:wrap; gap:14px; align-items:baseline;}
   .weight{font-size:15px; font-weight:800; background:var(--orange); color:var(--ink); border-radius:999px; padding:3px 12px; letter-spacing:.3px;}
   .weight.sm{font-size:13px; padding:2px 10px; background:var(--peach);}
@@ -163,11 +163,12 @@
   .build{display:inline-flex; align-items:center; gap:8px; margin-top:16px; font-weight:700; font-size:15.5px; text-decoration:none; background:var(--slate); color:#fff; border-radius:10px; padding:9px 14px;}
   .build:hover{background:var(--slate-deep);}
 
-  .traps{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px;}
-  .trap{position:relative; background:var(--slate); color:#EEF0F6; border-left:4px solid var(--orange); border-radius:12px; padding:14px 16px; overflow:hidden;}
-  .trap .tl{display:flex; align-items:center; gap:8px; font-family:var(--mono); font-size:12.5px; font-weight:700; letter-spacing:1.4px; color:var(--peach); margin-bottom:6px;}
-  .trap .mv{font-weight:700; color:#fff; font-size:16px; line-height:1.4;}
-  .trap .why{margin-top:7px; color:#D7DAE6; font-size:15px; line-height:1.5;}
+  .traps{display:grid; grid-template-columns:minmax(0,1fr); gap:14px;}
+  .trap{position:relative; display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:10px 36px; align-items:start; background:var(--slate); color:#EEF0F6; border-left:5px solid var(--orange); border-radius:14px; padding:20px 26px; overflow:hidden;}
+  .trap .tl{grid-column:1/-1; display:flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px; font-weight:700; letter-spacing:1.4px; color:var(--peach);}
+  .trap .mv{font-weight:700; color:#fff; font-size:19px; line-height:1.45;}
+  .trap .why{color:#E3E6EF; font-size:17.5px; line-height:1.6; padding-left:24px; border-left:1px solid rgba(255,255,255,.14);}
+  .trap .why b{display:block; font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:1.2px; color:var(--peach); margin-bottom:4px;}
 
   .rem{margin-top:26px; background:var(--cream); border:2px dashed var(--peach); border-radius:var(--radius); padding:18px 22px;}
   .rem h3{font-size:17px; margin-bottom:8px;}
@@ -245,6 +246,7 @@
     .layout{display:block;}
     .dhead h2{font-size:27px;}
     .hl ul, .traps, .rem ol{grid-template-columns:1fr;}
+    .trap{grid-template-columns:minmax(0,1fr); padding:16px 18px;} .trap .why{padding-left:0; border-left:0;}
     .dtop{grid-template-columns:1fr;}
     .sub{padding:18px 16px;}
     .sub h3{font-size:21px;}
@@ -292,10 +294,10 @@
   </div>
 </main>
 
-<script src="site-nav.js"></script>
-<script src="md-view.js"></script>
-<script src="learn-data-ccao-f.js"></script>
-<script src="learn-data-ccdv-f.js"></script>
+<script src="site-nav.js?v=20261103"></script>
+<script src="md-view.js?v=20261103"></script>
+<script src="learn-data-ccao-f.js?v=20261103"></script>
+<script src="learn-data-ccdv-f.js?v=20261103"></script>
 <script>
 const DATA = window.LEARN_DATA || {};
 const $ = id => document.getElementById(id);
@@ -520,16 +522,20 @@ if(!T){
     }
     if(s.build){
       const isWQ = /episode-questions\.md#/.test(s.build[1]);
-      // every skill page answers its worked question inline, even when several skills share one
-      const wq = isWQ ? workedQuestion(s.build[1]) : null;
-      sec.append(wq || chip("\u2328", s.build[0] + " \u2192", s.build[1], "build"));
+      // a worked question shared by several skills appears once, on the first of them; the others show nothing
+      const first = isWQ && firstWQ ? firstWQ[s.build[1]] : null;
+      if(!first || first.sid === d.id + "-" + (i + 1)){
+        const wq = isWQ ? workedQuestion(s.build[1]) : null;
+        sec.append(wq || chip("\u2328", s.build[0] + " \u2192", s.build[1], "build"));
+      }
     }
     if(s.traps && s.traps.length){
       sec.append(el("h4", "", s.traps.length > 1 ? "Exam traps (" + s.traps.length + ")" : "Exam trap"));
       const grid = el("div", "traps");
       s.traps.forEach(t => {
         const box = el("div", "trap");
-        box.append(el("div", "tl", "⚠ EXAM TRAP"), el("div", "mv", "“" + t.move + "”"), el("div", "why", t.why));
+        const why = el("div", "why"); why.append(el("b", "", "WHY IT FAILS"), document.createTextNode(t.why));
+        box.append(el("div", "tl", "⚠ EXAM TRAP"), el("div", "mv", "“" + t.move + "”"), why);
         grid.append(box);
       });
       sec.append(grid);
