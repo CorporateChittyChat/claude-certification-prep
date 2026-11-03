@@ -6,7 +6,7 @@
 <title>Learn</title>
 <meta name="description" content="Study notes for every skill in the CCAO-F and CCDV-F exam guides: lessons, exam traps and worked questions.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23EE9D44'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%232A3446'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="theme.css?v=2026110302">
+<link rel="stylesheet" href="theme.css?v=2026110303">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
   .wrap{max-width:var(--page-max); margin:0 auto; padding:0 var(--page-pad);}
@@ -168,7 +168,7 @@
   .build:hover{background:var(--slate-deep);}
 
   .trap{position:relative; background:var(--slate-deep); color:#E6E8F0; border-left:4px solid var(--orange); border-radius:12px; padding:20px 92px 22px 26px; overflow:hidden;}
-  .trap::after{content:""; position:absolute; right:24px; top:20px; width:52px; height:46px; background:rgba(255,255,255,.08); clip-path:polygon(50% 0,100% 100%,0 100%);}
+  .trap::after{content:""; position:absolute; right:24px; top:20px; width:44px; height:44px; opacity:.4; background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFD2A6' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='6.5' x2='12' y2='13.5'/%3E%3Ccircle cx='12' cy='17' r='.6' fill='%23FFD2A6'/%3E%3C/svg%3E");}
   .trap .tl{display:flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px; font-weight:700; letter-spacing:1.6px; color:var(--peach);}
   .trap .mv{margin-top:12px; font-weight:700; color:#fff; font-size:18.5px; line-height:1.45;}
   .trap .why{margin-top:10px; color:#C9CDDA; font-size:17px; line-height:1.65;}
@@ -297,10 +297,10 @@
   </div>
 </main>
 
-<script src="site-nav.js?v=2026110302"></script>
-<script src="md-view.js?v=2026110302"></script>
-<script src="learn-data-ccao-f.js?v=2026110302"></script>
-<script src="learn-data-ccdv-f.js?v=2026110302"></script>
+<script src="site-nav.js?v=2026110303"></script>
+<script src="md-view.js?v=2026110303"></script>
+<script src="learn-data-ccao-f.js?v=2026110303"></script>
+<script src="learn-data-ccdv-f.js?v=2026110303"></script>
 <script>
 const DATA = window.LEARN_DATA || {};
 const $ = id => document.getElementById(id);
@@ -546,9 +546,8 @@ if(!T){
     return sec;
   }
 
-  /* No dead space beside the lesson. On a two-column skill page the worked question and the trap cards flow, one
-     block at a time, into whichever column is shorter, at that column's width, until the two columns end level;
-     whatever is left stays below the split. On one column everything stays in reading order. */
+  /* No dead space beside the lesson. On a two-column skill page the worked question moves into the shorter column
+     when that levels the columns, and the trap cards always sit together in the shorter column, at its width. On one column everything stays in reading order. */
   function balance(sec){
     const grid = sec.querySelector(".subgrid"), side = sec.querySelector(".sg-side"), main = sec.querySelector(".sg-main"), below = sec.querySelector(".sg-below");
     if(!grid || !side || !main || !below) return;
@@ -564,18 +563,18 @@ if(!T){
     below.append(...below._items);
     if(getComputedStyle(grid).gridTemplateColumns.trim().split(/\s+/).length < 2) return;
     const h = col => { const top = col.getBoundingClientRect().top; let m = 0; for(const c of col.children) m = Math.max(m, c.getBoundingClientRect().bottom - top); return m; };
-    // a trap heading travels with the first card under it
+    // the trap heading and all its cards move as one group, so the traps never split between a column and full width
     const units = [];
-    below._items.forEach(n => { const last = units[units.length - 1]; if(last && last.length === 1 && last[0].classList.contains("traps-h")) last.push(n); else units.push([n]); });
-    let target = null, flow = null;
+    below._items.forEach(n => { const last = units[units.length - 1]; if(n.classList.contains("trap") && last && (last[0].classList.contains("traps-h"))) last.push(n); else units.push([n]); });
+    const flows = new Map();
+    const flowIn = col => { if(!flows.has(col)){ const f = el("div", "sg-flow"); col.append(f); flows.set(col, f); } return flows.get(col); };
     for(const u of units){
-      const gap = h(side) - h(main);
-      if(Math.abs(gap) < 80) break;
-      const col = gap > 0 ? main : side;
-      if(target && col !== target) break;
-      if(!target){ target = col; flow = el("div", "sg-flow"); col.append(flow); }
-      flow.append(...u);
-      if(Math.abs(h(side) - h(main)) > Math.abs(gap)){ below.prepend(...u); break; }
+      const gap = h(side) - h(main), col = gap > 0 ? main : side;
+      // the traps always sit together in the shorter column, at that column's width
+      if(u[0].classList.contains("traps-h")){ flowIn(col).append(...u); continue; }
+      if(Math.abs(gap) < 80) continue;
+      flowIn(col).append(...u);
+      if(Math.abs(h(side) - h(main)) > Math.abs(gap)) below.prepend(...u);
     }
     // what is left stays below the split, in its original order
     below.append(...below._items.filter(n => n.parentNode === below));

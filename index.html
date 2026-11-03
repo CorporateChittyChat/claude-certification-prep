@@ -6,7 +6,7 @@
 <title>Claude Certification Prep · free study material</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23EE9D44'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%232A3446'/%3E%3C/svg%3E">
 <meta name="description" content="Free study notes, videos, flashcards and mock exams for the CCAO-F and CCDV-F Claude certifications. Not affiliated with Anthropic.">
-<link rel="stylesheet" href="theme.css?v=2026110302">
+<link rel="stylesheet" href="theme.css?v=2026110303">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
   .wrap{max-width:var(--page-max); margin:0 auto; padding:0 var(--page-pad);}
@@ -23,7 +23,7 @@
 
   /* hero */
   .hero{background:var(--slate-deep); color:#fff; padding:76px 0 84px;}
-  .hero .wrap{display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:56px; align-items:center;}
+  .hero .wrap{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:48px; align-items:center;}
   .pill{display:inline-flex; gap:10px; align-items:center; font-size:15px; font-weight:700; background:rgba(255,210,166,.14); color:var(--peach); border:1px solid rgba(255,210,166,.35); padding:6px 14px; border-radius:999px; margin-bottom:22px;}
   .hero h1{font-size:56px; line-height:1.08; letter-spacing:-.8px;}
   .hero h1 em{font-style:normal; color:var(--orange);}
@@ -35,9 +35,23 @@
   .fact b{display:block; font-size:38px; color:var(--orange); line-height:1.1;}
   .fact span{font-size:15px; color:#DADCE7;}
 
+  .hbadges{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px;}
+  .hb{display:flex; gap:16px; align-items:center; background:var(--slate); border:1px solid #3A4558; border-radius:16px; padding:16px 18px; color:#fff; text-decoration:none;}
+  a.hb:hover{border-color:var(--orange);}
+  .hb .badge{width:76px; height:76px; flex:none;}
+  .hb .c{display:block; font-family:var(--mono); font-size:13px; font-weight:700; letter-spacing:1.3px; color:var(--peach);}
+  .hb b{display:block; font-size:18px; line-height:1.25; margin-top:3px;}
+  .hb .l{display:block; font-size:14.5px; color:#B9BDCE; margin-top:5px;}
+  .hb .go{color:var(--orange); font-weight:700;}
+  .hb.soon{background:transparent; border-style:dashed;}
+  .stats{display:flex; flex-wrap:wrap; gap:12px 34px; margin-top:34px; padding-top:22px; border-top:1px solid #3A4558;}
+  .stat b{display:block; font-size:30px; line-height:1.1; color:var(--orange);}
+  .stat span{font-size:14.5px; color:#C9CDDA;}
+  @media (max-width:560px){ .hbadges{grid-template-columns:1fr;} .hb .badge{width:64px; height:64px;} }
+
   /* certifications */
-  .certs{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:20px; margin-top:30px;}
-  .cert{display:flex; flex-direction:column; background:var(--card); border:1px solid var(--line); border-left:4px solid var(--orange); border-radius:16px; padding:24px 22px 20px; box-shadow:var(--shadow); min-height:430px;}
+  .certs{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:20px; margin-top:30px; align-items:start;}
+  .cert{display:flex; flex-direction:column; background:var(--card); border:1px solid var(--line); border-left:4px solid var(--orange); border-radius:16px; padding:24px 22px 20px; box-shadow:var(--shadow);}
   .cert.soon{border-left-color:var(--peach); background:var(--cream); box-shadow:none;}
   .badge{width:84px; height:84px; flex:none; filter:drop-shadow(0 6px 14px rgba(44,46,67,.25));}
   .cert .bhead{display:flex; gap:14px; align-items:center;}
@@ -49,10 +63,10 @@
   .cert .who{font-size:16px; color:#3B3E55; margin-top:14px;}
   .cert .status{align-self:flex-start; margin-top:14px; font-size:12.5px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; padding:3px 10px; border-radius:999px; background:var(--good-soft); color:var(--good);}
   .cert.soon .status{background:#fff; color:var(--muted);}
-  .cert ul{list-style:none; display:grid; gap:4px; margin-top:16px; font-size:15.5px;}
-  .cert ul a{text-decoration:none; font-weight:600; display:flex; gap:8px; padding:4px 0;}
-  .cert ul a:hover{color:var(--orange-ink); text-decoration:underline;}
-  .cert .foot{margin-top:auto; padding-top:16px; border-top:1px solid var(--line); font-family:var(--mono); font-size:12.5px; letter-spacing:1px; text-transform:uppercase; color:var(--muted);}
+  .cert ul{list-style:none; display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; font-size:15px;}
+  .cert ul a{display:inline-block; text-decoration:none; font-weight:700; padding:6px 12px; border:1px solid var(--line); border-radius:999px; background:var(--paper);}
+  .cert ul a:hover{color:var(--orange-ink); border-color:var(--orange);}
+  .cert .foot{margin-top:18px; padding-top:14px; border-top:1px solid var(--line); font-family:var(--mono); font-size:12.5px; letter-spacing:1px; text-transform:uppercase; color:var(--muted);}
   .cert .go{margin-top:12px; font-weight:800; font-size:16.5px; color:var(--orange-ink); text-decoration:none;}
   .cert .go:hover{text-decoration:underline;}
 
@@ -127,11 +141,9 @@
         <a class="btn primary" href="#certs">Choose your certification</a>
         <a class="btn ghost" href="#faq">Read the FAQ</a>
       </div>
+      <div class="stats" id="facts"></div>
     </div>
-    <div>
-      <div class="badges" id="heroBadges" aria-hidden="true"></div>
-      <div class="facts" id="facts"></div>
-    </div>
+    <div class="hbadges" id="heroBadges"></div>
   </div>
 </section>
 
@@ -248,11 +260,11 @@
   </div>
 </footer>
 
-<script src="site-nav.js?v=2026110302"></script>
-<script src="path-data.js?v=2026110302"></script>
-<script src="flashcards-data.js?v=2026110302"></script>
-<script src="learn-data-ccao-f.js?v=2026110302"></script>
-<script src="learn-data-ccdv-f.js?v=2026110302"></script>
+<script src="site-nav.js?v=2026110303"></script>
+<script src="path-data.js?v=2026110303"></script>
+<script src="flashcards-data.js?v=2026110303"></script>
+<script src="learn-data-ccao-f.js?v=2026110303"></script>
+<script src="learn-data-ccdv-f.js?v=2026110303"></script>
 <script>
 const el = (tag, cls, text) => { const e = document.createElement(tag); if(cls) e.className = cls; if(text !== undefined) e.textContent = text; return e; };
 const LD = window.LEARN_DATA || {}, PD = window.PATH_DATA || {}, FC = window.FC_DATA || {};
@@ -290,12 +302,11 @@ CERTS.forEach(c => {
   bt.append(el("span", "code", c.id.toUpperCase()), el("h3", "", c.name), el("span", "lvl", c.lvl));
   bh.append(badge(c.id, c.soon), bt);
   card.append(bh, el("p", "who", c.who));
-  heroBadges.append(badge(c.id, c.soon));
   card.append(el("span", "status", c.soon ? "Coming soon" : "Ready to study"));
   if(!c.soon && P){
     const ul = el("ul");
     [["🧭", "Journey", "path.html?track=" + c.id], ["📖", "Learn", "learn.html?track=" + c.id], ["▶", "Videos", "videos.html?track=" + c.id], ["🃏", "Flashcards", "flashcards.html?track=" + c.id], ["⏱", "Mock exam", P.exam]].forEach(([i, t, h]) => {
-      const li = el("li"), a = el("a"); a.href = h; a.append(el("span", "", i), el("span", "", t)); li.append(a); ul.append(li);
+      const li = el("li"), a = el("a"); a.href = h; a.textContent = t; li.append(a); ul.append(li);
     });
     card.append(ul);
   }
@@ -303,7 +314,16 @@ CERTS.forEach(c => {
   const doms = L ? L.domains.filter(d => d.w).length : 0;
   const items = g && g.Items ? g.Items.split(",")[0] + " items" : null;
   const time = g && g.Time ? g.Time.replace(" minutes", " min") : null;
-  card.append(el("span", "foot", c.soon ? "Coming soon" : [items, time, doms ? doms + " domains" : null].filter(Boolean).join(" · ") || "Notes, videos, flashcards, mock exam"));
+  if(!c.soon) card.append(el("span", "foot", [items, time, doms ? doms + " domains" : null].filter(Boolean).join(" · ") || "Notes, videos, flashcards, mock exam"));
+  // hero tile: badge and the facts that matter, linking to the track's journey
+  const hb = el(c.soon ? "div" : "a", "hb" + (c.soon ? " soon" : ""));
+  if(!c.soon) hb.href = "path.html?track=" + c.id;
+  const ht = el("div");
+  ht.append(el("span", "c", c.id.toUpperCase()), el("b", "", c.name.replace("Claude Certified ", "") + " · " + c.lvl));
+  const hl = el("span", "l");
+  if(c.soon) hl.textContent = "Coming soon";
+  else { hl.append(document.createTextNode([items, time].filter(Boolean).join(" · ") + " · "), el("span", "go", "Start →")); }
+  ht.append(hl); hb.append(badge(c.id, c.soon), ht); heroBadges.append(hb);
   if(!c.soon){
     const go = el("a", "go", "Start free →"); go.href = "path.html?track=" + c.id;
     go.addEventListener("click", () => { try{ localStorage.setItem("fc-track", JSON.stringify(c.id)); }catch(e){} });
@@ -317,7 +337,7 @@ CERTS.forEach(c => {
 
 const facts = document.getElementById("facts");
 [[totals.notes, "skill lessons"], [totals.traps, "exam traps explained"], [totals.cards, "illustrated flashcards"], [totals.videos, "videos"]].forEach(([n, t]) => {
-  const f = el("div", "fact"); f.append(el("b", "", String(n)), el("span", "", t)); facts.append(f);
+  const f = el("div", "stat"); f.append(el("b", "", String(n)), el("span", "", t)); facts.append(f);
 });
 
 /* Supporter count: written daily by .github/workflows/supporters.yml; shown once it reaches 3 */
