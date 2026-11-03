@@ -61,6 +61,7 @@ const TRACKS = {
   .sn-install{font-family:inherit; font-size:15px; font-weight:700; color:#FFD2A6; background:transparent; border:1px solid rgba(255,210,166,.5); border-radius:9px; padding:9px 14px; cursor:pointer; white-space:nowrap;}
   .sn-install:hover{background:rgba(255,210,166,.1); border-color:#FFD2A6;}
   .sn-install[hidden]{display:none;}
+  .sn-inst{margin-left:auto;}   /* desktop: pinned to the far right of the header */
   .sn-inst .sn-menu{padding:14px 16px; min-width:300px;}
   .sn-ititle{display:block; font-size:16px; color:#24263A; margin-bottom:8px;}
   .sn-steps{margin:0 0 0 20px; display:grid; gap:6px; font-size:15.5px; line-height:1.45; color:#24263A;}
@@ -85,6 +86,7 @@ const TRACKS = {
     .sn-cta{justify-content:center; margin-top:8px; font-size:17px;}
     .sn-mock .sn-cta{width:100%;}
     .sn-install{width:100%; min-height:48px; font-size:17px; margin-top:8px;}
+    .sn-inst{margin-left:0;}
     .sn-mock .sn-menu{position:static; box-shadow:none; margin-top:8px; min-width:0;}
   }
   @media (max-width:520px){
@@ -168,6 +170,7 @@ const TRACKS = {
 
   // Install app, always visible unless the site already runs as an installed app. When the browser is ready to install,
   // one tap installs; otherwise the button opens the steps for this browser (Chrome waits for some use before offering).
+  let installWrap = null;   // appended last, so it sits at the far right of the header
   const standalone = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
   if(!standalone){
     const ua = navigator.userAgent;
@@ -198,7 +201,7 @@ const TRACKS = {
       if(!wasOpen){ im.classList.add("open"); ib.setAttribute("aria-expanded", "true"); }
     });
     iw.append(ib, im);
-    links.append(iw);
+    installWrap = iw;
   }
 
   if(track){
@@ -227,6 +230,7 @@ const TRACKS = {
     links.append(wrap);
   }
 
+  if(installWrap) links.append(installWrap);
   links.id = "snLinks";
   const burger = el("button", "sn-burger");
   burger.type = "button";
