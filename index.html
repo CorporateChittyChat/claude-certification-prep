@@ -178,7 +178,7 @@
         </details>
         <details>
           <summary>How many Claude certifications are there, and which can I study for here?</summary>
-          <p>Four: Associate Operator (CCAO-F), Developer (CCDV-F), Architect Foundations (CCAR-F) and Architect Professional (CCAR-P). CCAO-F and CCDV-F have full material here today. CCAR-F and CCAR-P are being written and will follow the same journey.</p>
+          <p>Four: Associate (CCAO-F), Developer (CCDV-F), Architect Foundations (CCAR-F) and Architect Professional (CCAR-P). CCAO-F and CCDV-F have full material here today. CCAR-F and CCAR-P are being written and will follow the same journey.</p>
         </details>
         <details>
           <summary>How do I choose the right certification?</summary>
@@ -245,14 +245,14 @@
 <script src="site-nav.js"></script>
 <script src="path-data.js"></script>
 <script src="flashcards-data.js"></script>
-<script src="learn-data.js"></script>
+<script src="learn-data-ccao-f.js"></script>
 <script src="learn-data-ccdv-f.js"></script>
 <script>
 const el = (tag, cls, text) => { const e = document.createElement(tag); if(cls) e.className = cls; if(text !== undefined) e.textContent = text; return e; };
 const LD = window.LEARN_DATA || {}, PD = window.PATH_DATA || {}, FC = window.FC_DATA || {};
 
 const CERTS = [
-  { id: "ccao-f", name: "Claude Certified Associate Operator", lvl: "Foundations", who: "For people who use Claude at work without writing code: prompting, checking output, choosing features, configuring projects and using AI responsibly." },
+  { id: "ccao-f", name: "Claude Certified Associate", lvl: "Foundations", who: "For people who use Claude at work without writing code: prompting, checking output, choosing features, configuring projects and using AI responsibly." },
   { id: "ccdv-f", name: "Claude Certified Developer", lvl: "Foundations", who: "For engineers who build, integrate and ship Claude-powered applications, agents and workflows with the API, tools, MCP and Claude Code." },
   { id: "ccar-f", name: "Claude Certified Architect", lvl: "Foundations", who: "For solution architects and technical practitioners designing Claude-powered agentic systems.", soon: true },
   { id: "ccar-p", name: "Claude Certified Architect", lvl: "Professional", who: "For senior architects and technical leads who design and deliver production-grade Claude solutions.", soon: true }

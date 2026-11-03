@@ -195,7 +195,7 @@
 </main>
 
 <script src="site-nav.js"></script>
-<script src="learn-data.js"></script>
+<script src="learn-data-ccao-f.js"></script>
 <script src="learn-data-ccdv-f.js"></script>
 <script>
 const DATA = window.LEARN_DATA || {};
@@ -221,7 +221,7 @@ function chip(icon, label, url, cls){
   a.append(el("span", "", icon), el("span", "", label));
   return a;
 }
-const pct = w => (w === null || w === undefined) ? "" : (Number.isInteger(w) ? w + ".0" : String(w)) + "%";
+const pct = w => (w === null || w === undefined) ? "" : String(w) + "%";
 
 if(!T){
   $("panel").append(el("div", "empty", "Study notes for this certification are on their way."));

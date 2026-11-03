@@ -3,7 +3,7 @@
    data-page: home | journey | learn | videos | flashcards. Built with DOM calls and textContent only. */
 (function(){
   const TRACKS = {
-    "ccao-f": { code: "CCAO-F", name: "Associate Operator", exam: "ccao-f/practice/mock-exam-player.html" },
+    "ccao-f": { code: "CCAO-F", name: "Associate", exam: "ccao-f/practice/mock-exam-player.html" },
     "ccdv-f": { code: "CCDV-F", name: "Developer", exam: "ccdv-f/practice/mock-exam-player.html" }
   };
   const PAGES = [
