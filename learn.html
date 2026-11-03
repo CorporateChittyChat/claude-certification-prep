@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta name="theme-color" content="#1D242F">
 <meta name="apple-mobile-web-app-title" content="Cert Prep">
-<link rel="stylesheet" href="theme.css?v=2026110304">
+<link rel="stylesheet" href="theme.css?v=2026110305">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
   .wrap{max-width:var(--page-max); margin:0 auto; padding:0 var(--page-pad);}
@@ -172,6 +172,7 @@
   .build{display:inline-flex; align-items:center; gap:8px; margin-top:16px; font-weight:700; font-size:15.5px; text-decoration:none; background:var(--slate); color:#fff; border-radius:10px; padding:9px 14px;}
   .build:hover{background:var(--slate-deep);}
 
+  .trap-row{display:grid; gap:14px;} .trap-dots{display:none;}
   .trap{position:relative; background:var(--slate-deep); color:#E6E8F0; border-left:4px solid var(--orange); border-radius:12px; padding:20px 92px 22px 26px; overflow:hidden;}
   .trap::after{content:""; position:absolute; right:24px; top:20px; width:44px; height:44px; opacity:.4; background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFD2A6' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='6.5' x2='12' y2='13.5'/%3E%3Ccircle cx='12' cy='17' r='.6' fill='%23FFD2A6'/%3E%3C/svg%3E");}
   .trap .tl{display:flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px; font-weight:700; letter-spacing:1.6px; color:var(--peach);}
@@ -295,6 +296,12 @@
     .hl{padding:16px;}
     .hl ul, .traps, .rem ol{grid-template-columns:1fr;}
     .trap{padding:16px 18px;} .trap::after{display:none;}
+    /* traps swipe sideways on phones and tablets: one card at a time, the next one peeking in */
+    .trap-row{display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; scroll-padding:0 16px; margin:0 -16px; padding:0 16px 4px; scrollbar-width:none;}
+    .trap-row::-webkit-scrollbar{display:none;}
+    .trap-row .trap{flex:0 0 86%; scroll-snap-align:start;}
+    .trap-dots{display:flex; justify-content:center; gap:7px; margin-top:-4px;}
+    .trap-dots i{width:8px; height:8px; border-radius:50%; background:var(--line);} .trap-dots i.on{background:var(--orange);}
     .dtop{grid-template-columns:1fr;}
     .sub{padding:18px 16px; scroll-margin-top:calc(var(--sn-h,56px) + 72px);}
     .sub h3{font-size:22px;}
@@ -376,10 +383,10 @@
   </div>
 </main>
 
-<script src="site-nav.js?v=2026110304"></script>
-<script src="md-view.js?v=2026110304"></script>
-<script src="learn-data-ccao-f.js?v=2026110304"></script>
-<script src="learn-data-ccdv-f.js?v=2026110304"></script>
+<script src="site-nav.js?v=2026110305"></script>
+<script src="md-view.js?v=2026110305"></script>
+<script src="learn-data-ccao-f.js?v=2026110305"></script>
+<script src="learn-data-ccdv-f.js?v=2026110305"></script>
 <script>
 const DATA = window.LEARN_DATA || {};
 const $ = id => document.getElementById(id);
@@ -668,11 +675,24 @@ if(!T){
     }
     if(s.traps && s.traps.length){
       below.append(el("h4", "traps-h", s.traps.length > 1 ? "Exam traps (" + s.traps.length + ")" : "Exam trap"));
-      s.traps.forEach(t => {
+      // one row of cards: stacked on desktop, a swipeable carousel on phones
+      const row = el("div", "trap-row");
+      s.traps.forEach((t, k) => {
         const box = el("div", "trap");
-        box.append(el("div", "tl", "⚠ EXAM TRAP"), el("div", "mv", t.move), el("div", "why", t.why));
-        below.append(box);
+        box.append(el("div", "tl", "⚠ EXAM TRAP" + (s.traps.length > 1 ? "  " + (k + 1) + " / " + s.traps.length : "")), el("div", "mv", t.move), el("div", "why", t.why));
+        row.append(box);
       });
+      below.append(row);
+      if(s.traps.length > 1){
+        const dots = el("div", "trap-dots"); dots.setAttribute("aria-hidden", "true");
+        s.traps.forEach(() => dots.append(el("i")));
+        dots.firstChild.className = "on";
+        row.addEventListener("scroll", () => {
+          const k = Math.round(row.scrollLeft / Math.max(1, row.firstChild.offsetWidth + 12));
+          [...dots.children].forEach((d, j) => d.className = j === k ? "on" : "");
+        }, {passive: true});
+        below.append(dots);
+      }
     }
     return sec;
   }
@@ -696,7 +716,7 @@ if(!T){
     const h = col => { const top = col.getBoundingClientRect().top; let m = 0; for(const c of col.children) m = Math.max(m, c.getBoundingClientRect().bottom - top); return m; };
     // the trap heading and all its cards move as one group, so the traps never split between a column and full width
     const units = [];
-    below._items.forEach(n => { const last = units[units.length - 1]; if(n.classList.contains("trap") && last && (last[0].classList.contains("traps-h"))) last.push(n); else units.push([n]); });
+    below._items.forEach(n => { const last = units[units.length - 1]; if((n.classList.contains("trap-row") || n.classList.contains("trap-dots")) && last && last[0].classList.contains("traps-h")) last.push(n); else units.push([n]); });
     const flows = new Map();
     const flowIn = col => { if(!flows.has(col)){ const f = el("div", "sg-flow"); col.append(f); flows.set(col, f); } return flows.get(col); };
     for(const u of units){

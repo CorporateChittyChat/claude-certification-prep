@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="../../icons/icon-192.png">
 <meta name="theme-color" content="#1D242F">
 <meta name="apple-mobile-web-app-title" content="Cert Prep">
-<link rel="stylesheet" href="../../theme.css?v=2026110304">
+<link rel="stylesheet" href="../../theme.css?v=2026110305">
 <style>
   /* palette tokens come from theme.css; these two are page-only names for palette colours */
   :root{ --orange-soft:var(--peach); --mark:var(--peach); }
@@ -711,6 +711,7 @@ function startExam(){
   $("navbar").classList.remove("hidden");
   timerId = setInterval(tick, 1000);
   render();
+  window.scrollTo(0, 0);   // the start screen may have been scrolled; the first question opens at the top
 }
 
 function tick(){
@@ -772,6 +773,7 @@ function go(dir){
   if(dir===1 && cur===Q.length-1){ openReview(); return; }
   cur = Math.min(Q.length-1, Math.max(0, cur+dir));
   render();
+  window.scrollTo(0, 0);
 }
 
 $("flagBtn").onclick = ()=>{ flags[cur] = !flags[cur]; render(); };
