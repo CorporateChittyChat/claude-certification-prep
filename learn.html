@@ -6,7 +6,7 @@
 <title>Learn</title>
 <meta name="description" content="Study notes for every skill in the CCAO-F and CCDV-F exam guides: lessons, exam traps and worked questions.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23EE9D44'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%232A3446'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="theme.css?v=20261103">
+<link rel="stylesheet" href="theme.css?v=2026110302">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
   .wrap{max-width:var(--page-max); margin:0 auto; padding:0 var(--page-pad);}
@@ -157,18 +157,21 @@
   .code pre{margin:0; background:var(--slate-deep); color:#F4EFE6; padding:14px; font-family:var(--mono); font-size:14.5px; line-height:1.55; overflow-x:auto; white-space:pre;}
 
   .know{list-style:none; display:grid; gap:9px;}
+  .sg-flow{margin-top:20px; display:grid; gap:14px;} .sg-flow>h4{margin:6px 0 -2px;}
+  .sg-below{display:grid; gap:14px; margin-top:18px;} .sg-below>h4{margin:10px 0 -2px;}
+  .sg-below:empty{display:none;}
+  .sg-tail{margin-top:12px;}
   .know li{position:relative; padding-left:24px;}
   .know li::before{content:""; position:absolute; left:5px; top:.66em; width:9px; height:9px; border-radius:50%; background:var(--orange);}
 
   .build{display:inline-flex; align-items:center; gap:8px; margin-top:16px; font-weight:700; font-size:15.5px; text-decoration:none; background:var(--slate); color:#fff; border-radius:10px; padding:9px 14px;}
   .build:hover{background:var(--slate-deep);}
 
-  .traps{display:grid; grid-template-columns:minmax(0,1fr); gap:14px;}
-  .trap{position:relative; display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:10px 36px; align-items:start; background:var(--slate); color:#EEF0F6; border-left:5px solid var(--orange); border-radius:14px; padding:20px 26px; overflow:hidden;}
-  .trap .tl{grid-column:1/-1; display:flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px; font-weight:700; letter-spacing:1.4px; color:var(--peach);}
-  .trap .mv{font-weight:700; color:#fff; font-size:19px; line-height:1.45;}
-  .trap .why{color:#E3E6EF; font-size:17.5px; line-height:1.6; padding-left:24px; border-left:1px solid rgba(255,255,255,.14);}
-  .trap .why b{display:block; font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:1.2px; color:var(--peach); margin-bottom:4px;}
+  .trap{position:relative; background:var(--slate-deep); color:#E6E8F0; border-left:4px solid var(--orange); border-radius:12px; padding:20px 92px 22px 26px; overflow:hidden;}
+  .trap::after{content:""; position:absolute; right:24px; top:20px; width:52px; height:46px; background:rgba(255,255,255,.08); clip-path:polygon(50% 0,100% 100%,0 100%);}
+  .trap .tl{display:flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px; font-weight:700; letter-spacing:1.6px; color:var(--peach);}
+  .trap .mv{margin-top:12px; font-weight:700; color:#fff; font-size:18.5px; line-height:1.45;}
+  .trap .why{margin-top:10px; color:#C9CDDA; font-size:17px; line-height:1.65;}
 
   .rem{margin-top:26px; background:var(--cream); border:2px dashed var(--peach); border-radius:var(--radius); padding:18px 22px;}
   .rem h3{font-size:17px; margin-bottom:8px;}
@@ -246,7 +249,7 @@
     .layout{display:block;}
     .dhead h2{font-size:27px;}
     .hl ul, .traps, .rem ol{grid-template-columns:1fr;}
-    .trap{grid-template-columns:minmax(0,1fr); padding:16px 18px;} .trap .why{padding-left:0; border-left:0;}
+    .trap{padding:16px 18px;} .trap::after{display:none;}
     .dtop{grid-template-columns:1fr;}
     .sub{padding:18px 16px;}
     .sub h3{font-size:21px;}
@@ -269,7 +272,7 @@
       <div class="ttl">Study progress</div>
       <div class="prog"><i><b id="sideBar"></b></i><div class="row"><span id="sideText"></span><span id="sidePct"></span></div></div>
       <div class="ttl">Curriculum</div>
-      <a class="ov" href="#top" id="ovLink">Exam facts</a>
+      <a class="ov" href="#d1" id="ovLink">Start here</a>
       <ol id="nav"></ol>
     </nav>
     <div class="col">
@@ -294,10 +297,10 @@
   </div>
 </main>
 
-<script src="site-nav.js?v=20261103"></script>
-<script src="md-view.js?v=20261103"></script>
-<script src="learn-data-ccao-f.js?v=20261103"></script>
-<script src="learn-data-ccdv-f.js?v=20261103"></script>
+<script src="site-nav.js?v=2026110302"></script>
+<script src="md-view.js?v=2026110302"></script>
+<script src="learn-data-ccao-f.js?v=2026110302"></script>
+<script src="learn-data-ccdv-f.js?v=2026110302"></script>
 <script>
 const DATA = window.LEARN_DATA || {};
 const $ = id => document.getElementById(id);
@@ -515,33 +518,87 @@ if(!T){
       main.append(c);
     }
     if(s.know && s.know.length){
-      side.append(el("h4", "", "What you need to know"));
+      const kw = el("div", "sg-know");
+      kw.append(el("h4", "", "What you need to know"));
       const k = el("ul", "know");
       s.know.forEach(t => k.append(el("li", "", t)));
-      side.append(k);
+      kw.append(k); side.append(kw);
     }
+    const below = el("div", "sg-below");
+    sec.append(below);
     if(s.build){
       const isWQ = /episode-questions\.md#/.test(s.build[1]);
       // a worked question shared by several skills appears once, on the first of them; the others show nothing
       const first = isWQ && firstWQ ? firstWQ[s.build[1]] : null;
       if(!first || first.sid === d.id + "-" + (i + 1)){
         const wq = isWQ ? workedQuestion(s.build[1]) : null;
-        sec.append(wq || chip("\u2328", s.build[0] + " \u2192", s.build[1], "build"));
+        below.append(wq || chip("\u2328", s.build[0] + " \u2192", s.build[1], "build"));
       }
     }
     if(s.traps && s.traps.length){
-      sec.append(el("h4", "", s.traps.length > 1 ? "Exam traps (" + s.traps.length + ")" : "Exam trap"));
-      const grid = el("div", "traps");
+      below.append(el("h4", "traps-h", s.traps.length > 1 ? "Exam traps (" + s.traps.length + ")" : "Exam trap"));
       s.traps.forEach(t => {
         const box = el("div", "trap");
-        const why = el("div", "why"); why.append(el("b", "", "WHY IT FAILS"), document.createTextNode(t.why));
-        box.append(el("div", "tl", "⚠ EXAM TRAP"), el("div", "mv", "“" + t.move + "”"), why);
-        grid.append(box);
+        box.append(el("div", "tl", "⚠ EXAM TRAP"), el("div", "mv", t.move), el("div", "why", t.why));
+        below.append(box);
       });
-      sec.append(grid);
     }
     return sec;
   }
+
+  /* No dead space beside the lesson. On a two-column skill page the worked question and the trap cards flow, one
+     block at a time, into whichever column is shorter, at that column's width, until the two columns end level;
+     whatever is left stays below the split. On one column everything stays in reading order. */
+  function balance(sec){
+    const grid = sec.querySelector(".subgrid"), side = sec.querySelector(".sg-side"), main = sec.querySelector(".sg-main"), below = sec.querySelector(".sg-below");
+    if(!grid || !side || !main || !below) return;
+    const lesson = main.querySelector(".lesson");
+    if(!below._items) below._items = [...below.children];
+    if(!main._items) main._items = [...main.children];
+    if(!side._items) side._items = [...side.children];
+    side.append(...side._items);
+    if(lesson && !lesson._items) lesson._items = [...lesson.children];
+    sec.querySelectorAll(".sg-flow, .sg-tail").forEach(f => f.remove());
+    if(lesson) lesson.append(...lesson._items);
+    main.append(...main._items);
+    below.append(...below._items);
+    if(getComputedStyle(grid).gridTemplateColumns.trim().split(/\s+/).length < 2) return;
+    const h = col => { const top = col.getBoundingClientRect().top; let m = 0; for(const c of col.children) m = Math.max(m, c.getBoundingClientRect().bottom - top); return m; };
+    // a trap heading travels with the first card under it
+    const units = [];
+    below._items.forEach(n => { const last = units[units.length - 1]; if(last && last.length === 1 && last[0].classList.contains("traps-h")) last.push(n); else units.push([n]); });
+    let target = null, flow = null;
+    for(const u of units){
+      const gap = h(side) - h(main);
+      if(Math.abs(gap) < 80) break;
+      const col = gap > 0 ? main : side;
+      if(target && col !== target) break;
+      if(!target){ target = col; flow = el("div", "sg-flow"); col.append(flow); }
+      flow.append(...u);
+      if(Math.abs(h(side) - h(main)) > Math.abs(gap)){ below.prepend(...u); break; }
+    }
+    // what is left stays below the split, in its original order
+    below.append(...below._items.filter(n => n.parentNode === below));
+    // a short lesson beside a long side box: the "What you need to know" list moves across to the lesson column
+    const kw = side.querySelector(".sg-know"), sgap = h(side) - h(main);
+    if(kw && sgap > 80){ main.append(kw); if(Math.abs(h(side) - h(main)) > sgap) side.append(kw); }
+    // a lesson far longer than the side column: its last paragraphs, tables and code continue full width under the split
+    const blocks = [...(lesson ? lesson._items : []), ...main._items.filter(n => n.matches(".tbl, .code"))];
+    if(h(main) - h(side) < 80 || !blocks.length) return;
+    const tail = el("div", "sg-tail"), tl = el("div", "lesson");
+    tail.append(tl); grid.after(tail);
+    for(let k = blocks.length - 1; k > 0; k--){
+      const gap = h(main) - h(side);
+      if(gap < 80) break;
+      const b = blocks[k];
+      if(b.tagName === "P") tl.prepend(b); else tail.insertBefore(b, tl.nextSibling);
+      if(Math.abs(h(main) - h(side)) > gap){ (b.tagName === "P" ? lesson : main).append(b); break; }
+    }
+    if(!tl.children.length) tl.remove();
+    if(!tail.children.length) tail.remove();
+  }
+  let balT;
+  window.addEventListener("resize", () => { clearTimeout(balT); balT = setTimeout(() => { const sec = document.querySelector("#panel .sub"); if(sec) balance(sec); }, 150); });
 
   function drawDomain(d, si){
     const p = $("panel"); p.replaceChildren();
@@ -577,7 +634,12 @@ if(!T){
       // ---- one skill per page ----
       const crumb = el("a", "crumb", "\u2190 " + (isT ? "" : "Domain " + d.code.slice(1) + " \u00b7 ") + d.title + (d.w ? " \u00b7 " + pct(d.w) + " of the exam" : ""));
       crumb.href = "#" + d.id;
-      p.append(crumb, renderSkill(d, d.subs[si], si, firstWQ), pager(true));
+      const sec = renderSkill(d, d.subs[si], si, firstWQ);
+      p.append(crumb, sec, pager(true));
+      balance(sec);
+      if(document.fonts && document.fonts.ready) document.fonts.ready.then(() => balance(sec));
+      // the worked question arrives a moment later and changes the heights
+      [500, 1500].forEach(ms => setTimeout(() => { if(sec.isConnected) balance(sec); }, ms));
       return;
     }
 
