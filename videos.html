@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Videos</title>
-<meta name="description" content="Every episode of the free Claude certification video series, in study order, each linked to its study notes and hands-on build. Unofficial.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23FFB020'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%233D405B'/%3E%3C/svg%3E">
+<meta name="description" content="Every episode of the CCAO-F and CCDV-F video series, in study order.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23EE9D44'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%232A3446'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="theme.css">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -44,10 +44,10 @@
       <h1>Videos</h1>
       <p id="intro"></p>
     </div>
-    <a class="btn primary" id="playlist" target="_blank" rel="noopener">▶ Open the playlist on YouTube</a>
+    <a class="btn primary" id="playlist" target="_blank" rel="noopener">▶ Playlist on YouTube</a>
   </div>
   <div id="sections"></div>
-  <footer>Independent study material. Not affiliated with, endorsed by, or approved by Anthropic. Videos play on YouTube.</footer>
+  <footer>Independent study material. Not affiliated with, endorsed by or approved by Anthropic. Not a certification, score or prediction.</footer>
 </main>
 <script src="site-nav.js"></script>
 <script src="path-data.js"></script>
@@ -101,7 +101,7 @@ P.sections.forEach(sec => {
   });
   $("sections").append(h, grid);
 });
-$("intro").textContent = count + " videos, in the order to watch them. Each one links to its study notes and, where there is one, its hands-on build.";
+$("intro").textContent = count + " videos, in watching order.";
 </script>
 </body>
 </html>

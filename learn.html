@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Learn</title>
-<meta name="description" content="Study notes for Claude certifications, organised by the official exam guide: every domain and weighted skill, with lessons, decision tables, what to know, exam traps and build exercises. Free, unofficial, no account.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23FFB020'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%233D405B'/%3E%3C/svg%3E">
+<meta name="description" content="Study notes for every skill in the CCAO-F and CCDV-F exam guides: lessons, exam traps and worked questions.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23EE9D44'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%232A3446'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="theme.css">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -31,7 +31,7 @@
   /* three columns */
   .layout{display:grid; grid-template-columns:340px minmax(0,1fr); gap:0; align-items:start;}
   .layout>*{min-width:0;}
-  .side{position:sticky; top:64px; height:calc(100vh - 64px); overflow:auto; background:var(--slate-deep); color:#E3E5EE; border-radius:0; padding:26px 20px 30px; box-shadow:inset -1px 0 0 rgba(255,255,255,.06); scrollbar-width:thin; scrollbar-color:#5A5D78 transparent;}
+  .side{position:sticky; top:64px; height:calc(100vh - 64px); overflow:auto; background:var(--slate-deep); color:#E3E5EE; border-radius:0; padding:26px 20px 30px; box-shadow:inset -1px 0 0 rgba(255,255,255,.06); scrollbar-width:thin; scrollbar-color:#3A4558 transparent;}
   .side .ttl{font-family:var(--mono); font-size:12.5px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--peach); margin:0 4px 10px;}
   .side .prog{margin:0 4px 22px;}
   .side .prog i{display:block; height:8px; border-radius:99px; background:#4A4D68; overflow:hidden;}
@@ -44,7 +44,7 @@
   .dom + .dom{margin-top:4px;}
   .dom-h{display:grid; grid-template-columns:18px 34px 1fr 22px; gap:6px; align-items:start; width:100%; text-align:left; font:inherit; color:#fff; background:transparent; border:0; border-radius:10px; padding:9px 6px; cursor:pointer;}
   .dom-h:hover{background:rgba(255,255,255,.06);}
-  .dom.cur > .dom-h{background:rgba(255,176,32,.12);}
+  .dom.cur > .dom-h{background:rgba(238,157,68,.12);}
   .dom-h .ck{color:var(--good-soft); font-weight:800; font-size:14px; padding-top:2px; visibility:hidden;}
   .dom.done .dom-h .ck{visibility:visible; color:#7FD3A0;}
   .dom-h .no{font-family:var(--mono); font-size:13.5px; color:#AFB2C6; padding-top:2px;}
@@ -79,7 +79,7 @@
   .watch .poster:focus-visible{outline:3px solid var(--orange); outline-offset:-3px;}
   .watch .cap{display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:space-between; color:#fff; font-size:14.5px; font-weight:700; padding:10px 4px 2px;}
   .watch .tabs{display:flex; gap:6px; flex-wrap:wrap;}
-  .watch .tabs button{font:inherit; font-size:13.5px; font-weight:700; color:#fff; background:var(--slate); border:1px solid #5A5D78; border-radius:8px; padding:4px 10px; cursor:pointer;}
+  .watch .tabs button{font:inherit; font-size:13.5px; font-weight:700; color:#fff; background:var(--slate); border:1px solid #3A4558; border-radius:8px; padding:4px 10px; cursor:pointer;}
   .watch .tabs button[aria-pressed="true"]{background:var(--orange); border-color:var(--orange); color:var(--ink);}
   .watch .cap a{color:var(--peach); font-weight:600;}
   .practice{margin-top:22px; background:var(--card); border:2px solid var(--slate); border-radius:18px; padding:20px 22px; box-shadow:var(--shadow);}
@@ -236,7 +236,7 @@
       <div class="ttl">Study progress</div>
       <div class="prog"><i><b id="sideBar"></b></i><div class="row"><span id="sideText"></span><span id="sidePct"></span></div></div>
       <div class="ttl">Curriculum</div>
-      <a class="ov" href="#top" id="ovLink">Overview and exam facts</a>
+      <a class="ov" href="#top" id="ovLink">Exam facts</a>
       <ol id="nav"></ol>
     </nav>
     <div class="col">
@@ -253,10 +253,10 @@
       <article class="panel" id="panel" aria-live="polite"></article>
       <div class="tip">
         <span style="font-size:32px">☕</span>
-        <p>These notes are free, with no sign-up. If a domain finally clicked, buy me a coffee: it funds the next tracks, CCAR-F and CCAR-P.</p>
+        <p>Did a domain click? A coffee funds the CCAR-F and CCAR-P tracks.</p>
         <a class="btn coffee" href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener">☕ Buy me a coffee</a>
       </div>
-      <footer>Independent study material. Not affiliated with, endorsed by, or approved by Anthropic. Organised by Anthropic's published exam guide; the explanations and traps are written for this project and no exam item is reproduced. This is not a certification, score or prediction. Product names, limits and prices change: confirm them at docs.claude.com. Reading progress is kept in this browser only.</footer>
+      <footer>Independent study material. Not affiliated with, endorsed by or approved by Anthropic. Not a certification, score or prediction.</footer>
     </div>
   </div>
 </main>
@@ -332,12 +332,12 @@ function chip(icon, label, url, cls){
 const pct = w => (w === null || w === undefined) ? "" : String(w) + "%";
 
 if(!T){
-  $("panel").append(el("div", "empty", "Study notes for this certification are on their way."));
+  $("panel").append(el("div", "empty", "Notes for this certification are coming."));
 } else {
   document.title = "Learn · " + track.toUpperCase();
   $("trackLabel").textContent = track.toUpperCase() + " · " + T.name;
   $("intro").textContent = T.intro;
-  $("asof").textContent = "Product facts checked " + T.asOf + ". Names, limits and prices change: confirm them at docs.claude.com before the exam.";
+  $("asof").textContent = "Facts checked " + T.asOf + ". Confirm at docs.claude.com.";
   const g = $("glance");
   (T.glance || []).forEach(([k, v]) => { const f = el("div", "fact"); f.append(el("b", "", k), document.createTextNode(v)); g.append(f); });
   if(T.guide) g.append(chip(T.guide[0], T.guide[1], T.guide[2], "fact"));
@@ -414,7 +414,7 @@ if(!T){
         opts.append(b);
       });
       reveal.append(MD.render(q.reveal, docPath));
-      const more = el("p", "more"); const a = el("a", "", "Open all the worked questions →"); a.href = "read.html?doc=" + docPath; more.append(a);
+      const more = el("p", "more"); const a = el("a", "", "All worked questions →"); a.href = "read.html?doc=" + docPath; more.append(a);
       body.append(opts, verdict, reveal, more);
     }).catch(() => { body.replaceChildren(); const a = el("a", "", "Open the worked question →"); a.href = url; body.append(a); });
     return box;
@@ -466,7 +466,7 @@ if(!T){
       const ph = el("div", "ph");
       ph.append(el("h3", "", "\u2328 Practise it: hands-on builds"));
       const repo = el("a", "", "chittychat-studio/ccdvf-course \u2197"); repo.href = T.practiceRepo; repo.target = "_blank"; repo.rel = "noopener";
-      ph.append(repo, el("p", "", "Each build is the code from its episode, ready to clone, run and break on purpose. Run it, then work through its PRACTICE.md exercises and questions where there is one."));
+      ph.append(repo, el("p", "", "Code from each episode: clone it, run it, break it. Some folders add a PRACTICE.md."));
       pr.append(ph);
       const eps = el("div", "eps");
       d.practice.forEach(e => {
@@ -551,7 +551,7 @@ if(!T){
         sec.append(grid);
       }
       const sf = el("div", "subfoot");
-      sf.append(el("span", "hint", "Finished this skill? Tick it off to track your progress."));
+      sf.append(el("span", "hint", "Tick it off when you're done."));
       const mk = el("button", "btn"); mk.type = "button";
       const setMk = () => { const on = done.includes(sid); mk.textContent = on ? "✓ Done" : "Mark as done"; mk.className = "btn" + (on ? " done" : ""); };
       setMk();
@@ -583,7 +583,7 @@ if(!T){
     if(idx > 0){ const a = el("a", "btn", "← " + T.domains[idx - 1].title); a.href = "#" + T.domains[idx - 1].id; foot.append(a); }
     foot.append(el("span", "sp"));
     const mark = el("button", "btn"); mark.type = "button";
-    function setFootMark(){ const all = domainDone(d); mark.textContent = all ? "✓ All skills done" : "Mark every skill in this domain done"; mark.className = "btn" + (all ? " done" : ""); }
+    function setFootMark(){ const all = domainDone(d); mark.textContent = all ? "✓ All skills done" : "Mark domain done"; mark.className = "btn" + (all ? " done" : ""); }
     setFootMark();
     mark.addEventListener("click", () => {
       const all = domainDone(d);

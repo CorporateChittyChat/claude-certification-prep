@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flashcards &amp; Traps</title>
-<meta name="description" content="Illustrated flip-card revision and a printable traps-and-tricks sheet for the CCAO-F and CCDV-F Claude certifications. Every answer comes with a mini diagram, a worked example and a memory hook. Free, unofficial, original material.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23FFB020'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%232C2E43'/%3E%3C/svg%3E">
+<meta name="description" content="Illustrated flashcards and a printable traps sheet for CCAO-F and CCDV-F.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23EE9D44'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%231D242F'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="theme.css">
 <style>
   /* palette tokens (--accent, --accent-ink, --accent-soft, --red, --green ...) come from theme.css.
@@ -173,13 +173,13 @@
 <main class="wrap">
   <div class="head">
     <h1>Flashcards &amp; traps</h1>
-    <p>Flip through the rules each exam domain is built on, and learn to spot the answer that only <i>sounds</i> right. Every answer comes with a picture of the idea, a worked example and a one-line memory hook. Red cards are traps: the tempting move on the front, why it fails on the back.</p>
+    <p>The rules behind each domain, and the answers that only <i>sound</i> right. Red cards are traps.</p>
     <div class="legend" aria-hidden="true">
       <span><i style="background:var(--accent)"></i> Rule card</span>
       <span><i style="background:var(--red)"></i> Trap card</span>
       <span><i style="background:var(--green-soft); border:1px solid var(--green)"></i> What works</span>
       <span><i style="background:var(--red-soft); border:1px solid var(--red)"></i> What fails</span>
-      <span><i style="background:var(--accent-soft); border:2px dashed var(--accent-ink)"></i> A gate: a person or a check that must pass</span>
+      <span><i style="background:var(--accent-soft); border:2px dashed var(--accent-ink)"></i> Gate: must pass</span>
     </div>
   </div>
 
@@ -189,7 +189,7 @@
       <button type="button" data-mode="traps">⚠ Traps &amp; tricks</button>
     </div>
     <span class="spacer"></span>
-    <a class="exam-link" id="examLink" href="#">Ready? Take the mock exam →</a>
+    <a class="exam-link" id="examLink" href="#">Take the mock exam →</a>
   </div>
 
   <!-- FLASHCARDS -->
@@ -214,7 +214,7 @@
               <div class="ico" id="fIcon" aria-hidden="true"></div>
               <div class="front-text" id="fText"></div>
             </div>
-            <div class="hint">Click, tap or press Space to flip</div>
+            <div class="hint">Tap or press Space to flip</div>
           </div>
           <div class="face back">
             <div class="row1"><span class="tag" id="bTag"></span><a class="topic" id="bTopic"></a></div>
@@ -239,24 +239,24 @@
       <h2 id="doneTitle"></h2>
       <p id="doneText"></p>
       <div class="actions">
-        <button type="button" class="primary" id="reviewBtn">Review the ones I missed</button>
-        <button type="button" id="restartBtn">Go through all again</button>
+        <button type="button" class="primary" id="reviewBtn">Review missed cards</button>
+        <button type="button" id="restartBtn">Start again</button>
         <a id="doneExam" href="#">Take the mock exam →</a>
       </div>
-      <p class="coffee-note">Found the cards useful? <a href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener">☕ Buy me a coffee</a>. Optional, and everything stays free.</p>
+      <p class="coffee-note">Found the cards useful? <a href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener">☕ Buy me a coffee</a>.</p>
     </div>
   </section>
 
   <!-- TRAPS SHEET -->
   <section id="trapsView" class="hidden">
     <div class="sheet-intro">
-      <span>Every trap next to the rule that beats it, with its memory hook, one block per domain. Print it for the night before.</span>
+      <span>Each trap beside the rule that beats it. Print it for the night before.</span>
       <button class="btn" type="button" onclick="window.print()">🖨 Print / save as PDF</button>
     </div>
     <div id="sheet"></div>
   </section>
 
-  <footer><a href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener" style="color:var(--orange-ink); font-weight:700">☕ Buy me a coffee</a> · Independent study material. Not affiliated with, endorsed by, or approved by Anthropic. Every card restates this project's own original study guides and episode material; the examples are illustrative scenarios written for this project. Nothing here is from, or derived from, any real exam.</footer>
+  <footer><a href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener" style="color:var(--orange-ink); font-weight:700">☕ Buy me a coffee</a> · Independent study material. Not affiliated with, endorsed by or approved by Anthropic. Not a certification, score or prediction.</footer>
 </main>
 
 <script src="site-nav.js"></script>
@@ -349,7 +349,7 @@ function buildOrder(shuffle){
 
 function setTopicLabel(a, tp){
   a.textContent = tp.name;
-  if(tp.link){ a.href = tp.link; a.target = "_blank"; a.rel = "noopener"; a.title = "Open the study material for this topic"; }
+  if(tp.link){ a.href = tp.link; a.target = "_blank"; a.rel = "noopener"; a.title = "Study this topic"; }
   else { a.removeAttribute("href"); }
 }
 
@@ -377,7 +377,7 @@ function showCard(){
   $("bExText").textContent = c.ex || ""; $("bEx").classList.toggle("hidden", !c.ex);
   $("bHookText").textContent = c.hook || ""; $("bHook").classList.toggle("hidden", !c.hook);
   const s = status[c.id];
-  $("bHint").textContent = s === "known" ? "You marked this one as known." : s === "again" ? "Marked for review." : "Got it, or see it again?";
+  $("bHint").textContent = s === "known" ? "Marked as known." : s === "again" ? "Marked for review." : "Got it, or see it again?";
   $("pos").innerHTML = `Card <b>${idx + 1}</b> of ${order.length}` + (reviewOnly ? " · review pass" : "");
   $("prevBtn").disabled = idx === 0;
 }
@@ -395,10 +395,10 @@ function finish(){
   const known = d.cards.filter(c => status[c.id] === "known").length;
   if(!order.length){
     $("doneTitle").textContent = "No cards match these filters";
-    $("doneText").textContent = "Change the topic, or untick \"Hide cards I know\".";
+    $("doneText").textContent = "Pick another topic or untick \"Hide cards I know\".";
   } else {
     $("doneTitle").textContent = again.length ? "Round done" : "Round done, nothing left to review 🎉";
-    $("doneText").textContent = `You know ${known} of ${d.cards.length} ${d.title} cards. ` + (again.length ? `${again.length} marked to review again.` : "Try the mock exam to test it under time pressure.");
+    $("doneText").textContent = `You know ${known} of ${d.cards.length} ${d.title} cards. ` + (again.length ? `${again.length} marked to review again.` : "Now try the mock exam against the clock.");
   }
   $("reviewBtn").classList.toggle("hidden", !again.length);
   $("pos").textContent = "";

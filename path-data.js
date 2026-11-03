@@ -5,7 +5,7 @@
 window.PATH_DATA = {
 "ccao-f": {
   "title": "CCAO-F", "name": "Claude Certified Associate – Foundations",
-  "who": "For project managers, business analysts, delivery leads and other professionals who use Claude at work without writing code.",
+  "who": "For people who use Claude at work without writing code.",
   "exam": "ccao-f/practice/mock-exam-player.html", "flash": "flashcards.html?track=ccao-f",
   "playlist": "https://www.youtube.com/playlist?list=PLFbwN1bk0S4c",
   "outcomes": [

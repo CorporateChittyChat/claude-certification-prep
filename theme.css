@@ -1,16 +1,16 @@
 /* Site palette and type scale. Every page links this file first and builds on these tokens.
-   Palette: #FFFFFB (paper) · #FFF1DC (cream) · #FFD2A6 (peach) · #FFB020 (orange) · #3D405B (slate).
+   Palette (from the CCAO-F recap deck): #FFFFFB paper · #FFF1DC cream · #FFD2A6 peach · #EE9D44 orange · #2A3446 slate · #1D242F navy.
    Contrast: orange is a fill colour (dark text on it). For orange-coloured TEXT use --orange-ink, which passes AA on paper/cream. */
 :root{
   --paper:#FFFFFB;
   --cream:#FFF1DC;
   --peach:#FFD2A6;
-  --orange:#FFB020;
-  --slate:#3D405B;
+  --orange:#EE9D44;
+  --slate:#2A3446;
 
-  --slate-deep:#2C2E43;      /* header, footer, dark panels */
-  --slate-soft:#E9EAF0;      /* quiet fills, meter tracks */
-  --orange-ink:#8A5A00;      /* orange text on light backgrounds (AA) */
+  --slate-deep:#1D242F;      /* header, footer, dark panels */
+  --slate-soft:#E8EBF0;      /* quiet fills, meter tracks */
+  --orange-ink:#8C5214;      /* orange text on light backgrounds (AA) */
   --ink:#24263A;             /* body text */
   --muted:#5D6078;           /* secondary text (AA on paper and cream) */
   --line:#EADFCF;            /* borders on paper/cream */

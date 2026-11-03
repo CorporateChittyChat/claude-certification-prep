@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CCAO-F Mock Exam</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23FFB020'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%232C2E43'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23EE9D44'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%231D242F'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="../../theme.css">
 <style>
   /* palette tokens come from theme.css; these two are page-only names for palette colours */
@@ -152,7 +152,7 @@
 <body>
 
 <header id="topbar" class="hidden">
-  <div class="brand">CCAO-F Mock Exam<small>Original practice material · Unofficial · not affiliated with Anthropic</small></div>
+  <div class="brand">CCAO-F Mock Exam<small>Unofficial practice exam</small></div>
   <div class="qpos" id="qpos"></div>
   <button class="hbtn" id="flagBtn">⚑ Flag for review</button>
   <div id="timer">60:00</div>
@@ -164,21 +164,20 @@
   <div class="start-card">
     <div class="hero">
       <svg class="emblem" viewBox="0 0 120 120" role="img" aria-label="CCAO-F practice exam badge">
-        <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="#FFB020"/>
-        <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="#2C2E43"/>
+        <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="#EE9D44"/>
+        <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="#1D242F"/>
         <text x="60" y="50" text-anchor="middle" fill="#FFD2A6" font-size="9" font-weight="700" textLength="48" lengthAdjust="spacingAndGlyphs">PRACTICE</text>
         <text x="60" y="68" text-anchor="middle" fill="#fff" font-size="16" font-weight="800" textLength="60" lengthAdjust="spacingAndGlyphs">CCAO-F</text>
-        <text x="60" y="81" text-anchor="middle" fill="#FFB020" font-size="8.5" font-weight="700" textLength="50" lengthAdjust="spacingAndGlyphs">MOCK EXAM</text>
+        <text x="60" y="81" text-anchor="middle" fill="#EE9D44" font-size="8.5" font-weight="700" textLength="50" lengthAdjust="spacingAndGlyphs">MOCK EXAM</text>
       </svg>
       <div>
         <h1>CCAO-F Mock Exam</h1>
-        <div class="sub" style="margin-bottom:12px">Claude Certified Associate – Foundations · half-length practice sitting</div>
+        <div class="sub" style="margin-bottom:12px">Claude Certified Associate – Foundations · half-length practice</div>
         <div class="chips">
           <span class="chip hot">🎯 Exam-style scenarios</span>
           <span class="chip">⏱ Timed</span>
           <span class="chip">📊 Per-domain results</span>
           <span class="chip">🏅 Earn a practice badge</span>
-          <span class="chip">Free · no sign-up</span>
         </div>
       </div>
     </div>
@@ -188,20 +187,20 @@
       <div class="fact"><b>30</b><span>questions</span></div>
       <div class="fact"><b>60:00</b><span>minutes</span></div>
       <div class="fact"><b>7</b><span>domains</span></div>
-      <div class="fact"><b>2 min</b><span>per question, real pacing</span></div>
+      <div class="fact"><b>2 min</b><span>per question</span></div>
     </div>
     <ul class="rules">
-      <li>Click an option to select it. Use <b>abc̶</b> (or right-click an option) to strike out answers you have eliminated.</li>
-      <li><b>⚑ Flag</b> questions to revisit; the review screen shows everything flagged or unanswered before you submit.</li>
-      <li>The timer starts when you begin and submits the exam automatically at zero.</li>
+      <li>Click to select. Right-click or <b>abc̶</b> to strike out.</li>
+      <li><b>⚑ Flag</b> to revisit. Review shows flagged and unanswered questions before you submit.</li>
+      <li>At zero the exam submits itself.</li>
     </ul>
     </div>
     <div class="start-side">
     <div class="tip"><span class="label">Exam strategy</span>
-      <b>Eliminate the clearly wrong pair first, then choose between the remaining two.</b>
-      Each question shows the scenario first and <b>what's actually being asked</b> below it. Watch the <mark class="q">highlighted</mark> qualifier words such as <i>first</i>, <i>best</i> and <i>most</i>: they usually decide between the last two options.</div>
+      <b>Strike the clearly wrong pair, then compare the last two.</b>
+      Watch the <mark class="q">highlighted</mark> words such as <i>first</i>, <i>best</i> and <i>most</i>: they usually decide it.</div>
     <button class="big-btn" onclick="startExam()">Begin exam →</button>
-    <div class="disclaimer"><b>Every question here is original study material</b> written for the claude-certification-prep project, in the exam's style. Nothing is from, or derived from, the real exam. Study guides and answer explanations: github.com/CorporateChittyChat/claude-certification-prep</div>
+    <div class="disclaimer">Independent study material. Not affiliated with, endorsed by or approved by Anthropic. Not a certification, score or prediction.</div>
     </div>
     </div>
   </div>
@@ -215,7 +214,7 @@
   </div>
   <div class="stem" id="stem"></div>
   <div id="opts"></div>
-  <div class="hint">Right-click an option (or use abc̶) to strike it out · selecting a struck option clears its strike</div>
+  <div class="hint">Right-click or abc̶ to strike out · select it again to clear</div>
 </section>
 
 <!-- REVIEW -->
@@ -239,7 +238,7 @@
   <div class="start-card">
     <h1 style="font-size:32px;">Results</h1>
     <div class="earned" id="earned"></div>
-    <p class="coffee-note">Found this mock exam useful? <a href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener">☕ Buy me a coffee</a>. Optional, and everything stays free.</p>
+    <p class="coffee-note">Found this mock exam useful? <a href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener">☕ Buy me a coffee</a>.</p>
     <div class="score-line" id="scoreLine"></div>
     <div id="passNote" class="callout"></div>
     <div id="focusBox" class="focus"></div>
@@ -247,7 +246,7 @@
     <div class="rev-head">
       <h2>Question review</h2>
       <button class="seg on" id="showAll" onclick="filterReview(false)">All questions</button>
-      <button class="seg" id="showMissed" onclick="filterReview(true)">Only the ones I missed</button>
+      <button class="seg" id="showMissed" onclick="filterReview(true)">Missed only</button>
     </div>
     <div id="reviewList" class="reviewList"></div>
   </div>
@@ -537,8 +536,8 @@ function submitExam(auto){
   const pct = Math.round(right/Q.length*100);
   $("scoreLine").innerHTML = `${right} / ${Q.length} <small>(${pct}%)</small>`;
   $("passNote").textContent = auto
-    ? "Time expired — the exam submitted automatically. On the real paper the passing score is 720 out of 1000; any domain below two-thirds here deserves a reread of its study guide."
-    : "On the real paper the passing score is 720 out of 1000; any domain below two-thirds here deserves a reread of its study guide.";
+    ? "Time's up: the exam submitted itself. The real exam's pass mark is 720 out of 1000. Reread the guide for any domain below two-thirds."
+    : "The real exam's pass mark is 720 out of 1000. Reread the guide for any domain below two-thirds.";
 
   let t = "<tr><th>Domain</th><th>Score</th><th>Verdict</th></tr>";
   const weak = [];
@@ -555,7 +554,7 @@ function submitExam(auto){
   fb.className = "focus " + (weak.length ? "weak" : "strong");
   fb.innerHTML = weak.length
     ? `<span class="label" style="color:var(--red)">Focus your study here</span><b>${weak.length} domain${weak.length>1?"s":""} below two-thirds.</b> Reread these study guides, then retake the exam:<ul>${weak.join("")}</ul>`
-    : `<span class="label" style="color:var(--green)">Every domain is solid</span><b>All seven domains at two-thirds or better.</b> Skim the key takeaways below for any question you got right by guessing.`;
+    : `<span class="label" style="color:var(--green)">Every domain is solid</span><b>All seven domains at two-thirds or better.</b> Skim the takeaways for any you guessed.`;
 
   const list = $("reviewList"); list.innerHTML = "";
   Q.forEach((q,i)=>{
@@ -574,7 +573,7 @@ function submitExam(auto){
     div.querySelector(".wt").textContent = q.e;
     list.appendChild(div);
   });
-  $("showMissed").textContent = `Only the ones I missed (${Q.length - right})`;
+  $("showMissed").textContent = `Missed only (${Q.length - right})`;
 }
 
 /* Remember the result in this browser only (no account, no server), so the learning path can show a
@@ -594,7 +593,7 @@ function saveResult(pct, right, dom){
     const p = document.createElement("p");
     p.id = "pathLink"; p.style.cssText = "margin:14px 0 4px; font-size:17px; font-weight:700;";
     const a = document.createElement("a");
-    a.href = "../../path.html?track=ccao-f"; a.textContent = "See your readiness score and claim your certificate on the learning path \u2192";
+    a.href = "../../path.html?track=ccao-f"; a.textContent = "Your readiness and certificate \u2192";
     p.appendChild(a); box.insertAdjacentElement("afterend", p);
   }
 }
@@ -602,14 +601,14 @@ function saveResult(pct, right, dom){
 /* practice badge tier: a study signal only, never a certification claim */
 function renderBadge(pct, weakCount){
   const tiers = [
-    {min:80, weak:0, name:"Exam Ready", c1:"#FFB020", c2:"#2C2E43", fg:"#FFF1DC", ic:"#FFB020", icon:"★",
-     msg:"80%+ with every domain solid. Book it — and skim the takeaways for anything you guessed."},
-    {min:67, weak:7, name:"Almost There", c1:"#FFD2A6", c2:"#2C2E43", fg:"#FFF1DC", ic:"#FFD2A6", icon:"▲",
+    {min:80, weak:0, name:"Exam Ready", c1:"#EE9D44", c2:"#1D242F", fg:"#FFF1DC", ic:"#EE9D44", icon:"★",
+     msg:"80%+ with every domain solid. Book it, and skim the takeaways for anything you guessed."},
+    {min:67, weak:7, name:"Almost There", c1:"#FFD2A6", c2:"#1D242F", fg:"#FFF1DC", ic:"#FFD2A6", icon:"▲",
      msg:"Two-thirds or better overall. Close the weak domains below, then retake."},
-    {min:0, weak:7, name:"Keep Studying", c1:"#5D6078", c2:"#2C2E43", fg:"#FFF1DC", ic:"#FFF1DC", icon:"●",
+    {min:0, weak:Infinity, name:"Keep Studying", c1:"#5D6078", c2:"#1D242F", fg:"#FFF1DC", ic:"#FFF1DC", icon:"●",
      msg:"A baseline, not a verdict. Work through the domain guides flagged below, then retake."}
   ];
-  const t = tiers.find(x => pct >= x.min && weakCount <= x.weak);
+  const t = tiers.find(x => pct >= x.min && weakCount <= x.weak) || tiers[tiers.length - 1];
   const box = $("earned");
   box.style.borderColor = t.c1;
   box.innerHTML = `
@@ -624,7 +623,7 @@ function renderBadge(pct, weakCount){
       <span class="label">Practice badge earned</span>
       <h3>${t.name}</h3>
       <p>${t.msg}</p>
-      <small>Practice badge from this unofficial mock exam — not an Anthropic certification or score prediction.</small>
+      <small>Practice badge from this unofficial mock exam. Not an Anthropic certification or score prediction.</small>
     </div>`;
 }
 

@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Learning Paths</title>
-<meta name="description" content="The CCAO-F and CCDV-F study material as a course: what you will learn, every lesson in order with time estimates, a readiness score and a completion certificate. Free, unofficial, no account.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23FFB020'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%233D405B'/%3E%3C/svg%3E">
+<meta name="description" content="The CCAO-F and CCDV-F study path: lessons in order, a readiness score and a completion certificate.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23EE9D44'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%232A3446'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="theme.css">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -36,7 +36,7 @@
   .step p{font-size:15.5px; color:var(--muted); line-height:1.5;}
   .step .foot{margin-top:auto; padding-top:10px; border-top:1px solid var(--line); font-family:var(--mono); font-size:12.5px; letter-spacing:.8px; text-transform:uppercase; color:var(--muted);}
   .step.real{background:var(--slate); color:#fff; border-color:var(--slate);}
-  .step.real h3, .step.real .n{color:#fff;} .step.real p{color:#E3E5EE;} .step.real .foot{color:var(--peach); border-top-color:#5A5D78;}
+  .step.real h3, .step.real .n{color:#fff;} .step.real p{color:#E3E5EE;} .step.real .foot{color:var(--peach); border-top-color:#3A4558;}
   .step.real a{color:var(--peach); font-weight:700;}
   .step:not(:last-child)::after{content:"\203A"; position:absolute; right:-15px; top:50%; transform:translateY(-50%); width:26px; height:26px; border-radius:50%; background:var(--slate); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; z-index:2;}
   @media (prefers-reduced-motion:reduce){ .step{transition:none;} a.step:hover{transform:none;} }
@@ -150,7 +150,7 @@
 
   <section class="box cert" id="cert">
     <span class="label">Completion certificate</span>
-    <h2>Finish the path, pass the mock, claim it</h2>
+    <h2>Finish the path, pass the mock</h2>
     <ul class="reqs" id="reqs"></ul>
     <div id="certLocked" class="locked"></div>
     <div id="certOpen" class="hidden">
@@ -167,13 +167,13 @@
     </div>
     <div class="tip">
       <span style="font-size:34px">☕</span>
-      <p id="tipText">Everything here is free, with no sign-up. If this path got you ready, buy me a coffee: it funds the next tracks, CCAR-F and CCAR-P.</p>
+      <p id="tipText">Did this path get you ready? A coffee funds the CCAR-F and CCAR-P tracks.</p>
       <a class="btn coffee" href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener">☕ Buy me a coffee</a>
       <span class="supporters hidden" id="supporters"></span>
     </div>
   </section>
 
-  <footer>Independent study material. Not affiliated with, endorsed by, or approved by Anthropic. The certificate records that you completed this free, unofficial study path and your score on its original mock exam; it is not an Anthropic certification, score or prediction. Progress is kept in this browser only.</footer>
+  <footer>Independent study material. Not affiliated with, endorsed by or approved by Anthropic. Not a certification, score or prediction.</footer>
 </main>
 <div class="toast hidden" id="toast" role="status"></div>
 
@@ -238,14 +238,14 @@ function renderReadiness(){
   if(r.weakest){
     w.appendChild(el("b", "", "Weakest area: "));
     const a = el("a", "", r.weakest.name); a.href = `${P().flash}&topic=${r.weakest.ti}`; w.appendChild(a);
-    w.appendChild(document.createTextNode(` · ${Math.round(r.weakest.v * 100)}% right so far. Drill its flashcards, then reread that lesson.`));
+    w.appendChild(document.createTextNode(` · ${Math.round(r.weakest.v * 100)}% right. Drill its flashcards, then reread the lesson.`));
   } else {
-    w.textContent = "Flip a few flashcards or sit the mock exam and the weakest area shows up here.";
+    w.textContent = "Your weakest area shows here once you flip cards or sit the mock.";
   }
-  $("verdict").textContent = r.score >= 85 ? "Exam ready. Book it, and run the traps sheet the night before."
-    : r.score >= 60 ? "Getting close. Close the weakest area and retake the mock exam."
-    : r.score > 0 ? "Keep going: lessons count 30%, flashcards 30%, the best mock score 40%."
-    : "Tick lessons as you finish them. Flashcards and the mock exam feed in automatically.";
+  $("verdict").textContent = r.score >= 85 ? "Exam ready. Book it and read the traps sheet the night before."
+    : r.score >= 60 ? "Close. Work on your weakest area, then retake the mock."
+    : r.score > 0 ? "Keep going: lessons 30%, flashcards 30%, best mock 40%."
+    : "Tick lessons as you go. Flashcards and the mock count automatically.";
   renderCert(r);
 }
 
@@ -288,10 +288,10 @@ function renderCert(r){
   const open = lessonsOk && examOk;
   $("certOpen").classList.toggle("hidden", !open);
   $("certLocked").classList.toggle("hidden", open);
-  $("certLocked").textContent = open ? "" : "Both ticks unlock a named, dated certificate you can download and share. It is a record of this free practice path, not an official credential.";
+  $("certLocked").textContent = open ? "" : "Both ticks unlock a named, dated certificate to download and share.";
   $("tipText").textContent = open
-    ? "You did the work; the certificate is yours. Everything here is free with no sign-up. If it got you ready, buy me a coffee: it funds the next tracks, CCAR-F and CCAR-P."
-    : "Everything here is free, with no sign-up. If this path got you ready, buy me a coffee: it funds the next tracks, CCAR-F and CCAR-P.";
+    ? "You did the work. If this path got you ready, a coffee funds the CCAR-F and CCAR-P tracks."
+    : "Did this path get you ready? A coffee funds the CCAR-F and CCAR-P tracks.";
 }
 
 function hexagon(ctx, x, y, r, fill){
@@ -310,19 +310,19 @@ function makeCert(){
   if(!name){ $("certName").focus(); toast("Add your name first"); return; }
   save("path-name", name);
   const r = readiness(), p = P();
-  const accent = "#FFB020";
+  const accent = "#EE9D44";
   const W = 1600, H = 1131, c = document.createElement("canvas"); c.width = W; c.height = H;
   const ctx = c.getContext("2d");
   ctx.fillStyle = "#FFFFFB"; ctx.fillRect(0, 0, W, H);
-  ctx.fillStyle = "#2C2E43"; ctx.fillRect(0, 0, W, 26); ctx.fillRect(0, H - 26, W, 26);
+  ctx.fillStyle = "#1D242F"; ctx.fillRect(0, 0, W, 26); ctx.fillRect(0, H - 26, W, 26);
   ctx.strokeStyle = accent; ctx.lineWidth = 6; ctx.strokeRect(60, 70, W - 120, H - 140);
   ctx.strokeStyle = "#EADFCF"; ctx.lineWidth = 2; ctx.strokeRect(76, 86, W - 152, H - 172);
-  hexagon(ctx, W / 2, 230, 78, accent); hexagon(ctx, W / 2, 230, 56, "#2C2E43");
+  hexagon(ctx, W / 2, 230, 78, accent); hexagon(ctx, W / 2, 230, 56, "#1D242F");
   ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.font = "800 26px Segoe UI, Arial, sans-serif"; ctx.fillText(p.title, W / 2, 240);
   ctx.fillStyle = "#5D6078"; ctx.font = "700 22px Segoe UI, Arial, sans-serif"; ctx.fillText("CLAUDE CERTIFICATION PREP  ·  CORPORATECHITTYCHAT", W / 2, 350);
   ctx.fillStyle = "#24263A"; ctx.font = "800 64px Segoe UI, Arial, sans-serif"; ctx.fillText("Certificate of Completion", W / 2, 430);
   ctx.fillStyle = "#5D6078"; ctx.font = "400 28px Segoe UI, Arial, sans-serif"; ctx.fillText("This certifies that", W / 2, 500);
-  ctx.fillStyle = "#8A5A00"; ctx.font = "italic 700 76px Georgia, 'Times New Roman', serif"; ctx.fillText(name, W / 2, 600);
+  ctx.fillStyle = "#8C5214"; ctx.font = "italic 700 76px Georgia, 'Times New Roman', serif"; ctx.fillText(name, W / 2, 600);
   ctx.fillStyle = "#24263A"; ctx.font = "400 30px Segoe UI, Arial, sans-serif";
   wrapText(ctx, `completed the ${p.name} (${p.title}) learning path:`, W / 2, 670, 1200, 40);
   ctx.font = "700 30px Segoe UI, Arial, sans-serif";
@@ -342,7 +342,7 @@ function makeCert(){
 function copyPost(){
   const r = readiness(), p = P();
   const text = `I completed the ${p.title} (${p.name}) learning path on Claude Certification Prep, with a best mock exam score of ${r.best.pct}%. Free, unofficial study material built alongside the CorporateChittyChat videos: ${SITE}path.html?track=${track}`;
-  (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(() => toast("Post copied. Attach the PNG when you share it."), () => toast("Copy failed; select and copy the text from the certificate instead."));
+  (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(() => toast("Post copied. Attach the PNG when you share it."), () => toast("Copy failed. Copy the text by hand instead."));
 }
 
 /* ---------- journey steps ---------- */
@@ -355,10 +355,10 @@ function renderJourney(){
   const traps = L ? L.domains.reduce((n, d) => n + d.subs.reduce((m, s) => m + s.traps.length, 0), 0) : 0;
   const ex = examRecord();
   const steps = [
-    ["1", "Learn", "\u{1F4D6}", `learn.html?track=${track}`, L ? "Every domain and skill in the official exam guide, with lessons, decision tables and the traps to avoid." : "Study notes per exam domain.", L ? `${domains.length} domains · ${skills} skills · ${traps} traps` : "study notes"],
-    ["2", "Videos", "▶", `videos.html?track=${track}`, "Watch each episode, then run its build or work its practice question.", `${vids} videos`],
-    ["3", "Flashcards", "\u{1F0CF}", p.flash, "Flip illustrated cards until every one is known, then print the traps sheet.", `${fc.cards.length} cards`],
-    ["4", "Mock exam", "⏱", p.exam, ex && ex.best ? `Best so far: ${ex.best.pct}%. Retake it after closing your weakest area.` : "A timed practice exam with results by domain.", "30 questions · 60 min"]
+    ["1", "Learn", "\u{1F4D6}", `learn.html?track=${track}`, L ? "Every skill in the exam guide, with its traps." : "Study notes per exam domain.", L ? `${domains.length} domains · ${skills} skills · ${traps} traps` : "study notes"],
+    ["2", "Videos", "▶", `videos.html?track=${track}`, "Watch each episode, then do its build or question.", `${vids} videos`],
+    ["3", "Flashcards", "\u{1F0CF}", p.flash, "Flip until you know them all, then print the traps sheet.", `${fc.cards.length} cards`],
+    ["4", "Mock exam", "⏱", p.exam, ex && ex.best ? `Best so far: ${ex.best.pct}%. Retake it after your weakest area.` : "Timed, with results by domain.", "30 questions · 60 min"]
   ];
   steps.forEach(([n, h, ic, href, txt, foot]) => {
     const a = el("a", "step"); a.href = href;
@@ -370,9 +370,9 @@ function renderJourney(){
   const h3 = el("h3", "", "The real exam"); h3.appendChild(el("span", "", "\u{1F393}"));
   real.append(el("span", "n", "STEP 5"), h3);
   const g = L && L.glance ? Object.fromEntries(L.glance) : null;
-  real.appendChild(el("p", "", g ? `${g.Items}. ${g.Time}. Pass mark: ${g["Pass mark"]}.` : "Check the official exam guide for the format and pass mark."));
+  real.appendChild(el("p", "", g ? `${g.Items}. ${g.Time}. Pass mark: ${g["Pass mark"]}.` : "Format and pass mark are in the exam guide."));
   if(L && L.guide){ const a = el("a", "", "Official exam guide ↗"); a.href = L.guide[2]; a.target = "_blank"; a.rel = "noopener"; const pp = el("p"); pp.appendChild(a); real.appendChild(pp); }
-  real.appendChild(el("span", "foot", "Booked with Anthropic, not here"));
+  real.appendChild(el("span", "foot", "Book with Anthropic"));
   box.appendChild(real);
 }
 

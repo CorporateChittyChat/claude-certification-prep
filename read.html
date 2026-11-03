@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Read</title>
-<meta name="description" content="Study guides, worked questions and answer explanations for the Claude certification tracks, on the site. Free, unofficial.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23FFB020'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%233D405B'/%3E%3C/svg%3E">
+<meta name="description" content="Study guides, worked questions and answer explanations for CCAO-F and CCDV-F.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23EE9D44'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%232A3446'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="theme.css">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -44,7 +44,7 @@
   .side-actions a:hover{border-color:var(--orange);}
   .msg{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:24px;}
   footer{margin-top:44px; padding:22px 0 34px; color:var(--muted); font-size:13.5px; border-top:1px solid var(--line);}
-  @media (max-width:1000px){ .layout{grid-template-columns:1fr;} .toc{display:none;} .doc{padding:22px 18px;} .doc h1{font-size:30px;} .doc h2{font-size:23px;} }
+  @media (max-width:1000px){ .layout{grid-template-columns:minmax(0,1fr);} .layout>*{min-width:0;} .toc{display:none;} .doc{padding:22px 18px;} .doc h1{font-size:30px;} .doc h2{font-size:23px;} }
 </style>
 </head>
 <body>
@@ -61,7 +61,7 @@
       <div class="side-actions" id="actions"></div>
     </aside>
   </div>
-  <footer>Independent study material. Not affiliated with, endorsed by, or approved by Anthropic. Every practice question is original, written for this project; no item from any real exam is reproduced.</footer>
+  <footer>Independent study material. Not affiliated with, endorsed by or approved by Anthropic. Not a certification, score or prediction.</footer>
 </main>
 <script src="site-nav.js"></script>
 <script src="md-view.js"></script>
@@ -86,7 +86,7 @@ function crumbs(title){
 }
 
 if(!MD.DOC_RE.test(doc)){
-  $("doc").append(el("div", "msg", "That document isn't one of this site's study files."));
+  $("doc").append(el("div", "msg", "Document not found."));
 } else {
   fetch(doc, { cache: "no-cache" }).then(r => { if(!r.ok) throw new Error(r.status); return r.text(); }).then(md => {
     $("doc").append(MD.render(md, doc));
@@ -105,7 +105,7 @@ if(!MD.DOC_RE.test(doc)){
       if(t){ const d = t.closest("details"); if(d) d.open = true; setTimeout(() => t.scrollIntoView({ block: "start" }), 50); }
     }
   }).catch(() => {
-    $("doc").append(el("div", "msg", "This document couldn't be loaded. Check your connection and try again."));
+    $("doc").append(el("div", "msg", "Couldn't load this document. Check your connection."));
   });
 }
 </script>
