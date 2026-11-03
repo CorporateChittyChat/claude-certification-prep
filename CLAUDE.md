@@ -28,7 +28,7 @@ have, in the same shape, and so nothing here ever drifts into claiming to be off
 ## Repository shape
 
 ```
-theme.css               the palette (#FFFFFB #FFF1DC #FFD2A6 #FF8500 #3D405B) and type scale; every page links it first
+theme.css               the palette (#FFFFFB #FFF1DC #FFD2A6 #FFB020 #3D405B) and type scale; every page links it first
 site-nav.js             shared header on every page: cert picker, Journey · Learn · Videos · Flashcards · Mock exam
 index.html              home: hero, "choose your certification" cards, five-step journey, FAQ (not affiliated), coffee
 path.html               Journey per track: step cards, outcomes, lessons, readiness, certificate (data in path-data.js)

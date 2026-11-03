@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Learning Paths</title>
 <meta name="description" content="The CCAO-F and CCDV-F study material as a course: what you will learn, every lesson in order with time estimates, a readiness score and a completion certificate. Free, unofficial, no account.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23FF8500'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%233D405B'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23FFB020'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%233D405B'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="theme.css">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
   a{color:inherit;}
-  .wrap{max-width:1440px; margin:0 auto; padding:0 28px;}
+  .wrap{max-width:var(--page-max); margin:0 auto; padding:0 var(--page-pad);}
   .label{display:block; font-size:13px; font-weight:800; letter-spacing:.9px; text-transform:uppercase; color:var(--accent-ink); margin-bottom:8px;}
 
   .head{padding:26px 0 8px; display:flex; flex-wrap:wrap; gap:16px; align-items:center;}
@@ -310,7 +310,7 @@ function makeCert(){
   if(!name){ $("certName").focus(); toast("Add your name first"); return; }
   save("path-name", name);
   const r = readiness(), p = P();
-  const accent = "#FF8500";
+  const accent = "#FFB020";
   const W = 1600, H = 1131, c = document.createElement("canvas"); c.width = W; c.height = H;
   const ctx = c.getContext("2d");
   ctx.fillStyle = "#FFFFFB"; ctx.fillRect(0, 0, W, H);
@@ -322,7 +322,7 @@ function makeCert(){
   ctx.fillStyle = "#5D6078"; ctx.font = "700 22px Segoe UI, Arial, sans-serif"; ctx.fillText("CLAUDE CERTIFICATION PREP  ·  CORPORATECHITTYCHAT", W / 2, 350);
   ctx.fillStyle = "#24263A"; ctx.font = "800 64px Segoe UI, Arial, sans-serif"; ctx.fillText("Certificate of Completion", W / 2, 430);
   ctx.fillStyle = "#5D6078"; ctx.font = "400 28px Segoe UI, Arial, sans-serif"; ctx.fillText("This certifies that", W / 2, 500);
-  ctx.fillStyle = "#A84F00"; ctx.font = "italic 700 76px Georgia, 'Times New Roman', serif"; ctx.fillText(name, W / 2, 600);
+  ctx.fillStyle = "#8A5A00"; ctx.font = "italic 700 76px Georgia, 'Times New Roman', serif"; ctx.fillText(name, W / 2, 600);
   ctx.fillStyle = "#24263A"; ctx.font = "400 30px Segoe UI, Arial, sans-serif";
   wrapText(ctx, `completed the ${p.name} (${p.title}) learning path:`, W / 2, 670, 1200, 40);
   ctx.font = "700 30px Segoe UI, Arial, sans-serif";

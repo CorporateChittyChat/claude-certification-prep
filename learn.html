@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Learn</title>
 <meta name="description" content="Study notes for Claude certifications, organised by the official exam guide: every domain and weighted skill, with lessons, decision tables, what to know, exam traps and build exercises. Free, unofficial, no account.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23FF8500'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%233D405B'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23FFB020'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%233D405B'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="theme.css">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
-  .wrap{max-width:1440px; margin:0 auto; padding:0 28px;}
+  .wrap{max-width:var(--page-max); margin:0 auto; padding:0 var(--page-pad);}
   .label{display:block; font-size:13px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:var(--orange-ink); margin-bottom:6px;}
 
   /* page head */
@@ -27,7 +27,7 @@
   .note{font-size:14px; color:var(--muted); margin-top:10px;}
 
   /* three columns */
-  .layout{display:grid; grid-template-columns:280px minmax(0,1fr) 250px; gap:32px; margin-top:22px; align-items:start;}
+  .layout{display:grid; grid-template-columns:300px minmax(0,1fr) 270px; gap:clamp(24px,2.2vw,44px); margin-top:22px; align-items:start;}
   .layout>*{min-width:0;}
   .side, .toc{position:sticky; top:82px; max-height:calc(100vh - 100px); overflow:auto;}
   .side{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:10px;}
@@ -54,6 +54,49 @@
   /* domain */
   .panel{opacity:1; transition:opacity .16s ease;}
   .panel.swap{opacity:0;}
+  .dtop{display:grid; grid-template-columns:minmax(0,1fr) minmax(360px,44%); gap:28px; align-items:start;}
+  .dtop.novid{grid-template-columns:1fr;}
+  .watch{background:var(--slate-deep); border-radius:16px; padding:12px; box-shadow:var(--shadow);}
+  .watch .frame{position:relative; aspect-ratio:16/9; border-radius:10px; overflow:hidden; background:#000;}
+  .watch iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+  .watch .poster{all:unset; position:absolute; inset:0; cursor:pointer; display:block;}
+  .watch .poster img{width:100%; height:100%; object-fit:cover; display:block;}
+  .watch .poster span{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:72px; height:72px; border-radius:50%; background:var(--orange); color:var(--ink); display:flex; align-items:center; justify-content:center; font-size:28px; box-shadow:0 8px 22px rgba(0,0,0,.35);}
+  .watch .poster:focus-visible{outline:3px solid var(--orange); outline-offset:-3px;}
+  .watch .cap{display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:space-between; color:#fff; font-size:14.5px; font-weight:700; padding:10px 4px 2px;}
+  .watch .tabs{display:flex; gap:6px; flex-wrap:wrap;}
+  .watch .tabs button{font:inherit; font-size:13.5px; font-weight:700; color:#fff; background:var(--slate); border:1px solid #5A5D78; border-radius:8px; padding:4px 10px; cursor:pointer;}
+  .watch .tabs button[aria-pressed="true"]{background:var(--orange); border-color:var(--orange); color:var(--ink);}
+  .watch .cap a{color:var(--peach); font-weight:600;}
+  .practice{margin-top:22px; background:var(--card); border:2px solid var(--slate); border-radius:18px; padding:20px 22px; box-shadow:var(--shadow);}
+  .practice .ph{display:flex; flex-wrap:wrap; gap:10px 18px; align-items:baseline; justify-content:space-between;}
+  .practice .ph h3{font-size:20px; color:var(--slate-deep);}
+  .practice .ph a{font-weight:700; color:var(--orange-ink);}
+  .practice .ph p{flex-basis:100%; color:var(--muted); font-size:15.5px;}
+  .eps{display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:16px; margin-top:14px;}
+  .ep{display:flex; flex-direction:column; gap:10px; background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:16px;}
+  .ep .top{display:flex; flex-wrap:wrap; gap:8px; align-items:center;}
+  .ep .top b{font-size:17px; color:var(--slate-deep);}
+  .ep .tag{font-size:12px; font-weight:800; letter-spacing:.6px; text-transform:uppercase; border-radius:999px; padding:2px 9px; background:var(--slate-soft); color:var(--slate);}
+  .ep .tag.free{background:var(--good-soft); color:var(--good);}
+  .ep .tag.key{background:var(--cream); color:var(--orange-ink);}
+  .ep .what{font-size:15.5px;}
+  .ep ul{list-style:none; display:grid; gap:4px; font-size:14.5px;}
+  .ep ul code{font-family:var(--mono); font-size:13.5px; background:var(--cream); border-radius:5px; padding:1px 6px; margin-right:6px;}
+  .ep pre{margin:0; background:var(--slate-deep); color:#F4EFE6; border-radius:10px; padding:10px 12px; font-family:var(--mono); font-size:13.5px; line-height:1.55; overflow-x:auto; white-space:pre;}
+  .ep .acts{display:flex; flex-wrap:wrap; gap:8px; margin-top:auto;}
+  .ep .acts a{font-size:14.5px; font-weight:700; text-decoration:none; border-radius:9px; padding:7px 12px; border:1px solid var(--line); background:var(--card);}
+  .ep .acts a.go{background:var(--slate); border-color:var(--slate); color:#fff;}
+  .ep .acts a:hover{border-color:var(--orange);}
+  .vidstrip{margin-top:26px; background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px;}
+  .vidstrip h3{font-size:17px; margin-bottom:12px; color:var(--slate-deep);}
+  .vidstrip .row{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px;}
+  .vidstrip a{display:grid; grid-template-columns:120px 1fr; gap:12px; align-items:center; text-decoration:none; border:1px solid var(--line); border-radius:12px; padding:8px; background:var(--paper);}
+  .vidstrip a:hover{border-color:var(--orange);}
+  .vidstrip img{width:120px; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block;}
+  .vidstrip b{display:block; font-size:15px;}
+  .vidstrip small{color:var(--muted); font-size:13.5px;}
+  @media (min-width:1700px){ .panel .traps{grid-template-columns:repeat(3,minmax(0,1fr));} .panel .hl ul{grid-template-columns:repeat(4,minmax(0,1fr));} }
   .dhead h2{font-size:36px; line-height:1.15; color:var(--slate-deep); display:flex; flex-wrap:wrap; gap:14px; align-items:baseline;}
   .weight{font-size:15px; font-weight:800; background:var(--orange); color:var(--ink); border-radius:999px; padding:3px 12px; letter-spacing:.3px;}
   .weight.sm{font-size:13px; padding:2px 10px; background:var(--peach);}
@@ -81,7 +124,7 @@
   .scope{margin-top:10px; font-size:15.5px; color:var(--muted); border-left:3px solid var(--peach); padding:4px 0 4px 12px;}
   .scope b{color:var(--ink);}
   .sub h4{font-size:13px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin:22px 0 10px;}
-  .lesson p{margin-top:12px; max-width:78ch;}
+  .lesson p{margin-top:12px; max-width:92ch;}
   .lesson p:first-child{margin-top:0;}
 
   .tbl{margin-top:16px; overflow-x:auto; border:1px solid var(--line); border-radius:12px;}
@@ -146,6 +189,7 @@
     .side a .code{padding:2px 8px;}
     .dhead h2{font-size:27px;}
     .hl ul, .traps, .rem ol{grid-template-columns:1fr;}
+    .dtop{grid-template-columns:1fr;}
     .sub{padding:18px 16px;}
     .sub h3{font-size:21px;}
   }
@@ -214,6 +258,36 @@ const READ_KEY = "learn-read-" + track;
 let read = load(READ_KEY, []);
 if(!Array.isArray(read)) read = [];
 
+const ytId = url => { const m = /youtu\.be\/([\w-]{11})|[?&]v=([\w-]{11})/.exec(url || ""); return m ? (m[1] || m[2]) : null; };
+/* The player loads only when the learner presses play (privacy-enhanced embed, no YouTube request before that). */
+function watchPanel(vids){
+  const box = el("div", "watch"), frame = el("div", "frame"), cap = el("div", "cap");
+  let cur = 0;
+  function poster(){
+    frame.replaceChildren();
+    const b = el("button", "poster"); b.type = "button"; b.setAttribute("aria-label", "Play: " + vids[cur].label);
+    const img = el("img"); img.alt = ""; img.src = "https://i.ytimg.com/vi/" + vids[cur].id + "/hqdefault.jpg";
+    b.append(img, el("span", "", "\u25B6"));
+    b.addEventListener("click", () => {
+      const f = el("iframe");
+      f.src = "https://www.youtube-nocookie.com/embed/" + vids[cur].id + "?autoplay=1&rel=0";
+      f.title = vids[cur].label; f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true;
+      frame.replaceChildren(f);
+    });
+    frame.append(b);
+    title.textContent = vids[cur].label.replace(/^Watch\s*/, "");
+    link.href = "https://youtu.be/" + vids[cur].id;
+    tabs.querySelectorAll("button").forEach((x, j) => x.setAttribute("aria-pressed", String(j === cur)));
+  }
+  const title = el("span"), link = el("a", "", "YouTube \u2197"); link.target = "_blank"; link.rel = "noopener";
+  const tabs = el("div", "tabs");
+  if(vids.length > 1) vids.forEach((v, j) => { const b = el("button", "", "Video " + (j + 1)); b.type = "button"; b.addEventListener("click", () => { cur = j; poster(); }); tabs.append(b); });
+  cap.append(title, tabs, link);
+  box.append(frame, cap);
+  poster();
+  return box;
+}
+
 function chip(icon, label, url, cls){
   const a = el("a", cls || "chip");
   a.href = url;
@@ -279,13 +353,46 @@ if(!T){
     chips.append(chip("🃏", "Flashcards for this domain", T.flash + "&topic=" + d.t));
     chips.append(chip("⏱", "Mock exam", T.exam));
     head.append(chips);
-    p.append(head);
+    const vids = d.links.map(l => ({ id: ytId(l[2]), label: l[1] })).filter(v => v.id);
+    const top = el("div", "dtop" + (vids.length ? "" : " novid"));
+    top.append(head);
+    if(vids.length) top.append(watchPanel(vids));
+    p.append(top);
 
     const hl = el("section", "hl");
     hl.append(el("h3", "", "Key exam highlights"));
     const ul = el("ul");
     d.highlights.forEach(h => ul.append(el("li", "", h)));
     hl.append(ul); p.append(hl);
+
+    if(d.practice && d.practice.length){
+      const pr = el("section", "practice");
+      const ph = el("div", "ph");
+      ph.append(el("h3", "", "\u2328 Practise it: hands-on builds"));
+      const repo = el("a", "", "chittychat-studio/ccdvf-course \u2197"); repo.href = T.practiceRepo; repo.target = "_blank"; repo.rel = "noopener";
+      ph.append(repo, el("p", "", "Each build is the code from its episode, ready to clone, run and break on purpose. Run it, then work through its PRACTICE.md exercises and questions where there is one."));
+      pr.append(ph);
+      const eps = el("div", "eps");
+      d.practice.forEach(e => {
+        const base = T.practiceRepo + "/tree/main/" + e.dir, blob = T.practiceRepo + "/blob/main/" + e.dir;
+        const card = el("article", "ep");
+        const top = el("div", "top");
+        top.append(el("b", "", e.ep + " \u00b7 " + e.dir), el("span", "tag", e.lang), el("span", "tag " + (e.key ? "key" : "free"), e.key ? "Needs an API key" : "No API key needed"));
+        card.append(top, el("p", "what", e.what));
+        const ul = el("ul");
+        e.files.forEach(([f, t]) => { const li = el("li"); li.append(el("code", "", f), document.createTextNode(t)); ul.append(li); });
+        card.append(ul, el("pre", "", e.run));
+        const acts = el("div", "acts");
+        const add = (label, href, cls) => { const a = el("a", cls || "", label); a.href = href; a.target = "_blank"; a.rel = "noopener"; acts.append(a); };
+        add("Open the folder \u2197", base, "go");
+        add("README", blob + "/README.md");
+        if(e.practice) add("PRACTICE.md", blob + "/PRACTICE.md");
+        card.append(acts);
+        eps.append(card);
+      });
+      pr.append(eps);
+      p.append(pr);
+    }
 
     if(d.subs.length > 1 && !isT){
       const tb = el("table", "skills"), body = el("tbody");
@@ -353,6 +460,19 @@ if(!T){
       b.addEventListener("click", () => jump(sid));
       li.append(b); toc.append(li);
     });
+
+    if(vids.length){
+      const vs = el("section", "vidstrip");
+      vs.append(el("h3", "", vids.length > 1 ? "Videos for this domain" : "Video for this domain"));
+      const row = el("div", "row");
+      vids.forEach(v => {
+        const a = el("a"); a.href = "https://youtu.be/" + v.id; a.target = "_blank"; a.rel = "noopener";
+        const img = el("img"); img.loading = "lazy"; img.alt = ""; img.src = "https://i.ytimg.com/vi/" + v.id + "/mqdefault.jpg";
+        const t = el("span"); t.append(el("b", "", v.label.replace(/^Watch\s*/, "")), el("small", "", "Opens on YouTube"));
+        a.append(img, t); row.append(a);
+      });
+      vs.append(row); p.append(vs);
+    }
 
     const rem = el("section", "rem");
     rem.append(el("h3", "", "Remember"));

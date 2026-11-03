@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Claude Certification Prep · free, unofficial study material</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23FF8500'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%233D405B'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23FFB020'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%233D405B'/%3E%3C/svg%3E">
 <meta name="description" content="Free, unofficial study material for Anthropic's Claude certifications: study notes for every exam-guide skill, videos, illustrated flashcards and timed mock exams for CCAO-F and CCDV-F. Not affiliated with Anthropic.">
 <link rel="stylesheet" href="theme.css">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
-  .wrap{max-width:1360px; margin:0 auto; padding:0 28px;}
+  .wrap{max-width:var(--page-max); margin:0 auto; padding:0 var(--page-pad);}
   .label{display:block; font-size:13px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:var(--orange-ink); margin-bottom:8px;}
   section{padding:72px 0 0;}
   section[id]{scroll-margin-top:80px;}
@@ -39,8 +39,12 @@
   .certs{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:20px; margin-top:30px;}
   .cert{display:flex; flex-direction:column; background:var(--card); border:1px solid var(--line); border-left:4px solid var(--orange); border-radius:16px; padding:24px 22px 20px; box-shadow:var(--shadow); min-height:430px;}
   .cert.soon{border-left-color:var(--peach); background:var(--cream); box-shadow:none;}
+  .badge{width:84px; height:84px; flex:none; filter:drop-shadow(0 6px 14px rgba(44,46,67,.25));}
+  .cert .bhead{display:flex; gap:14px; align-items:center;}
+  .badges{display:flex; flex-wrap:wrap; gap:14px; margin-bottom:18px;}
+  .badges .badge{width:104px; height:104px; filter:drop-shadow(0 10px 22px rgba(0,0,0,.35));}
   .cert .code{font-family:var(--mono); font-size:13.5px; font-weight:700; letter-spacing:1.4px; color:var(--orange-ink);}
-  .cert h3{font-size:24px; line-height:1.2; margin-top:12px; color:var(--slate-deep);}
+  .cert h3{font-size:22px; line-height:1.2; margin-top:4px; color:var(--slate-deep);}
   .cert .lvl{font-family:var(--mono); font-size:12.5px; letter-spacing:1.6px; text-transform:uppercase; color:var(--muted); margin-top:6px;}
   .cert .who{font-size:16px; color:#3B3E55; margin-top:14px;}
   .cert .status{align-self:flex-start; margin-top:14px; font-size:12.5px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; padding:3px 10px; border-radius:999px; background:var(--good-soft); color:var(--good);}
@@ -125,7 +129,10 @@
       </div>
       <p class="note">Independent and community-written. Not affiliated with, endorsed by or approved by Anthropic.</p>
     </div>
-    <div class="facts" id="facts"></div>
+    <div>
+      <div class="badges" id="heroBadges" aria-hidden="true"></div>
+      <div class="facts" id="facts"></div>
+    </div>
   </div>
 </section>
 
@@ -258,13 +265,34 @@ const CERTS = [
   { id: "ccar-p", name: "Claude Certified Architect", lvl: "Professional", who: "For senior architects and technical leads who design and deliver production-grade Claude solutions.", soon: true }
 ];
 
+/* Exam-prep badges, drawn with SVG DOM calls (no HTML strings). Ring colours come from the palette. */
+const RING = { "ccao-f": ["#FFB020", "ASSOCIATE"], "ccdv-f": ["#FFD2A6", "DEVELOPER"], "ccar-f": ["#FFF1DC", "ARCHITECT"], "ccar-p": ["#9C9EB5", "ARCHITECT"] };
+function badge(id, soon){
+  const NS = "http://www.w3.org/2000/svg", [ring, role] = RING[id];
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("viewBox", "0 0 120 120"); svg.setAttribute("class", "badge"); svg.setAttribute("aria-hidden", "true");
+  const poly = (pts, fill) => { const p = document.createElementNS(NS, "polygon"); p.setAttribute("points", pts); p.setAttribute("fill", fill); svg.append(p); };
+  const text = (y, fill, size, weight, len, t) => { const e = document.createElementNS(NS, "text"); [["x", 60], ["y", y], ["text-anchor", "middle"], ["fill", fill], ["font-size", size], ["font-weight", weight], ["textLength", len], ["lengthAdjust", "spacingAndGlyphs"], ["font-family", "Segoe UI, system-ui, Arial, sans-serif"]].forEach(([k, v]) => e.setAttribute(k, v)); e.textContent = t; svg.append(e); };
+  poly("60,4 108,32 108,88 60,116 12,88 12,32", ring);
+  poly("60,14 99,37 99,83 60,106 21,83 21,37", "#2C2E43");
+  text(50, "#FFF1DC", 9, 700, 48, role);
+  text(68, "#FFFFFF", 16, 800, 60, id.toUpperCase());
+  text(81, ring, 8.5, 700, 50, soon ? "COMING SOON" : "EXAM PREP");
+  return svg;
+}
+const heroBadges = document.getElementById("heroBadges");
+
 const grid = document.getElementById("certGrid");
 let totals = { notes: 0, traps: 0, cards: 0, videos: 0 };
 CERTS.forEach(c => {
   const L = LD[c.id], P = PD[c.id], F = FC[c.id];
   const card = el("article", "cert" + (c.soon ? " soon" : ""));
-  card.append(el("span", "code", c.id.toUpperCase()), el("h3", "", c.name), el("span", "lvl", c.lvl), el("p", "who", c.who));
-  card.append(el("span", "status", c.soon ? "In preparation" : "Ready to study"));
+  const bh = el("div", "bhead"), bt = el("div");
+  bt.append(el("span", "code", c.id.toUpperCase()), el("h3", "", c.name), el("span", "lvl", c.lvl));
+  bh.append(badge(c.id, c.soon), bt);
+  card.append(bh, el("p", "who", c.who));
+  heroBadges.append(badge(c.id, c.soon));
+  card.append(el("span", "status", c.soon ? "Coming soon" : "Ready to study"));
   if(!c.soon && P){
     const ul = el("ul");
     [["🧭", "Journey", "path.html?track=" + c.id], ["📖", "Learn", "learn.html?track=" + c.id], ["▶", "Videos", "videos.html?track=" + c.id], ["🃏", "Flashcards", "flashcards.html?track=" + c.id], ["⏱", "Mock exam", P.exam]].forEach(([i, t, h]) => {
@@ -276,7 +304,7 @@ CERTS.forEach(c => {
   const doms = L ? L.domains.filter(d => d.w).length : 0;
   const items = g && g.Items ? g.Items.split(",")[0] + " items" : null;
   const time = g && g.Time ? g.Time.replace(" minutes", " min") : null;
-  card.append(el("span", "foot", c.soon ? "Coming next" : [items, time, doms ? doms + " domains" : null].filter(Boolean).join(" · ") || "Study notes, videos, flashcards, mock exam"));
+  card.append(el("span", "foot", c.soon ? "Coming soon" : [items, time, doms ? doms + " domains" : null].filter(Boolean).join(" · ") || "Study notes, videos, flashcards, mock exam"));
   if(!c.soon){
     const go = el("a", "go", "Start free →"); go.href = "path.html?track=" + c.id;
     go.addEventListener("click", () => { try{ localStorage.setItem("fc-track", JSON.stringify(c.id)); }catch(e){} });

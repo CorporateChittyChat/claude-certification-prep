@@ -1120,3 +1120,50 @@ window.LEARN_DATA["ccdv-f"] = {
   ]
 };
 })();
+
+/* Hands-on practice per domain: the episode folders in chittychat-studio/ccdvf-course (checked against each README).
+   ep: episode, dir: folder, what: what you build, files: [file, what it shows], run: commands, key: needs an API key, practice: has PRACTICE.md */
+(function(){
+  const EP = {
+    ep01: { ep: "EP 01", dir: "ep01-models", lang: "Python", key: true, practice: false,
+      what: "Count, price and cache: count a request's tokens before sending it, turn a response's usage into a per-ticket cost with a budget stop, and cache a stable system prompt.",
+      files: [["count.py", "count input tokens before sending (free endpoint)"], ["price.py", "usage block → cost per ticket, refuse past a budget"], ["cache.py", "cache_control on the system prompt, read the cache fields back"]],
+      run: "pip install -r requirements.txt\ncp .env.example .env   # your key, never in code\npython count.py" },
+    ep02: { ep: "EP 02", dir: "ep02-agents", lang: "TypeScript", key: true, practice: false,
+      what: "One agent loop on the Messages API wired to the checklist: minimum tools with a 'do not use' line, a scoped system prompt, every tool_use answered by id, a human gate before a send, and an exit condition.",
+      files: [["tools.ts", "the minimum tool set, each with when not to use it"], ["loop.ts", "system prompt, the tool-use loop, MAX_TURNS exit"], ["gate.ts", "the human-in-the-loop gate before an action"]],
+      run: "npm install\ncp .env.example .env   # ANTHROPIC_API_KEY and CLAUDE_MODEL\nnpm run loop           # with the gate\nnpm run loop:nogate    # watch what it does without one" },
+    ep03: { ep: "EP 03", dir: "ep03-messages", lang: "Python", key: true, practice: false,
+      what: "API mechanics, one file per move: Messages and history growth, a stream handler that acts only on closed blocks, image token cost, documents, and the Message Batches API.",
+      files: [["messages_basics.py", "a request, stop_reason, and how history grows"], ["stream_handler.py", "assemble streamed events safely"], ["image_cost.py", "image token arithmetic (no API call)"], ["send_document.py", "a PDF as a document block"], ["batch_run.py", "submit and poll a batch"]],
+      run: "pip install -r requirements.txt\ncp .env.example .env\npython messages_basics.py --show-growth\npython stream_handler.py\npython image_cost.py   # no key needed" },
+    ep04: { ep: "EP 04", dir: "ep04-prompting", lang: "Python", key: true, practice: true,
+      what: "The support-ticket classifier, built properly: system prompt, tags, few-shot examples and an output constraint, plus an offline check that proves its safety checks work with no key.",
+      files: [["classify.py", "the classifier from the episode"], ["check_offline.py", "feeds fake responses to prove the checks (no key, no spend)"]],
+      run: "pip install -r requirements.txt\ncp .env.example .env\npython classify.py \"Login page shows a blank screen on Safari.\"\npython check_offline.py   # no key needed" },
+    ep05: { ep: "EP 05", dir: "ep05-tools-mcp", lang: "TypeScript", key: false, practice: true,
+      what: "A small MCP server with two tools, one resource and one prompt, plus a real MCP client that starts it over stdio and calls everything. No API key.",
+      files: [["server.ts", "the MCP server: tools, a resource, a prompt"], ["try.ts", "an MCP client playing Claude Code's part"]],
+      run: "npm install\nnpm run try" },
+    ep06: { ep: "EP 06", dir: "ep06-config-checker", lang: "TypeScript", key: false, practice: true,
+      what: "A config checker that reads a repo's Claude Code settings the way the layers stack (user, project, local) and flags what won't travel to the next machine, run against a sample repo.",
+      files: [["check-config.ts", "the checker"], ["fixtures/priya-repo/", "team and local settings, CLAUDE.md, a versioned prompt"]],
+      run: "npm install\nnpm run check" },
+    ep07: { ep: "EP 07", dir: "ep07-guard-hook", lang: "TypeScript", key: false, practice: true,
+      what: "A PreToolUse guard hook that reads one tool call and blocks it if it deletes a folder or touches the secrets file, with least-privilege allow and deny rules ready to copy.",
+      files: [["guard.ts", "the hook"], ["try-guard.ts", "feeds sample calls the way Claude Code does"], ["settings.example.json", "allow/deny rules and the hook wiring"]],
+      run: "npm install\nnpm run try" },
+    ep08: { ep: "EP 08", dir: "ep08-gate-checker", lang: "Python", key: false, practice: true,
+      what: "A gate checker that reads a requirements record and a release file and prints what blocks the next life-cycle gate: vague requirements, the wrong region, no eval.",
+      files: [["gate_check.py", "the checker"], ["fixtures/ravi-plan/", "the first plan, with three problems"], ["fixtures/ravi-fixed/", "the same plan after the fixes"]],
+      run: "python gate_check.py\npython gate_check.py fixtures/ravi-fixed" },
+    ep09: { ep: "EP 09", dir: "ep09-failure-checker", lang: "TypeScript", key: false, practice: true,
+      what: "A failure checker that reads recorded traces and, for each failed run, names the step that broke, whether it was your code or the model, and whether to retry or fail fast.",
+      files: [["checker.ts", "the checker"], ["traces.json", "five runs: rate limit, bad tool request, confident wrong answer, pass, refusal"]],
+      run: "npm install\nnpm run try" }
+  };
+  const BY_DOMAIN = { d1: ["ep02"], d2: ["ep03", "ep06", "ep08"], d3: ["ep07", "ep06"], d4: ["ep09"], d5: ["ep01", "ep03"], d6: ["ep04"], d7: ["ep07", "ep04"], d8: ["ep05"] };
+  const T = window.LEARN_DATA["ccdv-f"];
+  T.practiceRepo = "https://github.com/chittychat-studio/ccdvf-course";
+  T.domains.forEach(d => { if(BY_DOMAIN[d.id]) d.practice = BY_DOMAIN[d.id].map(k => EP[k]); });
+})();

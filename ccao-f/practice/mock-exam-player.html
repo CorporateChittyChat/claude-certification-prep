@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CCAO-F Mock Exam</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23FF8500'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%232C2E43'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23FFB020'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%232C2E43'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="../../theme.css">
 <style>
   /* palette tokens come from theme.css; these two are page-only names for palette colours */
@@ -164,11 +164,11 @@
   <div class="start-card">
     <div class="hero">
       <svg class="emblem" viewBox="0 0 120 120" role="img" aria-label="CCAO-F practice exam badge">
-        <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="#FF8500"/>
+        <polygon points="60,4 108,32 108,88 60,116 12,88 12,32" fill="#FFB020"/>
         <polygon points="60,14 99,37 99,83 60,106 21,83 21,37" fill="#2C2E43"/>
         <text x="60" y="50" text-anchor="middle" fill="#FFD2A6" font-size="9" font-weight="700" textLength="48" lengthAdjust="spacingAndGlyphs">PRACTICE</text>
         <text x="60" y="68" text-anchor="middle" fill="#fff" font-size="16" font-weight="800" textLength="60" lengthAdjust="spacingAndGlyphs">CCAO-F</text>
-        <text x="60" y="81" text-anchor="middle" fill="#FF8500" font-size="8.5" font-weight="700" textLength="50" lengthAdjust="spacingAndGlyphs">MOCK EXAM</text>
+        <text x="60" y="81" text-anchor="middle" fill="#FFB020" font-size="8.5" font-weight="700" textLength="50" lengthAdjust="spacingAndGlyphs">MOCK EXAM</text>
       </svg>
       <div>
         <h1>CCAO-F Mock Exam</h1>
@@ -602,7 +602,7 @@ function saveResult(pct, right, dom){
 /* practice badge tier: a study signal only, never a certification claim */
 function renderBadge(pct, weakCount){
   const tiers = [
-    {min:80, weak:0, name:"Exam Ready", c1:"#FF8500", c2:"#2C2E43", fg:"#FFF1DC", ic:"#FF8500", icon:"★",
+    {min:80, weak:0, name:"Exam Ready", c1:"#FFB020", c2:"#2C2E43", fg:"#FFF1DC", ic:"#FFB020", icon:"★",
      msg:"80%+ with every domain solid. Book it — and skim the takeaways for anything you guessed."},
     {min:67, weak:7, name:"Almost There", c1:"#FFD2A6", c2:"#2C2E43", fg:"#FFF1DC", ic:"#FFD2A6", icon:"▲",
      msg:"Two-thirds or better overall. Close the weak domains below, then retake."},

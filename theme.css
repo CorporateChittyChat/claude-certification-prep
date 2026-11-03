@@ -1,16 +1,16 @@
 /* Site palette and type scale. Every page links this file first and builds on these tokens.
-   Palette: #FFFFFB (paper) · #FFF1DC (cream) · #FFD2A6 (peach) · #FF8500 (orange) · #3D405B (slate).
+   Palette: #FFFFFB (paper) · #FFF1DC (cream) · #FFD2A6 (peach) · #FFB020 (orange) · #3D405B (slate).
    Contrast: orange is a fill colour (dark text on it). For orange-coloured TEXT use --orange-ink, which passes AA on paper/cream. */
 :root{
   --paper:#FFFFFB;
   --cream:#FFF1DC;
   --peach:#FFD2A6;
-  --orange:#FF8500;
+  --orange:#FFB020;
   --slate:#3D405B;
 
   --slate-deep:#2C2E43;      /* header, footer, dark panels */
   --slate-soft:#E9EAF0;      /* quiet fills, meter tracks */
-  --orange-ink:#A84F00;      /* orange text on light backgrounds (AA) */
+  --orange-ink:#8A5A00;      /* orange text on light backgrounds (AA) */
   --ink:#24263A;             /* body text */
   --muted:#5D6078;           /* secondary text (AA on paper and cream) */
   --line:#EADFCF;            /* borders on paper/cream */
@@ -23,6 +23,8 @@
   --accent:var(--orange); --accent-ink:var(--orange-ink); --accent-soft:var(--cream);
   --gold:var(--orange); --green:var(--good); --green-soft:var(--good-soft); --red:var(--bad); --red-soft:var(--bad-soft);
 
+  --page-max:1880px;       /* pages use the full width of large desktop screens */
+  --page-pad:clamp(16px,2.6vw,48px);
   --radius:14px;
   --shadow:0 6px 24px rgba(61,64,91,.08);
   --font:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;
