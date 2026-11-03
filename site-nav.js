@@ -163,30 +163,36 @@
   const gh = el("a", "", "GitHub"); gh.href = "https://github.com/CorporateChittyChat/claude-certification-prep";
   links.append(faq, gh);
 
-  // Install app: Chrome, Edge and Android offer a one-tap install; iPhone and iPad Safari get the two-step instructions.
-  // Hidden when the site already runs as an installed app, and in browsers that can't install it.
+  // Install app, always visible unless the site already runs as an installed app. When the browser is ready to install,
+  // one tap installs; otherwise the button opens the steps for this browser (Chrome waits for some use before offering).
   const standalone = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
-  const ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   if(!standalone){
+    const ua = navigator.userAgent;
+    const ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    const android = /Android/.test(ua), edge = /Edg\//.test(ua), firefox = /Firefox\//.test(ua);
+    const chromium = !!window.chrome || edge;
     const iw = el("div", "sn-mock sn-inst");
     const ib = el("button", "sn-install", "Install app");
-    ib.type = "button"; ib.hidden = true;
+    ib.type = "button"; ib.setAttribute("aria-haspopup", "true"); ib.setAttribute("aria-expanded", "false");
     let deferred = null;
     const im = el("div", "sn-menu");
-    if(ios){
-      ib.setAttribute("aria-haspopup", "true"); ib.setAttribute("aria-expanded", "false");
-      im.append(el("b", "sn-ititle", "Install on iPhone or iPad"));
-      const ol = el("ol", "sn-steps");
-      ["Tap the Share button (the square with an arrow) in Safari.", "Scroll down and choose “Add to Home Screen”.", "Tap Add. The app opens full screen from its icon."].forEach(t => ol.append(el("li", "", t)));
-      im.append(ol);
-      ib.hidden = false;
-    }
-    window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); deferred = e; ib.hidden = false; });
-    window.addEventListener("appinstalled", () => { ib.hidden = true; deferred = null; });
+    const [title, steps] =
+      ios ? ["Install on iPhone or iPad", ["Tap the Share button (the square with an arrow).", "Scroll down and choose “Add to Home Screen”.", "Tap Add. The app opens full screen from its icon."]]
+      : android && !firefox ? ["Install on Android", ["Tap the ⋮ menu at the top right of the browser.", "Choose “Install app” or “Add to Home screen”.", "Tap Install. The app opens full screen from its icon."]]
+      : edge ? ["Install in Edge", ["Click the install icon at the right of the address bar,", "or open the … menu, then Apps, then “Install this site as an app”.", "It opens in its own window, with a Start menu or Dock icon."]]
+      : chromium ? ["Install in Chrome", ["Click the install icon at the right of the address bar,", "or open the ⋮ menu, then “Cast, save and share”, then “Install page as app”.", "It opens in its own window, with a desktop or Dock icon."]]
+      : ["Install as an app", ["This browser can’t install websites as apps.", "Open certprep.cardzo.co.in in Chrome or Edge on a computer or Android, or in Safari on iPhone or iPad,", "then choose Install app."]];
+    im.append(el("b", "sn-ititle", title));
+    const ol = el("ol", "sn-steps");
+    steps.forEach(t => ol.append(el("li", "", t)));
+    im.append(ol);
+    window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); deferred = e; });
+    window.addEventListener("appinstalled", () => { iw.remove(); deferred = null; });
     ib.addEventListener("click", e => {
       e.stopPropagation();
       if(deferred){ deferred.prompt(); deferred.userChoice.then(() => { deferred = null; }).catch(() => {}); return; }
-      if(ios){ const wasOpen = im.classList.contains("open"); closeAll(); if(!wasOpen){ im.classList.add("open"); ib.setAttribute("aria-expanded", "true"); } }
+      const wasOpen = im.classList.contains("open"); closeAll();
+      if(!wasOpen){ im.classList.add("open"); ib.setAttribute("aria-expanded", "true"); }
     });
     iw.append(ib, im);
     links.append(iw);
