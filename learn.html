@@ -13,6 +13,8 @@
   .label{display:block; font-size:13px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:var(--orange-ink); margin-bottom:6px;}
 
   /* page head */
+  .app{padding:0;}
+  .col{min-width:0; padding:0 var(--page-pad) 0 clamp(28px,3vw,56px); max-width:1640px;}
   .head{padding:30px 0 10px; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:24px; align-items:end;}
   .head h1{font-size:44px; line-height:1.1; letter-spacing:-.4px; color:var(--slate-deep);}
   .head .intro{color:var(--muted); max-width:820px; margin-top:8px;}
@@ -27,9 +29,9 @@
   .note{font-size:14px; color:var(--muted); margin-top:10px;}
 
   /* three columns */
-  .layout{display:grid; grid-template-columns:340px minmax(0,1fr); gap:clamp(24px,2.4vw,48px); margin-top:22px; align-items:start;}
+  .layout{display:grid; grid-template-columns:340px minmax(0,1fr); gap:0; align-items:start;}
   .layout>*{min-width:0;}
-  .side{position:sticky; top:72px; height:calc(100vh - 88px); overflow:auto; background:var(--slate-deep); color:#E3E5EE; border-radius:18px; padding:22px 18px; scrollbar-width:thin; scrollbar-color:#5A5D78 transparent;}
+  .side{position:sticky; top:64px; height:calc(100vh - 64px); overflow:auto; background:var(--slate-deep); color:#E3E5EE; border-radius:0; padding:26px 20px 30px; box-shadow:inset -1px 0 0 rgba(255,255,255,.06); scrollbar-width:thin; scrollbar-color:#5A5D78 transparent;}
   .side .ttl{font-family:var(--mono); font-size:12.5px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--peach); margin:0 4px 10px;}
   .side .prog{margin:0 4px 22px;}
   .side .prog i{display:block; height:8px; border-radius:99px; background:#4A4D68; overflow:hidden;}
@@ -64,7 +66,7 @@
   @media (prefers-reduced-motion:reduce){ .side .prog i b, .dom-h .chev{transition:none;} }
 
   /* domain */
-  .panel{opacity:1; transition:opacity .16s ease;}
+  .panel{margin-top:22px; opacity:1; transition:opacity .16s ease;}
   .panel.swap{opacity:0;}
   .dtop{display:grid; grid-template-columns:minmax(0,1fr) minmax(360px,44%); gap:28px; align-items:start;}
   .dtop.novid{grid-template-columns:1fr;}
@@ -123,12 +125,6 @@
   .hl li{display:flex; gap:10px;}
   .hl li::before{content:"★"; color:var(--orange-ink); font-weight:800;}
 
-  .skills{margin-top:18px; width:100%; border-collapse:collapse; font-size:15.5px; background:var(--card); border:1px solid var(--line); border-radius:12px; overflow:hidden;}
-  .skills td{padding:9px 14px; border-top:1px solid var(--line);}
-  .skills tr:first-child td{border-top:0;}
-  .skills td:last-child{text-align:right; font-weight:800; white-space:nowrap;}
-  .skills button{all:unset; cursor:pointer; font-weight:600;}
-  .skills button:hover{color:var(--orange-ink); text-decoration:underline;}
 
   .sub{margin-top:26px; background:var(--card); border:1px solid var(--line); border-radius:18px; padding:26px 30px; box-shadow:var(--shadow); scroll-margin-top:84px;}
   .sub h3{font-size:25px; line-height:1.25; display:flex; flex-wrap:wrap; gap:12px; align-items:baseline; color:var(--slate-deep);}
@@ -209,11 +205,13 @@
   }
   @media (max-width:900px){
     .wrap{padding:0 16px;}
+    .col{padding:0 16px;}
     .head{grid-template-columns:1fr;}
     .progress{text-align:left;}
     .head h1{font-size:32px;}
     .layout{grid-template-columns:1fr;}
     .side{position:static; height:auto; max-height:none; padding:16px 14px;}
+    .layout{display:block;}
     .dhead h2{font-size:27px;}
     .hl ul, .traps, .rem ol{grid-template-columns:1fr;}
     .dtop{grid-template-columns:1fr;}
@@ -232,18 +230,7 @@
 <body>
 <header id="siteNav" data-page="learn"></header>
 
-<main class="wrap" id="top">
-  <div class="head">
-    <div>
-      <span class="label" id="trackLabel"></span>
-      <h1>Learn</h1>
-      <p class="intro" id="intro"></p>
-    </div>
-    <div class="progress"><span id="progText"></span><i><b id="progBar"></b></i></div>
-  </div>
-  <div class="glance" id="glance"></div>
-  <p class="note" id="asof"></p>
-
+<main class="app" id="top">
   <div class="layout">
     <nav class="side" aria-label="Curriculum">
       <div class="ttl">Study progress</div>
@@ -252,16 +239,26 @@
       <a class="ov" href="#top" id="ovLink">Overview and exam facts</a>
       <ol id="nav"></ol>
     </nav>
-    <article class="panel" id="panel" aria-live="polite"></article>
+    <div class="col">
+      <div class="head">
+        <div>
+          <span class="label" id="trackLabel"></span>
+          <h1>Learn</h1>
+          <p class="intro" id="intro"></p>
+        </div>
+        <div class="progress"><span id="progText"></span><i><b id="progBar"></b></i></div>
+      </div>
+      <div class="glance" id="glance"></div>
+      <p class="note" id="asof"></p>
+      <article class="panel" id="panel" aria-live="polite"></article>
+      <div class="tip">
+        <span style="font-size:32px">☕</span>
+        <p>These notes are free, with no sign-up. If a domain finally clicked, buy me a coffee: it funds the next tracks, CCAR-F and CCAR-P.</p>
+        <a class="btn coffee" href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener">☕ Buy me a coffee</a>
+      </div>
+      <footer>Independent study material. Not affiliated with, endorsed by, or approved by Anthropic. Organised by Anthropic's published exam guide; the explanations and traps are written for this project and no exam item is reproduced. This is not a certification, score or prediction. Product names, limits and prices change: confirm them at docs.claude.com. Reading progress is kept in this browser only.</footer>
+    </div>
   </div>
-
-  <div class="tip">
-    <span style="font-size:32px">☕</span>
-    <p>These notes are free, with no sign-up. If a domain finally clicked, buy me a coffee: it funds the next tracks, CCAR-F and CCAR-P.</p>
-    <a class="btn coffee" href="https://buy.stripe.com/5kQ8wSeembHnakwaXGgrS01" target="_blank" rel="noopener">☕ Buy me a coffee</a>
-  </div>
-
-  <footer>Independent study material. Not affiliated with, endorsed by, or approved by Anthropic. Organised by Anthropic's published exam guide; the explanations and traps are written for this project and no exam item is reproduced. This is not a certification, score or prediction. Product names, limits and prices change: confirm them at docs.claude.com. Reading progress is kept in this browser only.</footer>
 </main>
 
 <script src="site-nav.js"></script>
@@ -424,9 +421,16 @@ if(!T){
   }
 
   function jump(id){
-    const go = smooth => { const t = document.getElementById(id); if(t) t.scrollIntoView({behavior: smooth && !reduceMotion ? "smooth" : "auto", block: "start"}); };
-    go(true);
-    setTimeout(() => go(false), 700);   // worked questions above may load late and shift the page; settle on the target
+    const go = () => { const t = document.getElementById(id); if(t) t.scrollIntoView({behavior: "auto", block: "start"}); };
+    go();
+    // worked questions above the target load a moment later and change the page height: re-align until they settle
+    if("ResizeObserver" in window){
+      const panel = $("panel"), ro = new ResizeObserver(go);
+      ro.observe(panel);
+      const stop = () => { ro.disconnect(); window.removeEventListener("wheel", stop); window.removeEventListener("touchstart", stop); window.removeEventListener("keydown", stop); };
+      window.addEventListener("wheel", stop, {passive: true}); window.addEventListener("touchstart", stop, {passive: true}); window.addEventListener("keydown", stop);
+      setTimeout(stop, 1500);
+    } else setTimeout(go, 700);
   }
 
   function drawDomain(d){
@@ -486,15 +490,6 @@ if(!T){
       p.append(pr);
     }
 
-    if(d.subs.length > 1 && !isT){
-      const tb = el("table", "skills"), body = el("tbody");
-      d.subs.forEach((s, i) => {
-        const tr = el("tr"), td1 = el("td"), b = el("button", "", d.code + "." + (i + 1) + "  " + s.title);
-        b.type = "button"; b.addEventListener("click", () => jump(d.id + "-" + (i + 1)));
-        td1.append(b); tr.append(td1, el("td", "", pct(s.w))); body.append(tr);
-      });
-      tb.append(body); p.append(tb);
-    }
 
     d.subs.forEach((s, i) => {
       const sid = d.id + "-" + (i + 1);
@@ -623,7 +618,7 @@ if(!T){
     if(reduceMotion) drawDomain(d);
     else { p.classList.add("swap"); setTimeout(() => { drawDomain(d); p.classList.remove("swap"); if(skill) jump(skill); }, 110); }
     if(reduceMotion && skill) jump(skill);
-    if(scroll){ const top = $("nav").closest(".layout").getBoundingClientRect().top + window.scrollY - 80; if(window.scrollY > top) window.scrollTo({top, behavior: reduceMotion ? "auto" : "smooth"}); }
+    if(scroll && !skill){ const top = $("panel").getBoundingClientRect().top + window.scrollY - 84; if(window.scrollY > top) window.scrollTo({top, behavior: reduceMotion ? "auto" : "smooth"}); }
   }
   let drawn = null;
   window.addEventListener("hashchange", () => route(true));
