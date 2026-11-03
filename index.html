@@ -15,7 +15,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Cert Prep">
 <meta property="og:title" content="Cert Prep: free Claude certification study material">
-<meta property="og:description" content="Free lessons, exam traps, worked questions, flashcards and timed mock exams for the CCAO-F and CCDV-F Claude certifications. Architect tracks coming soon. Independent; not affiliated with Anthropic.">
+<meta property="og:description" content="Free lessons, exam traps, worked questions, flashcards and timed mock exams for the CCAO-F and CCDV-F Claude certifications. Architect, GitHub Foundations and Python coming soon. Independent; not affiliated with Anthropic.">
 <meta property="og:url" content="https://certprep.cardzo.co.in/">
 <meta property="og:image" content="https://certprep.cardzo.co.in/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -23,7 +23,7 @@
 <meta property="og:image:alt" content="Prepare for your Claude certification: free lessons, exam traps and mock exams. Independent study material, not affiliated with Anthropic.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Cert Prep: free Claude certification study material">
-<meta name="twitter:description" content="Free lessons, exam traps, worked questions, flashcards and timed mock exams for the CCAO-F and CCDV-F Claude certifications. Architect tracks coming soon. Independent; not affiliated with Anthropic.">
+<meta name="twitter:description" content="Free lessons, exam traps, worked questions, flashcards and timed mock exams for the CCAO-F and CCDV-F Claude certifications. Architect, GitHub Foundations and Python coming soon. Independent; not affiliated with Anthropic.">
 <meta name="twitter:image" content="https://certprep.cardzo.co.in/og-image.png">
 <!-- /sharing -->
 <script type="application/ld+json">
@@ -106,7 +106,7 @@
  ]
 }
 </script>
-<link rel="stylesheet" href="theme.css?v=2026110308">
+<link rel="stylesheet" href="theme.css?v=2026110309">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
   .wrap{max-width:var(--page-max); margin:0 auto; padding:0 var(--page-pad);}
@@ -145,7 +145,7 @@
   .stat span{font-size:14.5px; color:#C9CDDA;}
 
   /* certifications */
-  .certs{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:20px; margin-top:30px; align-items:start;}
+  .certs{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; margin-top:30px; align-items:start;}
   .cert{display:flex; flex-direction:column; background:var(--card); border:1px solid var(--line); border-left:4px solid var(--orange); border-radius:16px; padding:24px 22px 20px; box-shadow:var(--shadow);}
   .cert.soon{border-left-color:var(--peach); background:var(--cream); box-shadow:none;}
   .badge{width:84px; height:84px; flex:none; filter:drop-shadow(0 6px 14px rgba(44,46,67,.25));}
@@ -257,8 +257,8 @@
   <div class="wrap">
     <div>
       <span class="pill">✔ Free · no sign-up</span>
-      <h1>Prepare for your <em>Claude certification</em>, free</h1>
-      <p class="lead">Notes for every exam-guide skill, videos, flashcards and timed mock exams.</p>
+      <h1>Prepare for your next <em>certification</em>, free</h1>
+      <p class="lead">Notes for every exam-guide skill, videos, flashcards and timed mock exams. Claude Associate and Developer are live; Architect, GitHub Foundations and Python are next.</p>
       <div class="cta">
         <a class="btn primary" href="#certs">Choose your certification</a>
         <a class="btn ghost" href="#faq">Read the FAQ</a>
@@ -273,7 +273,7 @@
   <div class="wrap">
     <span class="label">Step one</span>
     <h2>Choose your certification</h2>
-    <p class="sub">Two tracks are ready. The architect tracks are in progress.</p>
+    <p class="sub">Two tracks are ready. Architect, GitHub Foundations and Python are in progress.</p>
     <div class="certs" id="certGrid"></div>
   </div>
 </section>
@@ -399,11 +399,11 @@
   </div>
 </footer>
 
-<script src="site-nav.js?v=2026110308"></script>
-<script src="path-data.js?v=2026110308"></script>
-<script src="flashcards-data.js?v=2026110308"></script>
-<script src="learn-data-ccao-f.js?v=2026110308"></script>
-<script src="learn-data-ccdv-f.js?v=2026110308"></script>
+<script src="site-nav.js?v=2026110309"></script>
+<script src="path-data.js?v=2026110309"></script>
+<script src="flashcards-data.js?v=2026110309"></script>
+<script src="learn-data-ccao-f.js?v=2026110309"></script>
+<script src="learn-data-ccdv-f.js?v=2026110309"></script>
 <script>
 const el = (tag, cls, text) => { const e = document.createElement(tag); if(cls) e.className = cls; if(text !== undefined) e.textContent = text; return e; };
 const LD = window.LEARN_DATA || {}, PD = window.PATH_DATA || {}, FC = window.FC_DATA || {};
@@ -412,11 +412,13 @@ const CERTS = [
   { id: "ccao-f", name: "Claude Certified Associate", lvl: "Foundations", who: "For people who use Claude at work without writing code." },
   { id: "ccdv-f", name: "Claude Certified Developer", lvl: "Foundations", who: "For engineers who build with the API, agents, tools, MCP and Claude Code." },
   { id: "ccar-f", name: "Claude Certified Architect", lvl: "Foundations", who: "For architects who design Claude-powered agentic systems.", soon: true },
-  { id: "ccar-p", name: "Claude Certified Architect", lvl: "Professional", who: "For senior architects who deliver production Claude systems.", soon: true }
+  { id: "ccar-p", name: "Claude Certified Architect", lvl: "Professional", who: "For senior architects who deliver production Claude systems.", soon: true },
+  { id: "github", name: "GitHub", lvl: "Foundations", who: "For anyone starting out with Git, GitHub and working together on code.", soon: true },
+  { id: "python", name: "Python", lvl: "Foundations", who: "For beginners showing they can write and read everyday Python.", soon: true }
 ];
 
 /* Exam-prep badges, drawn with SVG DOM calls (no HTML strings). Ring colours come from the palette. */
-const RING = { "ccao-f": ["#EE9D44", "ASSOCIATE"], "ccdv-f": ["#FFD2A6", "DEVELOPER"], "ccar-f": ["#FFF1DC", "ARCHITECT"], "ccar-p": ["#9C9EB5", "ARCHITECT"] };
+const RING = { "ccao-f": ["#EE9D44", "ASSOCIATE"], "ccdv-f": ["#FFD2A6", "DEVELOPER"], "ccar-f": ["#FFF1DC", "ARCHITECT"], "ccar-p": ["#9C9EB5", "ARCHITECT"], "github": ["#B9C3D3", "FOUNDATIONS"], "python": ["#E8CF86", "FOUNDATIONS"] };
 function badge(id, soon){
   const NS = "http://www.w3.org/2000/svg", [ring, role] = RING[id];
   const svg = document.createElementNS(NS, "svg");

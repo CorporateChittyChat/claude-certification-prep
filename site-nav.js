@@ -2,7 +2,10 @@
    Usage: <header id="siteNav" data-page="learn"></header> then <script src="site-nav.js"></script>.
    data-page: home | journey | learn | videos | flashcards. Built with DOM calls and textContent only. */
 (function(){
-  const TRACKS = {
+  // certifications on the way: listed in both dropdowns with a "Coming soon" tag
+const SOON = [["CCAR-F", "Claude Certified Architect – Foundations"], ["CCAR-P", "Claude Certified Architect – Professional"],
+              ["GITHUB", "GitHub Foundations"], ["PYTHON", "Python – Foundations"]];
+const TRACKS = {
     "ccao-f": { code: "CCAO-F", name: "Associate", exam: "ccao-f/practice/mock-exam-player.html" },
     "ccdv-f": { code: "CCDV-F", name: "Developer", exam: "ccdv-f/practice/mock-exam-player.html" }
   };
@@ -132,7 +135,7 @@
     a.addEventListener("click", () => { try{ localStorage.setItem("fc-track", JSON.stringify(id)); }catch(e){} });
     menu.append(a);
   });
-  [["CCAR-F", "Claude Certified Architect – Foundations"], ["CCAR-P", "Claude Certified Architect – Professional"]].forEach(([code, name]) => {
+  SOON.forEach(([code, name]) => {
     const s = el("span", "soon");
     s.setAttribute("aria-disabled", "true");
     const b = el("b", "", code); b.append(el("i", "", "Coming soon"));
@@ -214,10 +217,10 @@
       a.addEventListener("click", () => { try{ localStorage.setItem("fc-track", JSON.stringify(id)); }catch(e){} });
       m.append(a);
     });
-    [["CCAR-F", "Architect – Foundations"], ["CCAR-P", "Architect – Professional"]].forEach(([code, name]) => {
+    SOON.forEach(([code, name]) => {
       const sp = el("span", "soon"); sp.setAttribute("aria-disabled", "true");
       const b = el("b", "", code); b.append(el("i", "", "Coming soon"));
-      sp.append(b, document.createTextNode("Claude Certified " + name)); m.append(sp);
+      sp.append(b, document.createTextNode(name)); m.append(sp);
     });
     cb.addEventListener("click", e => { e.stopPropagation(); const wasOpen = m.classList.contains("open"); closeAll(); if(!wasOpen){ m.classList.add("open"); cb.setAttribute("aria-expanded", "true"); } });
     wrap.append(cb, m);
