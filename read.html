@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude certification study guides · Claude Certification Prep</title>
+<title>Claude certification study guides · Cert Prep</title>
 <meta name="description" content="Study guides, worked questions and answer explanations for CCAO-F and CCDV-F.">
 <!-- sharing -->
 <link rel="canonical" href="https://certprep.cardzo.co.in/read.html">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Claude Certification Prep">
+<meta property="og:site_name" content="Cert Prep">
 <meta property="og:title" content="Study guides and worked questions">
 <meta property="og:description" content="Study guides, worked questions and answer explanations for CCAO-F and CCDV-F. Independent; not affiliated with Anthropic.">
 <meta property="og:url" content="https://certprep.cardzo.co.in/read.html">
@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta name="theme-color" content="#1D242F">
 <meta name="apple-mobile-web-app-title" content="Cert Prep">
-<link rel="stylesheet" href="theme.css?v=2026110307">
+<link rel="stylesheet" href="theme.css?v=2026110308">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
   .wrap{max-width:var(--page-max); margin:0 auto; padding:0 var(--page-pad);}
@@ -83,8 +83,8 @@
   </div>
   <footer>Independent study material. Not affiliated with, endorsed by or approved by Anthropic. Not a certification, score or prediction.</footer>
 </main>
-<script src="site-nav.js?v=2026110307"></script>
-<script src="md-view.js?v=2026110307"></script>
+<script src="site-nav.js?v=2026110308"></script>
+<script src="md-view.js?v=2026110308"></script>
 <script>
 const $ = id => document.getElementById(id);
 const el = (tag, cls, text) => { const e = document.createElement(tag); if(cls) e.className = cls; if(text !== undefined) e.textContent = text; return e; };
@@ -112,7 +112,7 @@ if(!MD.DOC_RE.test(doc)){
     $("doc").append(MD.render(md, doc));
     const h1 = $("doc").querySelector("h1");
     const title = h1 ? h1.textContent : doc;
-    document.title = title + " · Claude Certification Prep";
+    document.title = title + " · Cert Prep";
     crumbs(title);
     $("doc").querySelectorAll("h2").forEach(h => {
       const li = el("li"), a = el("a", "", h.textContent); a.href = "#" + h.id; li.append(a); $("toc").append(li);

@@ -1,4 +1,4 @@
-# Claude Certification Prep
+# Cert Prep
 
 Free, unofficial study material for Anthropic's Claude certifications, published as a static GitHub Pages site
 (https://certprep.cardzo.co.in/; the CNAME file and a DNS-only Cloudflare CNAME to corporatechittychat.github.io keep that
@@ -27,8 +27,10 @@ have, in the same shape, and so nothing here ever drifts into claiming to be off
 - **Links stay on the site.** Study guides, worked questions and answer files open in read.html, never on GitHub;
   link them as `read.html?doc=<track>/<path>.md#<github-style-anchor>`. Learn tracks per-skill progress in
   `learn-done-<track>`, and CCAO-F worked questions are answered inline on the Learn page.
-- **Free stays free.** No paywall, no sign-up. The only ask is the coffee link, placed at moments of earned value
-  (round done, results screen, certificate), never as a gate.
+- **Free stays free.** No paywall, no sign-up. The asks are the coffee link, placed at moments of earned value
+  (round done, results screen, certificate), and one "Training for your team?" section on the home page
+  (training@cardzo.co.in, forwarded by Cloudflare Email Routing); never a gate, never inside lessons or mock exams.
+- **Name.** The site is "Cert Prep" (vendor-neutral, to match the domain); "Claude certification" describes the tracks.
 
 ## Repository shape
 

@@ -1,4 +1,4 @@
-# Claude Certification Prep
+# Cert Prep
 
 Free, community-written study material for Anthropic's Claude certifications — study notes per exam domain, original practice questions, a full mock exam, and a printable recap deck.
 

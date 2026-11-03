@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude certification videos (CCAO-F, CCDV-F) · Claude Certification Prep</title>
+<title>Claude certification videos (CCAO-F, CCDV-F) · Cert Prep</title>
 <meta name="description" content="Every episode of the CCAO-F and CCDV-F video series, in study order.">
 <!-- sharing -->
 <link rel="canonical" href="https://certprep.cardzo.co.in/videos.html">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Claude Certification Prep">
+<meta property="og:site_name" content="Cert Prep">
 <meta property="og:title" content="Videos: the CCAO-F and CCDV-F series in study order">
 <meta property="og:description" content="Every episode of the Claude certification video series, in study order. Independent; not affiliated with Anthropic.">
 <meta property="og:url" content="https://certprep.cardzo.co.in/videos.html">
@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta name="theme-color" content="#1D242F">
 <meta name="apple-mobile-web-app-title" content="Cert Prep">
-<link rel="stylesheet" href="theme.css?v=2026110307">
+<link rel="stylesheet" href="theme.css?v=2026110308">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
   .wrap{max-width:var(--page-max); margin:0 auto; padding:0 var(--page-pad);}
@@ -69,8 +69,8 @@
   <div id="sections"></div>
   <footer>Independent study material. Not affiliated with, endorsed by or approved by Anthropic. Not a certification, score or prediction.</footer>
 </main>
-<script src="site-nav.js?v=2026110307"></script>
-<script src="path-data.js?v=2026110307"></script>
+<script src="site-nav.js?v=2026110308"></script>
+<script src="path-data.js?v=2026110308"></script>
 <script>
 const PATHS = window.PATH_DATA;
 const $ = id => document.getElementById(id);
@@ -80,7 +80,7 @@ const q = new URLSearchParams(location.search).get("track");
 const track = PATHS[q] ? q : (PATHS[saved] ? saved : "ccdv-f");
 try{ localStorage.setItem("fc-track", JSON.stringify(track)); }catch(e){}
 const P = PATHS[track];
-document.title = track.toUpperCase() + " video series in study order · Claude Certification Prep";
+document.title = track.toUpperCase() + " video series in study order · Cert Prep";
 $("trackLabel").textContent = track.toUpperCase() + " · " + P.name;
 $("playlist").href = P.playlist;
 

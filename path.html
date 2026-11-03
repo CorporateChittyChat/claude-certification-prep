@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude certification study path and readiness score · Claude Certification Prep</title>
+<title>Claude certification study path and readiness score · Cert Prep</title>
 <meta name="description" content="The CCAO-F and CCDV-F study path: lessons in order, a readiness score and a completion certificate.">
 <!-- sharing -->
 <link rel="canonical" href="https://certprep.cardzo.co.in/path.html">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Claude Certification Prep">
+<meta property="og:site_name" content="Cert Prep">
 <meta property="og:title" content="Your study journey: lessons, readiness and a completion certificate">
 <meta property="og:description" content="The CCAO-F and CCDV-F study path in order, with a readiness score that shows your weakest area. Free, no sign-up. Independent; not affiliated with Anthropic.">
 <meta property="og:url" content="https://certprep.cardzo.co.in/path.html">
@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <meta name="theme-color" content="#1D242F">
 <meta name="apple-mobile-web-app-title" content="Cert Prep">
-<link rel="stylesheet" href="theme.css?v=2026110307">
+<link rel="stylesheet" href="theme.css?v=2026110308">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
   a{color:inherit;}
@@ -199,11 +199,11 @@
 </main>
 <div class="toast hidden" id="toast" role="status"></div>
 
-<script src="site-nav.js?v=2026110307"></script>
-<script src="path-data.js?v=2026110307"></script>
-<script src="learn-data-ccao-f.js?v=2026110307"></script>
-<script src="learn-data-ccdv-f.js?v=2026110307"></script>
-<script src="flashcards-data.js?v=2026110307"></script>
+<script src="site-nav.js?v=2026110308"></script>
+<script src="path-data.js?v=2026110308"></script>
+<script src="learn-data-ccao-f.js?v=2026110308"></script>
+<script src="learn-data-ccdv-f.js?v=2026110308"></script>
+<script src="flashcards-data.js?v=2026110308"></script>
 <script>
 const PATHS = window.PATH_DATA, FC = window.FC_DATA;
 const SITE = "https://certprep.cardzo.co.in/";
@@ -341,7 +341,7 @@ function makeCert(){
   ctx.strokeStyle = "#EADFCF"; ctx.lineWidth = 2; ctx.strokeRect(76, 86, W - 152, H - 172);
   hexagon(ctx, W / 2, 230, 78, accent); hexagon(ctx, W / 2, 230, 56, "#1D242F");
   ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.font = "800 26px Segoe UI, Arial, sans-serif"; ctx.fillText(p.title, W / 2, 240);
-  ctx.fillStyle = "#5D6078"; ctx.font = "700 22px Segoe UI, Arial, sans-serif"; ctx.fillText("CLAUDE CERTIFICATION PREP  ·  CORPORATECHITTYCHAT", W / 2, 350);
+  ctx.fillStyle = "#5D6078"; ctx.font = "700 22px Segoe UI, Arial, sans-serif"; ctx.fillText("CERT PREP  ·  CERTPREP.CARDZO.CO.IN", W / 2, 350);
   ctx.fillStyle = "#24263A"; ctx.font = "800 64px Segoe UI, Arial, sans-serif"; ctx.fillText("Certificate of Completion", W / 2, 430);
   ctx.fillStyle = "#5D6078"; ctx.font = "400 28px Segoe UI, Arial, sans-serif"; ctx.fillText("This certifies that", W / 2, 500);
   ctx.fillStyle = "#8C5214"; ctx.font = "italic 700 76px Georgia, 'Times New Roman', serif"; ctx.fillText(name, W / 2, 600);
@@ -363,7 +363,7 @@ function makeCert(){
 }
 function copyPost(){
   const r = readiness(), p = P();
-  const text = `I completed the ${p.title} (${p.name}) learning path on Claude Certification Prep, with a best mock exam score of ${r.best.pct}%. Free, unofficial study material built alongside the CorporateChittyChat videos: ${SITE}path.html?track=${track}`;
+  const text = `I completed the ${p.title} (${p.name}) learning path on Cert Prep (certprep.cardzo.co.in), with a best mock exam score of ${r.best.pct}%. Free, unofficial study material built alongside the CorporateChittyChat videos: ${SITE}path.html?track=${track}`;
   (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(() => toast("Post copied. Attach the PNG when you share it."), () => toast("Copy failed. Copy the text by hand instead."));
 }
 
@@ -403,7 +403,7 @@ function setTrack(t){
   track = t; save("fc-track", t);
   done = load("path-done-" + track, {});
   const p = P();
-  document.title = `${p.title} study path and readiness score · Claude Certification Prep`;
+  document.title = `${p.title} study path and readiness score · Cert Prep`;
   $("trackLabel").textContent = `${p.title} · your journey`;
   renderJourney();
   $("who").textContent = `${p.name}. ${p.who} About ${fmtMins(required().reduce((a, l) => a + l.mins, 0))} in all.`;

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude Certification Prep: free CCAO-F and CCDV-F study notes, exam traps and mock exams</title>
+<title>Cert Prep: free Claude certification study notes (CCAO-F, CCDV-F), exam traps and mock exams</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpolygon points='60,4 108,32 108,88 60,116 12,88 12,32' fill='%23EE9D44'/%3E%3Cpolygon points='60,22 92,41 92,79 60,98 28,79 28,41' fill='%232A3446'/%3E%3C/svg%3E">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
@@ -13,8 +13,8 @@
 <!-- sharing -->
 <link rel="canonical" href="https://certprep.cardzo.co.in/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Claude Certification Prep">
-<meta property="og:title" content="Claude Certification Prep: free study material">
+<meta property="og:site_name" content="Cert Prep">
+<meta property="og:title" content="Cert Prep: free Claude certification study material">
 <meta property="og:description" content="Free lessons, exam traps, worked questions, flashcards and timed mock exams for the CCAO-F and CCDV-F Claude certifications. Architect tracks coming soon. Independent; not affiliated with Anthropic.">
 <meta property="og:url" content="https://certprep.cardzo.co.in/">
 <meta property="og:image" content="https://certprep.cardzo.co.in/og-image.png">
@@ -22,7 +22,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Prepare for your Claude certification: free lessons, exam traps and mock exams. Independent study material, not affiliated with Anthropic.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Claude Certification Prep: free study material">
+<meta name="twitter:title" content="Cert Prep: free Claude certification study material">
 <meta name="twitter:description" content="Free lessons, exam traps, worked questions, flashcards and timed mock exams for the CCAO-F and CCDV-F Claude certifications. Architect tracks coming soon. Independent; not affiliated with Anthropic.">
 <meta name="twitter:image" content="https://certprep.cardzo.co.in/og-image.png">
 <!-- /sharing -->
@@ -32,14 +32,14 @@
  "@graph": [
   {
    "@type": "WebSite",
-   "name": "Claude Certification Prep",
+   "name": "Cert Prep",
    "url": "https://certprep.cardzo.co.in/",
    "inLanguage": "en-GB",
    "description": "Independent, free study material for the Claude certifications. Not affiliated with, endorsed by or approved by Anthropic."
   },
   {
    "@type": "Organization",
-   "name": "Claude Certification Prep",
+   "name": "Cert Prep",
    "url": "https://certprep.cardzo.co.in/"
   },
   {
@@ -55,7 +55,7 @@
       "url": "https://certprep.cardzo.co.in/path.html?track=ccao-f",
       "provider": {
        "@type": "Organization",
-       "name": "Claude Certification Prep",
+       "name": "Cert Prep",
        "url": "https://certprep.cardzo.co.in/"
       },
       "isAccessibleForFree": true,
@@ -83,7 +83,7 @@
       "url": "https://certprep.cardzo.co.in/path.html?track=ccdv-f",
       "provider": {
        "@type": "Organization",
-       "name": "Claude Certification Prep",
+       "name": "Cert Prep",
        "url": "https://certprep.cardzo.co.in/"
       },
       "isAccessibleForFree": true,
@@ -106,7 +106,7 @@
  ]
 }
 </script>
-<link rel="stylesheet" href="theme.css?v=2026110307">
+<link rel="stylesheet" href="theme.css?v=2026110308">
 <style>
   *{box-sizing:border-box; margin:0; padding:0;}
   .wrap{max-width:var(--page-max); margin:0 auto; padding:0 var(--page-pad);}
@@ -188,6 +188,12 @@
   details a{color:var(--orange-ink); font-weight:600;}
 
   /* support */
+  .teams{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:28px; align-items:center; background:var(--slate-deep); color:#fff; border-radius:20px; padding:32px 36px;}
+  .teams .label{color:var(--peach);}
+  .teams h2{color:#fff; margin-top:6px;}
+  .teams p{color:#DADCE7; margin-top:8px; max-width:70ch; font-size:17.5px;}
+  .teams .btn{white-space:nowrap;}
+  @media (max-width:760px){ .teams{grid-template-columns:1fr; padding:24px 20px;} .teams .btn{justify-content:center; white-space:normal;} }
   .coffee{display:grid; grid-template-columns:auto 1fr auto; gap:26px; align-items:center; background:var(--cream); border:2px solid var(--peach); border-radius:20px; padding:28px 32px;}
   .coffee .cup{font-size:54px; line-height:1;}
   .coffee h2{font-size:28px;}
@@ -287,6 +293,19 @@
   </div>
 </section>
 
+<section id="teams">
+  <div class="wrap">
+    <div class="teams">
+      <div>
+        <span class="label">For teams</span>
+        <h2>Training for your team?</h2>
+        <p>Preparing a group of staff for CCAO-F or CCDV-F? Live sessions walk through the exam guide, the traps that catch most people and a review of the practice exam, remotely or in person. The study site stays free for everyone.</p>
+      </div>
+      <a class="btn primary" href="mailto:training@cardzo.co.in?subject=Team%20training%20for%20Claude%20certifications">Ask about team training</a>
+    </div>
+  </div>
+</section>
+
 <section id="faq">
   <div class="wrap faq">
     <div class="notice">
@@ -380,11 +399,11 @@
   </div>
 </footer>
 
-<script src="site-nav.js?v=2026110307"></script>
-<script src="path-data.js?v=2026110307"></script>
-<script src="flashcards-data.js?v=2026110307"></script>
-<script src="learn-data-ccao-f.js?v=2026110307"></script>
-<script src="learn-data-ccdv-f.js?v=2026110307"></script>
+<script src="site-nav.js?v=2026110308"></script>
+<script src="path-data.js?v=2026110308"></script>
+<script src="flashcards-data.js?v=2026110308"></script>
+<script src="learn-data-ccao-f.js?v=2026110308"></script>
+<script src="learn-data-ccdv-f.js?v=2026110308"></script>
 <script>
 const el = (tag, cls, text) => { const e = document.createElement(tag); if(cls) e.className = cls; if(text !== undefined) e.textContent = text; return e; };
 const LD = window.LEARN_DATA || {}, PD = window.PATH_DATA || {}, FC = window.FC_DATA || {};

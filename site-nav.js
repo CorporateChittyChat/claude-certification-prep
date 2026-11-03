@@ -104,7 +104,7 @@
 
   const brand = el("a", "sn-brand");
   brand.href = "./";
-  brand.setAttribute("aria-label", "Claude Certification Prep, home");
+  brand.setAttribute("aria-label", "Cert Prep, home");
   // the site mark: the favicon's orange hexagon with the slate one inside
   const NS = "http://www.w3.org/2000/svg", mark = document.createElementNS(NS, "svg");
   mark.setAttribute("viewBox", "0 0 120 120"); mark.setAttribute("aria-hidden", "true");
@@ -112,7 +112,7 @@
     const p = document.createElementNS(NS, "polygon"); p.setAttribute("points", pts); p.setAttribute("fill", fill); mark.append(p);
   });
   const words = el("span");
-  words.append(el("span", "sn-long", "Claude Certification "), el("span", "sn-short", "Cert "), el("span", "sn-or", "Prep"));
+  words.append(el("span", "sn-long", "Cert "), el("span", "sn-short", "Cert "), el("span", "sn-or", "Prep"));
   brand.append(mark, words);
 
   // certification picker
