@@ -102,14 +102,6 @@
   .ep .acts a{font-size:14.5px; font-weight:700; text-decoration:none; border-radius:9px; padding:7px 12px; border:1px solid var(--line); background:var(--card);}
   .ep .acts a.go{background:var(--slate); border-color:var(--slate); color:#fff;}
   .ep .acts a:hover{border-color:var(--orange);}
-  .vidstrip{margin-top:26px; background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px;}
-  .vidstrip h3{font-size:17px; margin-bottom:12px; color:var(--slate-deep);}
-  .vidstrip .row{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px;}
-  .vidstrip a{display:grid; grid-template-columns:120px 1fr; gap:12px; align-items:center; text-decoration:none; border:1px solid var(--line); border-radius:12px; padding:8px; background:var(--paper);}
-  .vidstrip a:hover{border-color:var(--orange);}
-  .vidstrip img{width:120px; aspect-ratio:16/9; object-fit:cover; border-radius:8px; display:block;}
-  .vidstrip b{display:block; font-size:15px;}
-  .vidstrip small{color:var(--muted); font-size:13.5px;}
   @media (min-width:1700px){ .panel .traps{grid-template-columns:repeat(3,minmax(0,1fr));} .panel .hl ul{grid-template-columns:repeat(4,minmax(0,1fr));} }
   .dhead h2{font-size:36px; line-height:1.15; color:var(--slate-deep); display:flex; flex-wrap:wrap; gap:14px; align-items:baseline;}
   .weight{font-size:15px; font-weight:800; background:var(--orange); color:var(--ink); border-radius:999px; padding:3px 12px; letter-spacing:.3px;}
@@ -356,7 +348,7 @@ if(!T){
   const g = $("glance");
   (T.glance || []).forEach(([k, v]) => { const f = el("div", "fact"); f.append(el("b", "", k), document.createTextNode(v)); g.append(f); });
   if(T.guide) g.append(chip(T.guide[0], T.guide[1], T.guide[2], "fact"));
-  (T.overview || []).forEach(l => g.append(chip(l[0], l[1], l[2], "fact")));
+  (T.overview || []).filter(l => !ytId(l[2])).forEach(l => g.append(chip(l[0], l[1], l[2], "fact")));   // videos live on the Videos page
 
   function drawNav(current){
     const ol = $("nav"); ol.replaceChildren();
@@ -461,9 +453,9 @@ if(!T){
     head.append(h2, el("p", "", d.summary));
     const chips = el("div", "chips");
     // videos play in the panel beside this, and builds are in the practice panel below: no duplicate chips for them
-    d.links.filter(l => !ytId(l[2]) && !(d.practice && d.practice.length && l[0] === "⌨")).forEach(l => chips.append(chip(...l)));
+    // no chips for what is already on the page: videos (panel beside), builds (practice panel), worked questions (inline), the mock exam (header)
+    d.links.filter(l => !ytId(l[2]) && !/episode-questions\.md#/.test(l[2]) && !(d.practice && d.practice.length && l[0] === "⌨")).forEach(l => chips.append(chip(...l)));
     chips.append(chip("🃏", "Flashcards for this domain", T.flash + "&topic=" + d.t));
-    chips.append(chip("⏱", "Mock exam", T.exam));
     head.append(chips);
     const vids = d.links.map(l => ({ id: ytId(l[2]), label: l[1] })).filter(v => v.id);
     const top = el("div", "dtop" + (vids.length ? "" : " novid"));
@@ -585,18 +577,6 @@ if(!T){
       p.append(sec);
     });
 
-    if(vids.length){
-      const vs = el("section", "vidstrip");
-      vs.append(el("h3", "", vids.length > 1 ? "Videos for this domain" : "Video for this domain"));
-      const row = el("div", "row");
-      vids.forEach(v => {
-        const a = el("a"); a.href = "https://youtu.be/" + v.id; a.target = "_blank"; a.rel = "noopener";
-        const img = el("img"); img.loading = "lazy"; img.alt = ""; img.src = "https://i.ytimg.com/vi/" + v.id + "/mqdefault.jpg";
-        const t = el("span"); t.append(el("b", "", v.label.replace(/^Watch\s*/, "")), el("small", "", "Opens on YouTube"));
-        a.append(img, t); row.append(a);
-      });
-      vs.append(row); p.append(vs);
-    }
 
     const rem = el("section", "rem");
     rem.append(el("h3", "", "Remember"));

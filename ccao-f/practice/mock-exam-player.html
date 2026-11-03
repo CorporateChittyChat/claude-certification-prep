@@ -10,7 +10,7 @@
   /* palette tokens come from theme.css; these two are page-only names for palette colours */
   :root{ --orange-soft:var(--peach); --mark:var(--peach); }
   *{box-sizing:border-box; margin:0; padding:0;}
-  body{font-family:"Segoe UI",system-ui,Arial,sans-serif; background:var(--paper); color:var(--ink); font-size:19px; line-height:1.5;}
+  body{font-family:var(--font); background:var(--paper); color:var(--ink); font-size:19px; line-height:1.5;}
   mark.q{background:var(--mark); color:inherit; padding:0 5px; border-radius:4px; font-weight:700;}
   .label{display:block; font-size:13px; font-weight:800; letter-spacing:.9px; text-transform:uppercase; color:var(--orange-ink); margin-bottom:6px;}
   .hidden{display:none!important;}
@@ -41,7 +41,7 @@
   /* ---------- badges ---------- */
   .hero{display:flex; align-items:center; gap:26px; margin-bottom:8px;}
   .emblem{flex:none; width:118px; height:118px; filter:drop-shadow(0 6px 14px rgba(44,46,67,.22));}
-  .emblem text{font-family:"Segoe UI",system-ui,Arial,sans-serif;}
+  .emblem text{font-family:var(--font);}
   .chips{display:flex; flex-wrap:wrap; gap:10px; margin:6px 0 4px;}
   .chip{display:inline-flex; align-items:center; gap:6px; background:var(--slate-deep); color:#fff; font-size:15px; font-weight:600; padding:6px 14px; border-radius:999px;}
   .chip.hot{background:var(--orange); color:var(--ink);}

@@ -1,6 +1,11 @@
 /* Site palette and type scale. Every page links this file first and builds on these tokens.
    Palette (from the CCAO-F recap deck): #FFFFFB paper · #FFF1DC cream · #FFD2A6 peach · #EE9D44 orange · #2A3446 slate · #1D242F navy.
    Contrast: orange is a fill colour (dark text on it). For orange-coloured TEXT use --orange-ink, which passes AA on paper/cream. */
+/* Atkinson Hyperlegible (Braille Institute, SIL OFL 1.1), self-hosted in fonts/: no request to Google. See NOTICE.md. */
+@font-face{font-family:"Atkinson Hyperlegible"; src:url("fonts/AtkinsonHyperlegible-Regular.woff2") format("woff2"); font-weight:400; font-style:normal; font-display:swap;}
+@font-face{font-family:"Atkinson Hyperlegible"; src:url("fonts/AtkinsonHyperlegible-Bold.woff2") format("woff2"); font-weight:700; font-style:normal; font-display:swap;}
+@font-face{font-family:"Atkinson Hyperlegible"; src:url("fonts/AtkinsonHyperlegible-Italic.woff2") format("woff2"); font-weight:400; font-style:italic; font-display:swap;}
+@font-face{font-family:"Atkinson Hyperlegible"; src:url("fonts/AtkinsonHyperlegible-BoldItalic.woff2") format("woff2"); font-weight:700; font-style:italic; font-display:swap;}
 :root{
   --paper:#FFFFFB;
   --cream:#FFF1DC;
@@ -27,7 +32,7 @@
   --page-pad:clamp(16px,2.6vw,48px);
   --radius:14px;
   --shadow:0 6px 24px rgba(61,64,91,.08);
-  --font:"Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+  --font:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,Arial,sans-serif;
   --mono:Consolas,"Cascadia Mono","SF Mono",monospace;
 }
 html{-webkit-text-size-adjust:100%;}

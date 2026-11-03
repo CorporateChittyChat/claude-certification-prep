@@ -271,7 +271,7 @@ function badge(id, soon){
   const svg = document.createElementNS(NS, "svg");
   svg.setAttribute("viewBox", "0 0 120 120"); svg.setAttribute("class", "badge"); svg.setAttribute("aria-hidden", "true");
   const poly = (pts, fill) => { const p = document.createElementNS(NS, "polygon"); p.setAttribute("points", pts); p.setAttribute("fill", fill); svg.append(p); };
-  const text = (y, fill, size, weight, len, t) => { const e = document.createElementNS(NS, "text"); [["x", 60], ["y", y], ["text-anchor", "middle"], ["fill", fill], ["font-size", size], ["font-weight", weight], ["textLength", len], ["lengthAdjust", "spacingAndGlyphs"], ["font-family", "Segoe UI, system-ui, Arial, sans-serif"]].forEach(([k, v]) => e.setAttribute(k, v)); e.textContent = t; svg.append(e); };
+  const text = (y, fill, size, weight, len, t) => { const e = document.createElementNS(NS, "text"); [["x", 60], ["y", y], ["text-anchor", "middle"], ["fill", fill], ["font-size", size], ["font-weight", weight], ["textLength", len], ["lengthAdjust", "spacingAndGlyphs"], ["font-family", "Atkinson Hyperlegible, Segoe UI, system-ui, Arial, sans-serif"]].forEach(([k, v]) => e.setAttribute(k, v)); e.textContent = t; svg.append(e); };
   poly("60,4 108,32 108,88 60,116 12,88 12,32", ring);
   poly("60,14 99,37 99,83 60,106 21,83 21,37", "#1D242F");
   text(50, "#FFF1DC", 9, 700, 48, role);
