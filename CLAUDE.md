@@ -29,7 +29,7 @@ have, in the same shape, and so nothing here ever drifts into claiming to be off
   `learn-done-<track>`, and CCAO-F worked questions are answered inline on the Learn page.
 - **Free stays free.** No paywall, no sign-up. The asks are the coffee link, placed at moments of earned value
   (round done, results screen, certificate), and one "Training for your team?" section on the home page
-  (training@cardzo.co.in, forwarded by Cloudflare Email Routing); never a gate, never inside lessons or mock exams.
+  (hello@cardzo.co.in); never a gate, never inside lessons or mock exams.
 - **Name.** The site is "Cert Prep" (vendor-neutral, to match the domain); "Claude certification" describes the tracks.
 
 ## Repository shape
