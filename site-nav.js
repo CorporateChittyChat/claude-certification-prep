@@ -55,6 +55,12 @@
   .sn-mock{position:relative;}
   .sn-mock .sn-menu{left:auto; right:0; top:48px;}
   .sn-mock .sn-menu a b{display:block;}
+  .sn-install{font-family:inherit; font-size:15px; font-weight:700; color:#FFD2A6; background:transparent; border:1px solid rgba(255,210,166,.5); border-radius:9px; padding:9px 14px; cursor:pointer; white-space:nowrap;}
+  .sn-install:hover{background:rgba(255,210,166,.1); border-color:#FFD2A6;}
+  .sn-install[hidden]{display:none;}
+  .sn-inst .sn-menu{padding:14px 16px; min-width:300px;}
+  .sn-ititle{display:block; font-size:16px; color:#24263A; margin-bottom:8px;}
+  .sn-steps{margin:0 0 0 20px; display:grid; gap:6px; font-size:15.5px; line-height:1.45; color:#24263A;}
   .sn-links .sn-menu a{color:#24263A; display:block; padding:10px 12px; border-radius:8px; font-size:15.5px; white-space:normal;}
   .sn-links .sn-menu a:hover{color:#24263A; background:#FFF1DC;}
   .sn-links .sn-menu a b{color:#24263A; font-size:14px; letter-spacing:.8px;}
@@ -75,6 +81,7 @@
     .sn-sep{display:block; width:auto; height:1px; margin:6px 0;}
     .sn-cta{justify-content:center; margin-top:8px; font-size:17px;}
     .sn-mock .sn-cta{width:100%;}
+    .sn-install{width:100%; min-height:48px; font-size:17px; margin-top:8px;}
     .sn-mock .sn-menu{position:static; box-shadow:none; margin-top:8px; min-width:0;}
   }
   @media (max-width:520px){
@@ -155,6 +162,36 @@
   const faq = el("a", "", "FAQ"); faq.href = "./#faq";
   const gh = el("a", "", "GitHub"); gh.href = "https://github.com/CorporateChittyChat/claude-certification-prep";
   links.append(faq, gh);
+
+  // Install app: Chrome, Edge and Android offer a one-tap install; iPhone and iPad Safari get the two-step instructions.
+  // Hidden when the site already runs as an installed app, and in browsers that can't install it.
+  const standalone = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+  const ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  if(!standalone){
+    const iw = el("div", "sn-mock sn-inst");
+    const ib = el("button", "sn-install", "Install app");
+    ib.type = "button"; ib.hidden = true;
+    let deferred = null;
+    const im = el("div", "sn-menu");
+    if(ios){
+      ib.setAttribute("aria-haspopup", "true"); ib.setAttribute("aria-expanded", "false");
+      im.append(el("b", "sn-ititle", "Install on iPhone or iPad"));
+      const ol = el("ol", "sn-steps");
+      ["Tap the Share button (the square with an arrow) in Safari.", "Scroll down and choose “Add to Home Screen”.", "Tap Add. The app opens full screen from its icon."].forEach(t => ol.append(el("li", "", t)));
+      im.append(ol);
+      ib.hidden = false;
+    }
+    window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); deferred = e; ib.hidden = false; });
+    window.addEventListener("appinstalled", () => { ib.hidden = true; deferred = null; });
+    ib.addEventListener("click", e => {
+      e.stopPropagation();
+      if(deferred){ deferred.prompt(); deferred.userChoice.then(() => { deferred = null; }).catch(() => {}); return; }
+      if(ios){ const wasOpen = im.classList.contains("open"); closeAll(); if(!wasOpen){ im.classList.add("open"); ib.setAttribute("aria-expanded", "true"); } }
+    });
+    iw.append(ib, im);
+    links.append(iw);
+  }
+
   if(track){
     const cta = el("a", "sn-cta", "Take " + TRACKS[track].code + " mock exam");
     cta.href = TRACKS[track].exam;
