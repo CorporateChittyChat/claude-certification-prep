@@ -12,7 +12,7 @@ Built alongside the **[CCAO-F Exam Prep video series](https://www.youtube.com/pl
 |---|---|---|
 | **Claude Certified Associate – Foundations (CCAO-F)** | Complete | [`ccao-f/`](ccao-f/) — 7 domain study guides, 37 practice questions, recap deck, video series |
 | **Claude Certified Developer – Foundations (CCDV-F)** | Complete | [`ccdv-f/`](ccdv-f/) — episode index, video series, 30-question mock exam; runnable code per episode in [chittychat-studio/ccdvf-course](https://github.com/chittychat-studio/ccdvf-course) |
-| Claude Certified Architect – Foundations (CCAR-F) | Planned | — |
+| Claude Certified Architect – Foundations (CCAR-F) | In progress | [`ccar-f/`](ccar-f/) — exam overview, lesson map, and a runnable build per lesson (free mock mode, offline tests), starting with 1.1 Agentic loops |
 | Claude Certified Architect – Professional (CCAR-P) | Planned | — |
 
 Each certification gets its own top-level folder with the same shape: `domains/` study notes, `practice/` questions and mock exams, `assets/` printable material, and a README mapping everything to the companion videos. The developer track is code-first, so its runnable builds live in a separate companion repo and `ccdv-f/` maps each episode to them.
