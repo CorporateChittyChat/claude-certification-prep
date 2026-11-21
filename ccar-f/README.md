@@ -49,11 +49,11 @@ Every lesson has three parts: the idea in plain words, a build you code along wi
 | 0 | Start here: the exam and the map | [Watch](https://youtu.be/_ZGCvPUaPEU) | — |
 | 1.1 | Agentic loops | Coming soon | [`builds/1-1-agentic-loops/`](builds/1-1-agentic-loops/) |
 | 1.2 | Multi-agent orchestration | Coming soon | — |
+| 1.3 | Subagent invocation and context passing | Coming soon | [`builds/1-3-subagent-context/`](builds/1-3-subagent-context/) |
 
 ## Running the builds
 
-Every build runs **free by default**: a mock client replays a scripted conversation and enforces the documented message
-rules, so you can learn the loop with no account and no key. Each build has offline tests (`pytest -q`).
+Every build runs **free by default**. The builds use local examples or mocks, so you can follow along without an account or API key. See the README in each build for its offline test command.
 
 If you want to call the real API:
 
